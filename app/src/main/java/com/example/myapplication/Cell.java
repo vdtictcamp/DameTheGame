@@ -7,6 +7,9 @@ import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Cell extends View implements View.OnTouchListener{
 
     Rect rect;
@@ -48,7 +51,11 @@ public class Cell extends View implements View.OnTouchListener{
         return this.row;
     }
 
-    public void getPosition(int col, int row){
+    public List<Cell> getAvailablePositions(int col, int row){
+        List<Cell> availablePositions = new ArrayList<>();
 
+        return availablePositions;
     }
+
+
 }

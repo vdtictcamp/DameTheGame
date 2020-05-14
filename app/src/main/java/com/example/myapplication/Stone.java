@@ -2,20 +2,22 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.view.MotionEvent;
 import android.view.View;
 
-public class Stone extends View implements View.OnTouchListener{
+import java.util.ArrayList;
+import java.util.List;
 
-
+public abstract class Stone extends View{
 
     private Paint paint;
-    private float row;
-    private float col;
+    private int row;
+    private int col;
     private float posx;
     private float posy;
-    private Stone stone;
     private Cell position;
 
     public Stone(Context context, float posx, float posy, Paint paint, int col, int row, Cell position) {
@@ -29,7 +31,6 @@ public class Stone extends View implements View.OnTouchListener{
         this.col = col;
         this.row = row;
         this.position = position;
-        this.setOnTouchListener(this);
 
     }
 
@@ -39,23 +40,11 @@ public class Stone extends View implements View.OnTouchListener{
         canvas.drawCircle(posx, posy, 20, paint);
     }
 
-    public Stone getStone() {
-        return this;
-    }
-    public Cell getPositionOfStone(){
-        return this.position;
-    }
+    public abstract Stone getStone();
+    public abstract int getRow();
+    public abstract int getCol();
+    public abstract void moveStone(int fromX, int toX, int fromY, int toY, View view);
+    public abstract Cell getPosition();
 
 
-    //Lässt die Steine bewegen
-    public void moveStone(int fromX, int toX, int fromY, int toY, View view) {
-
-
-    }
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-
-        return true;
-    }
 }
