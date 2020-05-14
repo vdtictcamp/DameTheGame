@@ -20,7 +20,7 @@ public abstract class Stone extends View{
     private float posy;
     private Cell position;
 
-    public Stone(Context context, float posx, float posy, Paint paint, int col, int row, Cell position) {
+    public Stone(Context context, float posx, float posy, Paint paint, int col, int row) {
         super(context);
         this.paint = new Paint();
         this.row = row;
@@ -34,16 +34,13 @@ public abstract class Stone extends View{
 
     }
 
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        canvas.drawCircle(posx, posy, 20, paint);
-    }
 
     public abstract Stone getStone();
     public abstract int getRow();
     public abstract int getCol();
-    public abstract void moveStone(int fromX, int toX, int fromY, int toY, View view);
+    public abstract void setCol(int col);
+    public abstract void setRow(int row);
+    public abstract void moveStone( int toX, int toY, View view);
     public abstract Cell getPosition();
 
 
