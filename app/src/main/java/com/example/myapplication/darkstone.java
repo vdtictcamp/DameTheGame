@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,8 +74,8 @@ public class darkstone extends Stone implements View.OnTouchListener, View.OnCli
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        availablePostions =gameField.getAvailablePositionsForDarkStones(this.col, this.row);
         System.out.println(availablePostions.size()+"from darkstone");
+        System.out.println(v.getWidth() + " "+ v.getHeight());
 
         return true;
     }

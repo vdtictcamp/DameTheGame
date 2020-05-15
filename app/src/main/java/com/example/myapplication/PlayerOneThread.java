@@ -1,4 +1,9 @@
 package com.example.myapplication;
 
-public class PlayerOneThread {
+import android.graphics.Canvas;
+
+public class PlayerOneThread extends Thread implements Runnable{
+
+
+
 }

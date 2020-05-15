@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ public abstract class Stone extends View{
     private float posx;
     private float posy;
     private Cell position;
+    FrameLayout layout;
 
     public Stone(Context context, float posx, float posy, Paint paint, int col, int row) {
         super(context);
@@ -31,6 +33,8 @@ public abstract class Stone extends View{
         this.col = col;
         this.row = row;
         this.position = position;
+        this.layout=layout;
+
 
     }
 

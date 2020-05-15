@@ -14,7 +14,7 @@ import android.widget.FrameLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class whitestone extends Stone implements View.OnTouchListener, View.OnClickListener {
+public class whitestone extends Stone implements View.OnTouchListener{
 
     List<Cell> availablePostions = new ArrayList<>();
     GameField gameField = new GameField();
@@ -38,8 +38,8 @@ public class whitestone extends Stone implements View.OnTouchListener, View.OnCl
         this.posy = posy;
         this.paint = paint;
         view=this;
-        view.setOnClickListener(this);
         view.setOnTouchListener(this);
+        this.layout=layout;
     }
 
     @Override
@@ -73,7 +73,6 @@ public class whitestone extends Stone implements View.OnTouchListener, View.OnCl
         this.row = toY;
         FrameLayout layout = findViewById(R.id.gamelayout);
         layout.removeView(view);
-        gameField.drawNewStone(posx, posy, (Stone) view, col, row, position);
     }
 
     @Override
@@ -81,52 +80,24 @@ public class whitestone extends Stone implements View.OnTouchListener, View.OnCl
         return this.position;
     }
 
-    @SuppressLint("ResourceAsColor")
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-       if(event.getAction()==MotionEvent.ACTION_MOVE){
-           System.out.println("Aus touched");
-               v.setX(event.getX());
-               v.setY(event.getY());
-           try {
-               Thread.sleep(50);
-           } catch (InterruptedException e) {
-               e.printStackTrace();
-           }
-           view.getDrawingRect(new Rect());
-       }
 
-        return true;
-    }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.getWidth();
-        System.out.println(canvas.getHeight());
-        System.out.println("Weiser stein hinzugefügt");
+        System.out.println("breite von view:"+ view.getHeight());
         canvas.drawCircle(posx, posy, 20, paint);
     }
 
-    @SuppressLint("ResourceAsColor")
     @Override
-    public void onClick(View v) {
-        FrameLayout l = findViewById(R.id.gamelayout);
-        System.out.println("clicked");
-        availablePostions = gameField.getAvailablePositionsForWhiteStones(this.col, this.row);
-        System.out.println("Spalte:"+this.col+ "Reihe:"+this.row);
-        System.out.println(availablePostions.size());
-        this.animate()
-                .y(-10)
-                .setDuration(5)
-                .start();
+    public boolean onTouch(View v, MotionEvent event) {
+        v.getLayoutParams().width=20;
+        v.getLayoutParams().height=20;
+        if(event.getAction()==MotionEvent.ACTION_MOVE){
+            v.setX(event.getX());
+            v.setY((float) (event.getY()));
+        }
 
-
-
-
+        return true;
     }
-
-
-
-
 }
