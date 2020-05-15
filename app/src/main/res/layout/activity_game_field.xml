@@ -102,7 +102,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos"
+        android:id="@+id/pos1a"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="1"
@@ -142,7 +142,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos51"
+        android:id="@+id/pos4b"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="4"
@@ -150,7 +150,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos52"
+        android:id="@+id/pos4d"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="4"
@@ -158,7 +158,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos70"
+        android:id="@+id/pos2d"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="6"
@@ -166,7 +166,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos53"
+        android:id="@+id/pos4f"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="4"
@@ -174,7 +174,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos69"
+        android:id="@+id/pos3e"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="5"
@@ -182,7 +182,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos54"
+        android:id="@+id/pos4h"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="4"
@@ -190,7 +190,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos68"
+        android:id="@+id/pos3g"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="5"
@@ -198,7 +198,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos55"
+        android:id="@+id/pos3a"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="5"
@@ -206,7 +206,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos56"
+        android:id="@+id/pos3c"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="5"
@@ -224,7 +224,7 @@
         android:background="@drawable/rounded_corner"></View>
 
     <View
-        android:id="@+id/pos59"
+        android:id="@+id/pos2g"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="6"
@@ -232,7 +232,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos60"
+        android:id="@+id/pos2f"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="6"
@@ -240,7 +240,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos62"
+        android:id="@+id/pos2b"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="6"
@@ -248,7 +248,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos63"
+        android:id="@+id/pos1a"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="7"
@@ -256,7 +256,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos64"
+        android:id="@+id/pos1c"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="7"
@@ -264,7 +264,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos65"
+        android:id="@+id/pos1e"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="7"
@@ -272,7 +272,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos66"
+        android:id="@+id/pos1g"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="7"
@@ -410,7 +410,6 @@
     </View>
 
     <View
-        android:id="@+id/view39"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_row="0"
@@ -526,7 +525,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos27"
+        android:id="@+id/pos4a"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="4"
@@ -534,7 +533,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos28"
+        android:id="@+id/pos4c"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="4"
@@ -542,7 +541,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos29"
+        android:id="@+id/pos4e"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="4"
@@ -550,7 +549,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos30"
+        android:id="@+id/pos4g"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="4"
@@ -558,7 +557,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos31"
+        android:id="@+id/pos3b"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="5"
@@ -566,7 +565,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos32"
+        android:id="@+id/pos3d"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="5"
@@ -574,7 +573,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos33"
+        android:id="@+id/pos3f"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="5"
@@ -582,7 +581,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos34"
+        android:id="@+id/pos3h"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="5"
@@ -590,7 +589,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos37"
+        android:id="@+id/pos2a"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="6"
@@ -598,7 +597,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos38"
+        android:id="@+id/pos2c"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="6"
@@ -606,7 +605,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos39"
+        android:id="@+id/pos2e"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="6"
@@ -614,7 +613,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos40"
+        android:id="@+id/pos2f"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="6"
@@ -622,7 +621,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos42"
+        android:id="@+id/pos1g"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="7"
@@ -630,7 +629,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos43"
+        android:id="@+id/pos1f"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="7"
@@ -638,7 +637,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos44"
+        android:id="@+id/pos1d"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="7"
@@ -646,7 +645,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos45"
+        android:id="@+id/pos1b"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="7"
@@ -737,7 +736,7 @@
         android:background="@drawable/rounded_corner"></View>
 
     <View
-        android:id="@+id/view8"
+        android:id="@+id/w7"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_row="6"
@@ -747,7 +746,7 @@
         android:background="@drawable/rounded_corner"></View>
 
     <View
-        android:id="@+id/view24"
+        android:id="@+id/w11"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_row="5"
@@ -757,7 +756,7 @@
         android:background="@drawable/rounded_corner"></View>
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/w5"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_row="6"
@@ -767,7 +766,7 @@
         android:background="@drawable/rounded_corner"></View>
 
     <View
-        android:id="@+id/view17"
+        android:id="@+id/w2"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_row="7"
@@ -777,7 +776,7 @@
         android:background="@drawable/rounded_corner"></View>
 
     <View
-        android:id="@+id/view9"
+        android:id="@+id/w9"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_row="5"
@@ -823,7 +822,7 @@
     </View>
 
     <View
-        android:id="@+id/view10"
+        android:id="@+id/w4"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_row="7"
@@ -833,7 +832,7 @@
         android:background="@drawable/rounded_corner"></View>
 
     <View
-        android:id="@+id/view23"
+        android:id="@+id/w12"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_row="5"
@@ -843,7 +842,7 @@
         android:background="@drawable/rounded_corner"></View>
 
     <View
-        android:id="@+id/view22"
+        android:id="@+id/w8"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_row="6"
@@ -853,7 +852,7 @@
         android:background="@drawable/rounded_corner"></View>
 
     <View
-        android:id="@+id/view2"
+        android:id="@+id/w1"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_row="7"
@@ -863,7 +862,7 @@
         android:background="@drawable/rounded_corner"></View>
 
     <View
-        android:id="@+id/view15"
+        android:id="@+id/w10"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_row="5"
@@ -873,7 +872,7 @@
         android:background="@drawable/rounded_corner"></View>
 
     <View
-        android:id="@+id/view3"
+        android:id="@+id/w3"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_row="7"
@@ -883,7 +882,7 @@
         android:background="@drawable/rounded_corner"></View>
 
     <View
-        android:id="@+id/view25"
+        android:id="@+id/w6"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_row="6"
