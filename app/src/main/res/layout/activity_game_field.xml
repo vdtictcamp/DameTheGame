@@ -94,7 +94,7 @@
     </View>
 
     <View
-        android:id="@+id/pos10"
+        android:id="@+id/pos8f"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="0"
@@ -296,7 +296,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos46"
+        android:id="@+id/pos8a"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="0"
@@ -312,7 +312,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos4"
+        android:id="@+id/pos8d"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="0"
@@ -320,7 +320,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos71"
+        android:id="@+id/pos8b"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="0"
@@ -340,7 +340,7 @@
         android:layout_row="0"
         android:layout_width="47dp"
         android:layout_height="47dp"
-        android:id="@+id/pos02"
+        android:id="@+id/pos8c"
         android:background="@color/gray">
     </View>
 
@@ -369,7 +369,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos9"
+        android:id="@+id/pos8f"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="0"
@@ -678,7 +678,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos18"
+        android:id="@+id/pos8e"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="0"
@@ -686,7 +686,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos19"
+        android:id="@+id/pos7f"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="1"
@@ -702,7 +702,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos21"
+        android:id="@+id/pos8g"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="0"
