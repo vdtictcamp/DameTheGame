@@ -248,7 +248,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos63"
+        android:id="@+id/pos1a"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="7"
@@ -256,7 +256,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos64"
+        android:id="@+id/pos1c"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="7"
@@ -264,7 +264,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos65"
+        android:id="@+id/pos1f"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="7"
@@ -638,7 +638,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos44"
+        android:id="@+id/pos1d"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="7"
@@ -646,7 +646,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos45"
+        android:id="@+id/pos1b"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="7"
