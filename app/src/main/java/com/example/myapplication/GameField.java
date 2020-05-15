@@ -27,6 +27,7 @@ public class GameField extends Activity implements View.OnClickListener{
     int[][]blackstones;
 
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +39,10 @@ public class GameField extends Activity implements View.OnClickListener{
                 {R.id.pos3a, R.id.pos3b, R.id.pos3c, R.id.pos3d, R.id.pos3e, R.id.pos3f, R.id.pos3g, R.id.pos3h},
                  {R.id.pos4a, R.id.pos4b, R.id.pos4c, R.id.pos4d, R.id.pos4e, R.id.pos4f, R.id.pos4g, R.id.pos4h}};
 
+View v = findViewById(R.id.pos1a);
+v.setBackgroundColor(R.color.green);
 
-        //whitestones = new int[][]{{R.id.w1},{}, {}, {}, };
+        whitestones = new int[][]{{R.id.w1, R.id.w2, R.id.w3, R.id.w4},{}, {}, {}, };
         //blackstones = new int[][]{{}, {R.id.}, {}, {}}
 
 
