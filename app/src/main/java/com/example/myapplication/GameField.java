@@ -33,7 +33,7 @@ public class GameField extends Activity implements View.OnClickListener{
 View v = findViewById(R.id.pos1a);
 v.setBackgroundColor(R.color.green);
 
-        whitestones = new int[][]{{R.id.w1, R.id.w2, R.id.w3, R.id.w4},{R.id.w4, R.id.w5, R.id.w6, R.id.w7, R.id.w8}, {R.id.w9, R.id.w10, R.id.w11, R.id.w12}};
+        whitestones = new int[][]{{R.id.w1, R.id.w2, R.id.w3, R.id.w4},{R.id.w4, R.id.w5, R.id.w6, R.id.w7, R.id.w8}, {R.id.w9, R.id.w10, R.id.w11, R.id.w12},};
         //blackstones = new int[][]{{}, {R.id.}, {}, {}}
 
 
