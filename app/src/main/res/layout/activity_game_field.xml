@@ -224,7 +224,7 @@
         android:background="@drawable/rounded_corner"></View>
 
     <View
-        android:id="@+id/pos59"
+        android:id="@+id/pos2h"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="6"
@@ -614,7 +614,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos40"
+        android:id="@+id/pos2g"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="6"
@@ -622,7 +622,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos42"
+        android:id="@+id/pos1h"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="7"

@@ -20,10 +20,11 @@ import java.util.List;
 public class GameField extends Activity implements View.OnClickListener{
 
     GridLayout gameLayout;
-    protected Stone[][] stones = new Stone[8][8];
     Stone stone;
     Paint p;
     int[][]positions;
+    int[][]whitestones;
+    int[][]blackstones;
 
 
     @Override
@@ -32,7 +33,15 @@ public class GameField extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_game_field);
         gameLayout = findViewById(R.id.gamelayout);
 
-        positions= new int[][]{{R.id.pos1a,}, {R.id.pos2}, {R.id.pos3a}};
+        positions= new int[][]{{R.id.pos1a,R.id.pos1b, R.id.pos1c, R.id.pos1d, R.id.pos1e, R.id.pos1f, R.id.pos1g, R.id.pos1h},
+                {R.id.pos2a, R.id.pos2b, R.id.pos2c, R.id.pos2d, R.id.pos2e, R.id.pos2f, R.id.pos2g, R.id.pos2h},
+                {R.id.pos3a, R.id.pos3b, R.id.pos3c, R.id.pos3d, R.id.pos3e, R.id.pos3f, R.id.pos3g, R.id.pos3h},
+                 {R.id.pos4a, R.id.pos4b, R.id.pos4c, R.id.pos4d, R.id.pos4e, R.id.pos4f, R.id.pos4g, R.id.pos4h}};
+
+
+        //whitestones = new int[][]{{R.id.w1},{}, {}, {}, };
+        //blackstones = new int[][]{{}, {R.id.}, {}, {}}
+
 
     }
 
