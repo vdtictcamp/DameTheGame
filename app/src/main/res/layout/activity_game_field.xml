@@ -174,7 +174,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos69"
+        android:id="@+id/pos3e"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="5"
@@ -190,7 +190,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos68"
+        android:id="@+id/pos3g"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="5"
@@ -198,7 +198,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos55"
+        android:id="@+id/pos3a"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="5"
@@ -206,7 +206,7 @@
         android:background="@color/black"></View>
 
     <View
-        android:id="@+id/pos56"
+        android:id="@+id/pos3c"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="5"
@@ -560,7 +560,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos31"
+        android:id="@+id/pos3b"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="5"
@@ -568,7 +568,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos32"
+        android:id="@+id/pos3d"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="5"
@@ -576,7 +576,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos33"
+        android:id="@+id/pos3f"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="5"
@@ -584,7 +584,7 @@
         android:background="@color/gray"></View>
 
     <View
-        android:id="@+id/pos34"
+        android:id="@+id/pos3h"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_row="5"
