@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "849381588170",
+    "firebase_url": "https://multiplayerdame.firebaseio.com",
+    "project_id": "multiplayerdame",
+    "storage_bucket": "multiplayerdame.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849381588170:android:5c644dfa4c591dbe024833",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "849381588170-l4s14ijnt6ahngkn4iu4ec5f9fnic2ds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcCZ4lQnBzdDI9PAIw39tnL7K--od_G90"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "849381588170-l4s14ijnt6ahngkn4iu4ec5f9fnic2ds.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
