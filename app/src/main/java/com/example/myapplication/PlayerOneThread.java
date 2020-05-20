@@ -2,8 +2,41 @@ package com.example.myapplication;
 
 import android.graphics.Canvas;
 
-public class PlayerOneThread extends Thread implements Runnable{
+public class PlayerOneThread extends Thread implements Runnable {
+
+    GameField game = new GameField();
+    PlayerTwoThread pTwoThread;
+    boolean isInTurn;
+    int[][] stones;
+
+    public PlayerOneThread(int[][] stones) {
+        this.stones = stones;
+        pTwoThread = new PlayerTwoThread(stones);
+    }
 
 
+    public boolean isInTurn() {
+        isInTurn = true;
+        return isInTurn;
+    }
 
+
+    public boolean finishTurn() {
+        isInTurn = false;
+        return isInTurn;
+    }
+
+    @Override
+    public void run() {
+
+        while (true) {
+            if (isInTurn) {
+                game.update();
+                finishTurn();
+                pTwoThread.isInTurn();
+            }
+
+
+        }
+    }
 }
