@@ -1,16 +1,24 @@
-package com.example.myapplication;
+package com.example.myapplication.Activities;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.GridLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication.GameEngine.ChangeGameConditionRedStone;
+import com.example.myapplication.GameEngine.ChangeGameConditionWhiteStone;
+import com.example.myapplication.Queen.WhiteQueen;
+import com.example.myapplication.R;
+import com.example.myapplication.Threads.TimeThread;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameField extends AppCompatActivity{
 
@@ -25,9 +33,20 @@ public class GameField extends AppCompatActivity{
     private int[] validPositionsToMove=new int[2];
     public  int[] helpPositions = new int[2];
     public View movingStone;
-    changeGameConditions chGameCond;
-    private int[] posAfterEat=new int[4];
-    private int[] redStoneToEat = new int[4];
+    private View newQueen;
+    private ChangeGameConditionWhiteStone chGameCondWhite;
+    private WhiteQueen queen;
+    ChangeGameConditionRedStone chGameCondRed;
+    private List<List<Integer>> posAfterEat = new ArrayList<>();
+
+    private List<Integer>whiteStonesToEat = new ArrayList<>();
+    private List<Integer>redStonesToEat = new ArrayList<>();
+
+    //We need thie variables to controll the turns of the player
+    final int WHITETURN = 1;
+    final int REDTURN =2;
+    int TURN =WHITETURN;
+    EditText countdown;
 
 
     @SuppressLint("ResourceAsColor")
@@ -36,12 +55,13 @@ public class GameField extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_field);
         gameLayout = findViewById(R.id.gamelayout);
+        countdown = findViewById(R.id.countdown);
         redStones = new View[8][8];
         whiteStones = new View[8][8];
         positions = new View[8][8];
 
         //All position
-        positionsIds = new int[][]{{R.id.pos1a, R.id.pos1b, R.id.pos1c, R.id.pos1d, R.id.pos1e, R.id.pos1f, R.id.pos1e, R.id.pos1h},
+        positionsIds = new int[][]{{R.id.pos1a, R.id.pos1b, R.id.pos1c, R.id.pos1d, R.id.pos1e, R.id.pos1f, R.id.pos1g, R.id.pos1h},
                 {R.id.pos2a, R.id.pos2b, R.id.pos2c, R.id.pos2d, R.id.pos2e, R.id.pos2f, R.id.pos2g, R.id.pos2h},
                 {R.id.pos3a, R.id.pos3b, R.id.pos3c, R.id.pos3d, R.id.pos3e, R.id.pos3f, R.id.pos3g, R.id.pos3h},
                 {R.id.pos4a, R.id.pos4b, R.id.pos4c, R.id.pos4d, R.id.pos4e, R.id.pos4f, R.id.pos4g, R.id.pos4h},
@@ -80,58 +100,57 @@ public class GameField extends AppCompatActivity{
         stones = new int[][]{{R.id.w1, 0, R.id.w2, 0, R.id.w3, 0, R.id.w4, 0},
                 { 0, R.id.w5, 0, R.id.w6, 0, R.id.w7, 0, R.id.w8},
                 {R.id.w9, 0, R.id.w10, 0, R.id.w11, 0, R.id.w12, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0},
                 {0,R.id.b9, 0,R.id.b10, 0,R.id.b11, 0,R.id.b12},
                 {R.id.b5,0, R.id.b6,0, R.id.b7,0, R.id.b8,0},
                 {0,R.id.b1, 0,R.id.b2, 0,R.id.b3, 0,R.id.b4}};
-
-        chGameCond = new changeGameConditions(this, stones, positionsIds);
 
 
         View.OnClickListener redStoneClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("aus redstone listener");
-                showValidPositionsForRedStones(v);
+                chGameCondRed = new ChangeGameConditionRedStone(stones, positionsIds, redStonesIds);
+                if((TURN & REDTURN)!=0 ) {
+                    showValidPositionsForRedStones(v);
+                    posAfterEat = chGameCondRed.canEateWhiteStoneBeta(v);
+                    whiteStonesToEat = chGameCondRed.returnStonesToEat();
+                    if (posAfterEat != null) {
+                        for(int i=0; i<posAfterEat.size(); i++){
+                            for(int j=0; j<posAfterEat.get(i).size(); j++){
+                                int id = posAfterEat.get(i).get(j);
+                                ShowThePositionAfterEatingWhiteStone(id);
+                            }
+
+                        }
+                    }
+
+                   // whiteStoneToEat = chGameCondRed.whiteStoneToEat(v);
+                }
             }
         };
 
         View.OnClickListener whiteStoneClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("clicked");
-                showValidPositionsForWhiteStones(v);
-                 posAfterEat= chGameCond.canEateRedStone(v);
-                 if(posAfterEat!=null) {
-                     if (posAfterEat[0] != 0 && posAfterEat[1] != 0) {
-                         ShowThePositionAfterEatingStone(posAfterEat[1], posAfterEat[0]);
-                     }
-                     if (posAfterEat[2] != 0 && posAfterEat[3] != 0) {
-                         ShowThePositionAfterEatingStone(posAfterEat[3], posAfterEat[2]);
-                     }
-                 }
+                chGameCondWhite = new ChangeGameConditionWhiteStone( stones, positionsIds, whiteStonesIds);
+                if ((TURN & WHITETURN) != 0) {
+                    showValidPositionsForWhiteStones(v);
+                    posAfterEat = chGameCondWhite.canEateRedStone(v);
+                    redStonesToEat = chGameCondWhite.returnStonesToEat();
+                    if (posAfterEat != null) {
+                        for(int i=0; i<posAfterEat.size(); i++){
+                            for(int j=0; j<posAfterEat.get(i).size(); j++){
+                                int id = posAfterEat.get(i).get(j);
+                                ShowThePositionAfterEatingRedStone(id);
+                            }
 
-                 redStoneToEat = chGameCond.redStoneToEat(v);
+                        }
+                    }
+                   // redStoneToEat = chGameCondWhite.redStoneToEat(v);
+                }
             }
         };
-
-        /*
-        View.OnClickListener redStoneEatsWhiteStone = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chGameCond.canEateStone(v);
-            }
-        };
-
-        View.OnClickListener whiteStoneEatsRedStone = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chGameCond.canEateStone(v);
-            }
-        };
-
-         */
-
 
         //Set the Listener for the redStones
         for (int i = 0; i < redStonesIds.length; i++) {
@@ -157,20 +176,30 @@ public class GameField extends AppCompatActivity{
         }
 
 
+        TimeThread timer = new TimeThread(this, countdown);
+        timer.start();
+
     }
 
 //----------------------------------------------------------------------------------------
 
-
-
-    //Dieser Position muss anschliessend ein View.OnClickListener gegeben werden
-    private void ShowThePositionAfterEatingStone(int col, int row){
-        positions[row][col].setBackgroundColor(Color.GREEN);
-        positions[row][col].setOnClickListener(moveListenerForWhiteStone);
+    public void stopGame(){
+        //Display the 'The End Game' Activity
+        Intent intent = new Intent(this, EndOfGameActivity.class);
+        startActivity(intent);
     }
 
-    private void removeStone(int col, int row){
+    //Dieser Position muss anschliessend ein View.OnClickListener gegeben werden
+    private void ShowThePositionAfterEatingRedStone(int id){
+        View position = findViewById(id);
+        position.setBackgroundColor(Color.GREEN);
+        position.setOnClickListener(moveListenerForWhiteStone);
+    }
 
+    private void ShowThePositionAfterEatingWhiteStone(int id){
+        View position = findViewById(id);
+        position.setBackgroundColor(Color.GREEN);
+        position.setOnClickListener(moveListenerForRedStone);
     }
 
 
@@ -204,7 +233,7 @@ private void clearBoard(){
 }
 
     @SuppressLint("ResourceAsColor")
-    public int[] showValidPositionsForRedStones(View v){
+    public void showValidPositionsForRedStones(View v){
         clearBoard();
         boolean posIsBlocked;
         int id = v.getId();
@@ -227,30 +256,24 @@ private void clearBoard(){
         //Index for the Array which contains the positions where the stone can move
         int z=0;
         //Help index
-        int k=0;
         for(int i=row-1; i>row-2; i--){
                 for(int j=col-1; j<col+2; j++){
-                    if(j==col){
-                        continue;
-                    }
-                    if(j<0 || j>7 || i<0 || i>7){
+                    if(j==col || j<0 || j>7 || i<0 || i>7){
                         continue;
                     }
                     id = positionsIds[i][j];
-                    helpPositions[k]=id;
-                    k++;
                     View validPos = findViewById(id);
                     posIsBlocked=checkIfStoneIsBlockingPos(j,i);
                     if(!posIsBlocked){
                         validPos.setBackgroundColor(Color.GREEN);
                         validPositionsToMove[z]=positionsIds[i][j];
+                        System.out.println(validPositionsToMove.length);
                         z++;
                     }
                 }
             }
         //Set listener for the move of the Stones
         setMoveListenerRedStone(validPositionsToMove);
-        return helpPositions;
         }
 
 
@@ -265,6 +288,7 @@ private void clearBoard(){
         for(int i=0; i<stones.length; i++){
             for(int j=0; j<stones[i].length; j++){
                 if(stones[i][j]==id){
+                    System.out.println("Dieser Stein liegt in Spalte"+ j +" "+ "und zeile"+" "+i);
                     id = stones[i][j];
                     movingStone = findViewById(id);
                     row = i;
@@ -277,10 +301,7 @@ private void clearBoard(){
         int z=0;
         for(int i=row+1; i<row+2; i++){
             for(int j=col-1; j<col+2; j++){
-                if(j==col){
-                    continue;
-                }
-                if(j<0 || j>7 || i<0 || i>7){
+                if(j==col || j<0 || j>7 || i<0 || i>7){
                     continue;
                 }
                 id = positionsIds[i][j];
@@ -288,21 +309,13 @@ private void clearBoard(){
                 posIsBlocked=checkIfStoneIsBlockingPos(j,i);
                 if(!posIsBlocked){
                     validPos.setBackgroundColor(Color.GREEN);
-                    validPositionsToMove[z]=positionsIds[i][j];
+                    validPositionsToMove[z]=id;
                     z++;
                 }
 
             }
         }
         setMoveListenerWhiteStone(validPositionsToMove);
-    }
-
-
-    public void removeWhiteStone(View stone){
-            gameLayout.removeView(stone);
-    }
-    public void removeRedStone(View stone){
-        gameLayout.removeView(stone);
     }
 
 
@@ -320,26 +333,33 @@ private void clearBoard(){
         @Override
         public void onClick(View v) {
             System.out.println("Clicked");
-            moveWhiteStone(v);
+                moveWhiteStone(v);
+
         }
     };
 
 
     private void setMoveListenerRedStone(int[]positionsToMove){
-        for(int i=0; i<positionsToMove.length;i++){
-            int id = positionsToMove[i];
-            View posToMove = findViewById(id);
-            posToMove.setOnClickListener(moveListenerForRedStone);
+        if (positionsToMove[0]!=0) {
+            for (int i = 0; i < positionsToMove.length; i++) {
+                int id = positionsToMove[i];
+                View posToMove = findViewById(id);
+                posToMove.setOnClickListener(moveListenerForRedStone);
+            }
         }
 
     }
 
     private void setMoveListenerWhiteStone(int[]positionsToMove){
-        for(int i=0; i<positionsToMove.length;i++){
-            int id = positionsToMove[i];
-            View posToMove = findViewById(id);
-            posToMove.setOnClickListener(moveListenerForWhiteStone);
-        }
+       if(positionsToMove[0]!=0) {
+           for (int i = 0; i < positionsToMove.length; i++) {
+               int id = positionsToMove[i];
+               View posToMove = findViewById(id);
+               if (positionsToMove != null) {
+                   posToMove.setOnClickListener(moveListenerForWhiteStone);
+               }
+           }
+       }
     }
 
 
@@ -349,49 +369,96 @@ private void clearBoard(){
             clearBoard();
             float diffX = view.getX() - movingStone.getX();
             float diffY = view.getY() - movingStone.getY();
-            movingStone.animate()
-                    .x(movingStone.getX() + diffX + (movingStone.getWidth() / 2))
-                    .y(movingStone.getY() + diffY + (movingStone.getHeight() / 2))
-                    .start();
-
+                movingStone.animate()
+                        .x(movingStone.getX() + diffX + (movingStone.getWidth() / 2))
+                        .y(movingStone.getY() + diffY + (movingStone.getHeight() / 2))
+                        .start();
             switchPosOfStoneInArray(movingStone, view);
+            if(whiteStonesToEat.size()!=0){
+                for(int i=0; i<whiteStonesToEat.size(); i++){
+                    int id = whiteStonesToEat.get(i);
+                    for(int k=0; k<stones.length; k++){
+                        for(int j=0; j<stones[k].length; j++){
+                        if (stones[k][j]==id){
+                            eatWhiteStone(k, j);
+                        }
+                        }
+                    }
+                }
+
+            }
+            TURN = WHITETURN;
+            }
         }
-    }
 
     //If the Stones move, we need to change the index in the stone-Array
     public void moveWhiteStone(View view){
+        float diffX=0;
+        float diffY=0;
         if(movingStone.getY()>view.getY()) {
             clearBoard();
-            float diffX = view.getX() - movingStone.getX();
-            float diffY = view.getY() - movingStone.getY();
-            movingStone.animate()
-                    .x(movingStone.getX() + diffX + (movingStone.getWidth() / 2))
-                    .y(movingStone.getY() + diffY + (movingStone.getHeight() / 2))
-                    .start();
-            if (redStoneToEat != null) {
-                if (redStoneToEat[0] != 0 && redStoneToEat[1] != 0) {
-                    int id = stones[redStoneToEat[0]][redStoneToEat[1]];
-                    View stone = findViewById(id);
-                    gameLayout.removeView(stone);
-                    chGameCond.removeStone(redStoneToEat[1], redStoneToEat[0]);
+            diffX = view.getX() - movingStone.getX();
+            diffY = view.getY() - movingStone.getY();
+                movingStone.animate()
+                        .x(movingStone.getX() + diffX + (movingStone.getWidth() / 2))
+                        .y(movingStone.getY() + diffY + (movingStone.getHeight() / 2))
+                        .start();
+                switchPosOfStoneInArray(movingStone, view);
+                if(redStonesToEat.size()!=0){
+                    for(int i=0; i<redStonesToEat.size(); i++){
+                        int id = redStonesToEat.get(i);
+                        for(int k=0; k<stones.length; k++){
+                            for(int j=0; j<stones[k].length; j++){
+                                if (stones[k][j]==id){
+                                    eatRedStone(k, j);
+                                }
+                            }
+                        }
+                    }
+
                 }
-                if (redStoneToEat[0] != 0 && redStoneToEat[1] != 0) {
-                    int id = stones[redStoneToEat[2]][redStoneToEat[3]];
-                    View stone = findViewById(id);
-                    gameLayout.removeView(stone);
+                TURN = REDTURN;
+        }
+
+    }
+
+
+    private void eatWhiteStone(int i, int j){
+        View v = findViewById(stones[i][j]);
+        int id = v.getId();
+        gameLayout.removeView(v);
+        stones[i][j]=0;
+        for(int k=0; k<whiteStonesIds.length; k++){
+            for(int z=0; z<whiteStonesIds[k].length; z++){
+                if(whiteStonesIds[k][z]==id){
+                    whiteStonesIds[k][z]=0;
                 }
             }
+        }
 
-            switchPosOfStoneInArray(movingStone, view);
+    }
+
+    private void eatRedStone(int i, int j){
+        View v = findViewById(stones[i][j]);
+        gameLayout.removeView(v);
+        stones[i][j]=0;
+
+        int id = v.getId();
+        for(int k=0; k<redStonesIds.length; k++){
+            for(int z=0; z<redStonesIds[k].length; z++){
+                if(redStonesIds[k][z]==id){
+                    redStonesIds[k][z]=0;
+                }
+            }
         }
     }
 
     public void switchPosOfStoneInArray(View stone, View pos){
+        int col=0, row =0;
         int idStone = stone.getId();
         int idPos = pos.getId();
         int oldCol=0;
         int oldRow=0;
-        int temp =0;
         for(int i=0; i<positionsIds.length; i++){
             for(int j=0; j<positionsIds[i].length; j++){
                 if(stones[i][j]==idStone){
@@ -403,9 +470,20 @@ private void clearBoard(){
                 //Now we got the stone and we need to change the index
                 if(positionsIds[i][j]==idPos){
                     stones[i][j]=idStone;
+                    col = j;
+                    row = i;
                     System.out.println("Row:"+i+"Col:"+j);
                 }
             }
+        }
+
+        //Every Time when we switch a Position we need to check if we got a new Queen
+        if(row==7){
+            int id = stones[row][col];
+            View stoneToQueen = findViewById(id);
+            queen=new WhiteQueen(stoneToQueen, row, col);
+            queen.setQueen(stoneToQueen);
+            newQueen = queen.getQueen();
         }
 
     }
@@ -413,7 +491,7 @@ private void clearBoard(){
     public boolean checkIfStoneIsBlockingPos(int col, int row){
         int id = stones[row][col];
         View containingStone = findViewById(id);
-        if(containingStone==null || stones[row][col]==0){
+        if(stones[row][col]==0){
             return false;
         }else{
             return true;
@@ -429,8 +507,6 @@ private void clearBoard(){
 
 
     public void printField(){
-
-
         for(int i=0; i<stones.length;i++){
             for(int j=0; j<stones[i].length; j++){
                 System.out.println(stones[i][j]);

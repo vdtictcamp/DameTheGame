@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="380dp"
-    android:layout_height="380dp"
-    tools:context=".GameField"
+    android:layout_height="450dp"
+    tools:context=".Activities.GameField"
     android:id="@+id/gamelayout"
     android:orientation="vertical"
     android:layout_marginLeft="@dimen/marginLeftRight"
@@ -914,8 +914,16 @@
 
     </View>
 
-
-
+    <EditText
+        android:id="@+id/countdown"
+        android:layout_marginTop="10dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_row="12"
+        android:layout_column="0"
+        android:ems="10"
+        android:textSize="50px"
+        android:text="600"/>
 
 
 </GridLayout>

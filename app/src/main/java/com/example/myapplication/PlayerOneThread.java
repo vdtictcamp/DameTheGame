@@ -1,6 +1,6 @@
 package com.example.myapplication;
 
-import android.graphics.Canvas;
+import com.example.myapplication.Activities.GameField;
 
 public class PlayerOneThread extends Thread implements Runnable {
 
