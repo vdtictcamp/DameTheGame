@@ -36,7 +36,6 @@ public class TimeThread extends Thread implements Runnable {
     }
 
 private void stopGame(){
-
         gameField.stopGame();
 }
 

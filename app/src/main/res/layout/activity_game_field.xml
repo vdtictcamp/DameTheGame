@@ -14,31 +14,11 @@
     android:rowCount="14">
 
     <View
-        android:id="@+id/view20"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_row="6"
-        android:layout_column="7"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_corner"></View>
-
-    <View
         android:id="@+id/view21"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_row="6"
         android:layout_column="1"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_corner"></View>
-
-    <View
-        android:id="@+id/view11"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_row="6"
-        android:layout_column="7"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/rounded_corner"></View>
@@ -435,8 +415,8 @@
         android:layout_height="20dp"
         android:layout_row="2"
         android:layout_column="3"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/roundet_corner_red">
 
     </View>
@@ -483,8 +463,8 @@
         android:layout_height="20dp"
         android:layout_row="2"
         android:layout_column="5"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/roundet_corner_red">
 
     </View>
@@ -812,8 +792,8 @@
         android:layout_height="20dp"
         android:layout_row="0"
         android:layout_column="3"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/roundet_corner_red">
 
     </View>
@@ -824,8 +804,8 @@
         android:layout_height="20dp"
         android:layout_row="2"
         android:layout_column="7"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/roundet_corner_red">
 
     </View>
@@ -868,8 +848,8 @@
         android:layout_height="20dp"
         android:layout_row="6"
         android:layout_column="7"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/rounded_corner"></View>
 
     <View

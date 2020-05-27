@@ -40,29 +40,44 @@ public class ChangeGameConditionRedStone {
         for (int i = 0; i < positions.length; i++) {
             for (int j = 0; j < positions[i].length; j++) {
                 if (stones[i][j] == id) {
-                    if (j > 0 && j < 7) {
+                    if (j > 0 && j < 7 && i < 7 && i>0) {
                         if (stones[i - 1][j - 1] == 0 && stones[i - 1][j + 1] == 0) {
                             positionsToJump = null;
                         }
-                    } else if (j >= 7) {
+                    } else if (j >= 7 &&i>0 ) {
                         if (stones[i - 1][j - 1] == 0) {
                             positionsToJump = null;
                         }
-                    } else if (j <= 0) {
+                    } else if (j <= 0 &&i>0 ) {
                         if (stones[i - 1][j + 1] == 0) {
                             positionsToJump = null;
                         }
                     }
+                    else if(i==0 && j>0){
+                        if (stones[i + 1][j - 1] == 0 && stones[i + 1][j + 1] == 0) {
+                            positionsToJump = null;
+                        }
+                    }
+                    else if(i>=7 && j>0){
+                        if (stones[i - 1][j - 1] == 0 && stones[i - 1][j + 1] == 0) {
+                            positionsToJump = null;
+                        }
+                    }else if (i==0 && j==0){
+                        if (stones[i + 1][j + 1] == 0 ) {
+                            positionsToJump = null;
+                        }
+                    }
 
-                    if(positionsToJump!=null) {
+                    else{
                         List<Integer> pos = collectPosRightDiagonal(i, j);
                         positionsToJump.add(pos);
                         pos = collectPosLeftDiagonal(i, j);
                         positionsToJump.add(pos);
-                        pos=collectPosZickZackLeft(i, j);
-                        positionsToJump.add(pos);
-                        pos = collectPosZickZackRight(i, j);
-                        positionsToJump.add(pos);
+                        //Probably we dont need this methods anymore
+                        //pos=collectPosZickZackLeft(i, j);
+                        //positionsToJump.add(pos);
+                        //pos = collectPosZickZackRight(i, j);
+                        //positionsToJump.add(pos);
 
                     }
                 }
@@ -73,6 +88,7 @@ public class ChangeGameConditionRedStone {
     }
 
 
+
     //Gets all Positions to jump inDiagonal
     public List<Integer> collectPosRightDiagonal(int i, int j) {
 
@@ -80,6 +96,8 @@ public class ChangeGameConditionRedStone {
         int colDiff = 1;
         int rowDiff = 1;
         List<Integer> positionsToJump = new ArrayList<>();
+        List<Integer>checkPositionsRight=new ArrayList<>();
+        List<Integer>checkPositionsLeft = new ArrayList<>();
         for (int k = i; k >=0; k--) {
             for (int z = 0; z < positions[i].length; z++) {
                 if (z < 8) {
@@ -96,6 +114,18 @@ public class ChangeGameConditionRedStone {
                             stonesToEat.add(stones[k + 1][z - 1]);
                             colDiff++;
                             rowDiff++;
+                            if(k!=0){
+                                if(checkNextJump(k, z)) {
+                                    checkPositionsLeft = collectPosLeftDiagonal(k, z);
+                                    checkPositionsRight = collectPosRightDiagonal(k, z);
+                                    for (int p = 0; p < checkPositionsRight.size(); p++) {
+                                    positionsToJump.add(checkPositionsRight.get(p));
+                                    }
+                                    for (int p = 0; p < checkPositionsLeft.size(); p++) {
+                                    positionsToJump.add(checkPositionsLeft.get(p));
+                                    }
+                            }
+                            }
                         }
                     }
                     }
@@ -107,10 +137,20 @@ public class ChangeGameConditionRedStone {
         return positionsToJump;
 }
 
+public boolean checkNextJump(int row, int col){
+        if(stones[row-1][col-1]!=0 || stones[row-1][col+1]!=0){
+            return true;
+        }
+        else{
+            return false;
+        }
+}
 
 public List<Integer> collectPosLeftDiagonal(int i, int j){
     int colDiff = 1;
     int rowDiff = 1;
+    List<Integer>checkPositionsRight=new ArrayList<>();
+    List<Integer>checkPositionsLeft = new ArrayList<>();
     List<Integer> positionsToJump = new ArrayList<>();
     for (int k = i; k >=0; k--) {
         for (int z = 0; z < positions[i].length; z++) {
@@ -128,6 +168,18 @@ public List<Integer> collectPosLeftDiagonal(int i, int j){
                             stonesToEat.add(stones[k + 1][z + 1]);
                             colDiff++;
                             rowDiff++;
+                            if (k!=0){
+                            if(checkNextJump(k, z)) {
+                                checkPositionsLeft = collectPosLeftDiagonal(k, z);
+                                checkPositionsRight = collectPosRightDiagonal(k, z);
+                                for (int p = 0; p < checkPositionsRight.size(); p++) {
+                                    positionsToJump.add(checkPositionsRight.get(p));
+                                }
+                                for (int p = 0; p < checkPositionsLeft.size(); p++) {
+                                    positionsToJump.add(checkPositionsLeft.get(p));
+                                }
+                            }
+                            }
                         }
                     }
                 }
@@ -138,84 +190,6 @@ public List<Integer> collectPosLeftDiagonal(int i, int j){
 
 }
 
-    // We need this Method to collect the position where a stone can jump when he can eat another enemy stone
-    public List<Integer> collectPositionsToJumpZickZack(int i, int j) {
-        List<Integer>positionsToJump = new ArrayList<>();
-        for (int k = i ; k>0; k--) {
-            for (int z = 0; z < positions[i].length; z++) {
-                    if(z<6) {
-                        if ((k == i - 1 && z == j + 1) && (stones[k][z] != 0)) {
-                            if ((checkIfIsRedStone(stones[k][z])) && stones[k - 1][z + 1] == 0) {
-                                positionsToJump.add(positions[k - 1][z + 1]);
-                                stonesToEat.add(stones[k][z]);
-                            }
-                        }
-                        if((k==i-3 && z==j+1) &&(stones[k][z]!=0)){
-                            if ((checkIfIsRedStone(stones[k][z])) && stones[k - 1][j] == 0){
-                                positionsToJump.add(positions[k - 1][j]);
-                                stonesToEat.add(stones[k][z]);
-                            }
-                        }
-                    }
-                    if(z>1) {
-                        if ((k == i - 1 && z == j - 1) && (stones[k][z] != 0)) {
-                            if ((checkIfIsRedStone(stones[k][z])) && stones[k - 1][z - 1] == 0) {
-                                positionsToJump.add(positions[k - 1][z - 1]);
-                                stonesToEat.add(stones[k][z]);
-
-                            }
-                        }
-                    }
-                        if(z>1) {
-                            if ((k == i - 3 && z == j - 1) && (stones[k][z] != 0)) {
-                                if ((checkIfIsRedStone(stones[k][z])) && stones[k - 1][j] == 0) {
-                                    positionsToJump.add(positions[k - 1][j]);
-                                    stonesToEat.add(stones[k][z]);
-                                }
-                            }
-                        }
-
-                    }
-            }
-
-        return positionsToJump;
-    }
-
-
-    //Noch in Bearbeitung
-    private List<Integer> collectPosHorizontalZickZackLeft(int i, int j){
-        List<Integer>positionsToJump = new ArrayList<>();
-        int colDiff = 1;
-        int rowDiff = 1;
-        for(int k=i;k>0; k-- ){
-            for(int z=0; z<positions[i].length; z++){
-                if(z>=0){
-                    if ((k == i - rowDiff && z == j - colDiff) && (colDiff % 2 != 0)) {
-                        if (stones[k][z] != 0 && (checkIfIsRedStone(stones[k][z]))) {
-                            rowDiff++;
-                            colDiff++;
-                        }
-                    }
-                    if (j - colDiff >= 0) {
-                        if (((k == i - rowDiff) && (z == j - colDiff)) && (colDiff % 2 == 0)) {
-                            if (stones[k][z] == 0) {
-                                positionsToJump.add(positions[k][z]);
-                                stonesToEat.add(stones[k -1][z + 1]);
-                                colDiff++;
-                                rowDiff--;
-                                k=i;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-
-
-        return positionsToJump;
-
-    }
 
 
     //Noch in Bearbeitung
@@ -244,6 +218,7 @@ public List<Integer> collectPosLeftDiagonal(int i, int j){
                                 stonesToEat.add(stones[stoneRow][stoneCol]);
                                 containsStone=false;
                                 rowDiff++;
+                                z=positions.length-1;
                             }
                         }
                 }
@@ -274,7 +249,7 @@ public List<Integer> collectPosLeftDiagonal(int i, int j){
 
                         }
                     }
-                    if (((k==i-rowDiff && z==j) &&(rowDiff%2==0)) || ((k==i-rowDiff &&z==j+2)&&(rowDiff%2==0))) {
+                    if (((k==i-rowDiff && z==j && stones[k][z]==0 && rowDiff>2) &&(rowDiff%2==0)) || ((k==i-rowDiff &&z==j+2)&&(rowDiff%2==0))) {
                         if (stones[k][z] == 0 && containsStone==true) {
                             positionsToJump.add(positions[k][z]);
                             stonesToEat.add(stones[stoneRow][stoneCol]);

@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Threads;
 
 import com.example.myapplication.Activities.GameField;
 

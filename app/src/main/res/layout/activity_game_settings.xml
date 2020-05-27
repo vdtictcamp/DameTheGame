@@ -9,34 +9,51 @@
     android:background="@color/darkgreen">
 
 
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="100dp"
+    android:text="@string/playerOne">
+</TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:text="@string/playerTwo">
+    </TextView>
+
     <EditText
         android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="200dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/lblplayername">
-    </EditText>
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="5dp"
+        android:text="@string/lblplayername"></EditText>
 
     <TextView
         android:layout_width="200dp"
         android:layout_height="30dp"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:text="@string/placeholderForNameField"></TextView>
+
 
     <EditText
         android:id="@+id/editText"
         android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:layout_weight="1"
-        android:ems="10"
-        android:text="Name" />
-
+        android:layout_height="97dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/lblChooseOfColorForFigur" />
 
     <Button
         android:layout_width="100dp"
-        android:layout_height="50dp">
+        android:layout_height="50dp"
+        android:text="@string/btnStartGame"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="10dp">
 
     </Button>
 
