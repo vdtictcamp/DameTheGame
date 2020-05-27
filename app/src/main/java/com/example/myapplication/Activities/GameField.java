@@ -14,9 +14,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.GameEngine.ChangeGameConditionRedStone;
 import com.example.myapplication.GameEngine.ChangeGameConditionWhiteStone;
 import com.example.myapplication.GameEngine.CheckIfGameIsFinish;
+import com.example.myapplication.PlayerController.Controller;
 import com.example.myapplication.Queen.RedQueen;
 import com.example.myapplication.Queen.WhiteQueen;
 import com.example.myapplication.R;
+import com.example.myapplication.Threads.PlayerOneThread;
+import com.example.myapplication.Threads.PlayerTwoThread;
 import com.example.myapplication.Threads.TimeThread;
 
 import java.util.ArrayList;
@@ -50,7 +53,11 @@ public class GameField extends AppCompatActivity{
     private List<Integer>posForWhiteQueen=new ArrayList<>();
     private boolean timeLimit;
     private TimeThread timer;
-    boolean nextJump = false;
+    private PlayerOneThread pOneThread;
+    private PlayerTwoThread pTwoThread;
+    private View visualizeTurnOfPlayerOne;
+    private View visualizeTurnOfPlayerTwo;
+    private Controller controller;
 
     //We need thie variables to controll the turns of the player
     final int WHITETURN = 1;
@@ -69,7 +76,9 @@ public class GameField extends AppCompatActivity{
         redStones = new View[8][8];
         whiteStones = new View[8][8];
         positions = new View[8][8];
-
+        visualizeTurnOfPlayerOne=findViewById(R.id.playersOneTurn);
+        visualizeTurnOfPlayerTwo=findViewById(R.id.playersTwoTurn);
+        controller=new Controller();
         //All position
         positionsIds = new int[][]{{R.id.pos1a, R.id.pos1b, R.id.pos1c, R.id.pos1d, R.id.pos1e, R.id.pos1f, R.id.pos1g, R.id.pos1h},
                 {R.id.pos2a, R.id.pos2b, R.id.pos2c, R.id.pos2d, R.id.pos2e, R.id.pos2f, R.id.pos2g, R.id.pos2h},
@@ -196,9 +205,13 @@ public class GameField extends AppCompatActivity{
             }
         }
 
-
+        visualizeTurnOfPlayerTwo.setBackgroundColor(Color.WHITE);
+        //The Game starts
         timer = new TimeThread(this, countdown);
         timer.start();
+
+        pOneThread=new PlayerOneThread();
+        pOneThread.start();
     }
 
 //----------------------------------------------------------------------------------------
@@ -430,6 +443,7 @@ public void showValidPosForQueen(){
                 stopGame();
             }
 
+            controller.changeTurnOfPlayer(visualizeTurnOfPlayerTwo, visualizeTurnOfPlayerOne);
 
             TURN = WHITETURN;
             }
@@ -466,7 +480,7 @@ public void showValidPosForQueen(){
                 stopGame();
             }
 
-
+                controller.changeTurnOfPlayer(visualizeTurnOfPlayerOne, visualizeTurnOfPlayerTwo);
                 TURN = REDTURN;
         }
 

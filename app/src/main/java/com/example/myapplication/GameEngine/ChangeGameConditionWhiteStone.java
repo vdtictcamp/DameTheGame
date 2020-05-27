@@ -161,7 +161,7 @@ public class ChangeGameConditionWhiteStone{
                                 stonesToEat.add(stones[k - 1][z + 1]);
                                 colDiff++;
                                 rowDiff++;
-                                if(k!=0){
+                                if(k!=0 &&z!=0){
                                     if(checkNextJump(k, z)) {
                                         checkPositionsLeft = collectPosLeftDiagonal(k, z);
                                         checkPositionsRight = collectPosRightDiagonal(k, z);

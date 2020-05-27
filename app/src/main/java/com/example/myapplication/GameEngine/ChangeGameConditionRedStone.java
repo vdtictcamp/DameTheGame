@@ -62,13 +62,14 @@ public class ChangeGameConditionRedStone {
                         if (stones[i - 1][j - 1] == 0 && stones[i - 1][j + 1] == 0) {
                             positionsToJump = null;
                         }
-                    }else if (i==0 && j==0){
+                    }else
+                        if(i==0 && j==0){
                         if (stones[i + 1][j + 1] == 0 ) {
                             positionsToJump = null;
                         }
                     }
 
-                    else{
+                    if(positionsToJump!=null) {
                         List<Integer> pos = collectPosRightDiagonal(i, j);
                         positionsToJump.add(pos);
                         pos = collectPosLeftDiagonal(i, j);
@@ -114,7 +115,7 @@ public class ChangeGameConditionRedStone {
                             stonesToEat.add(stones[k + 1][z - 1]);
                             colDiff++;
                             rowDiff++;
-                            if(k!=0){
+                            if(k!=0 && z!=0){
                                 if(checkNextJump(k, z)) {
                                     checkPositionsLeft = collectPosLeftDiagonal(k, z);
                                     checkPositionsRight = collectPosRightDiagonal(k, z);

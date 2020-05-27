@@ -8,8 +8,9 @@ public class PlayerOneThread extends Thread implements Runnable {
     PlayerTwoThread pTwoThread;
     boolean isInTurn;
     int[][] stones;
+    int counter =15;
 
-    public PlayerOneThread(int[][] stones) {
+    public PlayerOneThread() {
         this.stones = stones;
         pTwoThread = new PlayerTwoThread(stones);
     }
