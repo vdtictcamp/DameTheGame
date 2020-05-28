@@ -23,7 +23,7 @@ public class ChangeGameConditionWhiteStone{
 
 
 
-    private boolean checkIfIsWhiteStone(int id){
+    public boolean checkIfIsWhiteStone(int id){
         for(int i=0; i<whiteStonesIds.length; i++){
             for(int j=0; j<whiteStonesIds[i].length; j++){
                 if(whiteStonesIds[i][j]==id){
@@ -64,7 +64,8 @@ public class ChangeGameConditionWhiteStone{
                         if (stones[i - 1][j - 1] == 0 && stones[i - 1][j + 1] == 0) {
                             positionsToJump = null;
                         }
-                    }else{
+                    }else
+                    if(i==0 && j==0){
                         if (stones[i + 1][j + 1] == 0 ) {
                             positionsToJump = null;
                         }
@@ -183,7 +184,10 @@ public class ChangeGameConditionWhiteStone{
         return positionsToJump;
     }
     public boolean checkNextJump(int row, int col){
-        if(stones[row-1][col-1]!=0 || stones[row-1][col+1]!=0){
+        if(row ==0 || col==0 || col==7 || row==7){
+            return false;
+        }
+        else if(stones[row-1][col-1]!=0 || stones[row-1][col+1]!=0){
             return true;
         }
         else{

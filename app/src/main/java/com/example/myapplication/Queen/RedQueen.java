@@ -2,24 +2,30 @@ package com.example.myapplication.Queen;
 
 import android.view.View;
 
+import com.example.myapplication.GameEngine.ChangeGameConditionRedStone;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class RedQueen {
 
-
+    ChangeGameConditionRedStone chGameCond;
     List<Integer>redQueens = new ArrayList<>();
+    int[][]redStones;
     View queen;
     int[][] positions;
     int[][]stones;
     int row=0;
     int col =0;
 
-    public RedQueen(View queen, List<Integer>redQueens, int[][] positions, int[][]stones){
+
+    public RedQueen(View queen, List<Integer>redQueens, int[][] positions, int[][]stones, int[][]redStones){
         this.redQueens=redQueens;
         this.queen=queen;
         this.stones=stones;
         this.positions=positions;
+        this.redStones=redStones;
+        chGameCond= new ChangeGameConditionRedStone(this.stones, this.positions, redStones);
     }
 
 
@@ -34,14 +40,12 @@ public class RedQueen {
         queen.getLayoutParams().width=120;
     }
 
-    public List<Integer> getPositionsToMove( ){
+    public List<Integer> getPositionsToMove(int row, int col){
         List<Integer>posToMove = new ArrayList<>();
         int colDiff =1;
         int rowDiff=1;
-        int[]index = getRowAndCol();
-        col = index[1];
-        row=index[0];
-        for(int i=row; i>row-2; i--){
+        System.out.println("Spalte:"+col +"Reihe:"+ row);
+        for(int i=row-1; i<row+2; i++){
             if(i==row || i<0 || i>7){
                 continue;
             }
@@ -57,13 +61,95 @@ public class RedQueen {
         return posToMove;
 
     }
-    public int[] getRowAndCol() {
+
+    public List<Integer> getPositionsToJumpForwardRight(int row, int col){
+        int rowDiff=1;
+        int colDiff=1;
+        List<Integer>positionsToJump = new ArrayList<>();
+        List<Integer>checkPositionsRight = new ArrayList<>();
+        List<Integer>checkPositionsLeft = new ArrayList<>();
+        for(int i=row-1; i<row+3; i++){
+            if(i>7 || i<0|| i==row){
+                continue;
+            }
+            for(int j=col-2; j<positions[i].length; j++){
+                if((i==row+rowDiff && j==col+colDiff &&colDiff%2!=0)) {
+                    if (stones[i][j] != 0 && chGameCond.checkIfIsRedStone(stones[i][j])) {
+                        colDiff++;
+                        rowDiff++;
+                    }
+                }
+                if((i==row+rowDiff && j==col+colDiff)){
+                    if(stones[i][j]==0 && rowDiff%2==0){
+                        System.out.println("Feld leer");
+                        positionsToJump.add(positions[i][j]);
+                        if(chGameCond.checkNextJump(i,j)){
+                            checkPositionsLeft=getPositionsToJumpForwardLeft(i,j);
+                            checkPositionsRight=getPositionsToJumpForwardRight(i,j);
+                            for (int p = 0; p < checkPositionsRight.size(); p++) {
+                                positionsToJump.add(checkPositionsRight.get(p));
+                            }
+                            for (int p = 0; p < checkPositionsLeft.size(); p++) {
+                                positionsToJump.add(checkPositionsLeft.get(p));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return positionsToJump;
+    }
+
+    public List<Integer> getPositionsToJumpForwardLeft(int row, int col){
+        int rowDiff=1;
+        int colDiff=1;
+        List<Integer>positionsToJump = new ArrayList<>();
+        List<Integer>checkPositionsRight = new ArrayList<>();
+        List<Integer>checkPositionsLeft = new ArrayList<>();
+        for(int i=row-1; i<row+3; i++){
+            if(i>7 || i<0|| i==row){
+                continue;
+            }
+            for(int j=col-2; j<positions[i].length; j++){
+                if((i==row+rowDiff && j==col-colDiff &&colDiff%2!=0)) {
+                    if (stones[i][j] != 0 && chGameCond.checkIfIsRedStone(stones[i][j])) {
+                        colDiff++;
+                        rowDiff++;
+                    }
+                }
+                if((i==row+rowDiff && j==col-colDiff) && rowDiff%2==0){
+                    if(stones[i][j]==0 && rowDiff%2==0){
+                        System.out.println("Feld leer");
+                        positionsToJump.add(positions[i][j]);
+                        if(chGameCond.checkNextJump(i,j)){
+                            checkPositionsLeft=getPositionsToJumpForwardLeft(i,j);
+                            checkPositionsRight=getPositionsToJumpForwardRight(i,j);
+                            for (int p = 0; p < checkPositionsRight.size(); p++) {
+                                positionsToJump.add(checkPositionsRight.get(p));
+                            }
+                            for (int p = 0; p < checkPositionsLeft.size(); p++) {
+                                positionsToJump.add(checkPositionsLeft.get(p));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return positionsToJump;
+    }
+
+
+
+
+    public int[] getRowAndCol(View queen) {
         int index[]=new int[2];
         for (int i = 0; i < stones.length; i++) {
             for (int j = 0; j < stones[i].length; j++) {
                 if(stones[i][j]==queen.getId()){
-                        index[0]=i;
-                        index[1]=j;
+                    index[0]=i;
+                    index[1]=j;
                 }
             }
         }

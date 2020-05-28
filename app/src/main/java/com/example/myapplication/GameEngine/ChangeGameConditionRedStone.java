@@ -21,7 +21,7 @@ public class ChangeGameConditionRedStone {
 
 
 
-    private boolean checkIfIsRedStone(int id) {
+    public boolean checkIfIsRedStone(int id) {
         for (int i = 0; i < redStonesIds.length; i++) {
             for (int j = 0; j < redStonesIds[i].length; j++) {
                 if (redStonesIds[i][j] == id) {
@@ -74,11 +74,7 @@ public class ChangeGameConditionRedStone {
                         positionsToJump.add(pos);
                         pos = collectPosLeftDiagonal(i, j);
                         positionsToJump.add(pos);
-                        //Probably we dont need this methods anymore
-                        //pos=collectPosZickZackLeft(i, j);
-                        //positionsToJump.add(pos);
-                        //pos = collectPosZickZackRight(i, j);
-                        //positionsToJump.add(pos);
+
 
                     }
                 }
@@ -139,7 +135,10 @@ public class ChangeGameConditionRedStone {
 }
 
 public boolean checkNextJump(int row, int col){
-        if(stones[row-1][col-1]!=0 || stones[row-1][col+1]!=0){
+        if(row ==0 || col==0 || col==7 || row==7){
+            return false;
+        }
+        else if(stones[row-1][col-1]!=0 || stones[row-1][col+1]!=0){
             return true;
         }
         else{
