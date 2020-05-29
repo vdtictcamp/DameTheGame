@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".Activities.MainActivity"
     android:orientation="horizontal"
     android:columnCount="10"
     android:rowCount="10">
@@ -26,7 +26,8 @@
         android:layout_row="4"
         android:layout_marginTop="100dp"
         android:text="@string/newGame"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:id="@+id/btnInitnewGame">
     </Button>
     <Button
         android:layout_column="4"

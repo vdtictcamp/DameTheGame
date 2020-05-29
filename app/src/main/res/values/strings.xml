@@ -5,4 +5,9 @@
     <string name="login">anmelden</string>
     <string name="newGame">neues Spiel</string>
     <string name="gamerules">Spielregeln</string>
+    <string name="exitGame">Spiel beenden</string>
+    <string name="lblplayername">Entscheide dich für einen Spielernamen</string>
+    <string name="placeholderForNameField">Spielername</string>
+    <string name="lblChooseOfColorForFigur">Wähle deine gewünschte Farbe der Spielfiguren</string>
+    <string name="gameFinished">Spiel beendet</string>
 </resources>
