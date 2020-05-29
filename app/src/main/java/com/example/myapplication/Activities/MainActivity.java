@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener toGameField = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                        changeToGamefield();
+                changeToGamefield();
             }
         };
         btnInitNewGame.setOnClickListener(toGameField);
