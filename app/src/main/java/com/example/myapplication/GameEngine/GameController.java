@@ -1,5 +1,7 @@
 package com.example.myapplication.GameEngine;
 
+import android.view.View;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,18 +17,16 @@ public class GameController {
     }
 
 
-    public void checkMovement(){
+    public void checkMovement(int positionId){
         int row=0;
         int id=0;
         List<Integer>rows = new ArrayList<>();
-        for(int s_id =0; s_id<stonesToEat.size(); s_id++) {
             for (int i = 0; i < stones.length; i++) {
                 for (int j = 0; j < stones[i].length; j++) {
-                    if (stones[i][j] == stonesToEat.get(s_id)){
+                    if (positions[i][j] == positionId){
 
                     }
                 }
             }
         }
-    }
 }
