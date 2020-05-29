@@ -10,4 +10,10 @@
     <string name="placeholderForNameField">Spielername</string>
     <string name="lblChooseOfColorForFigur">Wähle deine gewünschte Farbe der Spielfiguren</string>
     <string name="gameFinished">Spiel beendet</string>
+    <string name="btnStartGame">Spiel starten</string>
+    <string name="lblFigureColor">Wähle die gewünschte Figurfarbe</string>
+    <string name="playerOneSettings">Spieler 1</string>
+    <string name="playerTwoSettings">Spieler 2</string>
+    <string name="playerOneTurn">Spieler 1</string>
+    <string name="playerTwoTurn">Spieler 2 </string>
 </resources>

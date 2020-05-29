@@ -1,6 +1,7 @@
-package com.example.myapplication;
+package com.example.myapplication.Threads;
 
 import com.example.myapplication.Activities.GameField;
+import com.example.myapplication.Threads.PlayerOneThread;
 
 public class PlayerTwoThread extends Thread implements Runnable {
 
@@ -34,8 +35,6 @@ public class PlayerTwoThread extends Thread implements Runnable {
             if(isInTurn){
                 game.update();
             }
-
-
 
     }
 }

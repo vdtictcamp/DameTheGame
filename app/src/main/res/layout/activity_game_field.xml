@@ -14,14 +14,28 @@
     android:rowCount="14">
 
     <View
-        android:id="@+id/view20"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_row="6"
-        android:layout_column="7"
-        android:layout_marginLeft="10dp"
+        android:id="@+id/playersTwoTurn"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_row="13"
+        android:layout_column="4"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_corner"></View>
+        android:background="@color/green">
+
+    </View>
+
+    <View
+        android:id="@+id/playersOneTurn"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_row="13"
+        android:layout_column="2"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/green">
+
+    </View>
 
     <View
         android:id="@+id/view21"
@@ -29,16 +43,6 @@
         android:layout_height="20dp"
         android:layout_row="6"
         android:layout_column="1"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_corner"></View>
-
-    <View
-        android:id="@+id/view11"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_row="6"
-        android:layout_column="7"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/rounded_corner"></View>
@@ -435,8 +439,8 @@
         android:layout_height="20dp"
         android:layout_row="2"
         android:layout_column="3"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/roundet_corner_red">
 
     </View>
@@ -483,8 +487,8 @@
         android:layout_height="20dp"
         android:layout_row="2"
         android:layout_column="5"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/roundet_corner_red">
 
     </View>
@@ -812,8 +816,8 @@
         android:layout_height="20dp"
         android:layout_row="0"
         android:layout_column="3"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/roundet_corner_red">
 
     </View>
@@ -824,8 +828,8 @@
         android:layout_height="20dp"
         android:layout_row="2"
         android:layout_column="7"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/roundet_corner_red">
 
     </View>
@@ -868,8 +872,8 @@
         android:layout_height="20dp"
         android:layout_row="6"
         android:layout_column="7"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/rounded_corner"></View>
 
     <View
@@ -914,17 +918,37 @@
 
     </View>
 
+
+    <TextView
+        android:id="@+id/playerOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="13"
+        android:layout_column="3"
+        android:layout_marginTop="5dp"
+        android:text="@string/playerOneTurn"
+        android:textSize="10sp"></TextView>
+
+    <TextView
+        android:id="@+id/playerTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_row="13"
+        android:layout_column="5"
+        android:layout_marginTop="5dp"
+        android:text="@string/playerTwoTurn"
+        android:textSize="10sp">
+
+    </TextView>
+
     <EditText
         android:id="@+id/countdown"
-        android:layout_marginTop="10dp"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="12"
+        android:layout_width="42dp"
+        android:layout_height="30dp"
+        android:layout_row="13"
         android:layout_column="0"
         android:ems="10"
-        android:textSize="50px"
-        android:text="600"/>
-
+        android:inputType="time" />
 
 </GridLayout>
 
