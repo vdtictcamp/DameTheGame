@@ -19,10 +19,6 @@ public class ChangeGameConditionWhiteStone{
         this.whiteStonesIds = whiteStonesIds;
     }
 
-
-
-
-
     public boolean checkIfIsWhiteStone(int id){
         for(int i=0; i<whiteStonesIds.length; i++){
             for(int j=0; j<whiteStonesIds[i].length; j++){
@@ -43,15 +39,15 @@ public class ChangeGameConditionWhiteStone{
             for (int j = 0; j < positions[i].length; j++) {
                 if (stones[i][j] == id) {
                     if (j > 0 && j < 7 && i < 7 && i>0) {
-                        if (stones[i - 1][j - 1] == 0 && stones[i - 1][j + 1] == 0) {
+                        if (stones[i + 1][j + 1] == 0 && stones[i + 1][j - 1] == 0) {
                             positionsToJump = null;
                         }
                     } else if (j >= 7 &&i>0 ) {
-                        if (stones[i - 1][j - 1] == 0) {
+                        if (stones[i + 1][j - 1] == 0) {
                             positionsToJump = null;
                         }
                     } else if (j <= 0 &&i>0 ) {
-                        if (stones[i - 1][j + 1] == 0) {
+                        if (stones[i + 1][j + 1] == 0) {
                             positionsToJump = null;
                         }
                     }
@@ -61,7 +57,7 @@ public class ChangeGameConditionWhiteStone{
                         }
                     }
                     else if(i>=7 && j>0){
-                        if (stones[i - 1][j - 1] == 0 && stones[i - 1][j + 1] == 0) {
+                        if (stones[i + 1][j - 1] == 0 && stones[i - 1][j + 1] == 0) {
                             positionsToJump = null;
                         }
                     }else
@@ -76,11 +72,7 @@ public class ChangeGameConditionWhiteStone{
                         positionsToJump.add(pos);
                         pos = collectPosLeftDiagonal(i, j);
                         positionsToJump.add(pos);
-                        //Probably we dont need this methods anymore
-                        //pos=collectPosZickZackLeft(i, j);
-                        //positionsToJump.add(pos);
-                        //pos = collectPosZickZackRight(i, j);
-                        //positionsToJump.add(pos);
+
 
                     }
                 }

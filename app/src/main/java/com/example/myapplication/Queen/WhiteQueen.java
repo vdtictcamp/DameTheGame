@@ -49,10 +49,13 @@ public class WhiteQueen {
         List<Integer>checkPositionsRight = new ArrayList<>();
         List<Integer>checkPositionsLeft = new ArrayList<>();
         for(int i=row+1; i>row-3; i--){
-            if(i>7 || i==row || i==0){
+            if(i>7 || i==row || i<0){
                 continue;
             }
             for(int j=col-2; j<positions[i].length; j++){
+                if(j<0){
+                    continue;
+                }
                 if((i==row-rowDiff && j==col-colDiff &&colDiff%2!=0)) {
                     if (stones[i][j] != 0 && chGameCondWhite.checkIfIsWhiteStone(stones[i][j])) {
                         colDiff++;
@@ -88,7 +91,7 @@ public class WhiteQueen {
         List<Integer>checkPositionsRight = new ArrayList<>();
         List<Integer>checkPositionsLeft = new ArrayList<>();
         for(int i=row+1; i>row-3; i--){
-            if(i>7 || i==row || i==0){
+            if(i>7 || i==row || i<=0){
                 continue;
             }
             for(int j=col-2; j<positions[i].length; j++){

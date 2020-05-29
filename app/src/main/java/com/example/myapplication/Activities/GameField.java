@@ -90,12 +90,33 @@ public class GameField extends AppCompatActivity{
                 {R.id.pos8a, R.id.pos8b, R.id.pos8c, R.id.pos8d, R.id.pos8e, R.id.pos8f, R.id.pos8g, R.id.pos8h}};
 
 
+
+
+        View.OnClickListener checkPositions = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for(int i=0; i<positionsIds.length;i++){
+                    for(int j=0; j<positionsIds[i].length; j++){
+                        if(positionsIds[i][j]==v.getId()){
+                            if(stones[i][j]==0){
+                                System.out.println("Diese Position ist leer");
+                            }else{
+                                System.out.println("Position nicht leer");
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+
         //Fill the Array with all Positions
         for(int i=0; i<positions.length;i++){
             for(int j=0; j<positions[i].length; j++){
                 int id = positionsIds[i][j];
                 View pos = findViewById(id);
                 positions[i][j]=pos;
+                positions[i][j].setOnClickListener(checkPositions);
             }
         }
 
@@ -178,6 +199,7 @@ public class GameField extends AppCompatActivity{
                         int[]index = whiteQueen.getRowAndCol(v);
                         int row=index[0];
                         int col = index[1];
+                        System.out.println("Aus main: Reihe"+index[0]+"Spalte:"+index[1]);
                         posForWhiteQueen=whiteQueen.getPositionsToJumpForwardRight(row, col);
                         showValidPosForQueen(posForWhiteQueen);
                         posForWhiteQueen=whiteQueen.getPositionsToJumpForwardLeft(row, col);
@@ -406,17 +428,15 @@ public void showValidPosForQueen(List<Integer>positions){
     View.OnClickListener moveListenerForRedStone = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            System.out.println("Clicked");
             moveRedStone(v);
+
         }
     };
     //Eventuell auslagern
     View.OnClickListener moveListenerForWhiteStone = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            System.out.println("Clicked");
-                moveWhiteStone(v);
-
+                    moveWhiteStone(v);
         }
     };
 
@@ -446,28 +466,31 @@ public void showValidPosForQueen(List<Integer>positions){
 
     //Muss mit Touch Event erledigt werden
     public void moveRedStone(View view){
+        if((TURN & REDTURN)!=0 ){
         if(movingStone.getY()<view.getY()) {
             clearBoard();
             float diffX = view.getX() - movingStone.getX();
             float diffY = view.getY() - movingStone.getY();
-                movingStone.animate()
-                        .x(movingStone.getX() + diffX + (movingStone.getWidth() / 2))
-                        .y(movingStone.getY() + diffY + (movingStone.getHeight() / 2))
-                        .start();
+            movingStone.animate()
+                    .x(movingStone.getX() + diffX + (movingStone.getWidth() / 2))
+                    .y(movingStone.getY() + diffY + (movingStone.getHeight() / 2))
+                    .start();
+
             switchPosOfStoneInArray(movingStone, view);
-            if(whiteStonesToEat.size()!=0){
-                for(int i=0; i<whiteStonesToEat.size(); i++){
+            if (whiteStonesToEat.size() != 0) {
+                for (int i = 0; i < whiteStonesToEat.size(); i++) {
                     int id = whiteStonesToEat.get(i);
-                    for(int k=0; k<stones.length; k++){
-                        for(int j=0; j<stones[k].length; j++){
-                        if (stones[k][j]==id){
-                            eatWhiteStone(k, j);
-                        }
+                    for (int k = 0; k < stones.length; k++) {
+                        for (int j = 0; j < stones[k].length; j++) {
+                            if (stones[k][j] == id) {
+                                eatWhiteStone(k, j);
+                            }
                         }
                     }
                 }
 
             }
+        }
 
             boolean isFinish =finishChecker.checkIfGameIsFinish(whiteStonesIds, redStonesIds);
             if(isFinish){
@@ -482,21 +505,22 @@ public void showValidPosForQueen(List<Integer>positions){
     public void moveWhiteStone(View view){
         float diffX=0;
         float diffY=0;
-        if(movingStone.getY()>view.getY()) {
-            clearBoard();
-            diffX = view.getX() - movingStone.getX();
-            diffY = view.getY() - movingStone.getY();
+        if((TURN&WHITETURN)!=0) {
+            if (movingStone.getY() > view.getY()) {
+                clearBoard();
+                diffX = view.getX() - movingStone.getX();
+                diffY = view.getY() - movingStone.getY();
                 movingStone.animate()
                         .x(movingStone.getX() + diffX + (movingStone.getWidth() / 2))
                         .y(movingStone.getY() + diffY + (movingStone.getHeight() / 2))
                         .start();
                 switchPosOfStoneInArray(movingStone, view);
-                if(redStonesToEat.size()!=0){
-                    for(int i=0; i<redStonesToEat.size(); i++){
+                if (redStonesToEat.size() != 0) {
+                    for (int i = 0; i < redStonesToEat.size(); i++) {
                         int id = redStonesToEat.get(i);
-                        for(int k=0; k<stones.length; k++){
-                            for(int j=0; j<stones[k].length; j++){
-                                if (stones[k][j]==id){
+                        for (int k = 0; k < stones.length; k++) {
+                            for (int j = 0; j < stones[k].length; j++) {
+                                if (stones[k][j] == id) {
                                     eatRedStone(k, j);
                                 }
                             }
@@ -504,13 +528,14 @@ public void showValidPosForQueen(List<Integer>positions){
                     }
 
                 }
-             boolean isFinish =finishChecker.checkIfGameIsFinish(whiteStonesIds, redStonesIds);
-            if(isFinish){
-                stopGame();
-            }
+                boolean isFinish = finishChecker.checkIfGameIsFinish(whiteStonesIds, redStonesIds);
 
+                if (isFinish) {
+                    stopGame();
+                }
                 controller.changeTurnOfPlayer(visualizeTurnOfPlayerOne, visualizeTurnOfPlayerTwo);
                 TURN = REDTURN;
+            }
         }
 
     }
@@ -528,7 +553,6 @@ public void showValidPosForQueen(List<Integer>positions){
                 }
             }
         }
-
     }
 
     private void eatRedStone(int i, int j){

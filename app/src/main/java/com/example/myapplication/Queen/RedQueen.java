@@ -112,6 +112,9 @@ public class RedQueen {
                 continue;
             }
             for(int j=col-2; j<positions[i].length; j++){
+                if(j<0){
+                    continue;
+                }
                 if((i==row+rowDiff && j==col-colDiff &&colDiff%2!=0)) {
                     if (stones[i][j] != 0 && chGameCond.checkIfIsRedStone(stones[i][j])) {
                         colDiff++;
