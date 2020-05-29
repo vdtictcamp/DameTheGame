@@ -17,16 +17,25 @@ public class GameController {
     }
 
 
-    public void checkMovement(int positionId){
-        int row=0;
-        int id=0;
-        List<Integer>rows = new ArrayList<>();
+    public void removeStones(int positionId, int stoneId) {
+        int rowPos = 0;
+        int colPos =0;
+        int rowStone=0;
+        int colStone=0;
+        List<Integer> rows = new ArrayList<>();
+        for (int s_id = 0; s_id < stonesToEat.size(); s_id++) {
             for (int i = 0; i < stones.length; i++) {
                 for (int j = 0; j < stones[i].length; j++) {
-                    if (positions[i][j] == positionId){
-
+                    if (positions[i][j] == positionId) {
+                        rowPos=i;
+                        colPos=j;
+                    }
+                    if(stones[i][j]==stoneId){
+                        rowStone=i;
+                        colStone=j;
                     }
                 }
             }
         }
+    }
 }

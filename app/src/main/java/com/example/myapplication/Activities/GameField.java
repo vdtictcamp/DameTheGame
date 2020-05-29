@@ -142,6 +142,12 @@ public class GameField extends AppCompatActivity{
                 {0,R.id.b1, 0,R.id.b2, 0,R.id.b3, 0,R.id.b4}};
 
 
+
+
+            System.out.println("ID_Stein"+R.id.b2);
+            System.out.println("B1:"+R.id.b1);
+
+
         View.OnClickListener redStoneClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -173,7 +179,7 @@ public class GameField extends AppCompatActivity{
                         showValidPositionsForRedStones(v);
                         posAfterEat = chGameCondRed.canEateWhiteStoneBeta(v);
                         whiteStonesToEat = chGameCondRed.returnStonesToEat();
-                        if (posAfterEat != null) {
+                        if(posAfterEat!=null){
                             for (int i = 0; i < posAfterEat.size(); i++) {
                                 for (int j = 0; j < posAfterEat.get(i).size(); j++) {
                                     int id = posAfterEat.get(i).get(j);
@@ -182,10 +188,12 @@ public class GameField extends AppCompatActivity{
 
                             }
                         }
+                        }
+
                     }
 
                 }
-            }
+
         };
 
         View.OnClickListener whiteStoneClickListener = new View.OnClickListener() {
