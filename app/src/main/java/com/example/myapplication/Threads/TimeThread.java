@@ -27,7 +27,7 @@ public class TimeThread extends Thread implements Runnable {
                 e.printStackTrace();
             }
             timer--;
-            countdown.setText(String.valueOf(timer));
+            //countdown.setText(String.valueOf(timer));
             if(timer<=0){
                 stopGame();
             }
