@@ -23,7 +23,7 @@ public class GameController {
             for (int i = 0; i < stones.length; i++) {
                 for (int j = 0; j < stones[i].length; j++) {
                     if (stones[i][j] == stonesToEat.get(s_id)){
-                        row=i;
+
                     }
                 }
             }
