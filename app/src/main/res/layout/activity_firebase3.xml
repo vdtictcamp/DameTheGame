@@ -12,4 +12,18 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="Poke" />
+
+    <EditText
+        android:id="@+id/editTxtMsg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnPoke"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="111dp"
+        android:background="@color/colorPrimary"
+        android:ems="29"
+        android:hint="Nachricht"
+        android:inputType="textPersonName"
+        android:visibility="visible" />
 </RelativeLayout>

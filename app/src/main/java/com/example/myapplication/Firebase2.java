@@ -25,7 +25,7 @@ import java.util.List;
 public class Firebase2 extends AppCompatActivity {
 
     ListView listView;
-    Button button;
+    Button buttonCreateRoom;
 
     List<String> roomsList;
 
@@ -35,6 +35,9 @@ public class Firebase2 extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference roomRef;
     DatabaseReference roomsRef;
+    DatabaseReference messageRef;
+
+    String message = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,17 +52,18 @@ public class Firebase2 extends AppCompatActivity {
         roomName = playerName;
 
         listView = findViewById(R.id.listView);
-        button = findViewById(R.id.btnRoomCreate);
+        buttonCreateRoom = findViewById(R.id.btnRoomCreate);
 
         //alle verfügbare räume
         roomsList = new ArrayList<>();
 
-        button.setOnClickListener(new View.OnClickListener() {
+
+        buttonCreateRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //room erstellen und selbst als player1 hinzufügen
-                button.setText("CREATING ROOM");
-                button.setEnabled(false);
+                buttonCreateRoom.setText("CREATING ROOM");
+                buttonCreateRoom.setEnabled(false);
                 roomName = playerName;
                 roomRef = database.getReference("rooms/" + roomName + "/player1");
                 addRoomEventListener();
@@ -87,8 +91,8 @@ public class Firebase2 extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //join room
-                button.setText("CREATE ROOM");
-                button.setEnabled(true);
+                buttonCreateRoom.setText("CREATE ROOM");
+                buttonCreateRoom.setEnabled(true);
                 Intent intent = new Intent(getApplicationContext(), Firebase3.class);
                 intent.putExtra("roomName", roomName);
                 startActivity(intent);
@@ -97,8 +101,8 @@ public class Firebase2 extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 //error
-                button.setText("CREATE ROOM");
-                button.setEnabled(true);
+                buttonCreateRoom.setText("CREATE ROOM");
+                buttonCreateRoom.setEnabled(true);
                 Toast.makeText(Firebase2.this, "Error", Toast.LENGTH_SHORT).show();
 
             }
@@ -126,4 +130,16 @@ public class Firebase2 extends AppCompatActivity {
             }
         });
     }
+
+    private void setFireField(){
+
+        messageRef = database.getReference("rooms/" + roomName + "/field00");
+        message = "0";
+        messageRef.setValue(message);
+
+
+
+    }
+
+
 }
