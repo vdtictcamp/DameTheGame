@@ -4,27 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.GameSettings"
+    android:background="@color/darkgreen"
     android:orientation="vertical"
-    android:background="@color/darkgreen">
+    tools:context=".Activities.GameSettings">
 
-
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="100dp"
-    android:text="@string/playerOneSettings">
-</TextView>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
-        android:text="@string/playerTwoSettings">
-    </TextView>
+        android:text="@string/playerOneSettings"></TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:text="@string/playerTwoSettings"></TextView>
 
     <EditText
-        android:layout_width="200dp"
+        android:layout_width="223dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:layout_marginTop="200dp"
@@ -51,12 +49,11 @@
     <Button
         android:layout_width="100dp"
         android:layout_height="50dp"
-        android:text="@string/btnStartGame"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:text="@string/btnStartGame">
 
     </Button>
-
 
 
 </LinearLayout>
