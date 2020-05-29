@@ -17,4 +17,7 @@ public class Controller {
             view2.setBackgroundColor(Color.GREEN);
     }
 
+
+
+
 }
