@@ -32,6 +32,8 @@ public class Firebase extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_firebase);
 
+        playerName = "";
+
         editText = findViewById(R.id.editText);
         button = findViewById(R.id.btnLogin);
 
@@ -90,5 +92,11 @@ public class Firebase extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        playerName = "";
     }
 }

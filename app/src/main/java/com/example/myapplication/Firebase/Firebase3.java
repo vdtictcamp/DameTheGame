@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -18,11 +20,13 @@ import com.google.firebase.database.ValueEventListener;
 public class Firebase3 extends AppCompatActivity {
 
     Button button;
+    EditText editTxt;
 
     String playerName = "";
     String roomName = "";
     String role = "";
     String message = "";
+    String nachricht = "";
 
     FirebaseDatabase database;
     DatabaseReference messageRef;
@@ -34,6 +38,9 @@ public class Firebase3 extends AppCompatActivity {
 
         button = findViewById(R.id.btnPoke);
         button.setEnabled(false);
+
+        editTxt = findViewById(R.id.editTxtMsg);
+
 
         database = FirebaseDatabase.getInstance();
 
@@ -55,15 +62,20 @@ public class Firebase3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //nachricht senden
+                nachricht = editTxt.getText().toString();
                 button.setEnabled(false);
-                message = role + ":Poked";
+                message = role + nachricht;
                 messageRef.setValue(message);
             }
         });
 
         //listener für eingehende nachrichten
         messageRef = database.getReference("rooms/" + roomName + "/message");
-        message = role + ":Poked";
+        message = role + ":trashed";
+        messageRef.setValue(message);
+
+        messageRef = database.getReference("rooms/" + roomName + "/message");
+        message = role + ":trashed";
         messageRef.setValue(message);
 
         addRoomEventListener();
@@ -98,4 +110,8 @@ public class Firebase3 extends AppCompatActivity {
             }
         });
     }
+
+
+
+
 }
