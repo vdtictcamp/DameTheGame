@@ -83,7 +83,7 @@ public class FirebaseGameController {
         reference.setValue(currentField);
     }
 
-
+//Test
     private void addValueEventListener(){
         reference = database.getReference("rooms").child(this.gameName).child("updateInformations");
         reference.addValueEventListener(new ValueEventListener() {
