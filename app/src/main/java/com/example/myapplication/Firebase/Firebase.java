@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Firebase;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.myapplication.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -51,6 +52,7 @@ public class Firebase extends AppCompatActivity {
         button.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                database = FirebaseDatabase.getInstance();
                 //spieler einloggen
                 playerName = editText.getText().toString();
                 editText.setText("");
@@ -76,7 +78,6 @@ public class Firebase extends AppCompatActivity {
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("playerName", playerName);
                     editor.apply();
-
                     startActivity(new Intent(getApplicationContext(), Firebase2.class));
                     finish();
                 }

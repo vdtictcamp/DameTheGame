@@ -18,7 +18,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Register extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
 
     private Button btnRegister;
@@ -71,10 +71,10 @@ public class Register extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                                Toast.makeText(Register.this, "Account erstellt", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "Account erflgreich erstellt", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             }else{
-                                Toast.makeText(Register.this, "Error"+task.getException(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "Error"+task.getException(), Toast.LENGTH_SHORT).show();
 
                             }
                         }

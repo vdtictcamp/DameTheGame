@@ -3,7 +3,6 @@ package com.example.myapplication.Activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -12,9 +11,11 @@ import android.widget.GridLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.Firebase.FirebaseGameController;
 import com.example.myapplication.GameEngine.ChangeGameConditionRedStone;
 import com.example.myapplication.GameEngine.ChangeGameConditionWhiteStone;
 import com.example.myapplication.GameEngine.CheckIfGameIsFinish;
+import com.example.myapplication.GameEngine.GameController;
 import com.example.myapplication.PlayerController.Controller;
 import com.example.myapplication.Queen.RedQueen;
 import com.example.myapplication.Queen.WhiteQueen;
@@ -59,8 +60,12 @@ public class GameField extends AppCompatActivity{
     private View visualizeTurnOfPlayerOne;
     private View visualizeTurnOfPlayerTwo;
     private Controller controller;
+    private FirebaseGameController firebase;
+    private GameController gameController;
+    boolean sentData=false;
 
     //We need thie variables to controll the turns of the player
+    private String gameName =" ";
     final int WHITETURN = 1;
     final int REDTURN =2;
     int TURN =WHITETURN;
@@ -140,8 +145,6 @@ public class GameField extends AppCompatActivity{
                 {0,R.id.b9, 0,R.id.b10, 0,R.id.b11, 0,R.id.b12},
                 {R.id.b5,0, R.id.b6,0, R.id.b7,0, R.id.b8,0},
                 {0,R.id.b1, 0,R.id.b2, 0,R.id.b3, 0,R.id.b4}};
-
-
 
 
             System.out.println("ID_Stein"+R.id.b2);
@@ -270,11 +273,14 @@ public class GameField extends AppCompatActivity{
         timer = new TimeThread(this, countdown);
         timer.start();
 
-        pOneThread=new PlayerOneThread();
-        pOneThread.start();
+
+
+
     }
 
 //----------------------------------------------------------------------------------------
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -512,6 +518,7 @@ public void showValidPosForQueen(List<Integer>positions){
 
     //If the Stones move, we need to change the index in the stone-Array
     public void moveWhiteStone(View view){
+
         float diffX=0;
         float diffY=0;
         if((TURN&WHITETURN)!=0) {
@@ -525,6 +532,7 @@ public void showValidPosForQueen(List<Integer>positions){
                         .start();
                 switchPosOfStoneInArray(movingStone, view);
                 if (redStonesToEat.size() != 0) {
+
                     for (int i = 0; i < redStonesToEat.size(); i++) {
                         int id = redStonesToEat.get(i);
                         for (int k = 0; k < stones.length; k++) {
@@ -550,7 +558,15 @@ public void showValidPosForQueen(List<Integer>positions){
     }
 
 
-    private void eatWhiteStone(int i, int j){
+    public void removeStone(int row, int col){
+        View v = findViewById(stones[row][col]);
+        int id = v.getId();
+        gameLayout.removeView(v);
+        stones[row][col]=0;
+
+    }
+
+    public void eatWhiteStone(int i, int j){
         View v = findViewById(stones[i][j]);
         int id = v.getId();
         gameLayout.removeView(v);
@@ -564,7 +580,7 @@ public void showValidPosForQueen(List<Integer>positions){
         }
     }
 
-    private void eatRedStone(int i, int j){
+    public void eatRedStone(int i, int j){
         View v = findViewById(stones[i][j]);
         gameLayout.removeView(v);
         stones[i][j]=0;
@@ -579,6 +595,8 @@ public void showValidPosForQueen(List<Integer>positions){
     }
 
     public void switchPosOfStoneInArray(View stone, View pos){
+
+        firebase=new FirebaseGameController(stones, gameName);
         int col=0, row =0;
         int idStone = stone.getId();
         int idPos = pos.getId();
@@ -589,6 +607,8 @@ public void showValidPosForQueen(List<Integer>positions){
                 if(stones[i][j]==idStone){
                     oldCol=j;
                     oldRow=i;
+                   sentData = firebase.sendUpdateInformaions(stones[oldRow][oldCol], positionsIds[row][col]);
+
                     System.out.println("Alte Spalte:"+oldCol+" "+"Alte Reihe"+oldRow);
                     stones[oldRow][oldCol]=0;
                 }
@@ -601,6 +621,7 @@ public void showValidPosForQueen(List<Integer>positions){
                 }
             }
         }
+
 
         //Every Time when we switch a Position we need to check if we got a new Queen
         if(row==7){
@@ -618,6 +639,10 @@ public void showValidPosForQueen(List<Integer>positions){
 
         }
 
+    }
+
+    public boolean returnUpdate(){
+        return sentData;
     }
 
     public void setWhiteQueen(View stoneToQueen ){

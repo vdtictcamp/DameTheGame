@@ -24,12 +24,23 @@
     </TextView>
 
     <EditText
+        android:id="@+id/txtGameName"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/placeholderGameName"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="100dp"
+        android:textSize="20sp"/>
+
+    <EditText
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="5dp"
-        android:text="@string/lblplayername"></EditText>
+        android:text="@string/lblplayername">
+
+    </EditText>
 
     <TextView
         android:layout_width="200dp"
@@ -37,7 +48,8 @@
         android:layout_marginLeft="100dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:text="@string/placeholderForNameField"></TextView>
+        android:text="@string/placeholderForNameField">
+    </TextView>
 
 
     <EditText
@@ -49,6 +61,7 @@
         android:text="@string/lblChooseOfColorForFigur" />
 
     <Button
+        android:id="@+id/btnStartGame"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:text="@string/btnStartGame"
@@ -56,7 +69,6 @@
         android:layout_marginTop="10dp">
 
     </Button>
-
 
 
 </LinearLayout>

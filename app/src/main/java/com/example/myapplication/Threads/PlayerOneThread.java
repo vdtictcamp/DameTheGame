@@ -1,6 +1,7 @@
 package com.example.myapplication.Threads;
 
 import com.example.myapplication.Activities.GameField;
+import com.example.myapplication.Firebase.FirebaseGameController;
 
 public class PlayerOneThread extends Thread implements Runnable {
 
@@ -9,10 +10,14 @@ public class PlayerOneThread extends Thread implements Runnable {
     boolean isInTurn;
     int[][] stones;
     int counter =15;
+    FirebaseGameController gameController;
+    String gameName;
 
-    public PlayerOneThread() {
+    public PlayerOneThread(int[][]stones, String gameName) {
         this.stones = stones;
-        pTwoThread = new PlayerTwoThread(stones);
+        this.gameName=gameName;
+        pTwoThread = new PlayerTwoThread(stones, gameName);
+        gameController = new FirebaseGameController(stones,this.gameName );
     }
 
 
@@ -26,6 +31,7 @@ public class PlayerOneThread extends Thread implements Runnable {
         isInTurn = false;
         return isInTurn;
     }
+
 
     @Override
     public void run() {
