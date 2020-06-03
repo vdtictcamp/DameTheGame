@@ -84,7 +84,7 @@ EditText txtPassword;
         };
 
 
-btnLogin.setOnClickListener(loginListner);
+            btnLogin.setOnClickListener(loginListner);
     }
 
 
@@ -92,9 +92,5 @@ btnLogin.setOnClickListener(loginListner);
         Intent intent= new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
-
-
-
-
 
 }

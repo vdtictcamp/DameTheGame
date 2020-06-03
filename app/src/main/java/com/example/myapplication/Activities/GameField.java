@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.GridLayout;
 
@@ -72,7 +74,7 @@ public class GameField extends AppCompatActivity{
     final int REDTURN =2;
     int TURN =WHITETURN;
     EditText countdown;
-
+    Animation onClickAnim;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -87,7 +89,11 @@ public class GameField extends AppCompatActivity{
         visualizeTurnOfPlayerOne=findViewById(R.id.playersOneTurn);
         visualizeTurnOfPlayerTwo=findViewById(R.id.playersTwoTurn);
         controller=new Controller();
+        Intent intent= getIntent();
+        gameName = intent.getExtras().getString("gameName");
 
+        //Load the Animation
+        onClickAnim=AnimationUtils.loadAnimation(this, R.anim.clicked);
         //All position
         positionsIds = new int[][]{{R.id.pos1a, R.id.pos1b, R.id.pos1c, R.id.pos1d, R.id.pos1e, R.id.pos1f, R.id.pos1g, R.id.pos1h},
                 {R.id.pos2a, R.id.pos2b, R.id.pos2c, R.id.pos2d, R.id.pos2e, R.id.pos2f, R.id.pos2g, R.id.pos2h},
@@ -97,8 +103,6 @@ public class GameField extends AppCompatActivity{
                 {R.id.pos6a, R.id.pos6b, R.id.pos6c, R.id.pos6d, R.id.pos6e, R.id.pos6f, R.id.pos6g, R.id.pos6h},
                 {R.id.pos7a, R.id.pos7b, R.id.pos7c, R.id.pos7d, R.id.pos7e, R.id.pos7f, R.id.pos7g, R.id.pos7h},
                 {R.id.pos8a, R.id.pos8b, R.id.pos8c, R.id.pos8d, R.id.pos8e, R.id.pos8f, R.id.pos8g, R.id.pos8h}};
-
-
 
 
         View.OnClickListener checkPositions = new View.OnClickListener() {
@@ -154,11 +158,12 @@ public class GameField extends AppCompatActivity{
         View.OnClickListener redStoneClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                movingStone=v;
                 chGameCondRed = new ChangeGameConditionRedStone(stones, positionsIds, redStonesIds);
                 redQueen=new RedQueen(v,redQueens, positionsIds, stones, redStonesIds);
                 if((TURN & REDTURN)!=0 ) {
+                    v.startAnimation(onClickAnim);
                     if(redQueen.checkIfIsQueen(v)){
-                        movingStone=v;
                         int[]index = redQueen.getRowAndCol(v);
                         int row=index[0];
                         int col = index[1];
@@ -200,12 +205,13 @@ public class GameField extends AppCompatActivity{
         View.OnClickListener whiteStoneClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                movingStone=v;
                 chGameCondWhite = new ChangeGameConditionWhiteStone( stones, positionsIds, whiteStonesIds);
                 whiteQueen=new WhiteQueen(whiteQueens, positionsIds, stones, whiteStonesIds);
                 //Checks whoms Turn it is
                 if ((TURN & WHITETURN) != 0) {
+                    v.startAnimation(onClickAnim);
                     if(whiteQueen.checkIfIsQueen(v)){
-                        movingStone=v;
                         System.out.println("Es ist eine Königin"+posForWhiteQueen.size());
                         int[]index = whiteQueen.getRowAndCol(v);
                         int row=index[0];
@@ -356,7 +362,6 @@ public void showValidPosForQueen(List<Integer>positions){
             for(int j=0; j<stones[i].length; j++){
                 if(stones[i][j]==id){
                     id = stones[i][j];
-                    movingStone = findViewById(id);
                     row = i;
                     col = j;
                     i=stones.length-1;
@@ -402,7 +407,6 @@ public void showValidPosForQueen(List<Integer>positions){
                 if(stones[i][j]==id){
                     System.out.println("Dieser Stein liegt in Spalte"+ j +" "+ "und zeile"+" "+i);
                     id = stones[i][j];
-                    movingStone = findViewById(id);
                     row = i;
                     col = j;
                     i=stones.length-1;

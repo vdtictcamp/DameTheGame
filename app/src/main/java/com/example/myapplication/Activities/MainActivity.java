@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
             Intent intent = new Intent(getApplicationContext(), GameField.class);
+            intent.putExtra("gameName", "Default");
             startActivity(intent);
         }
         }));
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         btnCreateGame.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), GameSettings.class);
+                Intent intent = new Intent(getApplicationContext(), CreateOnlineGame.class);
                 startActivity(intent);
             }
         }));

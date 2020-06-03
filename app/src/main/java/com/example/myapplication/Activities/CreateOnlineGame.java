@@ -11,10 +11,7 @@ import android.widget.TextView;
 
 import com.example.myapplication.R;
 
-import java.io.BufferedReader;
-
-public class GameSettings extends AppCompatActivity {
-
+public class CreateOnlineGame extends AppCompatActivity {
 
     String gameName;
     EditText txtFieldGameName;
@@ -23,7 +20,9 @@ public class GameSettings extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_settings);
+        setContentView(R.layout.activity_create_online_game);
+        btnStartGame=findViewById(R.id.btnCreateOnlineGame);
+    txtFieldGameName=findViewById(R.id.nameOnlineGame);
 
         View.OnClickListener startGameListener = new View.OnClickListener() {
             @Override
@@ -31,7 +30,6 @@ public class GameSettings extends AppCompatActivity {
                 startGame();
             }
         };
-
         btnStartGame.setOnClickListener(startGameListener);
     }
 
@@ -41,5 +39,4 @@ public class GameSettings extends AppCompatActivity {
         intent.putExtra("gameName", gameName);
         startActivity(intent);
     }
-
 }

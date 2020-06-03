@@ -1,17 +1,12 @@
 package com.example.myapplication.Threads;
 
-import com.example.myapplication.Activities.GameField;
-import com.example.myapplication.Activities.GameFieldPlayerTwo;
 import com.example.myapplication.Firebase.FirebaseGameController;
 import com.example.myapplication.GameEngine.GameController;
-import com.example.myapplication.Threads.PlayerOneThread;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class PlayerTwoThread extends Thread implements Runnable {
 
-    GameFieldPlayerTwo game = new GameFieldPlayerTwo();
     GameController controller;
     PlayerOneThread pOneThread;
     public boolean gameOver= false;
@@ -67,7 +62,7 @@ public class PlayerTwoThread extends Thread implements Runnable {
                 int p_row = Integer.parseInt(String.valueOf(ids[2]));
                 int p_col = Integer.parseInt(String.valueOf(ids[3]));
                 isInTurn = isInTurn();
-                game.helpViewMover(stones[s_col][s_row], positionIds[p_row][p_col]);
+                //game.helpViewMover(stones[s_col][s_row], positionIds[p_row][p_col]);
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {

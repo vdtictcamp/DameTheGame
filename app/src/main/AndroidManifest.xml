@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Activities.CreateOnlineGame"></activity>
         <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,12 +23,10 @@
         </activity>
         <activity android:name=".Activities.EndOfGameActivity" />
         <activity android:name=".Activities.GameField" />
-        <activity android:name=".Activities.GameFieldPlayerTwo"></activity>
-        <activity android:name=".Activities.GameFieldPlayerOne"></activity>
-        <activity android:name=".Activities.LoginActivity"></activity>
-        <activity android:name=".Activities.RegisterActivity"></activity>
-        <activity android:name=".Activities.GameSettings"></activity>
-        <activity android:name=".Activities.SearchGameActivity"></activity>
+        <activity android:name=".Activities.LoginActivity" />
+        <activity android:name=".Activities.RegisterActivity" />
+        <activity android:name=".Activities.GameSettings" />
+        <activity android:name=".Activities.SearchGameActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
