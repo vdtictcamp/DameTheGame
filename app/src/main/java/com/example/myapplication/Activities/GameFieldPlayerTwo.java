@@ -30,16 +30,16 @@ import java.util.List;
 public class GameFieldPlayerTwo extends AppCompatActivity {
 
         public GridLayout gameLayout;
-        private int[][]positionsIds;
+        private int[][]positionsIds = new int[8][8];
         private int[][]whiteStonesIds;
         private int[][]redStonesIds;
-        private int[][] stones;
+        private int[][] stones = new int[8][8];
         private View[][] redStones;
         private View[][]whiteStones;
         private View[][]positions;
         private int[] validPositionsToMove=new int[2];
         public  int[] helpPositions = new int[2];
-        public View movingStone;
+        public View movingStone = null;
         private View newQueen;
         private ChangeGameConditionWhiteStone chGameCondWhite;
         private ChangeGameConditionRedStone chGameCondRed;
@@ -86,6 +86,7 @@ public class GameFieldPlayerTwo extends AppCompatActivity {
             controller=new Controller();
             Intent intent=getIntent();
             gameName = intent.getExtras().getString("gameName");
+            System.out.println(gameName);
             //All position
             positionsIds = new int[][]{{R.id.pos1a, R.id.pos1b, R.id.pos1c, R.id.pos1d, R.id.pos1e, R.id.pos1f, R.id.pos1g, R.id.pos1h},
                     {R.id.pos2a, R.id.pos2b, R.id.pos2c, R.id.pos2d, R.id.pos2e, R.id.pos2f, R.id.pos2g, R.id.pos2h},
@@ -96,6 +97,25 @@ public class GameFieldPlayerTwo extends AppCompatActivity {
                     {R.id.pos7a, R.id.pos7b, R.id.pos7c, R.id.pos7d, R.id.pos7e, R.id.pos7f, R.id.pos7g, R.id.pos7h},
                     {R.id.pos8a, R.id.pos8b, R.id.pos8c, R.id.pos8d, R.id.pos8e, R.id.pos8f, R.id.pos8g, R.id.pos8h}};
 
+            //All white stones
+            whiteStonesIds = new int[][]{{R.id.w1_2, R.id.w2_2, R.id.w3, R.id.w4},
+                    {R.id.w5, R.id.w6, R.id.w7, R.id.w8},
+                    {R.id.w9_2, R.id.w10,  R.id.w11, R.id.w12, },};
+
+            //All red stones
+            redStonesIds = new int[][]{{R.id.b1, R.id.b2, R.id.b3, R.id.b4},
+                    {R.id.b5, R.id.b6, R.id.b7, R.id.b8},
+                    {R.id.b9, R.id.b10, R.id.b11, R.id.b12},};
+
+            //The distrubution of the Stones on the Board
+            stones = new int[][]{{R.id.w1_2, 0, R.id.w2_2, 0, R.id.w3, 0, R.id.w4, 0},
+                    { 0, R.id.w5, 0, R.id.w6, 0, R.id.w7, 0, R.id.w8},
+                    {R.id.w9_2, 0, R.id.w10, 0, R.id.w11, 0, R.id.w12, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0, 0, 0},
+                    {0,R.id.b9, 0,R.id.b10, 0,R.id.b11, 0,R.id.b12},
+                    {R.id.b5,0, R.id.b6,0, R.id.b7,0, R.id.b8,0},
+                    {0,R.id.b1, 0,R.id.b2, 0,R.id.b3, 0,R.id.b4}};
 
             View.OnClickListener checkPositions = new View.OnClickListener() {
                 @Override
@@ -125,26 +145,9 @@ public class GameFieldPlayerTwo extends AppCompatActivity {
                 }
             }
 
-            //All white stones
-            whiteStonesIds = new int[][]{{R.id.w1, R.id.w2, R.id.w3, R.id.w4},
-                    {R.id.w5, R.id.w6, R.id.w7, R.id.w8},
-                    {R.id.w9, R.id.w10,  R.id.w11, R.id.w12, },};
 
-            //All red stones
-            redStonesIds = new int[][]{{R.id.b1, R.id.b2, R.id.b3, R.id.b4},
-                    {R.id.b5, R.id.b6, R.id.b7, R.id.b8},
-                    {R.id.b9, R.id.b10, R.id.b11, R.id.b12},};
 
-            //The distrubution of the Stones on the Board
-            stones = new int[][]{{R.id.w1, 0, R.id.w2, 0, R.id.w3, 0, R.id.w4, 0},
-                    { 0, R.id.w5, 0, R.id.w6, 0, R.id.w7, 0, R.id.w8},
-                    {R.id.w9, 0, R.id.w10, 0, R.id.w11, 0, R.id.w12, 0},
-                    {0, 0, 0, 0, 0, 0, 0, 0},
-                    {0, 0, 0, 0, 0, 0, 0, 0},
-                    {0,R.id.b9, 0,R.id.b10, 0,R.id.b11, 0,R.id.b12},
-                    {R.id.b5,0, R.id.b6,0, R.id.b7,0, R.id.b8,0},
-                    {0,R.id.b1, 0,R.id.b2, 0,R.id.b3, 0,R.id.b4}};
-
+        System.out.println(stones[2][2]);
 
 
             View.OnClickListener redStoneClickListener = new View.OnClickListener() {
@@ -173,7 +176,6 @@ public class GameFieldPlayerTwo extends AppCompatActivity {
                                     showValidPosForQueen(posForRedQueen);
                                 }
                             }
-
                         }else {
                             showValidPositionsForRedStones(v);
                             posAfterEat = chGameCondRed.canEateWhiteStoneBeta(v);
@@ -214,16 +216,25 @@ public class GameFieldPlayerTwo extends AppCompatActivity {
             //timer.start();
 
             firebase = new FirebaseGameController(stones, gameName);
-            pTwoThread=new PlayerTwoThread(stones, gameName);
-            pTwoThread.start();
+            //pTwoThread=new PlayerTwoThread(stones, gameName);
+            //pTwoThread.start();
 
+        View pos = findViewById(positionsIds[3][1]);
+        pos.setBackgroundColor(Color.GREEN);
 
+        movingStone = findViewById(stones[2][2]);
+            moveBeta(stones[2][2], positionsIds[3][1]);
 
         }
 
 //----------------------------------------------------------------------------------------
 
 
+    public void helpViewMover(int stoneRow, int stoneCol, int posRow, int posCol){
+
+            System.out.println(stoneRow +" "+ stoneCol+" "+posCol+" "+posRow);
+            System.out.println("index:"+stones[stoneRow][stoneCol]);
+    }
 
         @Override
         public boolean onCreateOptionsMenu(Menu menu) {
@@ -237,23 +248,6 @@ public class GameFieldPlayerTwo extends AppCompatActivity {
             startActivity(intent);
         }
 
-        public boolean checkIfIsQueen(View v){
-            boolean isQueen = false;
-            for(int i=0; i<whiteQueens.size(); i++){
-                if(v.getId()==whiteQueens.get(i)){
-                    isQueen=true;
-                }
-
-            }
-            return isQueen;
-        }
-
-        //Dieser Position muss anschliessend ein View.OnClickListener gegeben werden
-        private void ShowThePositionAfterEatingRedStone(int id){
-            View position = findViewById(id);
-            position.setBackgroundColor(Color.GREEN);
-            position.setOnClickListener(moveListenerForWhiteStone);
-        }
 
         private void ShowThePositionAfterEatingWhiteStone(int id){
             View position = findViewById(id);
@@ -339,49 +333,6 @@ public class GameFieldPlayerTwo extends AppCompatActivity {
             setMoveListenerRedStone(validPositionsToMove);
         }
 
-
-        @SuppressLint("ResourceAsColor")
-        public void showValidPositionsForWhiteStones(View v){
-            clearBoard();
-            boolean posIsBlocked = false;
-            int id = v.getId();
-            int row =0;
-            int col = 0;
-            View stone = null;
-            for(int i=0; i<stones.length; i++){
-                for(int j=0; j<stones[i].length; j++){
-                    if(stones[i][j]==id){
-                        System.out.println("Dieser Stein liegt in Spalte"+ j +" "+ "und zeile"+" "+i);
-                        id = stones[i][j];
-                        movingStone = findViewById(id);
-                        row = i;
-                        col = j;
-                        i=stones.length-1;
-                        break;
-                    }
-                }
-            }
-            int z=0;
-            for(int i=row+1; i<row+2; i++){
-                for(int j=col-1; j<col+2; j++){
-                    if(j==col || j<0 || j>7 || i<0 || i>7){
-                        continue;
-                    }
-                    id = positionsIds[i][j];
-                    View validPos = findViewById(id);
-                    posIsBlocked=checkIfStoneIsBlockingPos(j,i);
-                    if(!posIsBlocked){
-                        validPos.setBackgroundColor(Color.GREEN);
-                        validPositionsToMove[z]=id;
-                        z++;
-                    }
-
-                }
-            }
-            setMoveListenerWhiteStone(validPositionsToMove);
-        }
-
-
         //Eventuell auslagern
         View.OnClickListener moveListenerForRedStone = new View.OnClickListener() {
             @Override
@@ -414,17 +365,6 @@ public class GameFieldPlayerTwo extends AppCompatActivity {
 
         }
 
-        private void setMoveListenerWhiteStone(int[]positionsToMove){
-            if(positionsToMove[0]!=0) {
-                for (int i = 0; i < positionsToMove.length; i++) {
-                    int id = positionsToMove[i];
-                    View posToMove = findViewById(id);
-                    if (positionsToMove != null) {
-                        posToMove.setOnClickListener(moveListenerForWhiteStone);
-                    }
-                }
-            }
-        }
 
         //Muss mit Touch Event erledigt werden
         public void moveRedStone(View view){
@@ -464,8 +404,32 @@ public class GameFieldPlayerTwo extends AppCompatActivity {
         }
 
         //If the Stones move, we need to change the index in the stone-Array
-        public void moveWhiteStone(View view){
 
+    public void moveBeta(int stoneId, int positionId){
+        View pos = null;
+        View stone = null;
+            for(int i=0; i<stones.length; i++){
+            for(int j=0; j<stones[i].length; j++){
+                if(stones[i][j]==stoneId){
+                    System.out.println("Stein gefunden");
+                    System.out.println(i +" "+j);
+                    stone = findViewById(stones[i][j]);
+                }
+                if(positionsIds[i][j]==positionId){
+                    pos = findViewById(positionsIds[i][j]);
+                }
+            }
+        }
+            float diffX = pos.getX() - stone.getX();
+            float diffY = pos.getY() - stone.getY();
+            System.out.println(diffX+" "+diffY);
+        stone.animate()
+                .x(stone.getX() - diffX )
+                .y(stone.getY() + diffY/2 )
+                .setDuration(200000)
+                .start();
+    }
+    public void moveWhiteStone(View view){
             float diffX=0;
             float diffY=0;
             if((TURN&WHITETURN)!=0) {
@@ -554,10 +518,8 @@ public class GameFieldPlayerTwo extends AppCompatActivity {
                     if(stones[i][j]==idStone){
                         oldCol=j;
                         oldRow=i;
-                        sentData = firebase.sendUpdateInformaions(stones[oldRow][oldCol], positionsIds[row][col]);
+                        sentData = firebase.sendUpdateInformaions(oldRow, oldCol, row, col);
 
-                        System.out.println("Alte Spalte:"+oldCol+" "+"Alte Reihe"+oldRow);
-                        stones[oldRow][oldCol]=0;
                     }
                     //Now we got the stone and we need to change the index
                     if(positionsIds[i][j]==idPos){
@@ -566,8 +528,11 @@ public class GameFieldPlayerTwo extends AppCompatActivity {
                         row = i;
                         System.out.println("Row:"+i+"Col:"+j);
                     }
+                    stones[oldRow][oldCol]=0;
                 }
             }
+            sentData = firebase.sendUpdateInformaions(oldRow, oldCol, row, col);
+
 
 
             //Every Time when we switch a Position we need to check if we got a new Queen

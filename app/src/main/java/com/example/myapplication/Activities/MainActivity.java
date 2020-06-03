@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.myapplication.Firebase.Firebase;
 import com.example.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -33,11 +32,14 @@ public class MainActivity extends AppCompatActivity {
         btnLogout=findViewById(R.id.btnLogout);
         btnRegister=findViewById(R.id.btnRegister);
         btnToSearchGame=findViewById(R.id.btnToSearchGame);
-
         currentUserAuth = FirebaseAuth.getInstance();
 
         if (currentUserAuth.getCurrentUser()!=null){
             btnCreateGame.setVisibility(btnCreateGame.VISIBLE);
+        }else if(currentUserAuth.getCurrentUser()==null){
+            btnLogout.setVisibility(btnLogout.INVISIBLE);
+            btnToSearchGame.setVisibility(btnToSearchGame.INVISIBLE);
+
         }
 
         btnRegister.setOnClickListener((new View.OnClickListener() {
@@ -69,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 btnCreateGame.setVisibility(btnCreateGame.INVISIBLE);
+                btnLogout.setVisibility(btnLogout.INVISIBLE);
+                btnToSearchGame.setVisibility(btnToSearchGame.INVISIBLE);
             }
         }));
 
