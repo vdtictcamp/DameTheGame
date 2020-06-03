@@ -24,9 +24,10 @@ public class RegisterActivity extends AppCompatActivity {
     private Button btnRegister;
     private EditText txtUserName;
     private EditText txtPassword;
-    private EditText getTxtPasswordRepeat;
+    private EditText txtPasswordRepeat;
     String name;
     String password;
+    String password_repeat;
     String password_hash;
     FirebaseDatabase database;
     FirebaseAuth firebaseAuth;
@@ -38,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister=findViewById(R.id.btnRegister);
         txtUserName = findViewById(R.id.txtUsername);
         txtPassword=findViewById(R.id.txtPassword);
-        getTxtPasswordRepeat=findViewById(R.id.txtPasswordRepeat);
+        txtPasswordRepeat=findViewById(R.id.txtPasswordRepeat);
 
         firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
@@ -55,6 +56,8 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 name =txtUserName.getText().toString().trim();
                 password = txtPassword.getText().toString().trim();
+                password_repeat = txtPasswordRepeat.getText().toString().trim();
+
                 if(TextUtils.isEmpty(name)){
                     txtUserName.setText("Name darf nicht leer sein");
                     return;

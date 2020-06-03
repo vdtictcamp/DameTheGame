@@ -426,6 +426,7 @@ public class GameFieldPlayerTwo extends AppCompatActivity {
         stone.animate()
                 .x(stone.getX() - diffX )
                 .y(stone.getY() + diffY/2 )
+                .setDuration(200000)
                 .start();
     }
     public void moveWhiteStone(View view){

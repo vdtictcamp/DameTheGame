@@ -37,8 +37,6 @@ public class FirebaseGameController {
         this.stones=stones;
         this.gameName = gameName;
         database = FirebaseDatabase.getInstance();
-
-
     }
 
 
@@ -110,7 +108,6 @@ public class FirebaseGameController {
         });
         return updateIds;
     }
-
 
     private long addValueEventListenerStoneCol(){
         reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("stone").child("col");
@@ -239,6 +236,5 @@ public class FirebaseGameController {
     public void writeStonesToRemove(){
 
     }
-
 
 }
