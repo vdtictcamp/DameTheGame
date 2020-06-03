@@ -70,6 +70,11 @@ public class FirebaseGameController {
     public void initStartSituation(){
         currentField = new ArrayList<>();
         List<Integer> tempList = new ArrayList<>();
+
+        reference=database.getReference("rooms").child(gameName).child("PlayerOneTurn");
+        reference.setValue(true);
+        reference=database.getReference("rooms").child(gameName).child("PlayerTwoTurn");
+        reference.setValue(false);
         reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("stone").child("row");
         reference.setValue(0);
         reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("stone").child("col");
@@ -78,7 +83,6 @@ public class FirebaseGameController {
         reference.setValue(0);
         reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("position").child("col");
         reference.setValue(0);
-
 
         reference = database.getReference("rooms").child(gameName).child("field");
         for(int i=0;i<stones.length; i++){

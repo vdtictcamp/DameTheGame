@@ -52,7 +52,7 @@ public class SearchGameActivity extends AppCompatActivity {
 
     }
     public void joinGame(String gameName){
-        Intent intent =new Intent(this, GameFieldPlayerTwo.class);
+        Intent intent =new Intent(this, GameField.class);
         intent.putExtra("gameName", gameName);
         startActivity(intent);
     }

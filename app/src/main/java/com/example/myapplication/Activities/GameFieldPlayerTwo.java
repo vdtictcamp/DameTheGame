@@ -38,9 +38,7 @@ public class GameFieldPlayerTwo extends AppCompatActivity {
         private View[][]whiteStones;
         private View[][]positions;
         private int[] validPositionsToMove=new int[2];
-        public  int[] helpPositions = new int[2];
-        public View movingStone = null;
-        private View newQueen;
+        public View movingStone=null;
         private ChangeGameConditionWhiteStone chGameCondWhite;
         private ChangeGameConditionRedStone chGameCondRed;
         private CheckIfGameIsFinish finishChecker = new CheckIfGameIsFinish();
@@ -81,6 +79,8 @@ public class GameFieldPlayerTwo extends AppCompatActivity {
             redStones = new View[8][8];
             whiteStones = new View[8][8];
             positions = new View[8][8];
+            stones = new int[8][8];
+            positionsIds = new int[8][8];
             visualizeTurnOfPlayerOne=findViewById(R.id.playersOneTurn);
             visualizeTurnOfPlayerTwo=findViewById(R.id.playersTwoTurn);
             controller=new Controller();
@@ -110,7 +110,7 @@ public class GameFieldPlayerTwo extends AppCompatActivity {
             //The distrubution of the Stones on the Board
             stones = new int[][]{{R.id.w1_2, 0, R.id.w2_2, 0, R.id.w3, 0, R.id.w4, 0},
                     { 0, R.id.w5, 0, R.id.w6, 0, R.id.w7, 0, R.id.w8},
-                    {R.id.w9_2, 0, R.id.w10, 0, R.id.w11, 0, R.id.w12, 0},
+                    {R.id.w9_2, 0, R.id.view10, 0, R.id.w11, 0, R.id.w12, 0},
                     {0, 0, 0, 0, 0, 0, 0, 0},
                     {0, 0, 0, 0, 0, 0, 0, 0},
                     {0,R.id.b9, 0,R.id.b10, 0,R.id.b11, 0,R.id.b12},
@@ -216,24 +216,24 @@ public class GameFieldPlayerTwo extends AppCompatActivity {
             //timer.start();
 
             firebase = new FirebaseGameController(stones, gameName);
-            //pTwoThread=new PlayerTwoThread(stones, gameName);
-            //pTwoThread.start();
+            pTwoThread=new PlayerTwoThread(stones, positionsIds, gameName);
+            pTwoThread.start();
 
         View pos = findViewById(positionsIds[3][1]);
         pos.setBackgroundColor(Color.GREEN);
 
         movingStone = findViewById(stones[2][2]);
-            moveBeta(stones[2][2], positionsIds[3][1]);
 
         }
 
 //----------------------------------------------------------------------------------------
 
 
-    public void helpViewMover(int stoneRow, int stoneCol, int posRow, int posCol){
+    public void helpViewMover(int stonId, int posId){
 
-            System.out.println(stoneRow +" "+ stoneCol+" "+posCol+" "+posRow);
-            System.out.println("index:"+stones[stoneRow][stoneCol]);
+            System.out.println(stones[2][2]);
+            System.out.println("StoneID su helper:"+stonId+ " posId aus helper"+posId);
+        moveBeta(stonId, posId);
     }
 
         @Override
@@ -406,28 +406,19 @@ public class GameFieldPlayerTwo extends AppCompatActivity {
         //If the Stones move, we need to change the index in the stone-Array
 
     public void moveBeta(int stoneId, int positionId){
-        View pos = null;
-        View stone = null;
+
+            System.out.println("aus aray:"+stones[2][2]+" übergeben"+ stoneId);
+
             for(int i=0; i<stones.length; i++){
             for(int j=0; j<stones[i].length; j++){
                 if(stones[i][j]==stoneId){
                     System.out.println("Stein gefunden");
                     System.out.println(i +" "+j);
-                    stone = findViewById(stones[i][j]);
                 }
-                if(positionsIds[i][j]==positionId){
-                    pos = findViewById(positionsIds[i][j]);
-                }
+
             }
         }
-            float diffX = pos.getX() - stone.getX();
-            float diffY = pos.getY() - stone.getY();
-            System.out.println(diffX+" "+diffY);
-        stone.animate()
-                .x(stone.getX() - diffX )
-                .y(stone.getY() + diffY/2 )
-                .setDuration(200000)
-                .start();
+
     }
     public void moveWhiteStone(View view){
             float diffX=0;

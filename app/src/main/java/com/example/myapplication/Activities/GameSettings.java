@@ -39,7 +39,7 @@ public class GameSettings extends AppCompatActivity {
 
     public void startGame(){
         gameName = txtFieldGameName.getText().toString().trim();
-        Intent intent = new Intent(getApplicationContext(), GameFieldPlayerOne.class);
+        Intent intent = new Intent(getApplicationContext(), GameField.class);
         intent.putExtra("gameName", gameName);
         startActivity(intent);
     }

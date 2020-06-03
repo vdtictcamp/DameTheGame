@@ -68,16 +68,19 @@ public class RegisterActivity extends AppCompatActivity {
                 if(password.length()<5){
                     txtPassword.setText("Das Passwort muss mindestens 8 Zeichen enthalten");
                 }
+                if(!password_repeat.equals(password)){
+                    Toast.makeText(RegisterActivity.this, "Passwörter müssen übereinstimmen", Toast.LENGTH_LONG).show();
+                }
 
 
                     firebaseAuth.createUserWithEmailAndPassword(name, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                                Toast.makeText(RegisterActivity.this, "Account erflgreich erstellt", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "Account erflgreich erstellt", Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             }else{
-                                Toast.makeText(RegisterActivity.this, "Error"+task.getException(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "Error"+task.getException(), Toast.LENGTH_LONG).show();
 
                             }
                         }

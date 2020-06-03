@@ -28,39 +28,14 @@ public class RedQueen {
         chGameCond= new ChangeGameConditionRedStone(this.stones, this.positions, redStones);
     }
 
-
-
     public View getQueen(){
         return this.queen;
-
     }
+
     public void setQueen(View queen){
         this.queen=queen;
-        queen.getLayoutParams().height=120;
-        queen.getLayoutParams().width=120;
     }
 
-    public List<Integer> getPositionsToMove(int row, int col){
-        List<Integer>posToMove = new ArrayList<>();
-        int colDiff =1;
-        int rowDiff=1;
-        System.out.println("Spalte:"+col +"Reihe:"+ row);
-        for(int i=row-1; i<row+2; i++){
-            if(i==row || i<0 || i>7){
-                continue;
-            }
-            for(int j=0; j<stones[i].length; j++){
-                if((i==row+rowDiff &&j==col-colDiff) || (i==row+rowDiff &&j==col+colDiff)){
-                    if(stones[i][j]==0){
-                        posToMove.add(positions[i][j]);
-                    }
-                }
-            }
-
-        }
-        return posToMove;
-
-    }
 
     public List<Integer> getPositionsToJumpForwardRight(int row, int col){
         int rowDiff=1;
@@ -143,9 +118,6 @@ public class RedQueen {
         return positionsToJump;
     }
 
-
-
-
     public int[] getRowAndCol(View queen) {
         int index[]=new int[2];
         for (int i = 0; i < stones.length; i++) {
@@ -169,7 +141,4 @@ public class RedQueen {
         }
         return isQueen;
     }
-
-
-
 }

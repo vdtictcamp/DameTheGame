@@ -16,7 +16,6 @@ public class PlayerOneThread extends Thread implements Runnable {
     public PlayerOneThread(int[][]stones, String gameName) {
         this.stones = stones;
         this.gameName=gameName;
-        pTwoThread = new PlayerTwoThread(stones, gameName);
         gameController = new FirebaseGameController(stones,this.gameName );
     }
 

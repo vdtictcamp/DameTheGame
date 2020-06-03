@@ -47,10 +47,9 @@ public class GameController {
             diffRow = (rowPos + rowStone) / 2;
             colDiff = (colPos + colStone) / 2;
             int stoneToEatId = stones[diffRow][colDiff];
-            gameField.eatRedStone(diffRow, colDiff);
+            gameField.removeStone(diffRow, colDiff);
         }
     }
-
 
     public int[] getRowAndCol(View stone) {
         int index[]=new int[2];
