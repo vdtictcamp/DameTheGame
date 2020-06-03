@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkgreen"
+
+    android:background="@color/damebraun"
     android:orientation="vertical"
     tools:context=".Activities.GameSettings">
 
@@ -12,48 +13,144 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:text="@string/playerOneSettings"></TextView>
+        android:layout_alignParentStart="true"
+
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/playerOneSettings"
+        android:textColor="@color/sandbraun"
+        android:textStyle="bold|italic"
+        android:textSize="17sp"></TextView>
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="178dp"
+        android:layout_height="82dp"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="77dp"
+        android:layout_marginTop="158dp"
+        android:textColor="@color/sandbraun"
+        android:text="@string/lblChooseOfColorForFigur"
+        android:textSize="13sp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:text="@string/playerTwoSettings"></TextView>
+        android:layout_alignParentStart="true"
+
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="374dp"
+        android:textColor="@color/sandbraun"
+        android:textStyle="bold|italic"
+        android:text="@string/playerTwoSettings"
+        android:textSize="17sp"></TextView>
 
     <EditText
-        android:layout_width="223dp"
+        android:layout_width="291dp"
+        android:layout_height="64dp"
+        android:layout_row="0"
+        android:layout_column="1"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="407dp"
+        android:text="@string/lblplayername"
+        android:textColor="@color/sandbraun"
+        android:textSize="15sp"></EditText>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="286dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginBottom="5dp"
-        android:text="@string/lblplayername"></EditText>
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="46dp"
+        android:layout_marginBottom="598dp"
+        android:text="@string/lblplayername"
+        android:textColor="@color/sandbraun"
+        android:textSize="15sp" />
 
-    <TextView
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:text="@string/placeholderForNameField"></TextView>
+    <RadioGroup
+        android:layout_width="84dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="76dp"
+        android:layout_marginBottom="409dp">
 
+        <RadioButton
+            android:id="@+id/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="Black" />
+
+        <RadioButton
+            android:id="@+id/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="White"
+            android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
+
+
+    </RadioGroup>
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="200dp"
-        android:layout_height="97dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/lblChooseOfColorForFigur" />
+
+        android:layout_width="178dp"
+        android:layout_height="82dp"
+
+        android:layout_alignParentStart="true"
+
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="482dp"
+        android:text="@string/lblChooseOfColorForFigur"
+        android:textColor="@color/sandbraun"
+        android:textSize="13sp" />
+
+    <RadioGroup
+        android:layout_width="279dp"
+        android:layout_height="74dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="86dp">
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:text="Black" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+            android:text="White" />
+
+
+    </RadioGroup>
 
     <Button
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/btnStartGame">
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="167dp"
+        android:layout_marginBottom="21dp"
+        android:background="@color/sandbraun"
 
-    </Button>
+        android:text="Spielen!" />
 
 
-</LinearLayout>
+</RelativeLayout>
