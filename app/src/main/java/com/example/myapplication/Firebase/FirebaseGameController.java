@@ -23,13 +23,13 @@ public class FirebaseGameController {
     int[][]stones;
     FirebaseDatabase database;
     List<List<Integer>>currentField;
-    HashMap<String, Integer> field;
-    HashMap<String, Integer>updateIds;
+    List<List <Integer>> field;
+    long updateIds=0;
     private List<String> roomsList;
-    Firebase2 firebase2;
     DatabaseReference reference, reference1, reference2;
     GameController gameController;
     String gameName;
+    long [] ids = new long[4];
 
 
 
@@ -37,7 +37,6 @@ public class FirebaseGameController {
         this.stones=stones;
         this.gameName = gameName;
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference().child("rooms/"+this.gameName);
 
 
     }
@@ -56,7 +55,7 @@ public class FirebaseGameController {
     //3
     public void updateField(int[][]stones){
        currentField = new ArrayList<>();
-        reference = database.getReference("rooms/" + gameName );
+        reference = database.getReference("rooms").child(this.gameName).child("field");
 
         List<Integer> tempList = new ArrayList<>();
         for(int i=0;i<stones.length; i++){
@@ -73,7 +72,17 @@ public class FirebaseGameController {
     public void initStartSituation(){
         currentField = new ArrayList<>();
         List<Integer> tempList = new ArrayList<>();
-        reference = database.getReference("rooms/" + gameName+"/"+"field" );
+        reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("stone").child("row");
+        reference.setValue(0);
+        reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("stone").child("col");
+        reference.setValue(0);
+        reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("position").child("row");
+        reference.setValue(0);
+        reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("position").child("col");
+        reference.setValue(0);
+
+
+        reference = database.getReference("rooms").child(gameName).child("field");
         for(int i=0;i<stones.length; i++){
             for(int j=0; j<stones[i].length; j++){
                 tempList.add(stones[i][j]);
@@ -83,13 +92,15 @@ public class FirebaseGameController {
         reference.setValue(currentField);
     }
 
-//Test
-    private void addValueEventListener(){
-        reference = database.getReference("rooms").child(this.gameName).child("updateInformations");
+
+    private long addValueEventListenerStoneRow(){
+        reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("stone").child("row");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                updateIds = (HashMap<String, Integer>) dataSnapshot.getValue();
+                updateIds = (long) dataSnapshot.getValue();
+                ids[0]=updateIds;
+                System.out.println("UpdateSTone"+updateIds);
             }
 
             @Override
@@ -97,6 +108,82 @@ public class FirebaseGameController {
 
             }
         });
+        return updateIds;
+    }
+
+
+    private long addValueEventListenerStoneCol(){
+        reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("stone").child("col");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                updateIds = (long) dataSnapshot.getValue();
+                ids[1]=updateIds;
+                System.out.println("UpdateSTone"+updateIds);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return updateIds;
+    }
+
+
+    private long addValueEventListenerPositionCol(){
+        reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("position").child("col");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                updateIds = (long) dataSnapshot.getValue();
+                ids[3]=updateIds;
+                System.out.println("UpdateSTone"+updateIds);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return updateIds;
+    }
+
+    private long addValueEventListenerPositionRow(){
+        reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("position").child("row");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                updateIds = (long) dataSnapshot.getValue();
+                ids[2]=updateIds;
+                System.out.println("UpdateSTone"+updateIds);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return updateIds;
+    }
+
+    private long addValueEventListenerCol(){
+        reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("PositionId");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                updateIds = (long) dataSnapshot.getValue();
+                System.out.println("UpdatePos:" + updateIds);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return updateIds;
+
     }
 
     private void addRoomsEventListener(){
@@ -105,7 +192,7 @@ public class FirebaseGameController {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                field = (HashMap<String, Integer>) dataSnapshot.getValue();
+                field = (List<List<Integer>>) dataSnapshot.getValue();
             }
 
             @Override
@@ -118,27 +205,36 @@ public class FirebaseGameController {
 
     //1
     //This Method will send the Turn code and the stone which has moved to his last position
-    public boolean sendUpdateInformaions(int stoneId, int positionId){
-        reference = database.getReference("rooms").child(gameName).child("field").child("0").child("updateInformations").child("StoneID");
-        reference.setValue(stoneId);
-        reference = database.getReference("rooms").child(gameName).child("field").child("0").child("updateInformations").child("PositionID");
-        reference.setValue(positionId);
+    public boolean sendUpdateInformaions(int stoneRow, int stoneCol, int posRow, int posCol){
+        reference = database.getReference("rooms").child(gameName).child("updateInformations").child("position").child("row");
+        reference.setValue(posRow);
+        reference = database.getReference("rooms").child(gameName).child("updateInformations").child("position").child("col");
+        reference.setValue(posCol);
+
+        reference = database.getReference("rooms").child(gameName).child("updateInformations").child("stone").child("row");
+        reference.setValue(stoneRow);
+        reference = database.getReference("rooms").child(gameName).child("updateInformations").child("stone").child("col");
+        reference.setValue(stoneCol);
+
         return true;
     }
 
     //2
-    public boolean readStoneIdPositionId(){
-        if(field!=null) {
-            return true;
-        }else{
-            return false;
+    public long[] readStoneIdPositionId(){
+        addValueEventListenerStoneRow();
+        addValueEventListenerStoneCol();
+        addValueEventListenerPositionRow();
+        addValueEventListenerPositionCol();
+
+        System.out.println(ids[0]+" "+ids[1]+" "+ids[2]+" "+ids[3]);
+        if(ids[0]!=0 && ids[1]!=0 && ids[2]!=0 && ids[3]!=0){
+            return ids;
+        }else {
+            return null;
         }
 
     }
 
-    public HashMap<String, Integer> returnIds(){
-        return field;
-    }
     //This Method will write the stones which will be removed to the base
     public void writeStonesToRemove(){
 

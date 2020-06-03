@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.myapplication.Firebase.Firebase;
 import com.example.myapplication.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -37,7 +36,7 @@ public class SearchGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 gameName = txtFieldGameName.getText().toString().trim();
-                reference = database.getReference().child("rooms/"+gameName);
+                reference = database.getReference("rooms").child(gameName);
                 if(gameName.equals("")){
                     txtFieldGameName.setText("Bitte Gib ein Spielnamen ein");
                 }
@@ -54,7 +53,7 @@ public class SearchGameActivity extends AppCompatActivity {
     }
     public void joinGame(String gameName){
         Intent intent =new Intent(this, GameFieldPlayerTwo.class);
-        intent.putExtra("GameName", gameName);
+        intent.putExtra("gameName", gameName);
         startActivity(intent);
     }
 }

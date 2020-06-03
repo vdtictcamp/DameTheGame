@@ -127,9 +127,9 @@ public class GameFieldPlayerOne extends AppCompatActivity {
             }
 
             //All white stones
-            whiteStonesIds = new int[][]{{R.id.w1, R.id.w2, R.id.w3, R.id.w4},
+            whiteStonesIds = new int[][]{{R.id.w1_2, R.id.w2_2, R.id.w3, R.id.w4},
                     {R.id.w5, R.id.w6, R.id.w7, R.id.w8},
-                    {R.id.w9, R.id.w10,  R.id.w11, R.id.w12, },};
+                    {R.id.w9_2, R.id.w10,  R.id.w11, R.id.w12, },};
 
             //All red stones
             redStonesIds = new int[][]{{R.id.b1, R.id.b2, R.id.b3, R.id.b4},
@@ -137,9 +137,9 @@ public class GameFieldPlayerOne extends AppCompatActivity {
                     {R.id.b9, R.id.b10, R.id.b11, R.id.b12},};
 
             //The distrubution of the Stones on the Board
-            stones = new int[][]{{R.id.w1, 0, R.id.w2, 0, R.id.w3, 0, R.id.w4, 0},
+            stones = new int[][]{{R.id.w1_2, 0, R.id.w2_2, 0, R.id.w3, 0, R.id.w4, 0},
                     { 0, R.id.w5, 0, R.id.w6, 0, R.id.w7, 0, R.id.w8},
-                    {R.id.w9, 0, R.id.w10, 0, R.id.w11, 0, R.id.w12, 0},
+                    {R.id.w9_2, 0, R.id.w10, 0, R.id.w11, 0, R.id.w12, 0},
                     {0, 0, 0, 0, 0, 0, 0, 0},
                     {0, 0, 0, 0, 0, 0, 0, 0},
                     {0,R.id.b9, 0,R.id.b10, 0,R.id.b11, 0,R.id.b12},
@@ -544,7 +544,6 @@ public class GameFieldPlayerOne extends AppCompatActivity {
                     if(stones[i][j]==idStone){
                         oldCol=j;
                         oldRow=i;
-                        sentData = firebaseController.sendUpdateInformaions(stones[oldRow][oldCol], idPos);
                         System.out.println("Alte Spalte:"+oldCol+" "+"Alte Reihe"+oldRow);
                         stones[oldRow][oldCol]=0;
                     }
@@ -557,6 +556,8 @@ public class GameFieldPlayerOne extends AppCompatActivity {
                     }
                 }
             }
+            sentData = firebaseController.sendUpdateInformaions(oldRow, oldCol, row, col);
+
             firebaseController.updateField(stones);
 
             //Every Time when we switch a Position we need to check if we got a new Queen

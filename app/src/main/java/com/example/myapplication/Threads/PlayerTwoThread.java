@@ -46,29 +46,42 @@ public class PlayerTwoThread extends Thread implements Runnable {
     public void run() {
         //Sobald die update Methode true zurückgibt,
         // ist der Zug abgeschlossen und der andere Spieler ist am Zug
-        while (!gameOver){
             if(!isInTurn){
-                boolean receivedUpdate =gameController.readStoneIdPositionId();
-                if(receivedUpdate){
+                try {
+                    Thread.sleep(7000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                long[] ids =gameController.readStoneIdPositionId();
+                if(ids!=null){
                    System.out.println("TRUEEEEEE");
-                    HashMap<String, Integer> ids = gameController.returnIds();
-                    int posID = ids.get("PositionID");
-                    int stoneId = ids.get("StoneID");
-                    //Nachdem die Steine bewegt wurden, muss der aktuelle Spielstatus ausgelesen werden
-                    System.out.println("Aus Thread"+posID + stoneId);
-                    System.out.println("Aus player zwei Thread:"+ids);
-                    stoneIdFromBase = gameController.returnIds();
+                   int s_row = Integer.parseInt(String.valueOf(ids[0]));
+                   int s_col = Integer.parseInt(String.valueOf(ids[1]));
+                   System.out.println(".....................");
+                   System.out.println("StoneID"+ids[0]);
+                   System.out.println("....................");
+                    System.out.println("PositionID"+ids[1]);
+                    System.out.println(ids[2]);
+                    System.out.println(ids[3]);
+                   int p_row = Integer.parseInt(String.valueOf(ids[2]));
+                   int p_col = Integer.parseInt(String.valueOf(ids[3]));
                     isInTurn= isInTurn();
-                    game.setTurn();
+                   game.helpViewMover(s_row, s_col, p_row, p_col);
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                   game.setTurn();
+                    //Nachdem die Steine bewegt wurden, muss der aktuelle Spielstatus ausgelesen werden
 
                     //Now we need to move the Stone
                     //Then we finish the Turn of player one
                     //And set the Turn for player two
                 }
+
             }
     }
 
 }
 
-
-}

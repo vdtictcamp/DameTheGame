@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.myapplication.Firebase.Firebase;
 import com.example.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 
