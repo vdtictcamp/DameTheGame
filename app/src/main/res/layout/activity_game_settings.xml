@@ -1,74 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.GameSettings"
+
+    android:background="@color/damebraun"
     android:orientation="vertical"
-    android:background="@color/darkgreen">
+    tools:context=".Activities.GameSettings">
 
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="100dp"
-    android:text="@string/playerOneSettings">
-</TextView>
+    t
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:text="@string/playerTwoSettings">
-    </TextView>
+        android:layout_alignParentStart="true"
 
-    <EditText
-        android:id="@+id/txtGameName"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="@string/placeholderGameName"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="100dp"
-        android:textSize="20sp"/>
-
-    <EditText
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="5dp"
-        android:text="@string/lblplayername">
-
-    </EditText>
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="52dp"
+        android:fontFamily="@font/reem_kufi"
+        android:text="@string/playerOneSettings"
+        android:textColor="@color/sandbraun"
+        android:textSize="17sp"
+        android:textStyle="bold|italic"></TextView>
 
     <TextView
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:text="@string/placeholderForNameField">
-    </TextView>
+        android:id="@+id/editText"
+        android:layout_width="167dp"
+        android:layout_height="43dp"
 
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="158dp"
+        android:fontFamily="@font/alfa_slab_one"
+        android:text="@string/lblChooseOfColorForFigur"
+        android:textColor="@color/sandbraun"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="334dp"
+        android:text="@string/playerTwoSettings"
+        android:textColor="@color/sandbraun"
+        android:textSize="17sp"
+        android:textStyle="bold|italic"></TextView>
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="200dp"
-        android:layout_height="97dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/lblChooseOfColorForFigur" />
+        android:layout_width="291dp"
+        android:layout_height="64dp"
+        android:layout_row="0"
+        android:layout_column="1"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="378dp"
+        android:fontFamily="@font/reem_kufi"
+        android:text="@string/lblplayername"
+        android:textColor="@color/sandbraun"
+        android:textSize="15sp"></EditText>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="601dp"
+        android:fontFamily="@font/reem_kufi"
+        android:text="@string/lblplayername"
+        android:textColor="@color/sandbraun"
+        android:textSize="15sp" />
+
+    <RadioGroup
+        android:layout_width="84dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="77dp"
+        android:layout_marginBottom="442dp">
+
+        <RadioButton
+            android:id="@+id/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:fontFamily="@font/reem_kufi"
+            android:text="Black" />
+
+        <RadioButton
+            android:id="@+id/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/reem_kufi"
+            android:text="White"
+            android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
+
+
+    </RadioGroup>
+
+    <TextView
+
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+
+        android:layout_alignParentStart="true"
+
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="460dp"
+        android:fontFamily="@font/alfa_slab_one"
+        android:text="@string/lblChooseOfColorForFigur"
+        android:textColor="@color/sandbraun"
+        android:textSize="12sp" />
+
+    <RadioGroup
+        android:layout_width="293dp"
+        android:layout_height="77dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="46dp"
+        android:layout_marginBottom="124dp">
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:fontFamily="@font/reem_kufi"
+            android:text="Black" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/reem_kufi"
+            android:text="White"
+            android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
+
+
+    </RadioGroup>
 
     <Button
-        android:id="@+id/btnStartGame"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:text="@string/btnStartGame"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="10dp">
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="167dp"
+        android:layout_marginBottom="21dp"
+        android:background="@color/sandbraun"
 
-    </Button>
+        android:fontFamily="@font/alfa_slab_one"
+        android:text="Spielen!"
+        android:textColor="@color/damebraun" />
 
 
-</LinearLayout>
+</RelativeLayout>

@@ -6,18 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".Activities.LoginActivity"
     android:rowCount="5"
-    android:columnCount="2"
-    android:background="@color/green">
+    android:background="@color/damebraun"
+    android:columnCount="2">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_row="4"
         android:layout_column="0"
-        android:layout_row="0"
         android:layout_marginLeft="20dp"
-        android:text="@string/lblNoAccountYet"
-        android:background="@color/darkgreen">
-    </TextView>
+        android:background="@color/sandbraun"
+        android:text="@string/lblNoAccountYet"></TextView>
 
     <Button
         android:id="@+id/btnToRegister"
@@ -26,8 +25,8 @@
         android:layout_row="0"
         android:layout_column="1"
         android:layout_marginLeft="5dp"
-        android:text="@string/register"
-        android:background="@color/darkgreen">
+        android:background="@color/sandbraun"
+        android:text="@string/register">
 
     </Button>
 
@@ -57,14 +56,12 @@
 
     <Button
         android:id="@+id/btnLogin"
-        android:layout_column="0"
         android:layout_row="3"
-        android:text="@string/btnLogin"
+        android:layout_column="0"
         android:layout_marginLeft="20dp"
-        android:background="@color/darkgreen"
-        android:layout_marginTop="10dp"/>
-
-
+        android:layout_marginTop="10dp"
+        android:background="@color/sandbraun"
+        android:text="@string/btnLogin" />
 
 
 </GridLayout>
