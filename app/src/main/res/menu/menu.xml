@@ -7,4 +7,27 @@
         android:id="@+id/ListDataMenu"
         app:showAsAction="always"
         android:icon="@drawable/ic_list" />
+
+    <item android:title="@string/gamerules"
+        android:id="@+id/rulesMenuItem">
+
+    </item>
+
+    <item android:title="online spielen"
+        android:id="@+id/menuOnlineItem">
+    </item>
+
+    <item
+        android:title="@string/register"
+        android:id="@+id/registerMenuItem">
+    </item>
+<item
+    android:title="@string/login"
+    android:id="@+id/menuLoginItem">
+</item>
+    <item
+        android:title="@string/logout"
+        android:id="@+id/menuLogoutItem">
+    </item>
+
 </menu>

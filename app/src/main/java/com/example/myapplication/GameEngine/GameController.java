@@ -14,7 +14,7 @@ public class GameController {
     int[][] positionIds;
     List<Integer> stonesToEat;
 
-    public GameController(int[][] stones, int[][] positionIds) {
+    public GameController(int[][] positionIds) {
         this.stones = stones;
         this.positionIds = positionIds;
         gameField = new GameField();
@@ -22,7 +22,7 @@ public class GameController {
 
 
     //We will conduct this method fpr every stone which can be eaten
-    public void removeStones(List<Integer> positions, int stoneId, int positionId) {
+    public void removeStones(int[][]stones, List<Integer> positions, int stoneId, int positionId) {
         int rowPos = 0;
         int colPos = 0;
         int rowStone = 0;
@@ -30,7 +30,7 @@ public class GameController {
         int diffRow = 0;
         int colDiff = 0;
         int index = positions.indexOf(positionId);
-        for (int p_id = index; p_id < positions.size(); p_id++) {
+        for (int p_id = 0; p_id < positions.size(); p_id++) {
             for (int i = 0; i < stones.length; i++) {
                 for (int j = 0; j < stones[i].length; j++) {
                     if (positionIds[i][j] == positions.get(p_id)) {
@@ -44,12 +44,19 @@ public class GameController {
 
                 }
             }
+
             diffRow = (rowPos + rowStone) / 2;
             colDiff = (colPos + colStone) / 2;
             int stoneToEatId = stones[diffRow][colDiff];
             gameField.removeStone(diffRow, colDiff);
+            stoneId = stones[rowPos][colPos];
         }
+
     }
+
+
+
+
 
     public int[] getRowAndCol(View stone) {
         int index[]=new int[2];

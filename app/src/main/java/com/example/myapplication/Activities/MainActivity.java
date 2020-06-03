@@ -1,9 +1,13 @@
 package com.example.myapplication.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -26,29 +30,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btnInitNewGame=findViewById(R.id.btnInitnewGame);
-        btnToLogin=findViewById(R.id.btnToLogin);
-        btnCreateGame=findViewById(R.id.btnCreateNewGame);
-        btnCreateGame.setVisibility(btnCreateGame.INVISIBLE);
-        btnLogout=findViewById(R.id.btnLogout);
         btnRegister=findViewById(R.id.btnRegister);
-        btnToSearchGame=findViewById(R.id.btnToSearchGame);
         currentUserAuth = FirebaseAuth.getInstance();
 
-        if (currentUserAuth.getCurrentUser()!=null){
-            btnCreateGame.setVisibility(btnCreateGame.VISIBLE);
-        }else if(currentUserAuth.getCurrentUser()==null){
-            btnLogout.setVisibility(btnLogout.INVISIBLE);
-            btnToSearchGame.setVisibility(btnToSearchGame.INVISIBLE);
-
-        }
-
-        btnRegister.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent RegisterActivity = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(RegisterActivity);
-            }
-        }));
 
         btnInitNewGame.setOnClickListener((new View.OnClickListener() {
             @Override
@@ -59,38 +43,53 @@ public class MainActivity extends AppCompatActivity {
         }
         }));
 
-        btnToLogin.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+
+    }
+
+
+    @SuppressLint("ResourceType")
+    @Override
+    public boolean onCreateOptionsMenu( Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        if (currentUserAuth.getCurrentUser()!=null){
+            menu.removeItem(R.id.menuLoginItem);
+        }
+        if(currentUserAuth.getCurrentUser()==null){
+            menu.add(R.id.menuLoginItem);
+            menu.removeItem(R.id.menuLogoutItem);
+        }
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menuLoginItem:
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
-            }
-        }));
-
-        btnLogout.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                btnCreateGame.setVisibility(btnCreateGame.INVISIBLE);
-                btnLogout.setVisibility(btnLogout.INVISIBLE);
-                btnToSearchGame.setVisibility(btnToSearchGame.INVISIBLE);
-            }
-        }));
-
-        btnCreateGame.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CreateOnlineGame.class);
+                return true;
+            case R.id.rulesMenuItem:
+                intent = new Intent(getApplicationContext(), GameRulesActivity.class);
                 startActivity(intent);
-            }
-        }));
-
-        btnToSearchGame.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SearchGameActivity.class);
+                return true;
+            case R.id.registerMenuItem:
+                intent = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(intent);
-            }
-        }));
+                return true;
+            case R.id.menuOnlineItem:
+                intent = new Intent(getApplicationContext(), CreateOnlineGame.class);
+                startActivity(intent);
+                return true;
+            case R.id.menuLogoutItem:
+                currentUserAuth.getInstance().signOut();
+                intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+
+        }
     }
 }
