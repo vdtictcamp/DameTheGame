@@ -28,5 +28,8 @@
     <string name="btnJoinGame">Spiel beitreten</string>
     <string name="lblJoinGame">Spiel beitreten</string>
     <string name="placeholderJoinGameName">Gib hier einen Spielnamen ein</string>
+    <string name="lblLoginEmail">Email</string>
+    <string name="lblLoginPassword">Passwort</string>
+    <string name="lblLoginPasswordRepeat">Passwort bestätigen</string>
 
 </resources>
