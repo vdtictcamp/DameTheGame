@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnInitNewGame;
     private Button btnToLogin;
     private Button btnLogout;
+    private Button btnRegister;
     private Button btnToSearchGame;
     FirebaseAuth currentUserAuth;
     private Button btnCreateGame;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         btnCreateGame=findViewById(R.id.btnCreateNewGame);
         btnCreateGame.setVisibility(btnCreateGame.INVISIBLE);
         btnLogout=findViewById(R.id.btnLogout);
+        btnRegister=findViewById(R.id.btnRegister);
         btnToSearchGame=findViewById(R.id.btnToSearchGame);
 
         currentUserAuth = FirebaseAuth.getInstance();
@@ -37,77 +39,52 @@ public class MainActivity extends AppCompatActivity {
             btnCreateGame.setVisibility(btnCreateGame.VISIBLE);
         }
 
-
-        View.OnClickListener toGameField = new View.OnClickListener() {
+        btnRegister.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeToGamefield();
+                Intent RegisterActivity = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(RegisterActivity);
             }
-        };
+        }));
 
-        btnInitNewGame.setOnClickListener(toGameField);
-
-    View.OnClickListener toFire = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            changeToLogin();
-
+        btnInitNewGame.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            Intent intent = new Intent(getApplicationContext(), GameField.class);
+            startActivity(intent);
         }
-    };
-        btnToLogin.setOnClickListener(toFire);
+        }));
 
-        View.OnClickListener logoutListener = new View.OnClickListener() {
+        btnToLogin.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                logout();
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
             }
-        };
+        }));
 
-        btnLogout.setOnClickListener(logoutListener);
-
-        View.OnClickListener createGameListener = new View.OnClickListener() {
+        btnLogout.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeToGameSettings();
+                FirebaseAuth.getInstance().signOut();
+                btnCreateGame.setVisibility(btnCreateGame.INVISIBLE);
             }
-        };
-        btnCreateGame.setOnClickListener(createGameListener);
+        }));
 
-        View.OnClickListener toSearchGameListener = new View.OnClickListener() {
+        btnCreateGame.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeToSearchGame();
+                Intent intent = new Intent(getApplicationContext(), GameSettings.class);
+                startActivity(intent);
             }
-        };
+        }));
 
-        btnToSearchGame.setOnClickListener(toSearchGameListener);
-
+        btnToSearchGame.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SearchGameActivity.class);
+                startActivity(intent);
+            }
+        }));
     }
-
-public void logout(){
-        FirebaseAuth.getInstance().signOut();
-        btnCreateGame.setVisibility(btnCreateGame.INVISIBLE);
-}
-
-    public void changeToGamefield(){
-        Intent intent = new Intent(this, GameField.class);
-        startActivity(intent);
-    }
-
-    public void changeToLogin(){
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-    }
-
-    public void changeToGameSettings(){
-        Intent intent = new Intent(this, GameSettings.class);
-        startActivity(intent);
-    }
-
-
-    public void changeToSearchGame(){
-        Intent intent = new Intent(this, SearchGameActivity.class);
-        startActivity(intent);
-    }
-
 }
