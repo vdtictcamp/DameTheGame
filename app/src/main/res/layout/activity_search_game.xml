@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.SearchGameActivity"
+    android:orientation="vertical"
+    android:background="@color/darkgreen">
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lblJoinGame"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/txtFieldGameName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/placeholderJoinGameName">
+    </EditText>
+
+
+    <Button
+        android:id="@+id/btnJoingame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btnJoinGame"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/gameNotFoundLbl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_marginTop="5dp"
+        />
+</LinearLayout>

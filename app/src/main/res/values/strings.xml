@@ -16,4 +16,17 @@
     <string name="playerTwoSettings">Spieler 2</string>
     <string name="playerOneTurn">Spieler 1</string>
     <string name="playerTwoTurn">Spieler 2 </string>
+    <string name="btnLogin">Login</string>
+    <string name="lblNoAccountYet">Noch kein Account?</string>
+    <string name="placeholderTxtPassword">Passwort</string>
+    <string name="btnLblLogin">Einloggen</string>
+    <string name="lblCreateNewAccount">Neuen Account erstellen</string>
+    <string name="btnLblCreateGame">Spiel erstellen</string>
+    <string name="logout">Abmelden</string>
+    <string name="placeholderGameName">Lege einen Spielnamen fest</string>
+    <string name="btnToJoinGame">Spiel beitreten</string>
+    <string name="btnJoinGame">Spiel beitreten</string>
+    <string name="lblJoinGame">Spiel beitreten</string>
+    <string name="placeholderJoinGameName">Gib hier einen Spielnamen ein</string>
+
 </resources>

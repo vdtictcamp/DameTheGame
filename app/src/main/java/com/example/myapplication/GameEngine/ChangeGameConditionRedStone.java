@@ -42,30 +42,30 @@ public class ChangeGameConditionRedStone {
                 if (stones[i][j] == id) {
                     if (j > 0 && j < 7 && i < 7 && i>0) {
                         if (stones[i - 1][j - 1] == 0 && stones[i - 1][j + 1] == 0) {
-                            positionsToJump = null;
+                            break;
                         }
                     } else if (j >= 7 &&i>0 ) {
                         if (stones[i - 1][j - 1] == 0) {
-                            positionsToJump = null;
+                            break;
                         }
                     } else if (j <= 0 &&i>0 ) {
                         if (stones[i - 1][j + 1] == 0) {
-                            positionsToJump = null;
+                            break;
                         }
                     }
                     else if(i==0 && j>0){
                         if (stones[i + 1][j - 1] == 0 && stones[i + 1][j + 1] == 0) {
-                            positionsToJump = null;
+                            break;
                         }
                     }
                     else if(i>=7 && j>0){
                         if (stones[i - 1][j - 1] == 0 && stones[i - 1][j + 1] == 0) {
-                            positionsToJump = null;
+                            break;
                         }
                     }else
                         if(i==0 && j==0){
                         if (stones[i + 1][j + 1] == 0 ) {
-                            positionsToJump = null;
+                            break;
                         }
                     }
 
@@ -265,9 +265,14 @@ public List<Integer> collectPosLeftDiagonal(int i, int j){
     }
 
 
+    public List<List<Integer>>returnPosistionsToJump(){
 
+        return returnPosistionsToJump();
+
+
+    }
     public List<Integer> returnStonesToEat () {
                 return stonesToEat;
             }
 
-        }
+    }
