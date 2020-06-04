@@ -14,6 +14,7 @@ public class GameController {
     int[][] positionIds;
     List<Integer> stonesToEat;
 
+
     public GameController(int[][] positionIds) {
         this.stones = stones;
         this.positionIds = positionIds;
@@ -56,7 +57,17 @@ public class GameController {
 
 
 
+    public List<Integer> fillPositionsToJumpInList(List<List<Integer>>posAfterEat){
+        List<Integer>allPositionsToJump = new ArrayList<>();
+        System.out.println("Size:"+posAfterEat.size());
+        for(int i=0; i<posAfterEat.size(); i++){
+            for(int j=0; j<posAfterEat.get(i).size(); j++){
+                allPositionsToJump.add(posAfterEat.get(i).get(j));
+            }
+        }
+        return allPositionsToJump;
 
+    }
 
     public int[] getRowAndCol(View stone) {
         int index[]=new int[2];

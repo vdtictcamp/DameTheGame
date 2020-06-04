@@ -30,6 +30,7 @@ public class FirebaseGameController {
     GameController gameController;
     String gameName;
     long [] ids = new long[4];
+    private boolean isHosted=false;
 
 
 
@@ -67,22 +68,38 @@ public class FirebaseGameController {
     }
 
 
-    public void initStartSituation(){
-        currentField = new ArrayList<>();
-        List<Integer> tempList = new ArrayList<>();
+    public void initStartSituation(String player){
+            currentField = new ArrayList<>();
+            List<Integer> tempList = new ArrayList<>();
 
-        reference=database.getReference("rooms").child(gameName).child("PlayerOneTurn");
-        reference.setValue(true);
-        reference=database.getReference("rooms").child(gameName).child("PlayerTwoTurn");
-        reference.setValue(false);
-        reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("stone").child("row");
-        reference.setValue(0);
-        reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("stone").child("col");
-        reference.setValue(0);
-        reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("position").child("row");
-        reference.setValue(0);
-        reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("position").child("col");
-        reference.setValue(0);
+            if(player==null){
+                player="offline";
+            }
+            if (player.equals("PlayerOne")) {
+                reference = database.getReference("rooms").child(gameName).child("PlayerOneHasJoined");
+                reference.setValue(true);
+                reference = database.getReference("rooms").child(gameName).child("PlayerTwoHasJoined");
+                reference.setValue(false);
+
+            }
+
+            if(player.equals("PlayerTwo")) {
+                reference = database.getReference("rooms").child(gameName).child("PlayerTwoHasJoined");
+                reference.setValue(true);
+            }
+
+            reference=database.getReference("rooms").child(gameName).child("PlayerOneTurn");
+            reference.setValue(true);
+            reference=database.getReference("rooms").child(gameName).child("PlayerTwoTurn");
+            reference.setValue(false);
+            reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("stone").child("row");
+            reference.setValue(0);
+            reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("stone").child("col");
+            reference.setValue(0);
+            reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("position").child("row");
+            reference.setValue(0);
+            reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("position").child("col");
+            reference.setValue(0);
 
         reference = database.getReference("rooms").child(gameName).child("field");
         for(int i=0;i<stones.length; i++){
@@ -204,6 +221,24 @@ public class FirebaseGameController {
         });
     }
 
+
+    private boolean readIfPlayerTwoHasJoined(){
+        reference = database.getReference("rooms").child(gameName).child("PlayerTwoHasJoined");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                isHosted = (boolean) dataSnapshot.getValue();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return isHosted;
+    }
+
     //1
     //This Method will send the Turn code and the stone which has moved to his last position
     public boolean sendUpdateInformaions(int stoneRow, int stoneCol, int posRow, int posCol){
@@ -216,7 +251,6 @@ public class FirebaseGameController {
         reference.setValue(stoneRow);
         reference = database.getReference("rooms").child(gameName).child("updateInformations").child("stone").child("col");
         reference.setValue(stoneCol);
-
         return true;
     }
 
@@ -237,6 +271,15 @@ public class FirebaseGameController {
     }
 
 
+
+
+public boolean checkIfPlayerTwoHasJoined(){
+        boolean hasJoined=false;
+        hasJoined=readIfPlayerTwoHasJoined();
+        return isHosted;
+
+
+}
 
     public void checkIfIsInTurn(){
 
