@@ -195,7 +195,6 @@ public class GameField extends AppCompatActivity{
                                 showValidPosForQueen(posForRedQueen.get(i));
                             }
                         }
-
                     }
                     else {
                         showValidPositionsForRedStones(v);
