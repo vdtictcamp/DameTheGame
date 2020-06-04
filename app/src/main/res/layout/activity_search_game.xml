@@ -1,42 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.SearchGameActivity"
     android:orientation="vertical"
-    android:background="@color/darkgreen">
+    android:background="@color/damebraun"><![CDATA[
 
+
+    />
+
+    ]]>
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="78dp"
+        android:fontFamily="@font/reem_kufi"
         android:text="@string/lblJoinGame"
-        android:textSize="20sp" />
+        android:textColor="@color/sandbraun"
+        android:textSize="26sp"
+        android:textStyle="bold|italic"/>
 
     <EditText
         android:id="@+id/txtFieldGameName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="@string/placeholderJoinGameName">
-    </EditText>
-
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="167dp"
+        android:background="@color/sandbraun"
+        android:fontFamily="@font/reem_kufi"
+        android:text="@string/placeholderJoinGameName"
+        android:textColor="@color/damebraun"></EditText>
 
     <Button
         android:id="@+id/btnJoingame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-2dp"
+        android:layout_marginBottom="91dp"
+        android:background="@color/sandbraun"
+        android:fontFamily="@font/alfa_slab_one"
         android:text="@string/btnJoinGame"
-        android:layout_marginTop="5dp"/>
+        android:textColor="@color/damebraun" />
 
     <TextView
         android:id="@+id/gameNotFoundLbl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:layout_marginTop="5dp"
-        />
-</LinearLayout>
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="256dp"
+        android:textSize="20sp" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+</RelativeLayout>

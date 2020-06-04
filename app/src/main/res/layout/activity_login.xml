@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,21 +12,44 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_row="4"
-        android:layout_column="0"
-        android:layout_marginLeft="20dp"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="399dp"
         android:background="@color/sandbraun"
+        android:fontFamily="@font/reem_kufi"
+        android:textColor="@color/damebraun"
         android:text="@string/lblNoAccountYet"></TextView>
+
+    <TextView
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="78dp"
+        android:fontFamily="@font/reem_kufi"
+        android:text="Settings"
+        android:textColor="@color/sandbraun"
+        android:textSize="26sp"
+        android:textStyle="bold|italic"></TextView>
 
     <Button
         android:id="@+id/btnToRegister"
-        android:layout_width="wrap_content"
+        android:layout_width="133dp"
         android:layout_height="wrap_content"
-        android:layout_row="0"
-        android:layout_column="1"
-        android:layout_marginLeft="5dp"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="261dp"
+        android:layout_marginTop="383dp"
         android:background="@color/sandbraun"
-        android:text="@string/register">
+        android:fontFamily="@font/alfa_slab_one"
+        android:text="@string/register"
+        android:textColor="@color/damebraun">
 
     </Button>
 
@@ -34,34 +57,51 @@
         android:id="@+id/txtLoginUsername"
         android:layout_width="210dp"
         android:layout_height="30dp"
-        android:layout_row="1"
-        android:layout_column="0"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="50dp"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="153dp"
+        android:layout_marginEnd="100dp"
         android:background="@drawable/bordertxtfield"
         android:inputType="text"
-        android:text="TextView" />
+        android:text="Username"
+        android:textColor="@color/grey" />
 
     <EditText
         android:id="@+id/txtLoginPassword"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_row="2"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_column="0"
+
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="208dp"
+        android:layout_marginEnd="100dp"
+        android:background="@drawable/bordertxtfield"
         android:ems="10"
-        android:inputType="textPassword"
-        android:background="@drawable/bordertxtfield" />
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/btnLogin"
-        android:layout_row="3"
-        android:layout_column="0"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="164dp"
+        android:layout_marginBottom="417dp"
         android:background="@color/sandbraun"
-        android:text="@string/btnLogin" />
+        android:fontFamily="@font/alfa_slab_one"
+        android:text="@string/btnLogin"
+        android:textColor="@color/damebraun" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="314dp" />
 
 
-</GridLayout>
+</RelativeLayout>
