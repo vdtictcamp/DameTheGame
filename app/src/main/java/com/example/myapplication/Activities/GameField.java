@@ -37,7 +37,7 @@ public class GameField extends AppCompatActivity{
     private int[][]positionsIds;
     private int[][]whiteStonesIds;
     private int[][]redStonesIds;
-    private int[][] stones;
+    public int[][] stones;
     private View[][] redStones;
     private View[][]whiteStones;
     private View[][]positions;
@@ -88,6 +88,7 @@ public class GameField extends AppCompatActivity{
         redStones = new View[8][8];
         whiteStones = new View[8][8];
         positions = new View[8][8];
+        stones = new int[7][7];
         visualizeTurnOfPlayerOne=findViewById(R.id.playersOneTurn);
         visualizeTurnOfPlayerTwo=findViewById(R.id.playersTwoTurn);
         controller=new Controller();

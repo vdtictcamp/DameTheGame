@@ -10,29 +10,43 @@
     android:columnCount="2">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="399dp"
-        android:background="@color/sandbraun"
-        android:fontFamily="@font/reem_kufi"
-        android:textColor="@color/damebraun"
-        android:text="@string/lblNoAccountYet"></TextView>
+    android:layout_width="88dp"
+    android:layout_height="wrap_content"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginStart="161dp"
+    android:layout_marginTop="78dp"
+    android:fontFamily="@font/reem_kufi"
+    android:text="Settings"
+    android:textColor="@color/sandbraun"
+    android:textSize="26sp"
+    android:textStyle="bold|italic"></TextView>
 
     <TextView
-        android:layout_width="88dp"
+        android:layout_width="201dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="78dp"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="186dp"
         android:fontFamily="@font/reem_kufi"
-        android:text="Settings"
+        android:text="Username"
+        android:textColor="@color/sandbraun"
+        android:textSize="26sp"
+        android:textStyle="bold|italic"></TextView>
+
+    <TextView
+        android:layout_width="176dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="109dp"
+        android:layout_marginTop="271dp"
+        android:fontFamily="@font/reem_kufi"
+        android:text="Passwort"
         android:textColor="@color/sandbraun"
         android:textSize="26sp"
         android:textStyle="bold|italic"></TextView>
@@ -41,17 +55,14 @@
         android:id="@+id/btnToRegister"
         android:layout_width="133dp"
         android:layout_height="wrap_content"
-
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="261dp"
-        android:layout_marginTop="383dp"
+        android:layout_marginStart="137dp"
+        android:layout_marginTop="516dp"
         android:background="@color/sandbraun"
         android:fontFamily="@font/alfa_slab_one"
         android:text="@string/register"
-        android:textColor="@color/damebraun">
-
-    </Button>
+        android:textColor="@color/damebraun"></Button>
 
     <EditText
         android:id="@+id/txtLoginUsername"
@@ -61,11 +72,10 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="153dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginTop="238dp"
+        android:layout_marginEnd="95dp"
         android:background="@drawable/bordertxtfield"
         android:inputType="text"
-        android:text="Username"
         android:textColor="@color/grey" />
 
     <EditText
@@ -76,8 +86,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="208dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginTop="317dp"
+        android:layout_marginEnd="93dp"
         android:background="@drawable/bordertxtfield"
         android:ems="10"
         android:inputType="textPassword" />
@@ -89,8 +99,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginEnd="164dp"
-        android:layout_marginBottom="417dp"
+        android:layout_marginEnd="165dp"
+        android:layout_marginBottom="241dp"
         android:background="@color/sandbraun"
         android:fontFamily="@font/alfa_slab_one"
         android:text="@string/btnLogin"
@@ -99,9 +109,14 @@
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="314dp" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="190dp"
+        android:layout_marginTop="625dp"
+        android:layout_marginEnd="173dp"
+        android:layout_marginBottom="58dp" />
 
 
 </RelativeLayout>

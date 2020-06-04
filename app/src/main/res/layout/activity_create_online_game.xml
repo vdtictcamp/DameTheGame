@@ -12,19 +12,18 @@
         android:id="@+id/txtGameName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Spiel erstellen" />
+        android:text="Room Name:" />
 
     <EditText
         android:id="@+id/nameOnlineGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name" />
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/btnCreateOnlineGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Spiel erstellen" />
+        android:text="Online Spiel erstellen" />
 </LinearLayout>

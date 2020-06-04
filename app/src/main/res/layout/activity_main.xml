@@ -9,20 +9,14 @@
     android:background="@color/damebraun">
 
 
-
     <Button
-        android:layout_marginLeft="150dp"
         android:id="@+id/btnInitnewGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
         android:layout_marginTop="100dp"
         android:layout_marginBottom="10dp"
-        android:text="@string/newGame"></Button>
-
-
-
-
-
+        android:text="Offline Spiel Settings"></Button>
 
 
 </LinearLayout>

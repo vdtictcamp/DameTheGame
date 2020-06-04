@@ -47,9 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (firebaseAuth.getCurrentUser()!=null){
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
-
         }
-
 
         View.OnClickListener createAccountListener = new View.OnClickListener() {
             @Override
@@ -71,8 +69,6 @@ public class RegisterActivity extends AppCompatActivity {
                 if(!password_repeat.equals(password)){
                     Toast.makeText(RegisterActivity.this, "Passwörter müssen übereinstimmen", Toast.LENGTH_LONG).show();
                 }
-
-
                     firebaseAuth.createUserWithEmailAndPassword(name, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -81,11 +77,9 @@ public class RegisterActivity extends AppCompatActivity {
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             }else{
                                 Toast.makeText(RegisterActivity.this, "Error"+task.getException(), Toast.LENGTH_LONG).show();
-
                             }
                         }
                     });
-
             }
         };
 
