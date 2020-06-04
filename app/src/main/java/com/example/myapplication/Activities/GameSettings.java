@@ -43,13 +43,11 @@ public class GameSettings extends AppCompatActivity {
     }
 
     public void startGame(){
-        gameName = "Dame";
+        gameName = "offline";
         Intent intent = new Intent(getApplicationContext(), GameField.class);
         intent.putExtra("gameName", gameName);
         startActivity(intent);
     }
-
-
 
     @SuppressLint("ResourceType")
     @Override

@@ -1,5 +1,9 @@
 package com.example.myapplication.Threads;
 
+import android.app.Activity;
+import android.content.Context;
+import android.os.Looper;
+
 import com.example.myapplication.Activities.GameField;
 import com.example.myapplication.Firebase.FirebaseGameController;
 import com.example.myapplication.GameEngine.GameController;
@@ -21,20 +25,17 @@ public class PlayerTwoThread extends Thread implements Runnable {
     int[][]positionIds;
     GameField game;
 
-
-
-    public PlayerTwoThread(int[][]stones, String gameName) {
+    public PlayerTwoThread(int[][]stones, String gameName, Context context) {
         this.stones = stones;
         this.gameName=gameName;
         gameController = new FirebaseGameController(stones,this.gameName );
-        game=new GameField();
+        this.game= (GameField) context;
     }
 
     public boolean isInTurn(){
         isInTurn = true;
         return isInTurn;
     }
-
 
     public boolean finishTurn(){
         isInTurn = false;
@@ -45,6 +46,7 @@ public class PlayerTwoThread extends Thread implements Runnable {
     public void run() {
         //Sobald die update Methode true zurückgibt,
         // ist der Zug abgeschlossen und der andere Spieler ist am Zug
+
         while (!gameOver){
         if(!isInTurn) {
             try {
@@ -55,8 +57,10 @@ public class PlayerTwoThread extends Thread implements Runnable {
             long[] ids = gameController.readStoneIdPositionId();
             if (ids != null) {
                 System.out.println("TRUEEEEEE");
+
                 int s_row = Integer.parseInt(String.valueOf(ids[0]));
                 int s_col = Integer.parseInt(String.valueOf(ids[1]));
+
                 System.out.println(".....................");
                 System.out.println("StoneID" + ids[0]);
                 System.out.println("....................");
@@ -77,7 +81,6 @@ public class PlayerTwoThread extends Thread implements Runnable {
 
             }
         }
-
             }
     }
 

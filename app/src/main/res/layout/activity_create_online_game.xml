@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.CreateOnlineGame"
-    android:background="@color/damebraun"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/damebraun">
 
 
     <TextView
@@ -41,11 +41,7 @@
         android:id="@+id/btnCreateOnlineGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="299dp"
-        android:background="@color/sandbraun"
-        android:fontFamily="@font/alfa_slab_one"
         android:text="Spiel erstellen"
-        android:textColor="@color/damebraun" />
+        android:background="@color/sandbraun"/>
 </RelativeLayout>
+
