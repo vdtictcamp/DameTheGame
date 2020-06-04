@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.CreateOnlineGame"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/damebraun">
 
 
     <TextView
@@ -26,5 +27,6 @@
         android:id="@+id/btnCreateOnlineGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Spiel erstellen" />
+        android:text="Spiel erstellen"
+        android:background="@color/sandbraun"/>
 </LinearLayout>

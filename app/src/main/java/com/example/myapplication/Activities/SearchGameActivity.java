@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.myapplication.R;
@@ -26,6 +27,7 @@ public class SearchGameActivity extends AppCompatActivity {
     FirebaseDatabase database;
     TextView txtGameNotFound;
     boolean isHosted;
+    private ProgressBar loadBar;
 
 
     @Override
@@ -37,6 +39,8 @@ public class SearchGameActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         txtGameNotFound=findViewById(R.id.gameNotFoundLbl);
         isHosted=false;
+        loadBar = findViewById(R.id.loadBarSearchGame);
+        loadBar.setVisibility(loadBar.INVISIBLE);
 
         View.OnClickListener joinGameListener = new View.OnClickListener() {
             @Override
@@ -66,6 +70,7 @@ public class SearchGameActivity extends AppCompatActivity {
 
 
     private void checkIfGameIsHosted(){
+        loadBar.setVisibility(loadBar.VISIBLE);
         reference = database.getReference("rooms").child(gameName).child("PlayerOneHasJoined");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -73,6 +78,7 @@ public class SearchGameActivity extends AppCompatActivity {
                 isHosted = (boolean) dataSnapshot.getValue();
                 if (isHosted){
                     joinGame(gameName);
+                    loadBar.setVisibility(loadBar.INVISIBLE);
                 }
                 else{
                     txtFieldGameName.setText("Dises Spiel ist nicht gehostet");
