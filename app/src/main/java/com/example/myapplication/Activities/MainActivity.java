@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         btnInitNewGame.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Intent intent = new Intent(getApplicationContext(), GameField.class);
+            Intent intent = new Intent(getApplicationContext(), GameSettings.class);
             intent.putExtra("gameName", "Default");
             startActivity(intent);
         }
@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
 
     @SuppressLint("ResourceType")
     @Override
@@ -78,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.menuOnlineItem:
-                intent = new Intent(getApplicationContext(), CreateOnlineGame.class);
+                intent = new Intent(getApplicationContext(), OnlineOptionsActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.menuLogoutItem:

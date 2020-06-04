@@ -4,35 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.MainActivity"
+    tools:context=".Activities.OnlineOptionsActivity"
     android:orientation="vertical"
     android:background="@color/damebraun">
 
-
     <Button
-        android:id="@+id/btnRegister"
+        android:id="@+id/btnSearchOnlineGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:background="@color/sandbraun"
-        android:fontFamily="@font/alfa_slab_one"
-        android:text="@string/register"
-        android:textColor="@color/damebraun"
-        app:layout_constraintBottom_toBottomOf="parent"></Button>
-
-    <Button
+        android:text="Spiel suchen"
         android:layout_marginLeft="150dp"
-        android:id="@+id/btnInitnewGame"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp">
+
+    </Button>
+
+    <Button
+        android:id="@+id/btnCreateOnlineGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:text="Spiel erstellen"
+        android:layout_marginLeft="150dp"
         android:layout_marginBottom="10dp"
-        android:text="@string/newGame"></Button>
+        android:layout_marginTop="10dp">
 
-
-
-
-
-
+    </Button>
 
 </LinearLayout>

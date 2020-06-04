@@ -1,5 +1,6 @@
 package com.example.myapplication.Threads;
 
+import com.example.myapplication.Activities.GameField;
 import com.example.myapplication.Firebase.FirebaseGameController;
 import com.example.myapplication.GameEngine.GameController;
 
@@ -18,14 +19,15 @@ public class PlayerTwoThread extends Thread implements Runnable {
     String gameName;
     HashMap<String, Integer> stoneIdFromBase;
     int[][]positionIds;
+    GameField game;
 
 
 
-    public PlayerTwoThread(int[][]stones,int[][]positionIds, String gameName) {
+    public PlayerTwoThread(int[][]stones, String gameName) {
         this.stones = stones;
         this.gameName=gameName;
-        this.positionIds=positionIds;
         gameController = new FirebaseGameController(stones,this.gameName );
+        game=new GameField();
     }
 
     public boolean isInTurn(){
@@ -45,6 +47,11 @@ public class PlayerTwoThread extends Thread implements Runnable {
         // ist der Zug abgeschlossen und der andere Spieler ist am Zug
         while (!gameOver){
         if(!isInTurn) {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             long[] ids = gameController.readStoneIdPositionId();
             if (ids != null) {
                 System.out.println("TRUEEEEEE");
@@ -56,11 +63,10 @@ public class PlayerTwoThread extends Thread implements Runnable {
                 System.out.println("PositionID" + ids[1]);
                 System.out.println(ids[2]);
                 System.out.println(ids[3]);
-
                 System.out.println("Stones aus Thread:"+ stones[s_row][s_col]);
-
                 int p_row = Integer.parseInt(String.valueOf(ids[2]));
                 int p_col = Integer.parseInt(String.valueOf(ids[3]));
+                game.moveHelperFunc(s_col, s_row, p_row,p_col);
                 isInTurn = isInTurn();
                 //game.helpViewMover(stones[s_col][s_row], positionIds[p_row][p_col]);
                 try {
@@ -68,12 +74,7 @@ public class PlayerTwoThread extends Thread implements Runnable {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                isInTurn=true;
-                //Nachdem die Steine bewegt wurden, muss der aktuelle Spielstatus ausgelesen werden
 
-                //Now we need to move the Stone
-                //Then we finish the Turn of player one
-                //And set the Turn for player two
             }
         }
 

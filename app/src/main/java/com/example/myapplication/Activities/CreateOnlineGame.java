@@ -37,6 +37,7 @@ public class CreateOnlineGame extends AppCompatActivity {
         gameName = txtFieldGameName.getText().toString().trim();
         Intent intent = new Intent(getApplicationContext(), GameField.class);
         intent.putExtra("gameName", gameName);
+        intent.putExtra("Player", "PlayerOne");
         startActivity(intent);
     }
 }

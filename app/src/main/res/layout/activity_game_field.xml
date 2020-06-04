@@ -18,8 +18,8 @@
         android:layout_height="30dp"
         android:layout_row="13"
         android:layout_column="4"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@color/green">
 
     </View>
@@ -35,16 +35,6 @@
         android:background="@color/green">
 
     </View>
-
-    <View
-        android:id="@+id/view21"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_row="6"
-        android:layout_column="1"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_corner"></View>
 
     <View
         android:id="@+id/view12"
@@ -390,44 +380,44 @@
 
     <View
         android:id="@+id/b9"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_row="2"
         android:layout_column="1"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/roundet_corner_red">
 
     </View>
 
     <View
         android:id="@+id/b6"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_row="1"
         android:layout_column="2"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/roundet_corner_red">
 
     </View>
 
     <View
         android:id="@+id/b1"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_row="0"
         android:layout_column="1"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/roundet_corner_red">
 
     </View>
 
     <View
         android:id="@+id/b10"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_row="2"
         android:layout_column="3"
         android:layout_marginLeft="12dp"
@@ -438,20 +428,20 @@
 
     <View
         android:id="@+id/b7"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_row="1"
         android:layout_column="4"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/roundet_corner_red">
 
     </View>
 
     <View
         android:id="@+id/b3"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_row="0"
         android:layout_column="5"
         android:layout_marginLeft="10dp"
@@ -462,20 +452,20 @@
 
     <View
         android:id="@+id/b4"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_row="0"
         android:layout_column="7"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/roundet_corner_red">
 
     </View>
 
     <View
         android:id="@+id/b11"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_row="2"
         android:layout_column="5"
         android:layout_marginLeft="12dp"
@@ -486,12 +476,12 @@
 
     <View
         android:id="@+id/b8"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_row="1"
         android:layout_column="6"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/roundet_corner_red">
 
     </View>
@@ -753,28 +743,28 @@
 
     <View
         android:id="@+id/w7"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_row="6"
         android:layout_column="5"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/rounded_corner"></View>
 
     <View
         android:id="@+id/w11"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_row="5"
         android:layout_column="4"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/rounded_corner"></View>
 
     <View
         android:id="@+id/w5"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_row="6"
         android:layout_column="1"
         android:layout_marginLeft="10dp"
@@ -783,28 +773,28 @@
 
     <View
         android:id="@+id/w2_2"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_row="7"
         android:layout_column="2"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/rounded_corner"></View>
 
     <View
         android:id="@+id/w9_2"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_row="5"
         android:layout_column="0"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/rounded_corner"></View>
 
     <View
         android:id="@+id/b2"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_row="0"
         android:layout_column="3"
         android:layout_marginLeft="12dp"
@@ -815,8 +805,8 @@
 
     <View
         android:id="@+id/b12"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_row="2"
         android:layout_column="7"
         android:layout_marginLeft="12dp"
@@ -827,40 +817,40 @@
 
     <View
         android:id="@+id/b5"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_row="1"
         android:layout_column="0"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/roundet_corner_red">
 
     </View>
 
     <View
         android:id="@+id/w4"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_row="7"
         android:layout_column="6"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/rounded_corner"></View>
 
     <View
         android:id="@+id/w12"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_row="5"
         android:layout_column="6"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/rounded_corner"></View>
 
     <View
         android:id="@+id/w8"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_row="6"
         android:layout_column="7"
         android:layout_marginLeft="12dp"
@@ -869,42 +859,48 @@
 
     <View
         android:id="@+id/w1_2"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_row="7"
         android:layout_column="0"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_corner"></View>
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/rounded_corner">
+
+    </View>
 
     <View
         android:id="@+id/w10"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_row="5"
         android:layout_column="2"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_corner"></View>
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/rounded_corner">
+
+    </View>
 
     <View
         android:id="@+id/w3"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_row="7"
         android:layout_column="4"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_corner"></View>
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/rounded_corner">
+
+    </View>
 
     <View
         android:id="@+id/w6"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_row="6"
         android:layout_column="3"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/rounded_corner">
 
     </View>
