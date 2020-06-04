@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,15 +13,29 @@
         android:id="@+id/txtGameName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Spiel erstellen" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
+        android:text="Spiel erstellen"
+        android:fontFamily="@font/reem_kufi"
+        android:textColor="@color/sandbraun"
+        android:textSize="26sp"
+        android:textStyle="bold|italic"/>
 
     <EditText
         android:id="@+id/nameOnlineGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="93dp"
+        android:layout_marginTop="155dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:text="Name des Raumes eingeben"
+        android:fontFamily="@font/reem_kufi"
+        android:textColor="@color/sandbraun"
+        android:textSize="15sp"/>
 
     <Button
         android:id="@+id/btnCreateOnlineGame"
@@ -29,4 +43,5 @@
         android:layout_height="wrap_content"
         android:text="Spiel erstellen"
         android:background="@color/sandbraun"/>
-</LinearLayout>
+</RelativeLayout>
+

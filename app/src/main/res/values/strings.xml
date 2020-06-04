@@ -32,4 +32,29 @@
     <string name="lblLoginPassword">Passwort</string>
     <string name="lblLoginPasswordRepeat">Passwort bestätigen</string>
 
+    <string name="text_ziehen">
+        Die Steine ziehen ein Feld in diagonaler Richtung, aber nur vorwärts und nur auf freie dunkle Felder.
+    </string>
+
+    <string name="text_schlagen">
+        Es gilt Schlagzwang. Bei Brettspielnetz.de wird das automatisch durchgesetzt.
+        Wenn sich eigene freie Steine bei einem Zug nicht anklicken lassen,
+        kann das daran liegen, dass irgendwo auf dem Brett die Möglichkeit zum Schlagen besteht.
+        Nur einer dieser Steine kann dann ausgewählt werden. Einfache Steine dürfen nur vorwärts schlagen.
+        Wenn du die Auswahl zwischen verschiedenen Schlagmöglichkeiten hast, darfst du dich frei entscheiden.
+        Weder ein Mehrfachschlagen, noch ein Schlagen mit einer Dame hat absoluten Vorrang.
+    </string>
+
+    <string name="text_Dame">
+        Du bekommst eine Dame, wenn einer deiner Steine auf der gegnerischen Grundlinie stehen bleibt,
+        egal ob durch einen normalen Zug oder durch ein Schlagen.
+        Der Stein wird dann durch ein "D" gekennzeichnet (im Brettspiel wird ein zweiter Stein darauf gestellt).
+        Eine Dame kannst Du nun sowohl schräg vorwärts als auch rückwärts bewegen und genauso darfst du mit ihr auch schlagen.
+        Im Gegensatz zur internationalen Damenvariante darf sich die Dame aber
+        nur um ein Feld vorwärts oder rückwärts bewegen.
+        Beim Schlagen muss die Dame direkt vor dem gegnerischen Stein stehen und
+        muss nach dem Schlagen direkt hinter dem geschlagenen Stein landen.
+    </string>
+
+
 </resources>
