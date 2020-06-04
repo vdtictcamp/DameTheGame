@@ -12,6 +12,7 @@ public class ChangeGameConditionRedStone {
     private int[][] positions = new int[8][8];
     private int[][] redStonesIds;
     List<Integer>stonesToEat = new ArrayList<>();
+    List<Integer>posToJump=new ArrayList<>();
 
     public ChangeGameConditionRedStone(int[][] stones, int[][] positions, int[][] redStonesIds) {
         this.stones = stones;
@@ -33,8 +34,7 @@ public class ChangeGameConditionRedStone {
     }
 
 
-
-    public List<List<Integer>> canEateWhiteStoneBeta(View stone) {
+    public List<List<Integer>> canEateWhiteStone(View stone) {
         List<List<Integer>> positionsToJump = new ArrayList<>();
         int id = stone.getId();
         for (int i = 0; i < positions.length; i++) {
@@ -85,18 +85,16 @@ public class ChangeGameConditionRedStone {
     }
 
 
-
     //Gets all Positions to jump inDiagonal
     public List<Integer> collectPosRightDiagonal(int i, int j) {
-
        System.out.println(i+" "+" "+j +"aus collect");
         int colDiff = 1;
         int rowDiff = 1;
         List<Integer> positionsToJump = new ArrayList<>();
         List<Integer>checkPositionsRight=new ArrayList<>();
         List<Integer>checkPositionsLeft = new ArrayList<>();
-        for (int k = i; k >=0; k--) {
-            for (int z = 0; z < positions[i].length; z++) {
+        for (int k = i; k >=i-3; k--) {
+            for (int z = 0; z < j+3; z++) {
                 if (z < 8) {
                     if ((k == i - rowDiff && z == j + colDiff) && (colDiff % 2 != 0)) {
                         if ((stones[k][z] != 0) && (checkIfIsRedStone(stones[k][z]))) {
@@ -134,17 +132,7 @@ public class ChangeGameConditionRedStone {
         return positionsToJump;
 }
 
-public boolean checkNextJump(int row, int col){
-        if(row ==0 || col==0 || col==7 || row==7){
-            return false;
-        }
-        else if(stones[row-1][col-1]!=0 || stones[row-1][col+1]!=0){
-            return true;
-        }
-        else{
-            return false;
-        }
-}
+
 
 public List<Integer> collectPosLeftDiagonal(int i, int j){
     int colDiff = 1;
@@ -187,90 +175,20 @@ public List<Integer> collectPosLeftDiagonal(int i, int j){
         }
     }
     return positionsToJump;
-
 }
-
-
-
-    //Noch in Bearbeitung
-    private List<Integer> collectPosZickZackLeft(int i, int j) {
-        List<Integer> positionsToJump = new ArrayList<>();
-        int colDiff = 1;
-        int rowDiff = 1;
-        int stoneCol=0;
-        int stoneRow=0;
-        boolean containsStone = false;
-        for (int k = i; k >= 0; k--) {
-            for (int z = 0; z < positions[i].length; z++) {
-                if (z <=6) {
-                    if ((k == i - rowDiff && z == j - 1) && (rowDiff%2!=0)) {
-                        if ((stones[k][z] != 0 && (checkIfIsRedStone(stones[k][z])))){
-                                containsStone=true;
-                                stoneCol=z;
-                                stoneRow=k;
-                                rowDiff++;
-
-                        }
-                    }
-                        if (((k==i-rowDiff && z==j) &&(rowDiff%2==0)) || ((k==i-rowDiff &&z==j-2)&&(rowDiff%2==0))) {
-                            if (stones[k][z] == 0 && containsStone==true) {
-                                positionsToJump.add(positions[k][z]);
-                                stonesToEat.add(stones[stoneRow][stoneCol]);
-                                containsStone=false;
-                                rowDiff++;
-                                z=positions.length-1;
-                            }
-                        }
-                }
-
-            }
-
-                }
-                return positionsToJump;
-            }
-
-
-            //Noch in Bearbeitung
-    private List<Integer> collectPosZickZackRight(int i, int j) {
-        List<Integer> positionsToJump = new ArrayList<>();
-        boolean containsStone=false;
-        int stoneRow=0;
-        int stoneCol=0;
-        int rowDiff = 1;
-        for (int k = i; k >=0; k--) {
-            for (int z = 0; z < positions[i].length; z++) {
-                if (z <=6) {
-                    if ((k == i - rowDiff && z == j + 1) && (rowDiff%2!=0)) {
-                        if ((stones[k][z] != 0 && (checkIfIsRedStone(stones[k][z])))){
-                            containsStone=true;
-                            stoneCol=z;
-                            stoneRow=k;
-                            rowDiff++;
-
-                        }
-                    }
-                    if (((k==i-rowDiff && z==j && stones[k][z]==0 && rowDiff>2) &&(rowDiff%2==0)) || ((k==i-rowDiff &&z==j+2)&&(rowDiff%2==0))) {
-                        if (stones[k][z] == 0 && containsStone==true) {
-                            positionsToJump.add(positions[k][z]);
-                            stonesToEat.add(stones[stoneRow][stoneCol]);
-                            containsStone=false;
-                            rowDiff++;
-                        }
-                    }
-                }
-            }
+    public boolean checkNextJump(int row, int col){
+        if(row ==0 || col==0 || col==7 || row==7){
+            return false;
         }
-        return positionsToJump;
-
+        else if(stones[row-1][col-1]!=0 || stones[row-1][col+1]!=0){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 
-    public List<List<Integer>>returnPosistionsToJump(){
-
-        return returnPosistionsToJump();
-
-
-    }
     public List<Integer> returnStonesToEat () {
                 return stonesToEat;
             }

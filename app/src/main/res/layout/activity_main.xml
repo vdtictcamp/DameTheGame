@@ -1,68 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.MainActivity"
-    android:orientation="horizontal"
-    android:columnCount="10"
-    android:rowCount="10">
+    android:orientation="vertical"
+    android:background="@color/damebraun">
+
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/register"
+            app:layout_constraintBottom_toBottomOf="parent">
+        </Button>
+
 
     <Button
-        android:id="@+id/btnRegister"
+        android:layout_marginLeft="150dp"
+        android:id="@+id/btnInitnewGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_row="0"
-        android:layout_column="0"
-        android:layout_marginLeft="10dp"
-        android:text="@string/register"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-    </Button>
-
-    <Button android:layout_column="4"
-        android:layout_row="4"
         android:layout_marginTop="100dp"
-        android:text="@string/newGame"
         android:layout_marginBottom="10dp"
-        android:id="@+id/btnInitnewGame">
-    </Button>
-    <Button
-        android:layout_column="4"
-        android:layout_row="5"
-        android:text="Spielregeln">
-    </Button>
+        android:text="@string/newGame"></Button>
 
-    <Button
-        android:id="@+id/btnToLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_row="6"
-        android:layout_column="4"
-        android:text="@string/btnLogin" />
-    <Button
-        android:id="@+id/btnCreateNewGame"
-        android:layout_column="4"
-        android:layout_row="7"
-        android:text="@string/btnLblCreateGame">
-    </Button>
 
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_row="0"
-        android:layout_column="5"
-        android:text="@string/logout">
-    </Button>
 
-    <Button
-        android:id="@+id/btnToSearchGame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_row="8"
-        android:layout_column="4"
-        android:text="@string/btnToJoinGame" />
 
-</GridLayout>
+
+
+
+</LinearLayout>

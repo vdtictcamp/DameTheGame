@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.LoginActivity"
-    android:rowCount="5"
+    android:rowCount="6"
     android:background="@color/damebraun"
     android:columnCount="2">
 

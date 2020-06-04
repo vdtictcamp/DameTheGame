@@ -236,6 +236,13 @@ public class FirebaseGameController {
 
     }
 
+
+
+    public void checkIfIsInTurn(){
+
+    }
+    
+
     //This Method will write the stones which will be removed to the base
     public void writeStonesToRemove(){
 

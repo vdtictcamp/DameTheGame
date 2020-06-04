@@ -11,6 +11,7 @@ public class RedQueen {
 
     ChangeGameConditionRedStone chGameCond;
     List<Integer>redQueens = new ArrayList<>();
+    List<List<Integer>>allPositionsToJump = new ArrayList<>();
     int[][]redStones;
     View queen;
     int[][] positions;
@@ -37,6 +38,84 @@ public class RedQueen {
     }
 
 
+    public List<Integer> getPositionsToJumpBackwardRight(int row, int col){
+        int rowDiff=1;
+        int colDiff=1;
+        List<Integer>positionsToJump = new ArrayList<>();
+        List<Integer>checkPositionsRight = new ArrayList<>();
+        List<Integer>checkPositionsLeft = new ArrayList<>();
+        for(int i=row-1; i>row-3; i--){
+            if(i>7 || i<0|| i==row){
+                continue;
+            }
+            for(int j=col-2; j<positions[i].length; j++){
+                if((i==row-rowDiff && j==col+colDiff &&colDiff%2!=0)) {
+                    if (stones[i][j] != 0 && chGameCond.checkIfIsRedStone(stones[i][j])) {
+                        colDiff++;
+                        rowDiff++;
+                    }
+                }
+                if((i==row-rowDiff && j==col+colDiff)){
+                    if(stones[i][j]==0 && rowDiff%2==0){
+                        positionsToJump.add(positions[i][j]);
+                        if(chGameCond.checkNextJump(i,j)){
+                            checkPositionsLeft=getPositionsToJumpForwardLeft(i,j);
+                            checkPositionsRight=getPositionsToJumpForwardRight(i,j);
+                            for (int p = 0; p < checkPositionsRight.size(); p++) {
+                                positionsToJump.add(checkPositionsRight.get(p));
+                            }
+                            for (int p = 0; p < checkPositionsLeft.size(); p++) {
+                                positionsToJump.add(checkPositionsLeft.get(p));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        allPositionsToJump.add(positionsToJump);
+        return positionsToJump;
+    }
+
+    public List<Integer> getPositionsToJumpBackwardLeft(int row, int col){
+        int rowDiff=1;
+        int colDiff=1;
+        List<Integer>positionsToJump = new ArrayList<>();
+        List<Integer>checkPositionsRight = new ArrayList<>();
+        List<Integer>checkPositionsLeft = new ArrayList<>();
+        for(int i=row-1; i>row-3; i--){
+            if(i>7 || i<0|| i==row){
+                continue;
+            }
+            for(int j=col-2; j<positions[i].length; j++){
+                if((i==row-rowDiff && j==col-colDiff &&colDiff%2!=0)) {
+                    if (stones[i][j] != 0 && chGameCond.checkIfIsRedStone(stones[i][j])) {
+                        colDiff++;
+                        rowDiff++;
+                    }
+                }
+                if((i==row-rowDiff && j==col-colDiff)){
+                    if(stones[i][j]==0 && rowDiff%2==0){
+                        positionsToJump.add(positions[i][j]);
+                        if(chGameCond.checkNextJump(i,j)){
+                            checkPositionsLeft=getPositionsToJumpForwardLeft(i,j);
+                            checkPositionsRight=getPositionsToJumpForwardRight(i,j);
+                            for (int p = 0; p < checkPositionsRight.size(); p++) {
+                                positionsToJump.add(checkPositionsRight.get(p));
+                            }
+                            for (int p = 0; p < checkPositionsLeft.size(); p++) {
+                                positionsToJump.add(checkPositionsLeft.get(p));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        allPositionsToJump.add(positionsToJump);
+        return positionsToJump;
+    }
+
     public List<Integer> getPositionsToJumpForwardRight(int row, int col){
         int rowDiff=1;
         int colDiff=1;
@@ -56,7 +135,6 @@ public class RedQueen {
                 }
                 if((i==row+rowDiff && j==col+colDiff)){
                     if(stones[i][j]==0 && rowDiff%2==0){
-                        System.out.println("Feld leer");
                         positionsToJump.add(positions[i][j]);
                         if(chGameCond.checkNextJump(i,j)){
                             checkPositionsLeft=getPositionsToJumpForwardLeft(i,j);
@@ -73,6 +151,7 @@ public class RedQueen {
             }
         }
 
+        allPositionsToJump.add(positionsToJump);
         return positionsToJump;
     }
 
@@ -114,7 +193,7 @@ public class RedQueen {
                 }
             }
         }
-
+        allPositionsToJump.add(positionsToJump);
         return positionsToJump;
     }
 
@@ -140,5 +219,11 @@ public class RedQueen {
 
         }
         return isQueen;
+    }
+
+
+    public List<List<Integer>> returnPostions(){
+        System.out.println(allPositionsToJump.size());
+        return allPositionsToJump;
     }
 }
