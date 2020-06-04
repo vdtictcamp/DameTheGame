@@ -25,7 +25,7 @@ public class SearchGameActivity extends AppCompatActivity {
     DatabaseReference reference;
     FirebaseDatabase database;
     TextView txtGameNotFound;
-    boolean isHosted = false;
+    boolean isHosted;
 
 
     @Override
@@ -36,22 +36,20 @@ public class SearchGameActivity extends AppCompatActivity {
         txtFieldGameName = findViewById(R.id.txtFieldGameName);
         database = FirebaseDatabase.getInstance();
         txtGameNotFound=findViewById(R.id.gameNotFoundLbl);
+        isHosted=false;
 
         View.OnClickListener joinGameListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 gameName = txtFieldGameName.getText().toString().trim();
+                System.out.println(gameName);
                 reference = database.getReference("rooms").child(gameName).child("PlayerOneHasJoined");
                 if(gameName.equals("")){
                     txtFieldGameName.setText("Bitte Gib ein Spielnamen ein");
                 }
                 else {
-                        isHosted= checkIfGameIsHosted();
-                        if(isHosted) {
-                            joinGame(gameName);
-                        }else{
-                            txtFieldGameName.setText("Dieses Spiel ist nicht gehostet");
-                        }
+                    checkIfGameIsHosted();
+
                 }
             }
         };
@@ -67,12 +65,19 @@ public class SearchGameActivity extends AppCompatActivity {
     }
 
 
-    private boolean checkIfGameIsHosted(){
-         isHosted=false;
+    private void checkIfGameIsHosted(){
+        reference = database.getReference("rooms").child(gameName).child("PlayerOneHasJoined");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 isHosted = (boolean) dataSnapshot.getValue();
+                if (isHosted){
+                    joinGame(gameName);
+                }
+                else{
+                    txtFieldGameName.setText("Dises Spiel ist nicht gehostet");
+                }
+
             }
 
             @Override
@@ -80,7 +85,5 @@ public class SearchGameActivity extends AppCompatActivity {
 
             }
         });
-
-        return isHosted;
     }
 }

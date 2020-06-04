@@ -254,6 +254,13 @@ public class FirebaseGameController {
         return true;
     }
 
+    public void finishPlayerOneTurn(){
+
+    }
+    public void finidhPlayerTwoTurn(){
+
+    }
+
     //2
     public long[] readStoneIdPositionId(){
         addValueEventListenerStoneRow();

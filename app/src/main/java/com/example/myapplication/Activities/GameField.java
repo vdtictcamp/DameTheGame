@@ -163,7 +163,6 @@ public class GameField extends AppCompatActivity{
                 {R.id.b5,0, R.id.b6,0, R.id.b7,0, R.id.b8,0},
                 {0,R.id.b1, 0,R.id.b2, 0,R.id.b3, 0,R.id.b4}};
 
-
         queenChecker=new QueenChecker(positionsIds);
 
         View.OnClickListener redStoneClickListener = new View.OnClickListener() {
@@ -310,7 +309,7 @@ public class GameField extends AppCompatActivity{
             pTwoThread.start();
         }
 
-        else if(player.equals("PlayerOne")){
+        if(player.equals("PlayerOne")){
             pOneThread=new PlayerOneThread(stones, gameName);
             pOneThread.start();
         }
@@ -333,10 +332,11 @@ public class GameField extends AppCompatActivity{
     //moves stones only to valid positions
 
     public void connectionSuccessfull(){
-        Toast.makeText(this, "Spieler zwei ist dem SPiel erfolgreich beigetreten", Toast.LENGTH_LONG).show();
+    System.out.println("Spieler zwei ist erflogreich beigetreten");
     }
 
     public void moveHelperFunc(int stoneCol, int stoneRow, int posRow, int posCol){
+        System.out.println("StonesId aus helper:" + stones[stoneRow][stoneCol]);
         View stone = findViewById(stones[stoneRow][stoneCol]);
         movingStone=stone;
         View position = findViewById(positionsIds[posRow][posCol]);
@@ -688,6 +688,9 @@ public void showValidPosForQueen(List<Integer>positions){
             setWhiteQueen(stoneToQueen);
             setRedQueen(stoneToQueen);
 
+        }
+        if (player.equals("PlayerOne")){
+            firebase.finishPlayerOneTurn();
         }
 
     }
