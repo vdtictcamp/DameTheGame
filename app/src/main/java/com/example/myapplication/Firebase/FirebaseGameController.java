@@ -221,6 +221,16 @@ public class FirebaseGameController {
         });
     }
 
+    public void setDefaultUpdateValues(){
+        reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("stone").child("row");
+        reference.setValue(0);
+        reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("stone").child("col");
+        reference.setValue(0);
+        reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("position").child("row");
+        reference.setValue(0);
+        reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("position").child("col");
+        reference.setValue(0);
+    }
 
     private boolean readIfPlayerTwoHasJoined(){
         reference = database.getReference("rooms").child(gameName).child("PlayerTwoHasJoined");
@@ -255,10 +265,13 @@ public class FirebaseGameController {
     }
 
     public void finishPlayerOneTurn(){
+        reference = database.getReference("rooms").child(gameName).child("PlayerOneTurn");
+        reference.setValue(false);
 
     }
-    public void finidhPlayerTwoTurn(){
-
+    public void finishPlayerTwoTurn(){
+        reference = database.getReference("rooms").child(gameName).child("PlayerTwoTurn");
+        reference.setValue(false);
     }
 
     //2

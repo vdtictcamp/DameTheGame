@@ -303,12 +303,14 @@ public class GameField extends AppCompatActivity{
         firebase = new FirebaseGameController(stones, gameName);
         firebase.initStartSituation(player);
 
+        pTwoThread = new PlayerTwoThread(stones, gameName, this);
+        pOneThread=new PlayerOneThread(stones, gameName, this);
+
+
         if(player.equals("PlayerTwo")){
-            pTwoThread = new PlayerTwoThread(stones, gameName, this);
             pTwoThread.start();
         }
         else if(player.equals("PlayerOne")){
-            pOneThread=new PlayerOneThread(stones, gameName, this);
             pOneThread.start();
         }
         else{
@@ -597,6 +599,8 @@ public void showValidPosForQueen(List<Integer>positions){
             controller.changeTurnOfPlayer(visualizeTurnOfPlayerTwo, visualizeTurnOfPlayerOne);
             if(player.equals("PlayerTwo")) {
                 TURN = WHITETURN;
+                firebase.finishPlayerOneTurn();
+                pOneThread.finishTurn();
             }
         }
             }
@@ -643,6 +647,8 @@ public void showValidPosForQueen(List<Integer>positions){
                 }
                     controller.changeTurnOfPlayer(visualizeTurnOfPlayerOne, visualizeTurnOfPlayerTwo);
                     TURN = REDTURN;
+                    firebase.finishPlayerOneTurn();
+                    pOneThread.finishTurn();
             }
 
             }

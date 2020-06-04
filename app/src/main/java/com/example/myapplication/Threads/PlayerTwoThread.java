@@ -72,6 +72,7 @@ public class PlayerTwoThread extends Thread implements Runnable {
                 int p_col = Integer.parseInt(String.valueOf(ids[3]));
                 game.moveHelperFunc(s_col, s_row, p_row,p_col);
                 isInTurn = isInTurn();
+                gameController.setDefaultUpdateValues();
                 //game.helpViewMover(stones[s_col][s_row], positionIds[p_row][p_col]);
                 try {
                     Thread.sleep(2000);
