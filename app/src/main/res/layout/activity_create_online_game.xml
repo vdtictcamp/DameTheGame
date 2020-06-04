@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.CreateOnlineGame"
+    android:background="@color/damebraun"
     android:orientation="vertical">
 
 
@@ -12,18 +13,39 @@
         android:id="@+id/txtGameName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Room Name:" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
+        android:text="Spiel erstellen"
+        android:fontFamily="@font/reem_kufi"
+        android:textColor="@color/sandbraun"
+        android:textSize="26sp"
+        android:textStyle="bold|italic"/>
 
     <EditText
         android:id="@+id/nameOnlineGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="93dp"
+        android:layout_marginTop="155dp"
         android:ems="10"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:text="Name des Raumes eingeben"
+        android:fontFamily="@font/reem_kufi"
+        android:textColor="@color/sandbraun"
+        android:textSize="15sp"/>
 
     <Button
         android:id="@+id/btnCreateOnlineGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Online Spiel erstellen" />
-</LinearLayout>
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="299dp"
+        android:background="@color/sandbraun"
+        android:fontFamily="@font/alfa_slab_one"
+        android:text="Spiel erstellen"
+        android:textColor="@color/damebraun" />
+</RelativeLayout>
