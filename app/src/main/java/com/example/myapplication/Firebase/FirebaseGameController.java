@@ -208,7 +208,6 @@ public class FirebaseGameController {
             reference.setValue(true);
             reference = database.getReference("rooms").child(gameName).child("PlayerTwoHasJoined");
             reference.setValue(false);
-
         }
 
         if(player.equals("PlayerTwo")) {
@@ -296,6 +295,7 @@ public class FirebaseGameController {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
 
@@ -314,6 +314,7 @@ public class FirebaseGameController {
         reference.setValue(stoneRow);
         reference = database.getReference("rooms").child(gameName).child("updateInformations").child("stone").child("col");
         reference.setValue(stoneCol);
+
 
     }
 
@@ -350,7 +351,6 @@ public class FirebaseGameController {
 
         return turn;
     }
-
 
 
     public void finishPlayerOneTurn(){
