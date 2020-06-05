@@ -94,7 +94,7 @@ public class ChangeGameConditionRedStone {
         List<Integer>checkPositionsRight=new ArrayList<>();
         List<Integer>checkPositionsLeft = new ArrayList<>();
         for (int k = i; k >=i-3; k--) {
-            for (int z = 0; z < j+3; z++) {
+            for (int z = j-2; z < j+3; z++) {
                 if (z < 8) {
                     if ((k == i - rowDiff && z == j + colDiff) && (colDiff % 2 != 0)) {
                         if ((stones[k][z] != 0) && (checkIfIsRedStone(stones[k][z]))) {
@@ -141,7 +141,7 @@ public List<Integer> collectPosLeftDiagonal(int i, int j){
     List<Integer>checkPositionsLeft = new ArrayList<>();
     List<Integer> positionsToJump = new ArrayList<>();
     for (int k = i; k >=0; k--) {
-        for (int z = 0; z < positions[i].length; z++) {
+        for (int z = j-2; z < positions[i].length; z++) {
             if (z >=0) {
                 if ((k == i - rowDiff && z == j - colDiff) && (colDiff % 2 != 0)) {
                     if (stones[k][z] != 0 && (checkIfIsRedStone(stones[k][z]))) {

@@ -23,7 +23,7 @@ public class FirebaseGameController {
     int[][]stones;
     FirebaseDatabase database;
     List<List<Integer>>currentField;
-    List<List <Integer>> field;
+    private List<Integer> field;
     long updateIds=0;
     private List<String> roomsList;
     DatabaseReference reference, reference1, reference2;
@@ -64,7 +64,6 @@ public class FirebaseGameController {
             currentField.add(tempList);
         }
         reference.setValue(currentField);
-        addRoomsEventListener();
     }
 
 
@@ -184,6 +183,23 @@ public class FirebaseGameController {
         return updateIds;
     }
 
+    public List<Integer> addValueEventListenerAllValues(){
+        reference = database.getReference("rooms").child(this.gameName).child("updateInformations");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                field = (List<Integer>) dataSnapshot.getValue();
+                System.out.println("UpdateSTone"+field);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return field;
+    }
+
     private long addValueEventListenerCol(){
         reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("PositionId");
         reference.addValueEventListener(new ValueEventListener() {
@@ -201,23 +217,6 @@ public class FirebaseGameController {
 
         return updateIds;
 
-    }
-
-    private void addRoomsEventListener(){
-        reference = database.getReference("rooms").child(gameName).child("field");
-
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                field = (List<List<Integer>>) dataSnapshot.getValue();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // fehler, nicht ausführen
-
-            }
-        });
     }
 
     public void setDefaultUpdateValues(){
@@ -250,18 +249,18 @@ public class FirebaseGameController {
 
     //1
     //This Method will send the Turn code and the stone which has moved to his last position
-    public boolean sendUpdateInformaions(int stoneRow, int stoneCol, int posRow, int posCol){
+    public void sendUpdateInformaions(int stoneRow, int stoneCol, int posRow, int posCol, String player){
 
         reference = database.getReference("rooms").child(gameName).child("updateInformations").child("position").child("row");
         reference.setValue(posRow);
         reference = database.getReference("rooms").child(gameName).child("updateInformations").child("position").child("col");
         reference.setValue(posCol);
-
         reference = database.getReference("rooms").child(gameName).child("updateInformations").child("stone").child("row");
         reference.setValue(stoneRow);
         reference = database.getReference("rooms").child(gameName).child("updateInformations").child("stone").child("col");
         reference.setValue(stoneCol);
-        return true;
+
+
     }
 
 
@@ -278,7 +277,6 @@ public class FirebaseGameController {
 
             }
         });
-
         return turn;
     }
 
@@ -315,13 +313,19 @@ public class FirebaseGameController {
     public void finishPlayerOneTurn(){
         reference = database.getReference("rooms").child(gameName).child("PlayerOneTurn");
         reference.setValue(false);
+        reference = database.getReference("rooms").child(gameName).child("PlayerTwoTurn");
+        reference.setValue(true);
 
     }
 
     public void finishPlayerTwoTurn(){
         reference = database.getReference("rooms").child(gameName).child("PlayerTwoTurn");
         reference.setValue(false);
+        reference = database.getReference("rooms").child(gameName).child("PlayerOneTurn");
+        reference.setValue(true);
     }
+
+
     public void setPlayerOneTurn(){
         reference = database.getReference("rooms").child(gameName).child("PlayerOneTurn");
         reference.setValue(true);
@@ -341,7 +345,7 @@ public class FirebaseGameController {
 
         System.out.println(ids[0]+" "+ids[1]+" "+ids[2]+" "+ids[3]);
         if(ids[0]!=0 && ids[1]!=0 && ids[2]!=0 && ids[3]!=0){
-
+        setDefaultUpdateValues();
             return ids;
         }else {
             System.out.println("readStoneIdPosizionID error");

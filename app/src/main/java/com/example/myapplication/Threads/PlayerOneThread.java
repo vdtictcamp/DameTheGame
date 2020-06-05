@@ -6,6 +6,8 @@ import android.os.Looper;
 import com.example.myapplication.Activities.GameField;
 import com.example.myapplication.Firebase.FirebaseGameController;
 
+import java.util.List;
+
 public class PlayerOneThread extends Thread implements Runnable {
 
     GameField game;
@@ -53,25 +55,27 @@ public class PlayerOneThread extends Thread implements Runnable {
         }
         System.out.println("Spieler zwei ist beigetreten");
         game.connectionSuccessfull();
-        while (!gameOver) {
             inTurn = gameController.readTurnOfPlayerOne();
             if (!inTurn) {
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(10000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 System.out.println("Zug Spieler eins beendet");
-                long[] ids = gameController.readStoneIdPositionId();
+                List<Integer> allValues = gameController.addValueEventListenerAllValues();
+                System.out.println(allValues);
+
+
+                /*long[] ids = gameController.readStoneIdPositionId();
                 System.out.println("suche update infos");
                 if (ids != null ) {
+                    inTurn=true;
                     int s_row = Integer.parseInt(String.valueOf(ids[0]));
                     int s_col = Integer.parseInt(String.valueOf(ids[1]));
                     int p_row = Integer.parseInt(String.valueOf(ids[2]));
                     int p_col = Integer.parseInt(String.valueOf(ids[3]));
-                    inTurn=true;
                     game.moveHelperFunc(s_col, s_row, p_row,p_col);
-                    gameController.setDefaultUpdateValues();
                     System.out.println("Jetzt bin ich im Thread des Spieler eins");
                     System.out.println("TRUEEEEEE aus player one thread");
                     System.out.println(".....................");
@@ -82,9 +86,10 @@ public class PlayerOneThread extends Thread implements Runnable {
                     System.out.println(ids[3]);
                     System.out.println("Stones aus Thread:"+ stones[s_row][s_col]);
 
-                }
+                 */
+
             }
 
         }
     }
-}
+

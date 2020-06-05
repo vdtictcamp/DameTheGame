@@ -305,17 +305,13 @@ public class GameField extends AppCompatActivity{
         pTwoThread = new PlayerTwoThread(stones, gameName, this);
         pOneThread=new PlayerOneThread(stones, gameName, this);
 
-
         if(player.equals("PlayerTwo")){
             pTwoThread.start();
         }
         else if(player.equals("PlayerOne")){
             pOneThread.start();
         }
-        else{
-            timer = new TimeThread(this, countdown);
-            timer.start();
-        }
+
     }
 
 //----------------------------------------------------------------------------------------
@@ -326,16 +322,11 @@ public class GameField extends AppCompatActivity{
         return super.onCreateOptionsMenu(menu);
     }
 
-
-
     //Helper function that fills all Positions to jum in one List, which we need for controll if the
     //moves stones only to valid positions
 
     public void connectionSuccessfull(){
         Toast.makeText(GameField.this, "Spieler zwei ist erfolgreich dem Spiel beigetreten",Toast.LENGTH_LONG).show();
-    }
-    public void waitingForConnection(){
-
     }
 
     public void moveHelperFunc(final int stoneCol, final int stoneRow, final int posRow, final int posCol){
@@ -357,12 +348,11 @@ public class GameField extends AppCompatActivity{
                 stones= gameController.switchPosOfStoneInArray(stones, positionsIds, stone.getId(), position.getId());
                 if(TURN==WHITETURN){
                     firebase.finishPlayerOneTurn();
-                    firebase.setPlayerTwoTurn();
                     TURN=REDTURN;
                 }else{
-                    TURN=WHITETURN;
-                    firebase.setPlayerOneTurn();
                     firebase.finishPlayerTwoTurn();
+                    TURN=WHITETURN;
+
                 }
 
             }
@@ -696,9 +686,9 @@ public void showValidPosForQueen(List<Integer>positions){
                 }
             }
         }
+        firebase.sendUpdateInformaions(oldRow, oldCol, row, col, player);
         stones[oldRow][oldCol]=0;
         stones[row][col]=idStone;
-        firebase.sendUpdateInformaions(oldRow, oldCol, row, col);
         //Every Time when we switch a Position we need to check if we got a new Queen
         if(row==7){
             int id = stones[row][col];

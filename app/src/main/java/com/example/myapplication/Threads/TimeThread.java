@@ -4,15 +4,16 @@ import android.os.Looper;
 import android.widget.EditText;
 
 import com.example.myapplication.Activities.GameField;
+import com.example.myapplication.Activities.localGame;
 
 public class TimeThread extends Thread implements Runnable {
 
-    private GameField gameField;
+    private localGame gameField;
     private int timer = 600;
     boolean finish = false;
     EditText countdown;
 
-    public TimeThread(GameField game, EditText countdown){
+    public TimeThread(localGame game, EditText countdown){
         this.gameField = game;
         this.countdown = countdown;
     }
