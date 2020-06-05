@@ -116,7 +116,7 @@ public class GameField extends AppCompatActivity{
         //The distrubution of the Stones on the Board
         stones = new int[][]{{R.id.w1_2, 0, R.id.w2_2, 0, R.id.w3, 0, R.id.w4, 0},
                 { 0, R.id.w5, 0, R.id.w6, 0, R.id.w7, 0, R.id.w8},
-                {R.id.w9_2, 0, R.id.w10, 0, R.id.w11, 0, R.id.w12, 0},
+                {0, R.id.w9_2, 0, R.id.w10, 0, R.id.w11, 0, R.id.w12},
                 {0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0},
                 {0,R.id.b9, 0,R.id.b10, 0,R.id.b11, 0,R.id.b12},
