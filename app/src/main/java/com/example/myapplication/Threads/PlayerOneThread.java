@@ -80,7 +80,9 @@ public class PlayerOneThread extends Thread implements Runnable {
                 int colPos = values.getColPos();
                 int colStone = values.getColStone();
                 int rowStone = values.getRowStone();
-                game.moveHelperFunc(colStone, rowStone, rowPos, colPos);
+                if(rowPos!=0 && colPos!=0 && colPos!=0 &&colStone!=0){
+                    game.moveHelperFunc(colStone, rowStone, rowPos, colPos);
+                }
             }
 
         }
