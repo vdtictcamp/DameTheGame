@@ -48,7 +48,7 @@
         android:fontFamily="@font/reem_kufi"
         android:text="Login"
         android:textColor="@color/sandbraun"
-        android:textSize="26sp"
+        android:textSize="26dp"
         android:textStyle="bold|italic"></TextView>
 
     <Button
@@ -68,7 +68,6 @@
         android:id="@+id/txtLoginUsername"
         android:layout_width="210dp"
         android:layout_height="30dp"
-
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"

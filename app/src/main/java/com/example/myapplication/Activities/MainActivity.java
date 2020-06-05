@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnToLogin;
     private Button btnLogout;
     private Button btnRegister;
+    private Button btnOnlineSpielen;
     private Button btnToSearchGame;
     FirebaseAuth currentUserAuth;
     private Button btnCreateGame;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         btnInitNewGame=findViewById(R.id.btnInitnewGame);
         btnRegister=findViewById(R.id.btnRegister);
+        btnOnlineSpielen=findViewById(R.id.btnOnlineSpiel);
         currentUserAuth = FirebaseAuth.getInstance();
 
 
@@ -41,6 +43,24 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("gameName", "Default");
             startActivity(intent);
         }
+        }));
+
+        btnRegister.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                //intent.putExtra("gameName", "Default");
+                startActivity(intent);
+            }
+        }));
+
+        btnOnlineSpielen.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), OnlineOptionsActivity.class);
+                //intent.putExtra("gameName", "Default");
+                startActivity(intent);
+            }
         }));
 
 
