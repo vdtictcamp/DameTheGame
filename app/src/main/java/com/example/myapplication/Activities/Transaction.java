@@ -13,4 +13,35 @@ public class Transaction {
         this.rowStone = rS;
     }
 
+    public int getColPos() {
+        return colPos;
+    }
+
+    public int getColStone() {
+        return colStone;
+    }
+
+    public int getRowPos() {
+        return rowPos;
+    }
+
+    public int getRowStone() {
+        return rowStone;
+    }
+
+    public void setColPos(int colPos) {
+        this.colPos = colPos;
+    }
+
+    public void setColStone(int colStone) {
+        this.colStone = colStone;
+    }
+
+    public void setRowPos(int rowPos) {
+        this.rowPos = rowPos;
+    }
+
+    public void setRowStone(int rowStone) {
+        this.rowStone = rowStone;
+    }
 }

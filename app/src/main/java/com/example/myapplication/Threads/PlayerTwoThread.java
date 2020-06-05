@@ -54,18 +54,13 @@ public class PlayerTwoThread extends Thread implements Runnable {
             if (ids != null) {
                 inTurn = true;
                 System.out.println("TRUEEEEEE");
-                int s_row = ids.get("rowStone");
-                int s_col = Integer.parseInt(String.valueOf(ids[1]));
-                int p_row = Integer.parseInt(String.valueOf(ids[2]));
-                int p_col = Integer.parseInt(String.valueOf(ids[3]));
-                game.moveHelperFunc(s_col, s_row, p_row, p_col);
-                System.out.println(".....................");
-                System.out.println("StoneID" + ids[0]);
-                System.out.println("....................");
-                System.out.println("PositionID" + ids[1]);
-                System.out.println(ids[2]);
-                System.out.println(ids[3]);
-                System.out.println("Stones aus Thread:" + stones[s_row][s_col]);
+                System.out.println(ids);
+                Transaction values = ids.get("updateInformations");
+                int rowPos = values.getRowPos();
+                int colPos = values.getColPos();
+                int colStone = values.getColStone();
+                int rowStone = values.getRowStone();
+                game.moveHelperFunc(colStone, rowStone, rowPos, colPos);
             }
         }
     }

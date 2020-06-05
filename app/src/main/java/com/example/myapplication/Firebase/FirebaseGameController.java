@@ -74,9 +74,6 @@ public class FirebaseGameController {
         currentField = new ArrayList<>();
         List<Integer> tempList = new ArrayList<>();
 
-        if(player==null){
-            player="offline";
-        }
         if (player.equals("PlayerOne")) {
             reference = database.getReference("rooms").child(gameName).child("PlayerOneHasJoined");
             reference.setValue(true);
@@ -199,15 +196,37 @@ public class FirebaseGameController {
 
 
 
-    public void initStartSituationBeta(Transaction transaction){
+    public void setPlayers(String player){
+
+        if (player.equals("PlayerOne")) {
+            reference = database.getReference("rooms").child(gameName).child("PlayerOneHasJoined");
+            reference.setValue(true);
+            reference = database.getReference("rooms").child(gameName).child("PlayerTwoHasJoined");
+            reference.setValue(false);
+        }
+
+        if(player.equals("PlayerTwo")) {
+            reference = database.getReference("rooms").child(gameName).child("PlayerTwoHasJoined");
+            reference.setValue(true);
+        }
+        reference=database.getReference("rooms").child(gameName).child("PlayerOneTurn");
+        reference.setValue(true);
+        reference=database.getReference("rooms").child(gameName).child("PlayerTwoTurn");
+        reference.setValue(false);
+
+    }
+
+    public void initStartSituationBeta(Transaction transaction, String player){
+
         HashMap<String, Transaction> values = new HashMap<>();
-        reference = database.getReference("rooms").child(this.gameName);
-        values.put("updatInformations", transaction);
+        reference = database.getReference("rooms").child(this.gameName).child("updateInformations");
+        values.put("updateInformations", transaction);
+        reference.setValue(values);
     }
 
     public void updateValuesBeta(Transaction transaction){
         HashMap<String, Transaction> values = new HashMap<>();
-        reference = database.getReference("rooms").child(this.gameName);
+        reference = database.getReference("rooms").child(this.gameName).child("updateInformations");
         values.put("updateInformations", transaction);
         reference.setValue(values);
     }
@@ -219,7 +238,7 @@ public class FirebaseGameController {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 values = (HashMap<String, Transaction>) dataSnapshot.getValue();
-                System.out.println("UpdateSTone"+field);
+                System.out.println("UpdateSTone"+values);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -249,14 +268,12 @@ public class FirebaseGameController {
     }
 
     public void setDefaultUpdateValues(){
+        Transaction zeroTrans = new Transaction(0,0,0,0);
+        HashMap<String, Transaction>values = new HashMap<>();
+        values.put("updateInformations", zeroTrans);
         reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("stone").child("row");
-        reference.setValue(0);
-        reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("stone").child("col");
-        reference.setValue(0);
-        reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("position").child("row");
-        reference.setValue(0);
-        reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("position").child("col");
-        reference.setValue(0);
+        reference.setValue(values);
+
     }
 
     private boolean readIfPlayerTwoHasJoined(){

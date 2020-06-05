@@ -300,7 +300,12 @@ public class GameField extends AppCompatActivity{
         //The Game starts
 
         firebase = new FirebaseGameController(stones, gameName);
-        firebase.initStartSituationBeta(new Transaction(0,0,0,0));
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         //firebase.initStartSituation(player);
 
@@ -308,10 +313,10 @@ public class GameField extends AppCompatActivity{
         pOneThread=new PlayerOneThread(stones, gameName, this);
 
         if(player.equals("PlayerTwo")){
-            //pTwoThread.start();
+            pTwoThread.start();
         }
         else if(player.equals("PlayerOne")){
-            //pOneThread.start();
+            pOneThread.start();
         }
 
     }

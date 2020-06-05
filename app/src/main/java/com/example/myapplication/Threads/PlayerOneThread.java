@@ -4,8 +4,10 @@ import android.content.Context;
 import android.os.Looper;
 
 import com.example.myapplication.Activities.GameField;
+import com.example.myapplication.Activities.Transaction;
 import com.example.myapplication.Firebase.FirebaseGameController;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class PlayerOneThread extends Thread implements Runnable {
@@ -43,6 +45,14 @@ public class PlayerOneThread extends Thread implements Runnable {
 
     @Override
     public void run() {
+
+        dataBaseController.initStartSituationBeta(new Transaction(0,0,0,0), "PlayerOne");
+        dataBaseController.setPlayers("PlayerOne");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Looper.prepare();
         while (!playerTwohasJoined){
             playerTwohasJoined=dataBaseController.checkIfPlayerTwoHasJoined();
@@ -63,31 +73,14 @@ public class PlayerOneThread extends Thread implements Runnable {
                     e.printStackTrace();
                 }
                 System.out.println("Zug Spieler eins beendet");
-                List<Integer> allValues = gameController.addValueEventListenerAllValues();
-                System.out.println(allValues);
-
-
-                /*long[] ids = gameController.readStoneIdPositionId();
-                System.out.println("suche update infos");
-                if (ids != null ) {
-                    inTurn=true;
-                    int s_row = Integer.parseInt(String.valueOf(ids[0]));
-                    int s_col = Integer.parseInt(String.valueOf(ids[1]));
-                    int p_row = Integer.parseInt(String.valueOf(ids[2]));
-                    int p_col = Integer.parseInt(String.valueOf(ids[3]));
-                    game.moveHelperFunc(s_col, s_row, p_row,p_col);
-                    System.out.println("Jetzt bin ich im Thread des Spieler eins");
-                    System.out.println("TRUEEEEEE aus player one thread");
-                    System.out.println(".....................");
-                    System.out.println("StoneID" + ids[0]);
-                    System.out.println("....................");
-                    System.out.println("PositionID" + ids[1]);
-                    System.out.println(ids[2]);
-                    System.out.println(ids[3]);
-                    System.out.println("Stones aus Thread:"+ stones[s_row][s_col]);
-
-                 */
-
+                HashMap<String, Transaction> ids = gameController.addValueEventListenerAllValues();
+                System.out.println(ids);
+                Transaction values = ids.get("updateInformations");
+                int rowPos = values.getRowPos();
+                int colPos = values.getColPos();
+                int colStone = values.getColStone();
+                int rowStone = values.getRowStone();
+                game.moveHelperFunc(colStone, rowStone, rowPos, colPos);
             }
 
         }
