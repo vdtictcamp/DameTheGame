@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
@@ -21,11 +22,12 @@ public class LoginActivity extends AppCompatActivity {
 
 
 private Button btnRegister, btnLogin;
-String email;
-String password;
-FirebaseAuth firebaseAuth;
-EditText txtName;
-EditText txtPassword;
+private String email;
+private String password;
+private FirebaseAuth firebaseAuth;
+private EditText txtName;
+private EditText txtPassword;
+private ProgressBar loadBar;
 
 
     @Override
@@ -36,6 +38,9 @@ EditText txtPassword;
         txtName = findViewById(R.id.txtLoginUsername);
         txtPassword=findViewById(R.id.txtLoginPassword);
         btnLogin=findViewById(R.id.btnLogin);
+        loadBar=findViewById(R.id.loadBarLogin);
+        loadBar.setVisibility(loadBar.INVISIBLE);
+
 
 
         View.OnClickListener toRegister = new View.OnClickListener() {
@@ -51,7 +56,6 @@ EditText txtPassword;
             public void onClick(View v) {
                 email=txtName.getText().toString().trim();
                 password=txtPassword.getText().toString().trim();
-
                 if(TextUtils.isEmpty(email)){
                     txtName.setText("Name darf nicht leer sein");
                     return;
@@ -59,15 +63,15 @@ EditText txtPassword;
                 if(TextUtils.isEmpty(password)){
                     Toast.makeText(LoginActivity.this, "Bitte geben Sie Ihr Passwort ein", Toast.LENGTH_SHORT).show();
                 }
-
                 firebaseAuth = FirebaseAuth.getInstance();
-
                 //Authenticate the user
                 if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+                    loadBar.setVisibility(loadBar.VISIBLE);
                     firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
+                                loadBar.setVisibility(loadBar.INVISIBLE);
                                 Toast.makeText(LoginActivity.this, "erfolgreich eingeloggt", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
 

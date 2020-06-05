@@ -300,6 +300,7 @@ public class GameField extends AppCompatActivity{
         //The Game starts
 
         firebase = new FirebaseGameController(stones, gameName);
+        firebase.initStartSituationBeta(0,0,0,0,  player);
 
         try {
             Thread.sleep(2000);
@@ -309,8 +310,9 @@ public class GameField extends AppCompatActivity{
 
         //firebase.initStartSituation(player);
 
-        pTwoThread = new PlayerTwoThread(stones, gameName, this);
+
         pOneThread=new PlayerOneThread(stones, gameName, this);
+        pTwoThread = new PlayerTwoThread(stones, gameName, this);
 
         if(player.equals("PlayerTwo")){
             pTwoThread.start();
@@ -354,14 +356,14 @@ public class GameField extends AppCompatActivity{
                         .start();
                 stones= gameController.switchPosOfStoneInArray(stones, positionsIds, stone.getId(), position.getId());
                 if(TURN==WHITETURN){
-                    firebase.finishPlayerOneTurn();
+                    //firebase.finishPlayerOneTurn();
+                    pOneThread.finishTurn();
                     TURN=REDTURN;
+
                 }else{
-                    firebase.finishPlayerTwoTurn();
+                    pTwoThread.finishTurn();
                     TURN=WHITETURN;
-
                 }
-
             }
         });
 
@@ -636,9 +638,8 @@ public void showValidPosForQueen(List<Integer>positions){
                 if (isFinish) {
                     stopGame();
                 }
-
-                    controller.changeTurnOfPlayer(visualizeTurnOfPlayerOne, visualizeTurnOfPlayerTwo);
-                    TURN=REDTURN;
+                controller.changeTurnOfPlayer(visualizeTurnOfPlayerOne, visualizeTurnOfPlayerTwo);
+                TURN=REDTURN;
 
             }
 
@@ -694,7 +695,7 @@ public void showValidPosForQueen(List<Integer>positions){
             }
         }
         //firebase.sendUpdateInformaions(oldRow, oldCol, row, col, player);
-        firebase.updateValuesBeta(new Transaction(oldRow, oldCol, row, col));
+        firebase.updateValuesBeta(oldRow, oldCol, row, col);
         stones[oldRow][oldCol]=0;
         stones[row][col]=idStone;
         //Every Time when we switch a Position we need to check if we got a new Queen

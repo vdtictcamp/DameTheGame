@@ -3,8 +3,11 @@ package com.example.myapplication.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,6 +21,7 @@ import android.widget.Toast;
 import com.example.myapplication.Firebase.Firebase2;
 import com.example.myapplication.Firebase.Firebase3;
 import com.example.myapplication.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,27 +35,23 @@ public class SearchGameActivity extends AppCompatActivity {
 
     private Button btnJoinGame;
     private ListView listView;
-   private TextView lblWaitForGames;
+    private TextView lblWaitForGames;
+    private ProgressBar loadBar;
+    private String gameName;
+    private DatabaseReference reference;
+    private FirebaseDatabase database;
+    private DatabaseReference roomsRef;
+    private FirebaseAuth currentUserAuth;
 
-    String gameName;
-    EditText txtFieldGameName;
-    DatabaseReference reference;
-    FirebaseDatabase database;
-    ProgressBar loadBar;
-    DatabaseReference roomsRef;
-    DatabaseReference roomRef;
-
-    List<String> roomsList;
-    String roomName = "";
-    String playerName = "";
-    boolean isHosted = false;
+    private List<String> roomsList;
+    private String playerName = "";
+    private boolean isHosted = false;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_game);
-        //btnJoinGame=findViewById(R.id.btnJoingame);
         database = FirebaseDatabase.getInstance();
         listView = findViewById(R.id.listView);
         lblWaitForGames=findViewById(R.id.lblWaitingForGames);
@@ -84,9 +84,6 @@ public class SearchGameActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //bestehendem room beitreten und sich selbst als player2 hinzufügen
                 gameName = roomsList.get(position);
-                //roomRef = database.getReference("rooms/" + roomName + "/player2");
-                //addRoomEventListener();
-                //roomRef.setValue(playerName);
                 checkIfGameIsHosted();
             }
         });
@@ -113,7 +110,7 @@ public class SearchGameActivity extends AppCompatActivity {
                     joinGame(gameName);
                 }
                 else{
-                    txtFieldGameName.setText("Dises Spiel ist nicht gehostet");
+                    Toast.makeText(SearchGameActivity.this, "Dieses Spiel ist nicht gehostet",Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -146,6 +143,51 @@ public class SearchGameActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+
+
+    @SuppressLint("ResourceType")
+    @Override
+    public boolean onCreateOptionsMenu( Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        if (currentUserAuth.getCurrentUser()!=null){
+            menu.removeItem(R.id.menuLoginItem);
+        }
+        if(currentUserAuth.getCurrentUser()==null){
+            menu.add(R.id.menuLoginItem);
+            menu.removeItem(R.id.menuLogoutItem);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menuLoginItem:
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.rulesMenuItem:
+                intent = new Intent(getApplicationContext(), GameRulesActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.registerMenuItem:
+                intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.menuOnlineItem:
+                intent = new Intent(getApplicationContext(), OnlineOptionsActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.menuLogoutItem:
+                currentUserAuth.getInstance().signOut();
+                intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 

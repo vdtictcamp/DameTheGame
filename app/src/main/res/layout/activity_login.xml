@@ -10,31 +10,17 @@
     android:columnCount="2">
 
     <TextView
-    android:layout_width="88dp"
-    android:layout_height="wrap_content"
-    android:layout_alignParentStart="true"
-    android:layout_alignParentTop="true"
-    android:layout_centerHorizontal="true"
-    android:layout_marginStart="161dp"
-    android:layout_marginTop="78dp"
-    android:fontFamily="@font/reem_kufi"
-    android:text="Settings"
-    android:textColor="@color/sandbraun"
-    android:textSize="26sp"
-    android:textStyle="bold|italic"></TextView>
-
-    <TextView
         android:layout_width="201dp"
         android:layout_height="wrap_content"
 
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="399dp"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="423dp"
         android:background="@color/sandbraun"
         android:fontFamily="@font/reem_kufi"
-        android:textColor="@color/damebraun"
-        android:text="@string/lblNoAccountYet"></TextView>
+        android:text="@string/lblNoAccountYet"
+        android:textColor="@color/damebraun"></TextView>
 
     <TextView
         android:layout_width="73dp"
@@ -43,8 +29,8 @@
 
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="175dp"
-        android:layout_marginTop="78dp"
+        android:layout_marginStart="169dp"
+        android:layout_marginTop="57dp"
         android:fontFamily="@font/reem_kufi"
         android:text="Login"
         android:textColor="@color/sandbraun"
@@ -58,7 +44,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="261dp"
-        android:layout_marginTop="383dp"
+        android:layout_marginTop="410dp"
         android:background="@color/sandbraun"
         android:fontFamily="@font/alfa_slab_one"
         android:text="@string/register"
@@ -108,11 +94,12 @@
         android:textColor="@color/damebraun" />
 
     <ProgressBar
+        android:id="@+id/loadBarLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="314dp" />
+        android:layout_marginTop="332dp" />
 
 
 </RelativeLayout>

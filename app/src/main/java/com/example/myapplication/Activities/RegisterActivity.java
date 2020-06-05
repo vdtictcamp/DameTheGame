@@ -3,12 +3,16 @@ package com.example.myapplication.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
@@ -25,6 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText txtUserName;
     private EditText txtPassword;
     private EditText txtPasswordRepeat;
+    private ProgressBar loadBar;
     String name;
     String password;
     String password_repeat;
@@ -40,6 +45,8 @@ public class RegisterActivity extends AppCompatActivity {
         txtUserName = findViewById(R.id.txtUsername);
         txtPassword=findViewById(R.id.txtPassword);
         txtPasswordRepeat=findViewById(R.id.txtPasswordRepeat);
+        loadBar=findViewById(R.id.loadBarRegister);
+        loadBar.setVisibility(loadBar.INVISIBLE);
 
         firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
@@ -69,10 +76,13 @@ public class RegisterActivity extends AppCompatActivity {
                 if(!password_repeat.equals(password)){
                     Toast.makeText(RegisterActivity.this, "Passwörter müssen übereinstimmen", Toast.LENGTH_LONG).show();
                 }
-                    firebaseAuth.createUserWithEmailAndPassword(name, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
+                loadBar.setVisibility(loadBar.VISIBLE);
+                firebaseAuth.createUserWithEmailAndPassword(name, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
+                                loadBar.setVisibility(loadBar.INVISIBLE);
                                 Toast.makeText(RegisterActivity.this, "Account erfolgreich erstellt", Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             }else{
@@ -85,5 +95,49 @@ public class RegisterActivity extends AppCompatActivity {
 
         btnRegister.setOnClickListener(createAccountListener);
 
+    }
+
+
+    @SuppressLint("ResourceType")
+    @Override
+    public boolean onCreateOptionsMenu( Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        if (firebaseAuth.getCurrentUser()!=null){
+            menu.removeItem(R.id.menuLoginItem);
+        }
+        if(firebaseAuth.getCurrentUser()==null){
+            menu.add(R.id.menuLoginItem);
+            menu.removeItem(R.id.menuLogoutItem);
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menuLoginItem:
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.rulesMenuItem:
+                intent = new Intent(getApplicationContext(), GameRulesActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.registerMenuItem:
+                intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.menuOnlineItem:
+                intent = new Intent(getApplicationContext(), OnlineOptionsActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.menuLogoutItem:
+                firebaseAuth.getInstance().signOut();
+                intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

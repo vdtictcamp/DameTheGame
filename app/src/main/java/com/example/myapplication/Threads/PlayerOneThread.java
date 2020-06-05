@@ -46,16 +46,14 @@ public class PlayerOneThread extends Thread implements Runnable {
     @Override
     public void run() {
 
-        dataBaseController.initStartSituationBeta(new Transaction(0,0,0,0), "PlayerOne");
-        dataBaseController.setPlayers("PlayerOne");
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         Looper.prepare();
-        while (!playerTwohasJoined){
-            playerTwohasJoined=dataBaseController.checkIfPlayerTwoHasJoined();
+        while (!playerTwohasJoined) {
+            playerTwohasJoined = dataBaseController.checkIfPlayerTwoHasJoined();
             System.out.println("Warte bis Spieler zwei beitritt");
             try {
                 Thread.sleep(3000);
@@ -65,26 +63,39 @@ public class PlayerOneThread extends Thread implements Runnable {
         }
         System.out.println("Spieler zwei ist beigetreten");
         game.connectionSuccessfull();
+        while (!gameOver) {
             inTurn = gameController.readTurnOfPlayerOne();
-            if (!inTurn) {
+            if (!isInTurn) {
                 try {
                     Thread.sleep(10000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 System.out.println("Zug Spieler eins beendet");
-                HashMap<String, Transaction> ids = gameController.addValueEventListenerAllValues();
+                HashMap<String, Integer> ids = gameController.addValueEventListenerAllValues();
                 System.out.println(ids);
-                Transaction values = ids.get("updateInformations");
-                int rowPos = values.getRowPos();
-                int colPos = values.getColPos();
-                int colStone = values.getColStone();
-                int rowStone = values.getRowStone();
-                if(rowPos!=0 && colPos!=0 && colPos!=0 &&colStone!=0){
-                    game.moveHelperFunc(colStone, rowStone, rowPos, colPos);
+                if (ids != null) {
+                    inTurn = true;
+                    System.out.println("TRUEEEEEE");
+                    System.out.println(ids);
+                    gameController.setDefaultUpdateValues();
+                    long rowPos = Long.parseLong(String.valueOf(ids.get("rowPos")));
+                    long colPos = Long.parseLong(String.valueOf(ids.get("colPos")));
+                    long colStone = Long.parseLong(String.valueOf(ids.get("colStone")));
+                    long rowStone = Long.parseLong(String.valueOf(ids.get("rowStone")));
+                    gameController.setDefaultUpdateValues();
+                    if (rowPos != 0 && colPos != 0 && colPos != 0 && colStone != 0) {
+                        isInTurn = true;
+                        boolean ready = gameController.setDefaultUpdateValues();
+                        if(ready) {
+                            game.moveHelperFunc((int) colStone, (int) rowStone, (int) rowPos, (int) colPos);
+                        }
+                    }
+
                 }
             }
 
         }
+    }
     }
 

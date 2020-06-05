@@ -46,21 +46,41 @@ public class PlayerTwoThread extends Thread implements Runnable {
 
     @Override
     public void run() {
-        inTurn = false;
+
         Looper.prepare();
-        inTurn = gameController.readTurnOfPlayerTwo();
-        if (!inTurn) {
-            HashMap<String, Transaction> ids = gameController.addValueEventListenerAllValues();
-            if (ids != null) {
-                inTurn = true;
-                System.out.println("TRUEEEEEE");
-                System.out.println(ids);
-                Transaction values = ids.get("updateInformations");
-                int rowPos = values.getRowPos();
-                int colPos = values.getColPos();
-                int colStone = values.getColStone();
-                int rowStone = values.getRowStone();
-                game.moveHelperFunc(colStone, rowStone, rowPos, colPos);
+        while (!gameOver) {
+            inTurn = gameController.readTurnOfPlayerTwo();
+            if (!isInTurn) {
+                try {
+                    Thread.sleep(10000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                HashMap<String, Integer> ids = gameController.addValueEventListenerAllValues();
+                if (ids != null) {
+                    System.out.println(ids.keySet());
+                    System.out.println("TRUEEEEEE");
+                    System.out.println(ids);
+                    gameController.setDefaultUpdateValues();
+                    if (ids != null) {
+                        inTurn = true;
+                        System.out.println("TRUEEEEEE");
+                        System.out.println(ids);
+                        gameController.setDefaultUpdateValues();
+                        long rowPos = Long.parseLong(String.valueOf(ids.get("rowPos")));
+                        long colPos = Long.parseLong(String.valueOf(ids.get("colPos")));
+                        long colStone = Long.parseLong(String.valueOf(ids.get("colStone")));
+                        long rowStone = Long.parseLong(String.valueOf(ids.get("rowStone")));
+                        if (rowPos != 0 && colPos != 0 && colPos != 0 && colStone != 0) {
+                            isInTurn = true;
+                            boolean ready = gameController.setDefaultUpdateValues();
+                            if(ready) {
+                                game.moveHelperFunc((int) colStone, (int) rowStone, (int) rowPos, (int) colPos);
+                            }
+                        }
+                    }
+
+                }
             }
         }
     }
