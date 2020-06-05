@@ -72,6 +72,8 @@
         android:layout_alignParentEnd="true"
         android:background="@color/sandbraun"
         android:text="Spiel erstellen"
+        android:fontFamily="@font/alfa_slab_one"
+        android:textColor="@color/damebraun"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
