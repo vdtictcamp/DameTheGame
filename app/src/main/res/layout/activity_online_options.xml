@@ -8,25 +8,37 @@
     android:orientation="vertical"
     android:background="@color/damebraun">
 
+    <TextView
+        android:id="@+id/txtGameName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="48dp"
+        android:layout_marginLeft="120dp"
+        android:fontFamily="@font/reem_kufi"
+        android:text="Was willst du tun?"
+        android:textColor="@color/sandbraun"
+        android:textSize="26sp"
+        android:textStyle="bold|italic" />
+
     <Button
         android:id="@+id/btnSearchOnlineGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Spiel suchen"
         android:layout_marginLeft="150dp"
+        android:layout_marginTop="40dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp">
-
-    </Button>
+        android:text="Spiel suchen"></Button>
 
     <Button
         android:id="@+id/btnCreateOnlineGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Spiel erstellen"
         android:layout_marginLeft="150dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp">
+        android:text="Spiel erstellen">
 
     </Button>
 

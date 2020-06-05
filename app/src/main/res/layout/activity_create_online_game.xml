@@ -22,20 +22,36 @@
         android:textSize="26sp"
         android:textStyle="bold|italic"/>
 
+    <TextView
+        android:id="@+id/txtErstellen"
+        android:layout_width="292dp"
+        android:layout_height="23dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="112dp"
+        android:layout_marginEnd="46dp"
+        android:fontFamily="@font/reem_kufi"
+        android:text="Name des Raumes eingeben"
+        android:textColor="@color/sandbraun"
+        android:textSize="17sp"
+        android:textStyle="bold|italic" />
+
     <EditText
         android:id="@+id/nameOnlineGame"
-        android:layout_width="wrap_content"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="93dp"
+        android:layout_marginStart="74dp"
         android:layout_marginTop="155dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name des Raumes eingeben"
         android:fontFamily="@font/reem_kufi"
+        android:inputType="textPersonName"
+        android:text=""
         android:textColor="@color/sandbraun"
-        android:textSize="15sp"/>
+        android:textSize="15sp" />
 
     <Button
         android:id="@+id/btnCreateOnlineGame"

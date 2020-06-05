@@ -10,7 +10,21 @@
     android:columnCount="2">
 
     <TextView
-        android:layout_width="wrap_content"
+    android:layout_width="88dp"
+    android:layout_height="wrap_content"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginStart="161dp"
+    android:layout_marginTop="78dp"
+    android:fontFamily="@font/reem_kufi"
+    android:text="Settings"
+    android:textColor="@color/sandbraun"
+    android:textSize="26sp"
+    android:textStyle="bold|italic"></TextView>
+
+    <TextView
+        android:layout_width="201dp"
         android:layout_height="wrap_content"
 
         android:layout_alignParentStart="true"
@@ -41,7 +55,6 @@
         android:id="@+id/btnToRegister"
         android:layout_width="133dp"
         android:layout_height="wrap_content"
-
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="261dp"
@@ -49,9 +62,7 @@
         android:background="@color/sandbraun"
         android:fontFamily="@font/alfa_slab_one"
         android:text="@string/register"
-        android:textColor="@color/damebraun">
-
-    </Button>
+        android:textColor="@color/damebraun"></Button>
 
     <EditText
         android:id="@+id/txtLoginUsername"
