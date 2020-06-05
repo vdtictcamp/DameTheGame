@@ -50,9 +50,6 @@ public class MainActivity extends AppCompatActivity {
         currentUserAuth = FirebaseAuth.getInstance();
         btnTestransaction = findViewById(R.id.btnTestTransaction);
 
-        gameName ="Test";
-        player="testPlayer";
-        stones = new int[][]{{1},{2}};
 
         btnInitNewGame.setOnClickListener((new View.OnClickListener() {
             @Override
@@ -90,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 reference = database.getReference("test").child("Testevent");
                 //reference.setValue("lol");
                 Map<String, Transaction> transactions = new HashMap<>();
-                transactions.put("alanisawesome", new Transaction("1", "2", "3", "4"));
+                transactions.put("yeahFirebase", new Transaction("1", "2", "3", "4"));
                 reference.setValue(transactions);
             }
         }));
@@ -104,7 +101,6 @@ public class MainActivity extends AppCompatActivity {
 
         usersRef.setValueAsync(transaction);
          **/
-
 
     }
 
