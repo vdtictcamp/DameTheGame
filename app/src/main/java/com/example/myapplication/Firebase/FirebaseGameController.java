@@ -268,8 +268,7 @@ public class FirebaseGameController {
 
 
 
-    private boolean readTurnOfPlayerOne(){
-
+    public boolean readTurnOfPlayerOne(){
         reference = database.getReference("rooms").child(gameName).child("PlayerOneTurn");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -286,7 +285,7 @@ public class FirebaseGameController {
         return turn;
     }
 
-    private boolean readTurnOfPlayerTwo(){
+    public boolean readTurnOfPlayerTwo(){
         reference = database.getReference("rooms").child(gameName).child("PlayerTwoTurn");
         reference.addValueEventListener(new ValueEventListener() {
             @Override

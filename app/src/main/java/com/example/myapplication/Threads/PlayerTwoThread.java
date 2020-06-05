@@ -50,7 +50,7 @@ public class PlayerTwoThread extends Thread implements Runnable {
         // ist der Zug abgeschlossen und der andere Spieler ist am Zug
 
         while (!gameOver){
-            inTurn = gameController.getTurnOfPlayerTwo();
+            inTurn = gameController.readTurnOfPlayerTwo();
             if(!inTurn) {
             try {
                 Thread.sleep(2000);
@@ -64,9 +64,9 @@ public class PlayerTwoThread extends Thread implements Runnable {
                 int s_col = Integer.parseInt(String.valueOf(ids[1]));
                 int p_row = Integer.parseInt(String.valueOf(ids[2]));
                 int p_col = Integer.parseInt(String.valueOf(ids[3]));
+                inTurn=true;
                 gameController.setDefaultUpdateValues();
                 game.moveHelperFunc(s_col, s_row, p_row,p_col);
-                inTurn=true;
                 System.out.println(".....................");
                 System.out.println("StoneID" + ids[0]);
                 System.out.println("....................");
