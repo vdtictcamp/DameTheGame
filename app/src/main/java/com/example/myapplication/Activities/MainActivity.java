@@ -11,19 +11,34 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.myapplication.Firebase.FirebaseGameController;
 import com.example.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button btnInitNewGame;
     private Button btnToLogin;
-    private Button btnLogout;
+
     private Button btnRegister;
     private Button btnOnlineSpielen;
     private Button btnToSearchGame;
     FirebaseAuth currentUserAuth;
     private Button btnCreateGame;
+
+    //firebase Testelements
+    private FirebaseGameController firebase;
+    private String gameName;
+    private String player;
+    static int[][] stones;
+    private Button btnTestransaction;
+    FirebaseDatabase database;
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
         btnRegister=findViewById(R.id.btnRegister);
         btnOnlineSpielen=findViewById(R.id.btnOnlineSpiel);
         currentUserAuth = FirebaseAuth.getInstance();
+        btnTestransaction = findViewById(R.id.btnTestTransaction);
+
+        gameName ="Test";
+        player="testPlayer";
+        stones = new int[][]{{1},{2}};
 
         btnInitNewGame.setOnClickListener((new View.OnClickListener() {
             @Override
@@ -60,6 +80,32 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }));
+
+        btnTestransaction.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //firebase = new FirebaseGameController(stones, gameName);
+                //firebase.initStartSituation(player);
+                database = FirebaseDatabase.getInstance();
+                reference = database.getReference("test").child("Testevent");
+                //reference.setValue("lol");
+                Map<String, Transaction> transactions = new HashMap<>();
+                transactions.put("alanisawesome", new Transaction("1", "2", "3", "4"));
+                reference.setValue(transactions);
+            }
+        }));
+
+        /**
+        reference = database.getReference("test").child("Testevent");
+        DatabaseReference usersRef = reference.child("Testevent");
+
+        Map<String, Transaction> transactions = new HashMap<>();
+        transactions.put("alanisawesome", new Transaction("1", "2", "3", "4"));
+
+        usersRef.setValueAsync(transaction);
+         **/
+
+
     }
 
     @SuppressLint("ResourceType")
@@ -104,4 +150,9 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
+
+
+
 }
