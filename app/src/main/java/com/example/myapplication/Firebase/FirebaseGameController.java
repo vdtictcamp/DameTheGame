@@ -218,13 +218,12 @@ public class FirebaseGameController {
         reference.setValue(true);
         reference=database.getReference("rooms").child(gameName).child("PlayerTwoTurn");
         reference.setValue(false);
-
     }
 
     public void initStartSituationBeta(Transaction transaction, String player){
 
         HashMap<String, Transaction> values = new HashMap<>();
-        reference = database.getReference("rooms").child(this.gameName).child("updateInformations");
+        reference = database.getReference("rooms").child(this.gameName);
         values.put("updateInformations", transaction);
         reference.setValue(values);
     }
