@@ -5,6 +5,7 @@ import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 
+import com.example.myapplication.Activities.Transaction;
 import com.example.myapplication.GameEngine.GameController;
 import com.example.myapplication.Player.Player;
 import com.google.firebase.database.DataSnapshot;
@@ -32,6 +33,8 @@ public class FirebaseGameController {
     long [] ids = new long[4];
     private boolean isHosted=false;
     private  boolean turn=false;
+    private HashMap<String, Integer> updateValues;
+    private HashMap<String, Transaction> values;
 
 
     public FirebaseGameController(int[][]stones, String gameName){
@@ -183,21 +186,47 @@ public class FirebaseGameController {
         return updateIds;
     }
 
-    public List<Integer> addValueEventListenerAllValues(){
+
+    /**
+     reference = database.getReference("test").child("Testevent");
+     DatabaseReference usersRef = reference.child("Testevent");
+
+     Map<String, Transaction> transactions = new HashMap<>();
+     transactions.put("alanisawesome", new Transaction("1", "2", "3", "4"));
+
+     usersRef.setValueAsync(transaction);
+     **/
+
+
+
+    public void initStartSituationBeta(Transaction transaction){
+        HashMap<String, Transaction> values = new HashMap<>();
+        reference = database.getReference("rooms").child(this.gameName);
+        values.put("updatInformations", transaction);
+    }
+
+    public void updateValuesBeta(Transaction transaction){
+        HashMap<String, Transaction> values = new HashMap<>();
+        reference = database.getReference("rooms").child(this.gameName);
+        values.put("updateInformations", transaction);
+        reference.setValue(values);
+    }
+
+
+    public HashMap<String, Transaction> addValueEventListenerAllValues(){
         reference = database.getReference("rooms").child(this.gameName).child("updateInformations");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                field = (List<Integer>) dataSnapshot.getValue();
+                values = (HashMap<String, Transaction>) dataSnapshot.getValue();
                 System.out.println("UpdateSTone"+field);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
-        return field;
+        return values;
     }
 
     private long addValueEventListenerCol(){

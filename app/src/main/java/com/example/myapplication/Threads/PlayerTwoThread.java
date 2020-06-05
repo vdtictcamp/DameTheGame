@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Looper;
 
 import com.example.myapplication.Activities.GameField;
+import com.example.myapplication.Activities.Transaction;
 import com.example.myapplication.Firebase.FirebaseGameController;
 import com.example.myapplication.GameEngine.GameController;
 
@@ -49,11 +50,11 @@ public class PlayerTwoThread extends Thread implements Runnable {
         Looper.prepare();
         inTurn = gameController.readTurnOfPlayerTwo();
         if (!inTurn) {
-            long[] ids = gameController.readStoneIdPositionId();
+            HashMap<String, Transaction> ids = gameController.addValueEventListenerAllValues();
             if (ids != null) {
                 inTurn = true;
                 System.out.println("TRUEEEEEE");
-                int s_row = Integer.parseInt(String.valueOf(ids[0]));
+                int s_row = ids.get("rowStone");
                 int s_col = Integer.parseInt(String.valueOf(ids[1]));
                 int p_row = Integer.parseInt(String.valueOf(ids[2]));
                 int p_col = Integer.parseInt(String.valueOf(ids[3]));

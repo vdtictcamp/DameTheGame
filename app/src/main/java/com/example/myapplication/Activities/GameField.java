@@ -300,16 +300,18 @@ public class GameField extends AppCompatActivity{
         //The Game starts
 
         firebase = new FirebaseGameController(stones, gameName);
-        firebase.initStartSituation(player);
+        firebase.initStartSituationBeta(new Transaction(0,0,0,0));
+
+        //firebase.initStartSituation(player);
 
         pTwoThread = new PlayerTwoThread(stones, gameName, this);
         pOneThread=new PlayerOneThread(stones, gameName, this);
 
         if(player.equals("PlayerTwo")){
-            pTwoThread.start();
+            //pTwoThread.start();
         }
         else if(player.equals("PlayerOne")){
-            pOneThread.start();
+            //pOneThread.start();
         }
 
     }
@@ -686,7 +688,8 @@ public void showValidPosForQueen(List<Integer>positions){
                 }
             }
         }
-        firebase.sendUpdateInformaions(oldRow, oldCol, row, col, player);
+        //firebase.sendUpdateInformaions(oldRow, oldCol, row, col, player);
+        firebase.updateValuesBeta(new Transaction(oldRow, oldCol, row, col));
         stones[oldRow][oldCol]=0;
         stones[row][col]=idStone;
         //Every Time when we switch a Position we need to check if we got a new Queen

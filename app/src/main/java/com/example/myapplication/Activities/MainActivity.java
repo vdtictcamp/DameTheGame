@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }));
 
-        btnTestransaction.setOnClickListener((new View.OnClickListener() {
+       /* btnTestransaction.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //firebase = new FirebaseGameController(stones, gameName);
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                 reference.setValue(transactions);
             }
         }));
-
+        */
         /**
         reference = database.getReference("test").child("Testevent");
         DatabaseReference usersRef = reference.child("Testevent");
