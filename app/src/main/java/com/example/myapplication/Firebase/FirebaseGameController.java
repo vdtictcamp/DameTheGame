@@ -99,6 +99,9 @@ public class FirebaseGameController {
         reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("position").child("col");
         reference.setValue(0);
 
+        /**
+         * Würde ein "Field" auf Fierbase erstellen
+
         reference = database.getReference("rooms").child(gameName).child("field");
         for(int i=0;i<stones.length; i++){
             for(int j=0; j<stones[i].length; j++){
@@ -107,6 +110,8 @@ public class FirebaseGameController {
             currentField.add(tempList);
         }
         reference.setValue(currentField);
+
+         */
     }
 
 
