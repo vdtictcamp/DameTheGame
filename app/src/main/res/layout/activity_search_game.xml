@@ -29,8 +29,8 @@
         android:layout_height="461dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="123dp"
-        android:layout_marginBottom="147dp" />
+        android:layout_marginTop="-4dp"
+        android:layout_marginBottom="274dp" />
 
     <Button
         android:id="@+id/btnJoingame"
@@ -44,5 +44,24 @@
         android:fontFamily="@font/alfa_slab_one"
         android:text="@string/btnJoinGame"
         android:textColor="@color/damebraun" />
+
+    <ProgressBar
+        android:id="@+id/loadBarJoinGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:layout_centerHorizontal="true">
+
+    </ProgressBar>
+
+    <TextView
+        android:id="@+id/lblWaitingForGames"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="380dp"
+        android:text="@string/lblWaitingForGameList">
+
+    </TextView>
 
 </RelativeLayout>

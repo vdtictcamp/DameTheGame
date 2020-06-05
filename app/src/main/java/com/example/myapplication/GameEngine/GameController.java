@@ -82,5 +82,30 @@ public class GameController {
         return index;
     }
 
+//bewegter Stein Id und zielpositionID
+    public int[][] switchPosOfStoneInArray(int[][]stones,int[][]positionIds, int stoneID, int posId){
+        int col=0, row =0;
+        int oldCol=0;
+        int oldRow=0;
+        for(int i=0; i<positionIds.length; i++){
+            for(int j=0; j<positionIds[i].length; j++){
+                if(stones[i][j]==stoneID){
+                    oldCol=j;
+                    oldRow=i;
+                    System.out.println("Alte Spalte:"+oldCol+" "+"Alte Reihe"+oldRow);
+                }
+                //Now we got the stone and we need to change the index
+                if(positionIds[i][j]==posId){
+                    stones[i][j]=stoneID;
+                    System.out.println("Row:"+i+"Col:"+j);
+                }
+            }
+        }
+        stones[oldRow][oldCol]=0;
+        return stones;
+    }
+
+
+
 
 }

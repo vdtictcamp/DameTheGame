@@ -24,6 +24,7 @@ public class PlayerTwoThread extends Thread implements Runnable {
     HashMap<String, Integer> stoneIdFromBase;
     int[][]positionIds;
     GameField game;
+   private boolean inTurn = false;
 
     public PlayerTwoThread(int[][]stones, String gameName, Context context) {
         this.stones = stones;
@@ -44,23 +45,28 @@ public class PlayerTwoThread extends Thread implements Runnable {
 
     @Override
     public void run() {
+        boolean inTurn = false;
         //Sobald die update Methode true zurückgibt,
         // ist der Zug abgeschlossen und der andere Spieler ist am Zug
 
         while (!gameOver){
-        if(!isInTurn) {
+            inTurn = gameController.getTurnOfPlayerTwo();
+            if(!inTurn) {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             long[] ids = gameController.readStoneIdPositionId();
-            if (ids != null) {
+            if (ids != null && ids[0]!=0) {
                 System.out.println("TRUEEEEEE");
-
                 int s_row = Integer.parseInt(String.valueOf(ids[0]));
                 int s_col = Integer.parseInt(String.valueOf(ids[1]));
-
+                int p_row = Integer.parseInt(String.valueOf(ids[2]));
+                int p_col = Integer.parseInt(String.valueOf(ids[3]));
+                gameController.setDefaultUpdateValues();
+                game.moveHelperFunc(s_col, s_row, p_row,p_col);
+                inTurn=true;
                 System.out.println(".....................");
                 System.out.println("StoneID" + ids[0]);
                 System.out.println("....................");
@@ -68,22 +74,10 @@ public class PlayerTwoThread extends Thread implements Runnable {
                 System.out.println(ids[2]);
                 System.out.println(ids[3]);
                 System.out.println("Stones aus Thread:"+ stones[s_row][s_col]);
-                int p_row = Integer.parseInt(String.valueOf(ids[2]));
-                int p_col = Integer.parseInt(String.valueOf(ids[3]));
-                game.moveHelperFunc(s_col, s_row, p_row,p_col);
-                isInTurn = isInTurn();
-                gameController.setDefaultUpdateValues();
-                //game.helpViewMover(stones[s_col][s_row], positionIds[p_row][p_col]);
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
 
+                }
             }
         }
-            }
     }
-
 }
 

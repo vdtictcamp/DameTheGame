@@ -34,15 +34,15 @@ import java.util.List;
 public class GameField extends AppCompatActivity{
 
     public GridLayout gameLayout;
-    private int[][]positionsIds;
+    private static int[][]positionsIds;
     private int[][]whiteStonesIds;
     private int[][]redStonesIds;
 
-    private static int[][] stones;
+    static int[][] stones;
 
     private View[][] redStones;
     private View[][]whiteStones;
-    private View[][]positions;
+    private static View[][]positions;
     private int[] validPositionsToMove=new int[2];
     private List<View>validPosToMove = new ArrayList<>();
     public View movingStone;
@@ -326,9 +326,7 @@ public class GameField extends AppCompatActivity{
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void setTurn(){
 
-    }
 
     //Helper function that fills all Positions to jum in one List, which we need for controll if the
     //moves stones only to valid positions
@@ -341,33 +339,34 @@ public class GameField extends AppCompatActivity{
     }
 
     public void moveHelperFunc(final int stoneCol, final int stoneRow, final int posRow, final int posCol){
-        System.out.println("Grösse von Array" + stones.length);
-        System.out.println("StonesId aus helper:" + stones[stoneRow][stoneCol]);
-
-        View stone = findViewById(stones[stoneRow][stoneCol]);
-        movingStone=stone;
-        final View position = findViewById(positionsIds[posRow][posCol]);
-        float diffX=0;
-        float diffY=0;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
+                View position = findViewById(positionsIds[posRow][posCol]);
                 View stone = findViewById(stones[stoneRow][stoneCol]);
                 movingStone=stone;
-                View position = findViewById(positionsIds[posRow][posCol]);
                 float diffX=0;
                 float diffY=0;
+                System.out.println("Der Stein:"+stone+" "+"die Position:"+position);
                 diffX = position.getX() - movingStone.getX();
                 diffY = position.getY() - movingStone.getY();
                 movingStone.animate()
                         .x(movingStone.getX() + diffX + (movingStone.getWidth() / 2))
                         .y(movingStone.getY() + diffY + (movingStone.getHeight() / 2))
                         .start();
-                TURN=REDTURN;
+                stones= gameController.switchPosOfStoneInArray(stones, positionsIds, stone.getId(), position.getId());
+                if(TURN==WHITETURN){
+                    firebase.finishPlayerOneTurn();
+                    firebase.setPlayerTwoTurn();
+                    TURN=REDTURN;
+                }else{
+                    TURN=WHITETURN;
+                    firebase.setPlayerOneTurn();
+                    firebase.finishPlayerTwoTurn();
+                }
+
             }
         });
-
 
     }
 
@@ -595,12 +594,9 @@ public void showValidPosForQueen(List<Integer>positions){
             if(isFinish){
                 stopGame();
             }
-            controller.changeTurnOfPlayer(visualizeTurnOfPlayerTwo, visualizeTurnOfPlayerOne);
-            if(player.equals("PlayerTwo")) {
-                TURN = WHITETURN;
-                firebase.finishPlayerOneTurn();
-                pOneThread.finishTurn();
-            }
+                controller.changeTurnOfPlayer(visualizeTurnOfPlayerTwo, visualizeTurnOfPlayerOne);
+                TURN=WHITETURN;
+
         }
             }
         }
@@ -615,8 +611,8 @@ public void showValidPosForQueen(List<Integer>positions){
         int colPos = 0;
         int rowStone = 0;
         int colStone = 0;
-        if((TURN&WHITETURN)!=0) {
-            if (movingStone.getY() > view.getY()) {
+        if((TURN & WHITETURN)!=0) {
+            if (movingStone.getY() > view.getY() && validPosToMove.contains(view)|| allPositionsToJump.contains(view.getId())) {
                 clearBoard();
                 diffX = view.getX() - movingStone.getX();
                 diffY = view.getY() - movingStone.getY();
@@ -640,14 +636,13 @@ public void showValidPosForQueen(List<Integer>positions){
                     }
 
                 boolean isFinish = finishChecker.checkIfGameIsFinish(whiteStonesIds, redStonesIds);
-
                 if (isFinish) {
                     stopGame();
                 }
+
                     controller.changeTurnOfPlayer(visualizeTurnOfPlayerOne, visualizeTurnOfPlayerTwo);
-                    TURN = REDTURN;
-                    firebase.finishPlayerOneTurn();
-                    pOneThread.finishTurn();
+                    TURN=REDTURN;
+
             }
 
             }
@@ -719,12 +714,8 @@ public void showValidPosForQueen(List<Integer>positions){
             setRedQueen(stoneToQueen);
 
         }
-        if (player.equals("PlayerOne")){
-            firebase.finishPlayerOneTurn();
-        }
 
     }
-
 
     public void setWhiteQueen(View stoneToQueen ){
         whiteQueen.setQueen(stoneToQueen);

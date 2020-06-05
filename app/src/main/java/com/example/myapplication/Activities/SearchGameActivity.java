@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,19 +30,21 @@ import java.util.List;
 public class SearchGameActivity extends AppCompatActivity {
 
     private Button btnJoinGame;
-    ListView listView;
+    private ListView listView;
+   private TextView lblWaitForGames;
+
     String gameName;
     EditText txtFieldGameName;
     DatabaseReference reference;
     FirebaseDatabase database;
-
+    ProgressBar loadBar;
     DatabaseReference roomsRef;
     DatabaseReference roomRef;
 
     List<String> roomsList;
     String roomName = "";
     String playerName = "";
-    boolean isHosted;
+    boolean isHosted = false;
 
 
     @Override
@@ -51,11 +54,12 @@ public class SearchGameActivity extends AppCompatActivity {
         btnJoinGame=findViewById(R.id.btnJoingame);
         database = FirebaseDatabase.getInstance();
         listView = findViewById(R.id.listView);
+        lblWaitForGames=findViewById(R.id.lblWaitingForGames);
         isHosted=false;
         roomsList = new ArrayList<>();
-
+        loadBar=findViewById(R.id.loadBarJoinGame);
         playerName = "test";
-
+        addRoomsEventListener();
 
         btnJoinGame.setOnClickListener((new View.OnClickListener() {
             @Override
@@ -76,15 +80,14 @@ public class SearchGameActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //bestehendem room beitreten und sich selbst als player2 hinzufügen
-                roomName = roomsList.get(position);
+                gameName = roomsList.get(position);
                 //roomRef = database.getReference("rooms/" + roomName + "/player2");
                 //addRoomEventListener();
                 //roomRef.setValue(playerName);
-                joinGame(roomName);
+                checkIfGameIsHosted();
             }
         });
 
-        addRoomsEventListener();
     }
 
     public void joinGame(String gameName){
@@ -95,12 +98,15 @@ public class SearchGameActivity extends AppCompatActivity {
     }
 
     private void checkIfGameIsHosted(){
+        loadBar.setVisibility(loadBar.VISIBLE);
         reference = database.getReference("rooms").child(gameName).child("PlayerOneHasJoined");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 isHosted = (boolean) dataSnapshot.getValue();
                 if (isHosted){
+                    loadBar.setVisibility(loadBar.INVISIBLE);
+                    lblWaitForGames.setVisibility(lblWaitForGames.INVISIBLE);
                     joinGame(gameName);
                 }
                 else{
@@ -127,6 +133,8 @@ public class SearchGameActivity extends AppCompatActivity {
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(SearchGameActivity.this, android.R.layout.simple_list_item_1, roomsList);
                     listView.setAdapter(adapter);
                 }
+                loadBar.setVisibility(loadBar.INVISIBLE);
+                lblWaitForGames.setVisibility(lblWaitForGames.INVISIBLE);
             }
 
             @Override
@@ -137,21 +145,5 @@ public class SearchGameActivity extends AppCompatActivity {
         });
     }
 
-    private void addRoomEventListener(){
-        roomRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //join room
-                Intent intent = new Intent(getApplicationContext(), Firebase3.class);
-                intent.putExtra("roomName", roomName);
-                startActivity(intent);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                //error
-                Toast.makeText(SearchGameActivity.this, "Error", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 }
