@@ -51,7 +51,7 @@ public class SearchGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_game);
-        btnJoinGame=findViewById(R.id.btnJoingame);
+        //btnJoinGame=findViewById(R.id.btnJoingame);
         database = FirebaseDatabase.getInstance();
         listView = findViewById(R.id.listView);
         lblWaitForGames=findViewById(R.id.lblWaitingForGames);
@@ -61,6 +61,8 @@ public class SearchGameActivity extends AppCompatActivity {
         playerName = "test";
         addRoomsEventListener();
 
+
+    /**
         btnJoinGame.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +77,7 @@ public class SearchGameActivity extends AppCompatActivity {
                 }
             }
         }));
+     **/
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -34,7 +34,6 @@ public class FirebaseGameController {
     private  boolean turn=false;
 
 
-
     public FirebaseGameController(int[][]stones, String gameName){
         this.stones=stones;
         this.gameName = gameName;
@@ -81,7 +80,6 @@ public class FirebaseGameController {
             reference.setValue(true);
             reference = database.getReference("rooms").child(gameName).child("PlayerTwoHasJoined");
             reference.setValue(false);
-
         }
 
         if(player.equals("PlayerTwo")) {
@@ -253,6 +251,7 @@ public class FirebaseGameController {
     //1
     //This Method will send the Turn code and the stone which has moved to his last position
     public boolean sendUpdateInformaions(int stoneRow, int stoneCol, int posRow, int posCol){
+
         reference = database.getReference("rooms").child(gameName).child("updateInformations").child("position").child("row");
         reference.setValue(posRow);
         reference = database.getReference("rooms").child(gameName).child("updateInformations").child("position").child("col");
@@ -264,8 +263,6 @@ public class FirebaseGameController {
         reference.setValue(stoneCol);
         return true;
     }
-
-
 
 
     public boolean readTurnOfPlayerOne(){
@@ -302,13 +299,10 @@ public class FirebaseGameController {
         return turn;
     }
 
-
     public boolean getTurnOfPlayerTwo(){
         boolean inTurn = false;
         inTurn=readTurnOfPlayerTwo();
         return inTurn;
-
-
 
     }
     public boolean getTurnOfPlayerOne(){
@@ -357,8 +351,6 @@ public class FirebaseGameController {
     }
 
 
-
-
     public boolean checkIfPlayerTwoHasJoined(){
         boolean hasJoined=false;
         hasJoined=readIfPlayerTwoHasJoined();
@@ -368,7 +360,6 @@ public class FirebaseGameController {
     public void checkIfIsInTurn(){
 
     }
-
 
     //This Method will write the stones which will be removed to the base
     public void writeStonesToRemove(){
