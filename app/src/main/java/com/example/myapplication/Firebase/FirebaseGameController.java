@@ -148,7 +148,6 @@ public class FirebaseGameController {
         return updateIds;
     }
 
-
     private long addValueEventListenerPositionCol(){
         reference = database.getReference("rooms").child(this.gameName).child("updateInformations").child("position").child("col");
         reference.addValueEventListener(new ValueEventListener() {
@@ -158,7 +157,6 @@ public class FirebaseGameController {
                 ids[3]=updateIds;
                 System.out.println("UpdateSTone"+updateIds);
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
