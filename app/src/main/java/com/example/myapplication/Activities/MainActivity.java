@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth currentUserAuth;
     private Button btnCreateGame;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         btnRegister=findViewById(R.id.btnRegister);
         btnOnlineSpielen=findViewById(R.id.btnOnlineSpiel);
         currentUserAuth = FirebaseAuth.getInstance();
-
 
         btnInitNewGame.setOnClickListener((new View.OnClickListener() {
             @Override
@@ -62,8 +60,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }));
-
-
     }
 
     @SuppressLint("ResourceType")
@@ -77,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
             menu.add(R.id.menuLoginItem);
             menu.removeItem(R.id.menuLogoutItem);
         }
-
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -107,8 +102,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-
-
         }
     }
 }

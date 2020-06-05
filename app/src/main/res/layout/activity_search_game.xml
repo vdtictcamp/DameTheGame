@@ -29,21 +29,9 @@
         android:layout_height="461dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="-4dp"
-        android:layout_marginBottom="274dp" />
-
-    <Button
-        android:id="@+id/btnJoingame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="-2dp"
-        android:layout_marginBottom="91dp"
-        android:background="@color/sandbraun"
-        android:fontFamily="@font/alfa_slab_one"
-        android:text="@string/btnJoinGame"
-        android:textColor="@color/damebraun" />
+        android:layout_marginTop="123dp"
+        android:layout_marginBottom="147dp"
+        android:background="#FFEB3B" />
 
     <ProgressBar
         android:id="@+id/loadBarJoinGame"

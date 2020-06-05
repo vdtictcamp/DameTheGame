@@ -57,14 +57,14 @@ public class RegisterActivity extends AppCompatActivity {
                 password_repeat = txtPasswordRepeat.getText().toString().trim();
 
                 if(TextUtils.isEmpty(name)){
-                    txtUserName.setText("Name darf nicht leer sein");
+                    txtUserName.setText(R.string.txtUnsernameNichtLeer);
                     return;
                 }
                 if(TextUtils.isEmpty(password)){
-                    txtPassword.setText("Bitee legen Sie ein Passwirt fest");
+                    txtPassword.setText(R.string.txtUsernameAufforderung);
                 }
                 if(password.length()<5){
-                    txtPassword.setText("Das Passwort muss mindestens 8 Zeichen enthalten");
+                    txtPassword.setText(R.string.txtMinimumPasswortlänge);
                 }
                 if(!password_repeat.equals(password)){
                     Toast.makeText(RegisterActivity.this, "Passwörter müssen übereinstimmen", Toast.LENGTH_LONG).show();
@@ -73,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                                Toast.makeText(RegisterActivity.this, "Account erflgreich erstellt", Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterActivity.this, "Account erfolgreich erstellt", Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             }else{
                                 Toast.makeText(RegisterActivity.this, "Error"+task.getException(), Toast.LENGTH_LONG).show();
