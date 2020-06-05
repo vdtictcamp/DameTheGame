@@ -6,12 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Activities.SearchGameActivity"
     android:orientation="vertical"
-    android:background="@color/damebraun"><![CDATA[
-
-
-    />
-
-    ]]>
+    android:background="@color/damebraun">
 
     <TextView
         android:id="@+id/textView2"
@@ -28,17 +23,14 @@
         android:textSize="26sp"
         android:textStyle="bold|italic"/>
 
-    <EditText
-        android:id="@+id/txtFieldGameName"
+    <ListView
+        android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_height="461dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="167dp"
-        android:background="@color/sandbraun"
-        android:fontFamily="@font/reem_kufi"
-        android:text="@string/placeholderJoinGameName"
-        android:textColor="@color/damebraun"></EditText>
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="123dp"
+        android:layout_marginBottom="147dp" />
 
     <Button
         android:id="@+id/btnJoingame"
@@ -52,18 +44,5 @@
         android:fontFamily="@font/alfa_slab_one"
         android:text="@string/btnJoinGame"
         android:textColor="@color/damebraun" />
-
-    <TextView
-        android:id="@+id/gameNotFoundLbl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="256dp"
-        android:textSize="20sp" />
-
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
 
 </RelativeLayout>

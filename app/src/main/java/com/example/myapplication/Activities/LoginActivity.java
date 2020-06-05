@@ -87,7 +87,6 @@ EditText txtPassword;
             btnLogin.setOnClickListener(loginListner);
     }
 
-
     public void changeToRegister(){
         Intent intent= new Intent(this, RegisterActivity.class);
         startActivity(intent);

@@ -257,9 +257,6 @@ public class FirebaseGameController {
     public void finishPlayerOneTurn(){
 
     }
-    public void finidhPlayerTwoTurn(){
-
-    }
 
     //2
     public long[] readStoneIdPositionId(){
@@ -270,8 +267,10 @@ public class FirebaseGameController {
 
         System.out.println(ids[0]+" "+ids[1]+" "+ids[2]+" "+ids[3]);
         if(ids[0]!=0 && ids[1]!=0 && ids[2]!=0 && ids[3]!=0){
+
             return ids;
         }else {
+            System.out.println("readStoneIdPosizionID error");
             return null;
         }
 

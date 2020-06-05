@@ -1,11 +1,14 @@
 package com.example.myapplication.Threads;
 
+import android.content.Context;
+import android.os.Looper;
+
 import com.example.myapplication.Activities.GameField;
 import com.example.myapplication.Firebase.FirebaseGameController;
 
 public class PlayerOneThread extends Thread implements Runnable {
 
-    GameField game = new GameField();
+    GameField game;
     PlayerTwoThread pTwoThread;
     private boolean isInTurn=true;
     int[][] stones;
@@ -16,19 +19,18 @@ public class PlayerOneThread extends Thread implements Runnable {
     FirebaseGameController dataBaseController;
     private boolean gameOver=false;
 
-    public PlayerOneThread(int[][]stones, String gameName) {
+    public PlayerOneThread(int[][]stones, String gameName, Context context) {
         this.stones = stones;
         this.gameName=gameName;
         gameController = new FirebaseGameController(stones,this.gameName );
         dataBaseController=new FirebaseGameController(stones, gameName);
+        this.game= (GameField) context;
     }
-
 
     public boolean isInTurn() {
         isInTurn = true;
         return isInTurn;
     }
-
 
     public boolean finishTurn() {
         isInTurn = false;
@@ -39,6 +41,8 @@ public class PlayerOneThread extends Thread implements Runnable {
     @Override
     public void run() {
 
+
+        Looper.prepare();
         while (!playerTwohasJoined){
             playerTwohasJoined=dataBaseController.checkIfPlayerTwoHasJoined();
             System.out.println("Warte bis Spieler zwei beitritt");
@@ -80,11 +84,9 @@ public class PlayerOneThread extends Thread implements Runnable {
                     //Then we finish the Turn of player one
                     //And set the Turn for player two
                 }
-                game.update();
                 finishTurn();
                 pTwoThread.isInTurn();
             }
-
 
         }
     }

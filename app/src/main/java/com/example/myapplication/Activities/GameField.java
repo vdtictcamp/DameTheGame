@@ -37,7 +37,9 @@ public class GameField extends AppCompatActivity{
     private int[][]positionsIds;
     private int[][]whiteStonesIds;
     private int[][]redStonesIds;
-    private int[][] stones;
+
+    private static int[][] stones;
+
     private View[][] redStones;
     private View[][]whiteStones;
     private View[][]positions;
@@ -111,6 +113,26 @@ public class GameField extends AppCompatActivity{
                 {R.id.pos7a, R.id.pos7b, R.id.pos7c, R.id.pos7d, R.id.pos7e, R.id.pos7f, R.id.pos7g, R.id.pos7h},
                 {R.id.pos8a, R.id.pos8b, R.id.pos8c, R.id.pos8d, R.id.pos8e, R.id.pos8f, R.id.pos8g, R.id.pos8h}};
 
+        //The distrubution of the Stones on the Board
+        stones = new int[][]{{R.id.w1_2, 0, R.id.w2_2, 0, R.id.w3, 0, R.id.w4, 0},
+                { 0, R.id.w5, 0, R.id.w6, 0, R.id.w7, 0, R.id.w8},
+                {R.id.w9_2, 0, R.id.w10, 0, R.id.w11, 0, R.id.w12, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0},
+                {0,R.id.b9, 0,R.id.b10, 0,R.id.b11, 0,R.id.b12},
+                {R.id.b5,0, R.id.b6,0, R.id.b7,0, R.id.b8,0},
+                {0,R.id.b1, 0,R.id.b2, 0,R.id.b3, 0,R.id.b4}};
+
+        //All white stones
+        whiteStonesIds = new int[][]{{R.id.w1_2, R.id.w2_2, R.id.w3, R.id.w4},
+                {R.id.w5, R.id.w6, R.id.w7, R.id.w8},
+                {R.id.w9_2, R.id.w10,  R.id.w11, R.id.w12, },};
+
+        //All red stones
+        redStonesIds = new int[][]{{R.id.b1, R.id.b2, R.id.b3, R.id.b4},
+                {R.id.b5, R.id.b6, R.id.b7, R.id.b8},
+                {R.id.b9, R.id.b10, R.id.b11, R.id.b12},};
+
 
         View.OnClickListener checkPositions = new View.OnClickListener() {
             @Override
@@ -143,26 +165,6 @@ public class GameField extends AppCompatActivity{
         clearBoard();
 
 
-        //All white stones
-        whiteStonesIds = new int[][]{{R.id.w1_2, R.id.w2_2, R.id.w3, R.id.w4},
-                {R.id.w5, R.id.w6, R.id.w7, R.id.w8},
-                {R.id.w9_2, R.id.w10,  R.id.w11, R.id.w12, },};
-
-        //All red stones
-        redStonesIds = new int[][]{{R.id.b1, R.id.b2, R.id.b3, R.id.b4},
-                {R.id.b5, R.id.b6, R.id.b7, R.id.b8},
-                {R.id.b9, R.id.b10, R.id.b11, R.id.b12},};
-
-        //The distrubution of the Stones on the Board
-        stones = new int[][]{{R.id.w1_2, 0, R.id.w2_2, 0, R.id.w3, 0, R.id.w4, 0},
-                { 0, R.id.w5, 0, R.id.w6, 0, R.id.w7, 0, R.id.w8},
-                {R.id.w9_2, 0, R.id.w10, 0, R.id.w11, 0, R.id.w12, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0},
-                {0,R.id.b9, 0,R.id.b10, 0,R.id.b11, 0,R.id.b12},
-                {R.id.b5,0, R.id.b6,0, R.id.b7,0, R.id.b8,0},
-                {0,R.id.b1, 0,R.id.b2, 0,R.id.b3, 0,R.id.b4}};
-
         queenChecker=new QueenChecker(positionsIds);
 
         View.OnClickListener redStoneClickListener = new View.OnClickListener() {
@@ -171,9 +173,8 @@ public class GameField extends AppCompatActivity{
                 movingStone=v;
                 chGameCondRed = new ChangeGameConditionRedStone(stones, positionsIds, redStonesIds);
                 redQueen=new RedQueen(v,redQueens, positionsIds, stones, redStonesIds);
-                if((TURN & REDTURN)!=0 ) {
+                if((TURN & REDTURN)!=0 && player.equals("PlayerTwo")) {
                     v.startAnimation(onClickAnim);
-
                     if(redQueen.checkIfIsQueen(v)){
                         int[]index = redQueen.getRowAndCol(v);
                         int row=index[0];
@@ -194,7 +195,6 @@ public class GameField extends AppCompatActivity{
                                 showValidPosForQueen(posForRedQueen.get(i));
                             }
                         }
-
                     }
                     else {
                         showValidPositionsForRedStones(v);
@@ -227,7 +227,7 @@ public class GameField extends AppCompatActivity{
                 chGameCondWhite = new ChangeGameConditionWhiteStone( stones, positionsIds, whiteStonesIds);
                 whiteQueen=new WhiteQueen(whiteQueens, positionsIds, stones, whiteStonesIds);
                 //Checks whoms Turn it is
-                if ((TURN & WHITETURN) != 0) {
+                if ((TURN & WHITETURN) != 0 && player.equals("PlayerOne")) {
                     v.startAnimation(onClickAnim);
                     if(whiteQueen.checkIfIsQueen(v)){
                         System.out.println("Es ist eine Königin"+posForWhiteQueen.size());
@@ -298,29 +298,25 @@ public class GameField extends AppCompatActivity{
 
         visualizeTurnOfPlayerTwo.setBackgroundColor(Color.WHITE);
         //The Game starts
-        timer = new TimeThread(this, countdown);
-        timer.start();
 
         firebase = new FirebaseGameController(stones, gameName);
         firebase.initStartSituation(player);
 
         if(player.equals("PlayerTwo")){
-            pTwoThread = new PlayerTwoThread(stones, gameName);
+            pTwoThread = new PlayerTwoThread(stones, gameName, this);
             pTwoThread.start();
         }
-
-        if(player.equals("PlayerOne")){
-            pOneThread=new PlayerOneThread(stones, gameName);
+        else if(player.equals("PlayerOne")){
+            pOneThread=new PlayerOneThread(stones, gameName, this);
             pOneThread.start();
         }
-
-
-
+        else{
+            timer = new TimeThread(this, countdown);
+            timer.start();
+        }
     }
 
 //----------------------------------------------------------------------------------------
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -328,19 +324,49 @@ public class GameField extends AppCompatActivity{
         return super.onCreateOptionsMenu(menu);
     }
 
+    public void setTurn(){
+
+    }
+
     //Helper function that fills all Positions to jum in one List, which we need for controll if the
     //moves stones only to valid positions
 
     public void connectionSuccessfull(){
-    System.out.println("Spieler zwei ist erflogreich beigetreten");
+        Toast.makeText(GameField.this, "Spieler zwei ist erfolgreich dem Spiel beigetreten",Toast.LENGTH_LONG).show();
+    }
+    public void waitingForConnection(){
+
     }
 
-    public void moveHelperFunc(int stoneCol, int stoneRow, int posRow, int posCol){
+    public void moveHelperFunc(final int stoneCol, final int stoneRow, final int posRow, final int posCol){
+        System.out.println("Grösse von Array" + stones.length);
         System.out.println("StonesId aus helper:" + stones[stoneRow][stoneCol]);
+
         View stone = findViewById(stones[stoneRow][stoneCol]);
         movingStone=stone;
-        View position = findViewById(positionsIds[posRow][posCol]);
-        moveWhiteStone(position);
+        final View position = findViewById(positionsIds[posRow][posCol]);
+        float diffX=0;
+        float diffY=0;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+
+                View stone = findViewById(stones[stoneRow][stoneCol]);
+                movingStone=stone;
+                View position = findViewById(positionsIds[posRow][posCol]);
+                float diffX=0;
+                float diffY=0;
+                diffX = position.getX() - movingStone.getX();
+                diffY = position.getY() - movingStone.getY();
+                movingStone.animate()
+                        .x(movingStone.getX() + diffX + (movingStone.getWidth() / 2))
+                        .y(movingStone.getY() + diffY + (movingStone.getHeight() / 2))
+                        .start();
+                TURN=REDTURN;
+            }
+        });
+
+
     }
 
     public void stopGame(){
@@ -568,7 +594,9 @@ public void showValidPosForQueen(List<Integer>positions){
                 stopGame();
             }
             controller.changeTurnOfPlayer(visualizeTurnOfPlayerTwo, visualizeTurnOfPlayerOne);
-            TURN = WHITETURN;
+            if(player.equals("PlayerTwo")) {
+                TURN = WHITETURN;
+            }
         }
             }
         }
@@ -584,7 +612,7 @@ public void showValidPosForQueen(List<Integer>positions){
         int rowStone = 0;
         int colStone = 0;
         if((TURN&WHITETURN)!=0) {
-            if (movingStone.getY() > view.getY() &&(allPositionsToJump.contains(view.getId()) || validPosToMove.contains(view))) {
+            if (movingStone.getY() > view.getY()) {
                 clearBoard();
                 diffX = view.getX() - movingStone.getX();
                 diffY = view.getY() - movingStone.getY();
@@ -612,8 +640,8 @@ public void showValidPosForQueen(List<Integer>positions){
                 if (isFinish) {
                     stopGame();
                 }
-                controller.changeTurnOfPlayer(visualizeTurnOfPlayerOne, visualizeTurnOfPlayerTwo);
-                TURN = REDTURN;
+                    controller.changeTurnOfPlayer(visualizeTurnOfPlayerOne, visualizeTurnOfPlayerTwo);
+                    TURN = REDTURN;
             }
 
             }
@@ -646,8 +674,6 @@ public void showValidPosForQueen(List<Integer>positions){
 
 
     public void switchPosOfStoneInArray(View stone, View pos){
-
-        firebase=new FirebaseGameController(stones, gameName);
         int col=0, row =0;
         int idStone = stone.getId();
         int idPos = pos.getId();
@@ -658,8 +684,6 @@ public void showValidPosForQueen(List<Integer>positions){
                 if(stones[i][j]==idStone){
                     oldCol=j;
                     oldRow=i;
-                    stones[oldRow][oldCol]=0;
-
                     System.out.println("Alte Spalte:"+oldCol+" "+"Alte Reihe"+oldRow);
                 }
                 //Now we got the stone and we need to change the index
@@ -695,9 +719,6 @@ public void showValidPosForQueen(List<Integer>positions){
 
     }
 
-    public boolean returnUpdate(){
-        return sentData;
-    }
 
     public void setWhiteQueen(View stoneToQueen ){
         whiteQueen.setQueen(stoneToQueen);
@@ -717,11 +738,6 @@ public void showValidPosForQueen(List<Integer>positions){
 
     }
 
-    //This Method returns true when a player finished his turn
-    public boolean update(){
-
-        return true;
-    }
 
 }
 
