@@ -19,7 +19,7 @@
         android:text="Spiel erstellen"
         android:fontFamily="@font/reem_kufi"
         android:textColor="@color/sandbraun"
-        android:textSize="26sp"
+        android:textSize="26dp"
         android:textStyle="bold|italic"/>
 
     <EditText
@@ -35,7 +35,7 @@
         android:text="Name des Raumes eingeben"
         android:fontFamily="@font/reem_kufi"
         android:textColor="@color/sandbraun"
-        android:textSize="15sp"/>
+        android:textSize="15dp"/>
 
     <Button
         android:id="@+id/btnCreateOnlineGame"

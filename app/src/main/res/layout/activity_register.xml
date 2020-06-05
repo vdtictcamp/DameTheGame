@@ -21,7 +21,7 @@
         android:fontFamily="@font/reem_kufi"
         android:text="Neuen Account Erstellen"
         android:textColor="@color/sandbraun"
-        android:textSize="26sp"
+        android:textSize="26dp"
 
         android:textStyle="bold|italic"></TextView>
 
@@ -29,7 +29,6 @@
         android:id="@+id/txtUsername"
         android:layout_width="212dp"
         android:layout_height="30dp"
-
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
