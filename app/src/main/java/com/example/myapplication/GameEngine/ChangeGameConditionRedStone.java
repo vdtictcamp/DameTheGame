@@ -149,7 +149,7 @@ public List<Integer> collectPosLeftDiagonal(int i, int j){
                         colDiff++;
                     }
                 }
-                if (j - colDiff >= 0) {
+                if (j - colDiff >= 0 && i-rowDiff>=0) {
                     if (((k == i - rowDiff) && (z == j - colDiff)) && (colDiff % 2 == 0)) {
                         if (stones[k][z] == 0) {
                             positionsToJump.add(positions[k][z]);
@@ -177,7 +177,21 @@ public List<Integer> collectPosLeftDiagonal(int i, int j){
     return positionsToJump;
 }
     public boolean checkNextJump(int row, int col){
-        if(row ==0 || col==0 || col==7 || row==7){
+        if(col==0){
+            if(stones[col+1][row-1]!=0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        else if(col>=7){
+            if(stones[col-1][row-1]!=0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        else if(row ==0 || row==7){
             return false;
         }
         else if(stones[row-1][col-1]!=0 || stones[row-1][col+1]!=0){

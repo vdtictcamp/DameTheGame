@@ -28,7 +28,7 @@
         android:id="@+id/editText"
         android:layout_width="167dp"
         android:layout_height="43dp"
-
+        android:layout_marginBottom="20dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="70dp"
@@ -42,17 +42,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-
         android:layout_alignParentTop="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="334dp"
+        android:layout_marginStart="74dp"
+        android:layout_marginTop="333dp"
+        android:layout_marginBottom="20dp"
         android:text="@string/playerTwoSettings"
         android:textColor="@color/sandbraun"
         android:textSize="17dp"
-        android:textStyle="bold|italic"></TextView>
+        android:textStyle="bold|italic">
+
+    </TextView>
 
     <EditText
+        android:layout_marginBottom="20dp"
         android:layout_width="291dp"
         android:layout_height="64dp"
         android:layout_row="0"
@@ -140,6 +143,7 @@
             android:text="Black" />
 
         <RadioButton
+            android:layout_marginBottom="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/reem_kufi"
@@ -156,10 +160,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="167dp"
-        android:layout_marginBottom="21dp"
+        android:layout_marginStart="66dp"
+        android:layout_marginBottom="38dp"
         android:background="@color/sandbraun"
-
         android:fontFamily="@font/alfa_slab_one"
         android:text="Spielen!"
         android:textColor="@color/damebraun" />

@@ -93,7 +93,6 @@ public class GameField extends AppCompatActivity{
         visualizeTurnOfPlayerOne=findViewById(R.id.playersOneTurn);
         visualizeTurnOfPlayerTwo=findViewById(R.id.playersTwoTurn);
         controller=new Controller();
-        gameController=new GameController(positionsIds);
         Intent intent= getIntent();
         gameName = intent.getExtras().getString("gameName");
         player = intent.getExtras().getString("Player");
@@ -133,6 +132,8 @@ public class GameField extends AppCompatActivity{
                 {R.id.b5, R.id.b6, R.id.b7, R.id.b8},
                 {R.id.b9, R.id.b10, R.id.b11, R.id.b12},};
 
+        //Game Controller
+        gameController=new GameController(this, positionsIds);
 
         View.OnClickListener checkPositions = new View.OnClickListener() {
             @Override
@@ -432,7 +433,6 @@ public void showValidPosForQueen(List<Integer>positions){
         int id = v.getId();
         int row =0;
         int col = 0;
-        View stone = null;
         for(int i=0; i<stones.length; i++){
             for(int j=0; j<stones[i].length; j++){
                 if(stones[i][j]==id){
@@ -444,7 +444,6 @@ public void showValidPosForQueen(List<Integer>positions){
                 }
             }
         }
-
         //Index for the Array which contains the positions where the stone can move
         int z=0;
         //Help index
@@ -474,12 +473,10 @@ public void showValidPosForQueen(List<Integer>positions){
     public void showValidPositionsForWhiteStones(View v){
         clearBoard();
         validPosToMove=new ArrayList<>();
-
         boolean posIsBlocked = false;
         int id = v.getId();
         int row =0;
         int col = 0;
-        View stone = null;
         for(int i=0; i<stones.length; i++){
             for(int j=0; j<stones[i].length; j++){
                 if(stones[i][j]==id){
@@ -588,17 +585,15 @@ public void showValidPosForQueen(List<Integer>positions){
                 }
 
             }
-
             boolean isFinish =finishChecker.checkIfGameIsFinish(whiteStonesIds, redStonesIds);
             if(isFinish){
                 stopGame();
             }
                 controller.changeTurnOfPlayer(visualizeTurnOfPlayerTwo, visualizeTurnOfPlayerOne);
                 TURN=WHITETURN;
-
-        }
             }
         }
+    }
 
     //If the Stones move, we need to change the index in the stone-Array
     public void moveWhiteStone(View view){

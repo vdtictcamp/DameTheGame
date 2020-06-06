@@ -93,7 +93,6 @@ public class localGame extends AppCompatActivity {
             visualizeTurnOfPlayerOne=findViewById(R.id.playersOneTurn);
             visualizeTurnOfPlayerTwo=findViewById(R.id.playersTwoTurn);
             controller=new Controller();
-            gameController=new GameController(positionsIds);
             Intent intent= getIntent();
             gameName = intent.getExtras().getString("gameName");
             player = intent.getExtras().getString("Player");
@@ -130,6 +129,12 @@ public class localGame extends AppCompatActivity {
                     {R.id.b5, R.id.b6, R.id.b7, R.id.b8},
                     {R.id.b9, R.id.b10, R.id.b11, R.id.b12},};
 
+            //GameController
+            gameController=new GameController(this, positionsIds);
+            //QueenChecker
+            queenChecker=new QueenChecker(positionsIds);
+            //Clears the Board
+
 
             View.OnClickListener checkPositions = new View.OnClickListener() {
                 @Override
@@ -148,7 +153,6 @@ public class localGame extends AppCompatActivity {
                 }
             };
 
-
             //Fill the Array with all Positions
             for(int i=0; i<positions.length;i++){
                 for(int j=0; j<positions[i].length; j++){
@@ -159,18 +163,16 @@ public class localGame extends AppCompatActivity {
                 }
             }
 
+            //Clears the Board
             clearBoard();
-
-
-            queenChecker=new QueenChecker(positionsIds);
 
             View.OnClickListener redStoneClickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    movingStone=v;
                     chGameCondRed = new ChangeGameConditionRedStone(stones, positionsIds, redStonesIds);
                     redQueen=new RedQueen(v,redQueens, positionsIds, stones, redStonesIds);
                     if((TURN & REDTURN)!=0) {
+                        movingStone=v;
                         v.startAnimation(onClickAnim);
                         if(redQueen.checkIfIsQueen(v)){
                             int[]index = redQueen.getRowAndCol(v);
@@ -220,11 +222,11 @@ public class localGame extends AppCompatActivity {
             View.OnClickListener whiteStoneClickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    movingStone=v;
                     chGameCondWhite = new ChangeGameConditionWhiteStone( stones, positionsIds, whiteStonesIds);
                     whiteQueen=new WhiteQueen(whiteQueens, positionsIds, stones, whiteStonesIds);
                     //Checks whoms Turn it is
                     if ((TURN & WHITETURN) != 0) {
+                        movingStone=v;
                         v.startAnimation(onClickAnim);
                         if(whiteQueen.checkIfIsQueen(v)){
                             System.out.println("Es ist eine Königin"+posForWhiteQueen.size());
@@ -314,13 +316,13 @@ public class localGame extends AppCompatActivity {
         //Dieser Position muss anschliessend ein View.OnClickListener gegeben werden
         private void ShowThePositionAfterEatingRedStone(int id){
             View position = findViewById(id);
-            position.setBackgroundColor(Color.GREEN);
+            position.setBackgroundColor(Color.parseColor("#D2691E"));
             position.setOnClickListener(moveListenerForWhiteStone);
         }
 
         private void ShowThePositionAfterEatingWhiteStone(int id){
             View position = findViewById(id);
-            position.setBackgroundColor(Color.GREEN);
+            position.setBackgroundColor(Color.parseColor("#D2691E"));
             position.setOnClickListener(moveListenerForRedStone);
         }
 
@@ -371,6 +373,8 @@ public class localGame extends AppCompatActivity {
             for(int i=0; i<stones.length; i++){
                 for(int j=0; j<stones[i].length; j++){
                     if(stones[i][j]==id){
+                        System.out.println("Dieser Stein liegt in Spalte"+ j +" "+ "und zeile"+" "+i);
+
                         id = stones[i][j];
                         row = i;
                         col = j;
@@ -390,9 +394,9 @@ public class localGame extends AppCompatActivity {
                     }
                     id = positionsIds[i][j];
                     View validPos = findViewById(id);
-                    posIsBlocked=checkIfStoneIsBlockingPos(j,i);
+                    posIsBlocked=gameController.checkIfStoneIsBlockingPos(stones, j,i);
                     if(!posIsBlocked){
-                        validPos.setBackgroundColor(Color.GREEN);
+                        validPos.setBackgroundColor(Color.parseColor("#D2691E"));
                         validPosToMove.add(validPos);
                         validPositionsToMove[z]=positionsIds[i][j];
                         System.out.println(validPositionsToMove.length);
@@ -409,7 +413,6 @@ public class localGame extends AppCompatActivity {
         public void showValidPositionsForWhiteStones(View v){
             clearBoard();
             validPosToMove=new ArrayList<>();
-
             boolean posIsBlocked = false;
             int id = v.getId();
             int row =0;
@@ -435,9 +438,9 @@ public class localGame extends AppCompatActivity {
                     }
                     id = positionsIds[i][j];
                     View validPos = findViewById(id);
-                    posIsBlocked=checkIfStoneIsBlockingPos(j,i);
+                    posIsBlocked=gameController.checkIfStoneIsBlockingPos(stones, j,i);
                     if(!posIsBlocked){
-                        validPos.setBackgroundColor(Color.GREEN);
+                        validPos.setBackgroundColor(Color.parseColor("#D2691E"));
                         validPosToMove.add(validPos);
                         validPositionsToMove[z]=id;
                         z++;
@@ -455,9 +458,6 @@ public class localGame extends AppCompatActivity {
                 moveQueen(v);
             }
         };
-
-
-        //Eventuell auslagern
         View.OnClickListener moveListenerForRedStone = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -465,7 +465,6 @@ public class localGame extends AppCompatActivity {
 
             }
         };
-        //Eventuell auslagern
         View.OnClickListener moveListenerForWhiteStone = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -498,8 +497,10 @@ public class localGame extends AppCompatActivity {
         }
         //Muss mit Touch Event erledigt werden
         public void moveRedStone(View view){
+            int posId = view.getId();
+            int stoneId = movingStone.getId();
             if((TURN & REDTURN)!=0 ){
-                if(movingStone.getY()<view.getY() && validPosToMove.contains(view)|| allPositionsToJump.contains(view.getId())) {
+                if(movingStone.getY()<view.getY() && validPosToMove.contains(view) || allPositionsToJump.contains(view.getId())) {
                     clearBoard();
                     float diffX = view.getX() - movingStone.getX();
                     float diffY = view.getY() - movingStone.getY();
@@ -508,29 +509,16 @@ public class localGame extends AppCompatActivity {
                             .y(movingStone.getY() + diffY + (movingStone.getHeight() / 2))
                             .start();
 
-                    switchPosOfStoneInArray(movingStone, view);
-                    if (whiteStonesToEat.size() != 0) {
-                        for (int i = 0; i < whiteStonesToEat.size(); i++) {
-                            int id = whiteStonesToEat.get(i);
-                            for (int k = 0; k < stones.length; k++) {
-                                for (int j = 0; j < stones[k].length; j++) {
-                                    if (stones[k][j] == id) {
-                                        removeStone(k, j);
-
-                                    }
-                                }
-                            }
-                        }
-
+                    if (whiteStonesToEat.size() > 0) {
+                        gameController.removeStones(stones,allPositionsToJump, stoneId,posId);
                     }
-
+                    switchPosOfStoneInArray(movingStone, view);
                     boolean isFinish =finishChecker.checkIfGameIsFinish(whiteStonesIds, redStonesIds);
                     if(isFinish){
                         stopGame();
                     }
                     controller.changeTurnOfPlayer(visualizeTurnOfPlayerTwo, visualizeTurnOfPlayerOne);
                     TURN=WHITETURN;
-
                 }
             }
         }
@@ -541,10 +529,6 @@ public class localGame extends AppCompatActivity {
             int stoneId = movingStone.getId();
             float diffX=0;
             float diffY=0;
-            int rowPos = 0;
-            int colPos = 0;
-            int rowStone = 0;
-            int colStone = 0;
             if((TURN & WHITETURN)!=0) {
                 if (movingStone.getY() > view.getY() && validPosToMove.contains(view)|| allPositionsToJump.contains(view.getId())) {
                     clearBoard();
@@ -554,29 +538,16 @@ public class localGame extends AppCompatActivity {
                             .x(movingStone.getX() + diffX + (movingStone.getWidth() / 2))
                             .y(movingStone.getY() + diffY + (movingStone.getHeight() / 2))
                             .start();
-                    switchPosOfStoneInArray(movingStone, view);
-                    if (redStonesToEat.size() != 0) {
-                        for (int i = 0; i < redStonesToEat.size(); i++) {
-                            int id = redStonesToEat.get(i);
-                            for (int k = 0; k < stones.length; k++) {
-                                for (int j = 0; j < stones[k].length; j++) {
-                                    if (stones[k][j] == id) {
-                                        removeStone(k, j);
-                                    }
-                                }
-                            }
-                        }
-
+                    if (redStonesToEat.size() >0) {
+                       gameController.removeStones(stones,allPositionsToJump, stoneId,posId);
                     }
-
+                    switchPosOfStoneInArray(movingStone, view);
                     boolean isFinish = finishChecker.checkIfGameIsFinish(whiteStonesIds, redStonesIds);
                     if (isFinish) {
                         stopGame();
                     }
-
                     controller.changeTurnOfPlayer(visualizeTurnOfPlayerOne, visualizeTurnOfPlayerTwo);
                     TURN=REDTURN;
-
                 }
 
             }
@@ -599,14 +570,11 @@ public class localGame extends AppCompatActivity {
 
         }
 
-
         public void removeStone(int row, int col){
             View v = findViewById(stones[row][col]);
             gameLayout.removeView(v);
             stones[row][col]=0;
-
         }
-
 
         public void switchPosOfStoneInArray(View stone, View pos){
             int col=0, row =0;
@@ -647,8 +615,9 @@ public class localGame extends AppCompatActivity {
                 setRedQueen(stoneToQueen);
 
             }
-
         }
+
+
 
         public void setWhiteQueen(View stoneToQueen ){
             whiteQueen.setQueen(stoneToQueen);
@@ -656,17 +625,5 @@ public class localGame extends AppCompatActivity {
         public void setRedQueen(View stoneToQueen){
             redQueen.setQueen(stoneToQueen);
         }
-
-        public boolean checkIfStoneIsBlockingPos(int col, int row){
-            int id = stones[row][col];
-            View containingStone = findViewById(id);
-            if(stones[row][col]==0){
-                return false;
-            }else{
-                return true;
-            }
-
-        }
-
 
     }

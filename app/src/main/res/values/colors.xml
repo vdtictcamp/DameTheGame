@@ -11,5 +11,6 @@
     <color name="damebraun">#843F3F</color>
     <color name="sandbraun">#FDE273</color>
     <color name="grey">#262626</color>
+    <color name="markForField">#D2691E</color>
 
 </resources>
