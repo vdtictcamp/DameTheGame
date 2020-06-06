@@ -98,6 +98,7 @@ public class localGame extends AppCompatActivity {
             visualizeTurnOfPlayerTwo=findViewById(R.id.playersTwoTurn);
             controller=new Controller();
             Intent intent= getIntent();
+
             gameName = intent.getExtras().getString("gameName");
             player = intent.getExtras().getString("Player");
 
@@ -170,6 +171,7 @@ public class localGame extends AppCompatActivity {
             //Clears the Board
             clearBoard();
 
+            //This ist the click listener for all red stones
             View.OnClickListener redStoneClickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -216,13 +218,12 @@ public class localGame extends AppCompatActivity {
                                 }
                             }
                         }
-
                     }
-
                 }
 
             };
 
+            //This is the click listener for all white stones
             View.OnClickListener whiteStoneClickListener = new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
