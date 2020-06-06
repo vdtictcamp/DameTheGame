@@ -60,6 +60,7 @@ public class SearchGameActivity extends AppCompatActivity {
         loadBar=findViewById(R.id.loadBarJoinGame);
         playerName = "test";
         addRoomsEventListener();
+        currentUserAuth= FirebaseAuth.getInstance();
 
 
     /**

@@ -49,32 +49,38 @@ public class PlayerTwoThread extends Thread implements Runnable {
 
         Looper.prepare();
         while (!gameOver) {
-            inTurn = gameController.readTurnOfPlayerTwo();
+            isInTurn = gameController.readTurnOfPlayerTwo();
             if (!isInTurn) {
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
                 HashMap<String, Integer> ids = gameController.addValueEventListenerAllValues();
                 if (ids != null) {
                     System.out.println(ids.keySet());
-                    System.out.println("TRUEEEEEE");
                     System.out.println(ids);
-                    gameController.setDefaultUpdateValues();
-                    if (ids != null) {
-                        inTurn = true;
                         System.out.println("TRUEEEEEE");
                         System.out.println(ids);
-                        gameController.setDefaultUpdateValues();
                         long rowPos = Long.parseLong(String.valueOf(ids.get("rowPos")));
                         long colPos = Long.parseLong(String.valueOf(ids.get("colPos")));
                         long colStone = Long.parseLong(String.valueOf(ids.get("colStone")));
                         long rowStone = Long.parseLong(String.valueOf(ids.get("rowStone")));
                         if (rowPos != 0 && colPos != 0 && colPos != 0 && colStone != 0) {
-                            isInTurn = true;
                             boolean ready = gameController.setDefaultUpdateValues();
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                             if(ready) {
+                                isInTurn = true;
+                                gameController.finishPlayerOneTurn();
+                                try {
+                                    Thread.sleep(1000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
                                 game.moveHelperFunc((int) colStone, (int) rowStone, (int) rowPos, (int) colPos);
                             }
                         }
@@ -84,5 +90,5 @@ public class PlayerTwoThread extends Thread implements Runnable {
             }
         }
     }
-}
+
 

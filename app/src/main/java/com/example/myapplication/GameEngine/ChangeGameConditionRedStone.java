@@ -20,8 +20,7 @@ public class ChangeGameConditionRedStone {
         this.redStonesIds = redStonesIds;
     }
 
-
-
+    //This Method checks if the Stone is a red Stone
     public boolean checkIfIsRedStone(int id) {
         for (int i = 0; i < redStonesIds.length; i++) {
             for (int j = 0; j < redStonesIds[i].length; j++) {
@@ -34,7 +33,7 @@ public class ChangeGameConditionRedStone {
     }
 
 
-    public List<List<Integer>> canEateWhiteStone(View stone) {
+    public List<List<Integer>> canEateWhiteStone( View stone) {
         List<List<Integer>> positionsToJump = new ArrayList<>();
         int id = stone.getId();
         for (int i = 0; i < positions.length; i++) {
@@ -93,7 +92,7 @@ public class ChangeGameConditionRedStone {
         List<Integer> positionsToJump = new ArrayList<>();
         List<Integer>checkPositionsRight=new ArrayList<>();
         List<Integer>checkPositionsLeft = new ArrayList<>();
-        for (int k = i; k >=i-3; k--) {
+        for (int k = i; k >=0; k--) {
             for (int z = j-2; z < j+3; z++) {
                 if (z < 8) {
                     if ((k == i - rowDiff && z == j + colDiff) && (colDiff % 2 != 0)) {
@@ -102,7 +101,7 @@ public class ChangeGameConditionRedStone {
                             colDiff++;
                         }
                     }
-                    if(j+colDiff<8){
+                    if(j+colDiff<=7){
                     if ((k == i - rowDiff && z == j + colDiff) && (colDiff % 2 == 0)) {
                         if (stones[k][z] == 0 ) {
                             positionsToJump.add(positions[k][z]);

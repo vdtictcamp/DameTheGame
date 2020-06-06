@@ -24,21 +24,15 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btnInitNewGame;
     private Button btnToLogin;
-
     private Button btnRegister;
     private Button btnOnlineSpielen;
     private Button btnToSearchGame;
-    FirebaseAuth currentUserAuth;
     private Button btnCreateGame;
 
-    //firebase Testelements
-    private FirebaseGameController firebase;
-    private String gameName;
-    private String player;
-    static int[][] stones;
     private Button btnTestransaction;
-    FirebaseDatabase database;
-    DatabaseReference reference;
+    private FirebaseDatabase database;
+    private DatabaseReference reference;
+    private FirebaseAuth currentUserAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,9 +140,4 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
-
-
-
 }

@@ -31,7 +31,7 @@ public class WhiteQueen {
         this.positions = positions;
         this.whiteStones = whiteStones;
         chGameCondWhite = new ChangeGameConditionWhiteStone(stones, positions, whiteStones);
-        changeGameCondRed = new ChangeGameConditionRedStone(stones, positions, whiteStones);
+        changeGameCondRed = new ChangeGameConditionRedStone( stones, positions, whiteStones);
     }
 
 

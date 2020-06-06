@@ -27,17 +27,10 @@ public class GameController {
         }
     }
 
-
     //We will conduct this method fpr every stone which can be eaten
     public void removeStones(int[][]stones, List<Integer> positions, int stoneId, int positionId) {
-        int rowChoosenPos = 0;
-        int colChoosenPos = 0;
-        int rowStone = 0;
-        int colStone = 0;
-        int diffRow = 0;
-        int colDiff = 0;
-        int rowJumpPos=0;
-        int colJumpPos=0;
+        int colChoosenPos = 0,rowChoosenPos=0, rowStone = 0, colStone = 0, rowJumpPos=0, colJumpPos=0;
+        int diffRow = 0, colDiff = 0;
         int []index = getChoosenPositionToJump(stones, positionId);
         colChoosenPos=index[1];
         rowChoosenPos=index[0];
@@ -52,8 +45,11 @@ public class GameController {
                         rowStone = i;
                         colStone = j;
                     }
+
                 }
+
             }
+
             if(colChoosenPos>colStone){
                 if(colJumpPos>=colStone) {
                     diffRow = (rowJumpPos + rowStone) / 2;
@@ -65,7 +61,6 @@ public class GameController {
                     }
                     stoneId = positionIds[rowJumpPos][colJumpPos];
                 }
-
             }if(colChoosenPos<colStone){
                 if(colJumpPos<=colStone){
                     diffRow = (rowJumpPos + rowStone) / 2;
@@ -104,9 +99,11 @@ public class GameController {
                     stoneId = positionIds[rowJumpPos][colJumpPos];
                 }
             }
-
-
+            if(positions.get(p_id)==positionId){
+                break;
+            }
         }
+
     }
 
     private int[] getChoosenPositionToJump(int[][]stones, int positionId){
@@ -124,10 +121,9 @@ public class GameController {
         }
         index[0]=rowChoosenPos;
         index[1]=colChoosenPos;
-
         return index;
     }
-
+    //This Method fills all positions in one List
     public List<Integer> fillPositionsToJumpInList(List<List<Integer>>posAfterEat){
         List<Integer>allPositionsToJump = new ArrayList<>();
         System.out.println("Size:"+posAfterEat.size());
@@ -137,19 +133,6 @@ public class GameController {
             }
         }
         return allPositionsToJump;
-    }
-
-    public int[] getRowAndCol(View stone) {
-        int index[]=new int[2];
-        for (int i = 0; i < stones.length; i++) {
-            for (int j = 0; j < stones[i].length; j++) {
-                if(stones[i][j]==stone.getId()){
-                    index[0]=i;
-                    index[1]=j;
-                }
-            }
-        }
-        return index;
     }
 
 //bewegter Stein Id und zielpositionID
@@ -172,7 +155,6 @@ public class GameController {
         return stones;
     }
 
-
     public boolean checkIfStoneIsBlockingPos(int[][]stones, int col, int row){
         int id = stones[row][col];
         if(stones[row][col]==0){
@@ -183,6 +165,30 @@ public class GameController {
     }
 
 
+    //there are Special situations fpr the GameController
+    //There are situations during a game, where the player has to decide which stone he wishes to eat. The Problem is, that it can be, that
+    //the destination position is the same independant which stone will be eaten.
+    //In this case the player needs to move forward one position and eats one stone. After that hew needs to make another
+    //movement.
+    //For that case we define a method
 
+    /*
+    public void stonesBeta(int[][]stones, List<Integer> positions, int stoneId, int positionId){
+        int colChoosenPos = 0, rowStone = 0, colStone = 0, rowJumpPos=0, colJumpPos=0;
+        int diffRow = 0, colDiff = 0;
+        for (int i = 0; i < stones.length; i++) {
+            for (int j = 0; j < stones[i].length; j++) {
+                if(positionIds[i][j]==positions.get(p_id)){
+                    rowJumpPos=i;
+                    colJumpPos=j;
+                }
+                if (stones[i][j] == stoneId || stoneId==positionIds[i][j]) {
+                    rowStone = i;
+                    colStone = j;
+                }
+            }
+        }
+    }
 
+     */
 }

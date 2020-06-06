@@ -74,11 +74,15 @@ public class localGame extends AppCompatActivity {
         //We need thie variables to controll the turns of the player
         private String gameName =" ";
         private String player=" ";
+
+        //These two variables controll the turn of the player
         final int WHITETURN = 1;
         final int REDTURN =2;
+
+        // At the beginning of the game we set the turn for the player which plays the white stones
         int TURN =WHITETURN;
-        EditText countdown;
-        Animation onClickAnim;
+        private EditText countdown;
+        private Animation onClickAnim;
 
         @SuppressLint("ResourceAsColor")
         @Override
@@ -97,9 +101,10 @@ public class localGame extends AppCompatActivity {
             gameName = intent.getExtras().getString("gameName");
             player = intent.getExtras().getString("Player");
 
-            //Load the Animation
+            //Load the Animation, the Animation helps to identify the stone which has been touched
             onClickAnim= AnimationUtils.loadAnimation(this, R.anim.clicked);
-            //All position
+
+            //All position, the following array represents all positions of the board
             positionsIds = new int[][]{{R.id.pos1a, R.id.pos1b, R.id.pos1c, R.id.pos1d, R.id.pos1e, R.id.pos1f, R.id.pos1g, R.id.pos1h},
                     {R.id.pos2a, R.id.pos2b, R.id.pos2c, R.id.pos2d, R.id.pos2e, R.id.pos2f, R.id.pos2g, R.id.pos2h},
                     {R.id.pos3a, R.id.pos3b, R.id.pos3c, R.id.pos3d, R.id.pos3e, R.id.pos3f, R.id.pos3g, R.id.pos3h},
@@ -109,7 +114,7 @@ public class localGame extends AppCompatActivity {
                     {R.id.pos7a, R.id.pos7b, R.id.pos7c, R.id.pos7d, R.id.pos7e, R.id.pos7f, R.id.pos7g, R.id.pos7h},
                     {R.id.pos8a, R.id.pos8b, R.id.pos8c, R.id.pos8d, R.id.pos8e, R.id.pos8f, R.id.pos8g, R.id.pos8h}};
 
-            //The distrubution of the Stones on the Board
+            //The distrubution of the Stones on the Board, startsituation of the game
             stones = new int[][]{{R.id.w1_2, 0, R.id.w2_2, 0, R.id.w3, 0, R.id.w4, 0},
                     { 0, R.id.w5, 0, R.id.w6, 0, R.id.w7, 0, R.id.w8},
                     { R.id.w9_2, 0, R.id.w10, 0, R.id.w11, 0, R.id.w12, 0},
@@ -129,12 +134,11 @@ public class localGame extends AppCompatActivity {
                     {R.id.b5, R.id.b6, R.id.b7, R.id.b8},
                     {R.id.b9, R.id.b10, R.id.b11, R.id.b12},};
 
-            //GameController
+            //GameController, the game controller controlls the game
             gameController=new GameController(this, positionsIds);
+
             //QueenChecker
             queenChecker=new QueenChecker(positionsIds);
-            //Clears the Board
-
 
             View.OnClickListener checkPositions = new View.OnClickListener() {
                 @Override
@@ -569,11 +573,19 @@ public class localGame extends AppCompatActivity {
             }
 
         }
-
         public void removeStone(int row, int col){
             View v = findViewById(stones[row][col]);
-            gameLayout.removeView(v);
+            for(int i=0; i<whiteStonesIds.length; i++){
+                for(int j=0; j<whiteStonesIds.length; j++){
+                    if(whiteStonesIds[i][j]==stones[row][col]){
+                        whiteStonesIds[i][j]=0;
+                    }else if(redStonesIds[i][j]==stones[row][col]){
+                        redStonesIds[i][j]=0;
+                    }
+                }
+            }
             stones[row][col]=0;
+            gameLayout.removeView(v);
         }
 
         public void switchPosOfStoneInArray(View stone, View pos){

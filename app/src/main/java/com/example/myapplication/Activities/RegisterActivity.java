@@ -64,32 +64,34 @@ public class RegisterActivity extends AppCompatActivity {
                 password_repeat = txtPasswordRepeat.getText().toString().trim();
 
                 if(TextUtils.isEmpty(name)){
-                    txtUserName.setText(R.string.txtUnsernameNichtLeer);
+                    Toast.makeText(RegisterActivity.this, "Email muss vorhanden sein", Toast.LENGTH_LONG).show();
                     return;
                 }
                 if(TextUtils.isEmpty(password)){
-                    txtPassword.setText(R.string.txtUsernameAufforderung);
+                    Toast.makeText(RegisterActivity.this, "Bitte legen Sie ein Passwort fest", Toast.LENGTH_LONG).show();
                 }
                 if(password.length()<5){
-                    txtPassword.setText(R.string.txtMinimumPasswortlänge);
+                    Toast.makeText(RegisterActivity.this, "Passwörter müssen übereinstimmen", Toast.LENGTH_LONG).show();
                 }
                 if(!password_repeat.equals(password)){
                     Toast.makeText(RegisterActivity.this, "Passwörter müssen übereinstimmen", Toast.LENGTH_LONG).show();
                 }
 
-                loadBar.setVisibility(loadBar.VISIBLE);
-                firebaseAuth.createUserWithEmailAndPassword(name, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(password_repeat)) {
+                    loadBar.setVisibility(loadBar.VISIBLE);
+                    firebaseAuth.createUserWithEmailAndPassword(name, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 loadBar.setVisibility(loadBar.INVISIBLE);
                                 Toast.makeText(RegisterActivity.this, "Account erfolgreich erstellt", Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                            }else{
-                                Toast.makeText(RegisterActivity.this, "Error"+task.getException(), Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(RegisterActivity.this, "Error" + task.getException(), Toast.LENGTH_LONG).show();
                             }
                         }
                     });
+                }
             }
         };
 

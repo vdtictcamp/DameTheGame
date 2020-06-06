@@ -37,20 +37,13 @@ public class PlayerOneThread extends Thread implements Runnable {
         return isInTurn;
     }
 
-    public boolean finishTurn() {
+    public void finishTurn() {
         isInTurn = false;
-        return isInTurn;
     }
 
 
     @Override
     public void run() {
-
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         Looper.prepare();
         while (!playerTwohasJoined) {
             playerTwohasJoined = dataBaseController.checkIfPlayerTwoHasJoined();
@@ -64,10 +57,10 @@ public class PlayerOneThread extends Thread implements Runnable {
         System.out.println("Spieler zwei ist beigetreten");
         game.connectionSuccessfull();
         while (!gameOver) {
-            inTurn = gameController.readTurnOfPlayerOne();
+            isInTurn = gameController.readTurnOfPlayerOne();
             if (!isInTurn) {
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -75,19 +68,27 @@ public class PlayerOneThread extends Thread implements Runnable {
                 HashMap<String, Integer> ids = gameController.addValueEventListenerAllValues();
                 System.out.println(ids);
                 if (ids != null) {
-                    inTurn = true;
                     System.out.println("TRUEEEEEE");
                     System.out.println(ids);
-                    gameController.setDefaultUpdateValues();
                     long rowPos = Long.parseLong(String.valueOf(ids.get("rowPos")));
                     long colPos = Long.parseLong(String.valueOf(ids.get("colPos")));
                     long colStone = Long.parseLong(String.valueOf(ids.get("colStone")));
                     long rowStone = Long.parseLong(String.valueOf(ids.get("rowStone")));
-                    gameController.setDefaultUpdateValues();
                     if (rowPos != 0 && colPos != 0 && colPos != 0 && colStone != 0) {
-                        isInTurn = true;
                         boolean ready = gameController.setDefaultUpdateValues();
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         if(ready) {
+                            isInTurn = true;
+                            gameController.finishPlayerTwoTurn();
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                             game.moveHelperFunc((int) colStone, (int) rowStone, (int) rowPos, (int) colPos);
                         }
                     }
