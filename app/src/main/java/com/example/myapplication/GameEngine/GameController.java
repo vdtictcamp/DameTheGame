@@ -106,7 +106,7 @@ public class GameController {
 
     }
 
-    private int[] getChoosenPositionToJump(int[][]stones, int positionId){
+    public int[] getChoosenPositionToJump(int[][]stones, int positionId){
         int rowChoosenPos=0;
         int colChoosenPos=0;
         int[]index = new int[2];
@@ -154,6 +154,8 @@ public class GameController {
         stones[oldRow][oldCol]=0;
         return stones;
     }
+
+
 
     public boolean checkIfStoneIsBlockingPos(int[][]stones, int col, int row){
         int id = stones[row][col];

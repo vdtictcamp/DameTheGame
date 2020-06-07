@@ -99,6 +99,8 @@ public class localGame extends AppCompatActivity {
             controller=new Controller();
             Intent intent= getIntent();
 
+            //With the game name we identify the player, dependent of the player, the corrct Thread to controll the turns of the player will start
+            //The Threads controll the online game
             gameName = intent.getExtras().getString("gameName");
             player = intent.getExtras().getString("Player");
 
@@ -517,7 +519,7 @@ public class localGame extends AppCompatActivity {
                     if (whiteStonesToEat.size() > 0) {
                         gameController.removeStones(stones,allPositionsToJump, stoneId,posId);
                     }
-                    switchPosOfStoneInArray(movingStone, view);
+                    stones= gameController.switchPosOfStoneInArray(stones, positionsIds, movingStone.getId(), view.getId());
                     boolean isFinish =finishChecker.checkIfGameIsFinish(whiteStonesIds, redStonesIds);
                     if(isFinish){
                         stopGame();
@@ -525,6 +527,22 @@ public class localGame extends AppCompatActivity {
                     controller.changeTurnOfPlayer(visualizeTurnOfPlayerTwo, visualizeTurnOfPlayerOne);
                     TURN=WHITETURN;
                 }
+            }
+
+            int[]index = gameController.getChoosenPositionToJump(stones,view.getId());
+            if(index[0]==7){
+                int id = stones[index[0]][index[1]];
+                whiteQueens.add(id);
+                View stoneToQueen = findViewById(id);
+                setWhiteQueen(stoneToQueen);
+            }
+
+            if(index[0]==0){
+                int id = stones[index[0]][index[1]];
+                redQueens.add(id);
+                View stoneToQueen = findViewById(id);
+                setWhiteQueen(stoneToQueen);
+                setRedQueen(stoneToQueen);
             }
         }
 
@@ -546,7 +564,7 @@ public class localGame extends AppCompatActivity {
                     if (redStonesToEat.size() >0) {
                        gameController.removeStones(stones,allPositionsToJump, stoneId,posId);
                     }
-                    switchPosOfStoneInArray(movingStone, view);
+                    stones = gameController.switchPosOfStoneInArray(stones,positionsIds, movingStone.getId(), view.getId());
                     boolean isFinish = finishChecker.checkIfGameIsFinish(whiteStonesIds, redStonesIds);
                     if (isFinish) {
                         stopGame();
@@ -556,6 +574,22 @@ public class localGame extends AppCompatActivity {
                 }
 
             }
+            int[]index = gameController.getChoosenPositionToJump(stones,view.getId());
+            if(index[0]==7){
+                int id = stones[index[0]][index[1]];
+                whiteQueens.add(id);
+                View stoneToQueen = findViewById(id);
+                setWhiteQueen(stoneToQueen);
+            }
+
+            if(index[0]==0){
+                int id = stones[index[0]][index[1]];
+                redQueens.add(id);
+                View stoneToQueen = findViewById(id);
+                setWhiteQueen(stoneToQueen);
+                setRedQueen(stoneToQueen);
+            }
+
         }
 
         public void moveQueen(View position){
@@ -565,8 +599,7 @@ public class localGame extends AppCompatActivity {
                     .x(movingStone.getX() + diffX + (movingStone.getWidth() / 2))
                     .y(movingStone.getY() + diffY + (movingStone.getHeight() / 2))
                     .start();
-            switchPosOfStoneInArray(movingStone, position);
-
+            stones= gameController.switchPosOfStoneInArray(stones,positionsIds, movingStone.getId(), position.getId());
             if(TURN==WHITETURN){
                 TURN = REDTURN;
             }else {
@@ -588,49 +621,6 @@ public class localGame extends AppCompatActivity {
             stones[row][col]=0;
             gameLayout.removeView(v);
         }
-
-        public void switchPosOfStoneInArray(View stone, View pos){
-            int col=0, row =0;
-            int idStone = stone.getId();
-            int idPos = pos.getId();
-            int oldCol=0;
-            int oldRow=0;
-            for(int i=0; i<positionsIds.length; i++){
-                for(int j=0; j<positionsIds[i].length; j++){
-                    if(stones[i][j]==idStone){
-                        oldCol=j;
-                        oldRow=i;
-                        System.out.println("Alte Spalte:"+oldCol+" "+"Alte Reihe"+oldRow);
-                    }
-                    //Now we got the stone and we need to change the index
-                    if(positionsIds[i][j]==idPos){
-                        stones[i][j]=idStone;
-                        col = j;
-                        row = i;
-                        System.out.println("Row:"+i+"Col:"+j);
-                    }
-                }
-            }
-            stones[oldRow][oldCol]=0;
-            stones[row][col]=idStone;
-            //Every Time when we switch a Position we need to check if we got a new Queen
-            if(row==7){
-                int id = stones[row][col];
-                whiteQueens.add(id);
-                View stoneToQueen = findViewById(id);
-                setWhiteQueen(stoneToQueen);
-            }
-            if(row==0){
-                int id = stones[row][col];
-                redQueens.add(id);
-                View stoneToQueen = findViewById(id);
-                setWhiteQueen(stoneToQueen);
-                setRedQueen(stoneToQueen);
-
-            }
-        }
-
-
 
         public void setWhiteQueen(View stoneToQueen ){
             whiteQueen.setQueen(stoneToQueen);

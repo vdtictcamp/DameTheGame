@@ -347,20 +347,22 @@ public class GameField extends AppCompatActivity{
                 movingStone=stone;
                 float diffX=0;
                 float diffY=0;
-                System.out.println("Der Stein:"+stone+" "+"die Position:"+position);
-                diffX = position.getX() - movingStone.getX();
-                diffY = position.getY() - movingStone.getY();
-                movingStone.animate()
-                        .x(movingStone.getX() + diffX + (movingStone.getWidth() / 2))
-                        .y(movingStone.getY() + diffY + (movingStone.getHeight() / 2))
-                        .start();
-                stones= gameController.switchPosOfStoneInArray(stones, positionsIds, stone.getId(), position.getId());
-                if(TURN==WHITETURN){
-                    //firebase.finishPlayerOneTurn();
-                    TURN=REDTURN;
+                if(stone!=null && position!=null) {
+                    System.out.println("Der Stein:" + stone + " " + "die Position:" + position);
+                    diffX = position.getX() - movingStone.getX();
+                    diffY = position.getY() - movingStone.getY();
+                    movingStone.animate()
+                            .x(movingStone.getX() + diffX + (movingStone.getWidth() / 2))
+                            .y(movingStone.getY() + diffY + (movingStone.getHeight() / 2))
+                            .start();
+                    stones = gameController.switchPosOfStoneInArray(stones, positionsIds, stone.getId(), position.getId());
+                    if (TURN == WHITETURN) {
+                        //firebase.finishPlayerOneTurn();
+                        TURN = REDTURN;
 
-                }else{
-                    TURN=WHITETURN;
+                    } else {
+                        TURN = WHITETURN;
+                    }
                 }
             }
         });
