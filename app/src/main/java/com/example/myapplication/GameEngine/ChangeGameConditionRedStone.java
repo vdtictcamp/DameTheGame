@@ -1,5 +1,6 @@
 package com.example.myapplication.GameEngine;
 
+import android.content.Context;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -11,26 +12,18 @@ public class ChangeGameConditionRedStone {
     private int[][] stones = new int[8][8];
     private int[][] positions = new int[8][8];
     private int[][] redStonesIds;
-    List<Integer>stonesToEat = new ArrayList<>();
-    List<Integer>posToJump=new ArrayList<>();
+    private List<Integer>stonesToEat = new ArrayList<>();
+    private GameController gameController;
+    private Context context;
 
-    public ChangeGameConditionRedStone(int[][] stones, int[][] positions, int[][] redStonesIds) {
+    public ChangeGameConditionRedStone(Context context, int[][] stones, int[][] positions, int[][] redStonesIds) {
         this.stones = stones;
         this.positions = positions;
         this.redStonesIds = redStonesIds;
+        this.context=context;
+        this.gameController=new GameController(context, positions);
     }
 
-    //This Method checks if the Stone is a red Stone
-    public boolean checkIfIsRedStone(int id) {
-        for (int i = 0; i < redStonesIds.length; i++) {
-            for (int j = 0; j < redStonesIds[i].length; j++) {
-                if (redStonesIds[i][j] == id) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 
 
     public List<List<Integer>> canEateWhiteStone( View stone) {
@@ -73,8 +66,6 @@ public class ChangeGameConditionRedStone {
                         positionsToJump.add(pos);
                         pos = collectPosLeftDiagonal(i, j);
                         positionsToJump.add(pos);
-
-
                     }
                 }
 
@@ -86,7 +77,6 @@ public class ChangeGameConditionRedStone {
 
     //Gets all Positions to jump inDiagonal
     public List<Integer> collectPosRightDiagonal(int i, int j) {
-       System.out.println(i+" "+" "+j +"aus collect");
         int colDiff = 1;
         int rowDiff = 1;
         List<Integer> positionsToJump = new ArrayList<>();
@@ -96,7 +86,7 @@ public class ChangeGameConditionRedStone {
             for (int z = j-2; z < j+3; z++) {
                 if (z < 8) {
                     if ((k == i - rowDiff && z == j + colDiff) && (colDiff % 2 != 0)) {
-                        if ((stones[k][z] != 0) && (checkIfIsRedStone(stones[k][z]))) {
+                        if ((stones[k][z] != 0) && (gameController.checkIfIsRedStone(stones[k][z], redStonesIds))) {
                             rowDiff++;
                             colDiff++;
                         }
@@ -117,17 +107,15 @@ public class ChangeGameConditionRedStone {
                                     }
                                     for (int p = 0; p < checkPositionsLeft.size(); p++) {
                                     positionsToJump.add(checkPositionsLeft.get(p));
+                                        }
                                     }
-                            }
+                                }
                             }
                         }
                     }
-                    }
                 }
-
             }
         }
-
         return positionsToJump;
 }
 
@@ -143,7 +131,7 @@ public List<Integer> collectPosLeftDiagonal(int i, int j){
         for (int z = j-2; z < positions[i].length; z++) {
             if (z >=0) {
                 if ((k == i - rowDiff && z == j - colDiff) && (colDiff % 2 != 0)) {
-                    if (stones[k][z] != 0 && (checkIfIsRedStone(stones[k][z]))) {
+                    if (stones[k][z] != 0 && (gameController.checkIfIsRedStone(stones[k][z], redStonesIds))) {
                         rowDiff++;
                         colDiff++;
                     }
@@ -201,9 +189,7 @@ public List<Integer> collectPosLeftDiagonal(int i, int j){
         }
     }
 
-
     public List<Integer> returnStonesToEat () {
                 return stonesToEat;
             }
-
     }

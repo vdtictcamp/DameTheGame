@@ -41,8 +41,6 @@ private ProgressBar loadBar;
         loadBar=findViewById(R.id.loadBarLogin);
         loadBar.setVisibility(loadBar.INVISIBLE);
 
-
-
         View.OnClickListener toRegister = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,20 +72,17 @@ private ProgressBar loadBar;
                                 loadBar.setVisibility(loadBar.INVISIBLE);
                                 Toast.makeText(LoginActivity.this, "erfolgreich eingeloggt", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
-
                             } else {
                                 Toast.makeText(LoginActivity.this, "Error" + task.getException(), Toast.LENGTH_SHORT).show();
+                                loadBar.setVisibility(loadBar.INVISIBLE);
 
                             }
 
                         }
                     });
                 }
-
             }
         };
-
-
             btnLogin.setOnClickListener(loginListner);
     }
 

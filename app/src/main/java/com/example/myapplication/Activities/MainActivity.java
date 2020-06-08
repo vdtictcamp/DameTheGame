@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.myapplication.Firebase.FirebaseGameController;
 import com.example.myapplication.R;
@@ -58,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
-                //intent.putExtra("gameName", "Default");
                 startActivity(intent);
             }
         }));
@@ -66,9 +66,12 @@ public class MainActivity extends AppCompatActivity {
         btnOnlineSpielen.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), OnlineOptionsActivity.class);
-                //intent.putExtra("gameName", "Default");
-                startActivity(intent);
+                if (currentUserAuth.getCurrentUser()==null){
+                    Toast.makeText(MainActivity.this, "Um online zu spielen melde dich bitte mit deinem Account an", Toast.LENGTH_LONG).show();
+                }else {
+                    Intent intent = new Intent(getApplicationContext(), OnlineOptionsActivity.class);
+                    startActivity(intent);
+                }
             }
         }));
 
@@ -128,8 +131,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.menuOnlineItem:
-                intent = new Intent(getApplicationContext(), OnlineOptionsActivity.class);
-                startActivity(intent);
+                if(currentUserAuth.getCurrentUser()==null){
+                    Toast.makeText(MainActivity.this, "Um online zu spielen melde dich bitte mit deinem Account an", Toast.LENGTH_LONG).show();
+
+                }else {
+                    intent = new Intent(getApplicationContext(), OnlineOptionsActivity.class);
+                    startActivity(intent);
+                }
                 return true;
             case R.id.menuLogoutItem:
                 currentUserAuth.getInstance().signOut();

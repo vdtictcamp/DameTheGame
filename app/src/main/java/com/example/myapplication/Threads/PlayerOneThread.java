@@ -64,7 +64,6 @@ public class PlayerOneThread extends Thread implements Runnable {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println("Zug Spieler eins beendet");
                 HashMap<String, Integer> ids = gameController.addValueEventListenerAllValues();
                 System.out.println(ids);
                 if (ids != null) {
@@ -75,20 +74,16 @@ public class PlayerOneThread extends Thread implements Runnable {
                     long colStone = Long.parseLong(String.valueOf(ids.get("colStone")));
                     long rowStone = Long.parseLong(String.valueOf(ids.get("rowStone")));
                     if (rowPos != 0 && colPos != 0 && colPos != 0 && colStone != 0) {
+                        ids=null;
                         boolean ready = gameController.setDefaultUpdateValues();
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep(2000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                         if(ready) {
                             isInTurn = true;
                             gameController.finishPlayerTwoTurn();
-                            try {
-                                Thread.sleep(1000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
                             game.moveHelperFunc((int) colStone, (int) rowStone, (int) rowPos, (int) colPos);
                         }
                     }

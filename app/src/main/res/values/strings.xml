@@ -2,7 +2,7 @@
     <string name="app_name">Dame</string>
     <string name="MenuListData">Menu</string>
     <string name="register">Registrieren</string>
-    <string name="login">anmelden</string>
+    <string name="login">Anmelden</string>
     <string name="newGame">neues Spiel</string>
     <string name="gamerules">Spielregeln</string>
     <string name="exitGame">Spiel beenden</string>

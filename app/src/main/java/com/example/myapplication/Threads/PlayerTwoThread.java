@@ -52,7 +52,7 @@ public class PlayerTwoThread extends Thread implements Runnable {
             isInTurn = gameController.readTurnOfPlayerTwo();
             if (!isInTurn) {
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -67,9 +67,10 @@ public class PlayerTwoThread extends Thread implements Runnable {
                         long colStone = Long.parseLong(String.valueOf(ids.get("colStone")));
                         long rowStone = Long.parseLong(String.valueOf(ids.get("rowStone")));
                         if (rowPos != 0 && colPos != 0 && colPos != 0 && colStone != 0) {
+                            ids=null;
                             boolean ready = gameController.setDefaultUpdateValues();
                             try {
-                                Thread.sleep(1000);
+                                Thread.sleep(2000);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }

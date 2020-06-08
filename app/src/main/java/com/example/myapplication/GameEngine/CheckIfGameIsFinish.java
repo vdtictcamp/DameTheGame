@@ -25,9 +25,6 @@ public class CheckIfGameIsFinish {
         if(counter_1>=12 || counter_2>=12){
             isFinish=true;
         }
-
         return isFinish;
     }
-
-
 }

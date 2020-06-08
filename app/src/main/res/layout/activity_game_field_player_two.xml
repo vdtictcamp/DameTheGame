@@ -778,7 +778,7 @@
     </View>
 
     <View
-        android:id="@+id/w9_2"
+        android:id="@+id/w9"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_row="5"
@@ -854,7 +854,7 @@
         android:background="@drawable/rounded_corner"></View>
 
     <View
-        android:id="@+id/w1_2"
+        android:id="@+id/w1"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_row="7"

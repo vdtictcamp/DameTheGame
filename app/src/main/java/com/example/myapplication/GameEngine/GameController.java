@@ -13,9 +13,7 @@ import java.util.List;
 public class GameController {
 
     private Activity activity;
-    int[][] stones;
     int[][] positionIds;
-    List<Integer> stonesToEat;
 
 
     public GameController(Context context, int[][] positionIds) {
@@ -27,13 +25,36 @@ public class GameController {
         }
     }
 
+    public boolean checkIfIsRedStone(int id, int[][]redStonesIds) {
+        for (int i = 0; i < redStonesIds.length; i++) {
+            for (int j = 0; j < redStonesIds[i].length; j++) {
+                if (redStonesIds[i][j] == id) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean checkIfIsWhiteStone(int id, int[][]whiteStonesIds){
+        for(int i=0; i<whiteStonesIds.length; i++){
+            for(int j=0; j<whiteStonesIds[i].length; j++){
+                if(whiteStonesIds[i][j]==id){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
+
     //We will conduct this method fpr every stone which can be eaten
     public void removeStones(int[][]stones, List<Integer> positions, int stoneId, int positionId) {
         int colChoosenPos = 0,rowChoosenPos=0, rowStone = 0, colStone = 0, rowJumpPos=0, colJumpPos=0;
         int diffRow = 0, colDiff = 0;
         int []index = getChoosenPositionToJump(stones, positionId);
         colChoosenPos=index[1];
-        rowChoosenPos=index[0];
         for (int p_id = 0; p_id < positions.size(); p_id++) {
             for (int i = 0; i < stones.length; i++) {
                 for (int j = 0; j < stones[i].length; j++) {
@@ -47,7 +68,6 @@ public class GameController {
                     }
 
                 }
-
             }
 
             if(colChoosenPos>colStone){
@@ -124,14 +144,22 @@ public class GameController {
         return index;
     }
     //This Method fills all positions in one List
-    public List<Integer> fillPositionsToJumpInList(List<List<Integer>>posAfterEat){
+    public List<Integer> fillPositionsToJumpInList(List<List<Integer>>posAfterEat, boolean isQueen){
         List<Integer>allPositionsToJump = new ArrayList<>();
-        System.out.println("Size:"+posAfterEat.size());
-        for(int i=0; i<posAfterEat.size(); i++){
-            for(int j=0; j<posAfterEat.get(i).size(); j++){
-                allPositionsToJump.add(posAfterEat.get(i).get(j));
+
+            System.out.println(isQueen);
+            for (int i = 0; i < posAfterEat.size(); i++) {
+                for (int j = 0; j < posAfterEat.get(i).size(); j++) {
+                    allPositionsToJump.add(posAfterEat.get(i).get(j));
+                }
             }
-        }
+            System.out.println(isQueen);
+            for (int i = posAfterEat.size()-1; i>=0; i--) {
+                for (int j = posAfterEat.get(i).size()-1; j>=0; j--) {
+                    allPositionsToJump.add(posAfterEat.get(i).get(j));
+                }
+            }
+
         return allPositionsToJump;
     }
 
@@ -155,8 +183,6 @@ public class GameController {
         return stones;
     }
 
-
-
     public boolean checkIfStoneIsBlockingPos(int[][]stones, int col, int row){
         int id = stones[row][col];
         if(stones[row][col]==0){
@@ -166,31 +192,4 @@ public class GameController {
         }
     }
 
-
-    //there are Special situations fpr the GameController
-    //There are situations during a game, where the player has to decide which stone he wishes to eat. The Problem is, that it can be, that
-    //the destination position is the same independant which stone will be eaten.
-    //In this case the player needs to move forward one position and eats one stone. After that hew needs to make another
-    //movement.
-    //For that case we define a method
-
-    /*
-    public void stonesBeta(int[][]stones, List<Integer> positions, int stoneId, int positionId){
-        int colChoosenPos = 0, rowStone = 0, colStone = 0, rowJumpPos=0, colJumpPos=0;
-        int diffRow = 0, colDiff = 0;
-        for (int i = 0; i < stones.length; i++) {
-            for (int j = 0; j < stones[i].length; j++) {
-                if(positionIds[i][j]==positions.get(p_id)){
-                    rowJumpPos=i;
-                    colJumpPos=j;
-                }
-                if (stones[i][j] == stoneId || stoneId==positionIds[i][j]) {
-                    rowStone = i;
-                    colStone = j;
-                }
-            }
-        }
-    }
-
-     */
 }

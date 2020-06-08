@@ -15,8 +15,8 @@
 
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="423dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="503dp"
         android:background="@color/sandbraun"
         android:fontFamily="@font/reem_kufi"
         android:text="@string/lblNoAccountYet"
@@ -43,8 +43,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="261dp"
-        android:layout_marginTop="410dp"
+        android:layout_marginStart="262dp"
+        android:layout_marginTop="481dp"
         android:background="@color/sandbraun"
         android:fontFamily="@font/alfa_slab_one"
         android:text="@string/register"
@@ -87,19 +87,20 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="164dp"
-        android:layout_marginBottom="417dp"
+        android:layout_marginBottom="250dp"
         android:background="@color/sandbraun"
         android:fontFamily="@font/alfa_slab_one"
         android:text="@string/btnLogin"
-        android:textColor="@color/damebraun" />
+        android:textColor="@color/damebraun"
+        android:layout_marginTop="140dp"/>
 
     <ProgressBar
         android:id="@+id/loadBarLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="332dp" />
+        android:layout_marginTop="405dp"
+        android:layout_marginLeft="180dp"/>
 
 
 </RelativeLayout>
