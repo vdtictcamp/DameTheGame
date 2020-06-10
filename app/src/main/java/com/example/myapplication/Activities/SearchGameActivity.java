@@ -61,23 +61,6 @@ public class SearchGameActivity extends AppCompatActivity {
         addRoomsEventListener();
         currentUserAuth = FirebaseAuth.getInstance();
 
-
-        /**
-         btnJoinGame.setOnClickListener((new View.OnClickListener() {
-        @Override public void onClick(View v) {
-        gameName = txtFieldGameName.getText().toString().trim();
-        System.out.println(gameName);
-        reference = database.getReference("rooms").child(gameName).child("PlayerOneHasJoined");
-        if(gameName.equals("")){
-        txtFieldGameName.setText("Bitte Gib ein Spielnamen ein");
-        }
-        else {
-        checkIfGameIsHosted();
-        }
-        }
-        }));
-         **/
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -137,7 +120,6 @@ public class SearchGameActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                // fehler, nicht ausführen
 
             }
         });
@@ -150,10 +132,12 @@ public class SearchGameActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu, menu);
         if (currentUserAuth.getCurrentUser() != null) {
             menu.removeItem(R.id.menuLoginItem);
+            menu.add(R.id.lblAccountMenu);
         }
         if (currentUserAuth.getCurrentUser() == null) {
             menu.add(R.id.menuLoginItem);
             menu.removeItem(R.id.menuLogoutItem);
+            menu.removeItem(R.id.lblAccountMenu);
         }
         return super.onCreateOptionsMenu(menu);
     }
@@ -186,6 +170,5 @@ public class SearchGameActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
 }

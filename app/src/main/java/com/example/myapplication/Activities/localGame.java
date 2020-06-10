@@ -68,6 +68,7 @@ public class localGame extends AppCompatActivity {
     private Context context;
     private List<Integer> positionsToMove_Q = new ArrayList<>();
     private List<Integer> eatenStones = new ArrayList<>();
+    int counter=0;
 
     //We need thie variables to controll the turns of the player
     private String gameName = " ";
@@ -233,9 +234,7 @@ public class localGame extends AppCompatActivity {
                         redStonesToEat = queenChecker.returnStonesToEat();
                         if (posForWhiteQueen.size() > 0) {
                             allPositionsToJump = gameController.fillPositionsToJumpInList(posForWhiteQueen, true);
-                            for (int i = 0; i < posForWhiteQueen.size(); i++) {
-                                showValidPosForQueen(posForWhiteQueen.get(i));
-                            }
+                                showValidPosForQueen(allPositionsToJump);
                         }
                     } else {
                         showValidPositionsForWhiteStones(v);
@@ -498,22 +497,22 @@ public class localGame extends AppCompatActivity {
                 }
                 //After each move we need to change the position of the stone in the stone array
                 stones = gameController.switchPosOfStoneInArray(stones, positionsIds, movingStone.getId(), view.getId());
+
+                //Controller visualizes the Turn of the Player
                 controller.changeTurnOfPlayer(true, false, visualizeTurnOfPlayerTwo, visualizeTurnOfPlayerOne);
+
+                //Gets the Column and Row of the destination Position
+                int[] index = gameController.getChoosenPositionToJump(stones, view.getId());
+                //If a red stone has reached the lowest row he's transforming himself into a queen
+                if (index[0] == 0) {
+                    int id = stones[index[0]][index[1]];
+                    redQueens.add(id);
+                    View stoneToQueen = findViewById(id);
+                    queenChecker.setRedQueen(stoneToQueen);
+                }
                 TURN = WHITETURN;
             }
             allPositionsToJump.clear();
-        }
-
-        //Gets the Column and Row of the destination Position
-        int[] index = gameController.getChoosenPositionToJump(stones, view.getId());
-
-        //If a red stone has reached the lowest row he's transforming himself into a queen
-
-        if (index[0] == 0) {
-            int id = stones[index[0]][index[1]];
-            redQueens.add(id);
-            View stoneToQueen = findViewById(id);
-            queenChecker.setRedQueen(stoneToQueen);
         }
     }
 
@@ -544,19 +543,20 @@ public class localGame extends AppCompatActivity {
 
                 //Thie line of code let's appear the view which visualize the turn of the player
                 controller.changeTurnOfPlayer(false, true, visualizeTurnOfPlayerTwo, visualizeTurnOfPlayerOne);
+
+                int[] index = gameController.getChoosenPositionToJump(stones, view.getId());
+                //If a white stone has reached the seventh row, its transforming itself to a queen
+                if (index[0] == 7) {
+                    int id = stones[index[0]][index[1]];
+                    whiteQueens.add(id);
+                    View stoneToQueen = findViewById(id);
+                    queenChecker.setWhiteQueen(stoneToQueen);
+                }
                 TURN = REDTURN;
             }
             allPositionsToJump.clear();
         }
-        int[] index = gameController.getChoosenPositionToJump(stones, view.getId());
 
-        //If a white stone has reached the seventh row, its transforming itself to a queen
-        if (index[0] == 7) {
-            int id = stones[index[0]][index[1]];
-            whiteQueens.add(id);
-            View stoneToQueen = findViewById(id);
-            queenChecker.setWhiteQueen(stoneToQueen);
-        }
     }
 
     public void moveQueen(View position) {
@@ -596,13 +596,13 @@ public class localGame extends AppCompatActivity {
         for (int i = 0; i < whiteStonesIds.length; i++) {
             for (int j = 0; j < whiteStonesIds.length; j++) {
                 if (whiteStonesIds[i][j] == stones[row][col]) {
-                    System.out.println("Stein gefunden ");
-                    eatenStones.add(whiteStonesIds[i][j]);
+                    counter++;
+                    System.out.println("Counter:"+counter);
+                    whiteStonesIds[i][j]=0;
                     System.out.println(whiteStonesIds.length + " " + whiteStonesIds[i].length);
-                    System.out.println("Anzahl gefressener weisser Steine" + eatenStones.size());
-                    whiteStonesIds[i][j] = 0;
+                    break;
                 }
-                if (redStonesIds[i][j] == stones[row][col]) {
+                else if (redStonesIds[i][j] == stones[row][col]) {
                     redStonesIds[i][j] = 0;
                 }
             }

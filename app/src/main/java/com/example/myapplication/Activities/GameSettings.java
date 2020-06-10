@@ -60,12 +60,13 @@ public class GameSettings extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu, menu);
         if (currentUserAuth.getCurrentUser() != null) {
             menu.removeItem(R.id.menuLoginItem);
+            menu.add(R.id.lblAccountMenu);
         }
         if (currentUserAuth.getCurrentUser() == null) {
             menu.add(R.id.menuLoginItem);
             menu.removeItem(R.id.menuLogoutItem);
+            menu.removeItem(R.id.lblAccountMenu);
         }
-
         return super.onCreateOptionsMenu(menu);
     }
 

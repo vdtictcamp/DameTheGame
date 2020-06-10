@@ -32,6 +32,7 @@
     <string name="lblLoginPassword">Passwort</string>
     <string name="lblLoginPasswordRepeat">Passwort bestätigen</string>
     <string name="lblWaitingForGameList">Suche verfügbare Spiele...</string>
+    <string name="btnDeleteAccount">Konto löschen</string>
 
     <string name="text_ziehen">
         Die Steine ziehen ein Feld in diagonaler Richtung, aber nur vorwärts und nur auf freie dunkle Felder.

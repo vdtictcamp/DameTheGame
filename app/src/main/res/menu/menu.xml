@@ -25,5 +25,9 @@
         android:title="@string/logout"
         android:id="@+id/menuLogoutItem">
     </item>
+    <item
+        android:title="Konto"
+        android:id="@+id/lblAccountMenu">
+    </item>
 
 </menu>

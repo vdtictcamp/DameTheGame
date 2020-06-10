@@ -12,14 +12,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.myapplication.Firebase.FirebaseGameController;
 import com.example.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
         btnOnlineSpielen = findViewById(R.id.btnOnlineSpiel);
         currentUserAuth = FirebaseAuth.getInstance();
-        btnTestransaction = findViewById(R.id.btnTestTransaction);
 
 
         btnInitNewGame.setOnClickListener((new View.OnClickListener() {
@@ -107,10 +102,12 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu, menu);
         if (currentUserAuth.getCurrentUser() != null) {
             menu.removeItem(R.id.menuLoginItem);
+            menu.add(R.id.lblAccountMenu);
         }
         if (currentUserAuth.getCurrentUser() == null) {
             menu.add(R.id.menuLoginItem);
             menu.removeItem(R.id.menuLogoutItem);
+            menu.removeItem(R.id.lblAccountMenu);
         }
         return super.onCreateOptionsMenu(menu);
     }
@@ -144,6 +141,9 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.lblAccountMenu:
+                intent=new Intent(getApplicationContext(), AccountDelete.class);
+                startActivity(intent);
             default:
                 return super.onOptionsItemSelected(item);
         }

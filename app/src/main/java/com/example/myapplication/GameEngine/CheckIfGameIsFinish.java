@@ -15,8 +15,6 @@ public class CheckIfGameIsFinish {
             }
         }
         System.out.println("Anzahl  weisse gefressene Steine:"+counter_1);
-
-
         for(int i=0; i<redStones.length; i++){
             for(int j=0; j<redStones[i].length; j++){
                 if(redStones[i][j]==0){
@@ -25,7 +23,7 @@ public class CheckIfGameIsFinish {
             }
         }
         System.out.println("Anzahl rote gefressene Steine:"+counter_2);
-        if(counter_1>=12 || counter_2>=12){
+        if(counter_1>=10 || counter_2>=10){
             isFinish=true;
         }
         return isFinish;
