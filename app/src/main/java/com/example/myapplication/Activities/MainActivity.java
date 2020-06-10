@@ -39,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnInitNewGame=findViewById(R.id.btnInitnewGame);
-        btnRegister=findViewById(R.id.btnRegister);
-        btnOnlineSpielen=findViewById(R.id.btnOnlineSpiel);
+        btnInitNewGame = findViewById(R.id.btnInitnewGame);
+        btnRegister = findViewById(R.id.btnRegister);
+        btnOnlineSpielen = findViewById(R.id.btnOnlineSpiel);
         currentUserAuth = FirebaseAuth.getInstance();
         btnTestransaction = findViewById(R.id.btnTestTransaction);
 
@@ -49,10 +49,10 @@ public class MainActivity extends AppCompatActivity {
         btnInitNewGame.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Intent intent = new Intent(getApplicationContext(), GameSettings.class);
-            intent.putExtra("gameName", "Default");
-            startActivity(intent);
-        }
+                Intent intent = new Intent(getApplicationContext(), GameSettings.class);
+                intent.putExtra("gameName", "Default");
+                startActivity(intent);
+            }
         }));
 
         btnRegister.setOnClickListener((new View.OnClickListener() {
@@ -66,9 +66,9 @@ public class MainActivity extends AppCompatActivity {
         btnOnlineSpielen.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentUserAuth.getCurrentUser()==null){
+                if (currentUserAuth.getCurrentUser() == null) {
                     Toast.makeText(MainActivity.this, "Um online zu spielen melde dich bitte mit deinem Account an", Toast.LENGTH_LONG).show();
-                }else {
+                } else {
                     Intent intent = new Intent(getApplicationContext(), OnlineOptionsActivity.class);
                     startActivity(intent);
                 }
@@ -90,25 +90,25 @@ public class MainActivity extends AppCompatActivity {
         }));
         */
         /**
-        reference = database.getReference("test").child("Testevent");
-        DatabaseReference usersRef = reference.child("Testevent");
+         reference = database.getReference("test").child("Testevent");
+         DatabaseReference usersRef = reference.child("Testevent");
 
-        Map<String, Transaction> transactions = new HashMap<>();
-        transactions.put("alanisawesome", new Transaction("1", "2", "3", "4"));
+         Map<String, Transaction> transactions = new HashMap<>();
+         transactions.put("alanisawesome", new Transaction("1", "2", "3", "4"));
 
-        usersRef.setValueAsync(transaction);
+         usersRef.setValueAsync(transaction);
          **/
 
     }
 
     @SuppressLint("ResourceType")
     @Override
-    public boolean onCreateOptionsMenu( Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
-        if (currentUserAuth.getCurrentUser()!=null){
+        if (currentUserAuth.getCurrentUser() != null) {
             menu.removeItem(R.id.menuLoginItem);
         }
-        if(currentUserAuth.getCurrentUser()==null){
+        if (currentUserAuth.getCurrentUser() == null) {
             menu.add(R.id.menuLoginItem);
             menu.removeItem(R.id.menuLogoutItem);
         }
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menuLoginItem:
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
@@ -131,10 +131,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.menuOnlineItem:
-                if(currentUserAuth.getCurrentUser()==null){
+                if (currentUserAuth.getCurrentUser() == null) {
                     Toast.makeText(MainActivity.this, "Um online zu spielen melde dich bitte mit deinem Account an", Toast.LENGTH_LONG).show();
 
-                }else {
+                } else {
                     intent = new Intent(getApplicationContext(), OnlineOptionsActivity.class);
                     startActivity(intent);
                 }

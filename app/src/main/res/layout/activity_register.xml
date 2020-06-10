@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,23 +9,26 @@
     android:rowCount="5"
     tools:context=".Activities.LoginActivity">
 
+
     <TextView
+        android:id="@+id/newAccount"
         android:layout_width="268dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="71dp"
-        android:layout_marginTop="78dp"
         android:fontFamily="@font/reem_kufi"
         android:text="Neuen Account Erstellen"
-        android:id="@+id/newAccount"
         android:textColor="@color/sandbraun"
         android:textSize="26dp"
         android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="71dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.05" />
+
 
     <EditText
         android:id="@+id/txtUsername"
@@ -34,17 +37,14 @@
         android:layout_below="@+id/newAccount"
         android:layout_alignParentStart="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="85dp"
-        android:layout_marginBottom="495dp"
         android:background="@color/sandbraun"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.258"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintVertical_bias="0.244" />
 
     <EditText
         android:id="@+id/txtPassword"
@@ -53,18 +53,15 @@
         android:layout_below="@+id/newAccount"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="215dp"
         android:background="@color/sandbraun"
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.174"
+        app:layout_constraintHorizontal_bias="0.258"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.343" />
 
     <EditText
         android:id="@+id/txtPasswordRepeat"
@@ -73,65 +70,52 @@
         android:layout_below="@+id/newAccount"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="343dp"
         android:background="@color/sandbraun"
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.174"
+        app:layout_constraintHorizontal_bias="0.258"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.446" />
 
     <Button
         android:id="@+id/btnRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="172dp"
+        android:layout_height="48dp"
         android:layout_below="@+id/newAccount"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="500dp"
         android:background="@color/sandbraun"
         android:fontFamily="@font/alfa_slab_one"
         android:text="@string/register"
         android:textColor="@color/damebraun"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.406"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtPasswordRepeat"
-        app:layout_constraintVertical_bias="1.0" />
-
-
-
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.625" />
 
     <TextView
         android:id="@+id/editTextTextPersonName"
         android:layout_width="121dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/newAccount"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginEnd="256dp"
-        android:layout_marginBottom="537dp"
-        android:ems="10"
+        android:textSize="20dp"
         android:fontFamily="@font/reem_kufi"
         android:inputType="textPersonName"
-        android:text="Username"
+        android:text="E-Mail"
         android:textColor="@color/sandbraun"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.179"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.942"
-        android:layout_below="@+id/newAccount"
-        android:layout_marginTop="50dp"
-        />
+        app:layout_constraintVertical_bias="0.198" />
 
     <TextView
         android:id="@+id/editTextTextPersonName2"
@@ -140,37 +124,35 @@
         android:layout_below="@+id/newAccount"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="180dp"
-        android:layout_marginBottom="517dp"
-        android:ems="10"
+        android:textSize="20dp"
         android:fontFamily="@font/reem_kufi"
         android:inputType="textPersonName"
         android:text="Passwort"
         android:textColor="@color/sandbraun"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.246"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.296" />
 
     <TextView
         android:id="@+id/editTextTextPersonName3"
-        android:layout_width="160sp"
-        android:layout_height="29sp"
+        android:layout_width="209dp"
+        android:layout_height="27dp"
         android:layout_below="@+id/newAccount"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="301dp"
-        android:layout_marginBottom="284dp"
-        android:ems="10"
         android:fontFamily="@font/reem_kufi"
         android:inputType="textPersonName"
         android:text=" Passwort wiederholen"
         android:textColor="@color/sandbraun"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.136"
+        app:layout_constraintHorizontal_bias="0.257"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="438dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.401" />
 
     <ProgressBar
         android:id="@+id/loadBarRegister"
@@ -180,10 +162,11 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="374dp"
-        android:layout_marginEnd="148dp"
-        tools:layout_editor_absoluteX="170dp"
-        tools:layout_editor_absoluteY="335dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.519" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

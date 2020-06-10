@@ -30,32 +30,32 @@ import com.example.myapplication.Threads.TimeThread;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameField extends AppCompatActivity{
+public class GameField extends AppCompatActivity {
 
     public GridLayout gameLayout;
-    private static int[][]positionsIds;
-    private int[][]whiteStonesIds;
-    private int[][]redStonesIds;
+    private static int[][] positionsIds;
+    private int[][] whiteStonesIds;
+    private int[][] redStonesIds;
 
     static int[][] stones;
 
     private View[][] redStones;
-    private View[][]whiteStones;
-    private static View[][]positions;
-    private int[] validPositionsToMove=new int[2];
-    private List<View>validPosToMove = new ArrayList<>();
+    private View[][] whiteStones;
+    private static View[][] positions;
+    private int[] validPositionsToMove = new int[2];
+    private List<View> validPosToMove = new ArrayList<>();
     public View movingStone;
     private ChangeGameConditionWhiteStone chGameCondWhite;
     private ChangeGameConditionRedStone chGameCondRed;
     private CheckIfGameIsFinish finishChecker = new CheckIfGameIsFinish();
     private List<List<Integer>> posAfterEat = new ArrayList<>();
-    private List<Integer>whiteStonesToEat = new ArrayList<>();
-    private List<Integer>redStonesToEat = new ArrayList<>();
-    private List<Integer>whiteQueens = new ArrayList<>();
-    private List<Integer>redQueens = new ArrayList<>();
-    private List<List<Integer>>posForRedQueen=new ArrayList<>();
-    private List<List<Integer>>posForWhiteQueen=new ArrayList<>();
-    List<Integer>allPositionsToJump = new ArrayList<>();
+    private List<Integer> whiteStonesToEat = new ArrayList<>();
+    private List<Integer> redStonesToEat = new ArrayList<>();
+    private List<Integer> whiteQueens = new ArrayList<>();
+    private List<Integer> redQueens = new ArrayList<>();
+    private List<List<Integer>> posForRedQueen = new ArrayList<>();
+    private List<List<Integer>> posForWhiteQueen = new ArrayList<>();
+    List<Integer> allPositionsToJump = new ArrayList<>();
     private boolean timeLimit;
     private TimeThread timer;
     private PlayerOneThread pOneThread;
@@ -66,16 +66,16 @@ public class GameField extends AppCompatActivity{
     private FirebaseGameController firebase;
     private GameController gameController;
     private QueenChecker queenChecker;
-    boolean sentData=false;
+    boolean sentData = false;
     private Context context;
-    List<Integer>positionsToMove_Q=new ArrayList<>();
+    List<Integer> positionsToMove_Q = new ArrayList<>();
 
     //We need thie variables to controll the turns of the player
-    private String gameName =" ";
-    private String player=" ";
+    private String gameName = " ";
+    private String player = " ";
     final int WHITETURN = 1;
-    final int REDTURN =2;
-    int TURN =WHITETURN;
+    final int REDTURN = 2;
+    int TURN = WHITETURN;
     EditText countdown;
     Animation onClickAnim;
 
@@ -214,7 +214,7 @@ public class GameField extends AppCompatActivity{
         View.OnClickListener whiteStoneClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                chGameCondWhite = new ChangeGameConditionWhiteStone( context, stones, positionsIds, whiteStonesIds);
+                allPositionsToJump.clear();
                 //Checks whoms Turn it is
                 if ((TURN & WHITETURN) != 0 &&player.equals("PlayerOne")) {
                     movingStone=v;
@@ -247,6 +247,7 @@ public class GameField extends AppCompatActivity{
                             allPositionsToJump = gameController.fillPositionsToJumpInList(posAfterEat, false);
                             ShowThePositionAfterEatingRedStone(allPositionsToJump);
                         }
+
                     }
                     posForWhiteQueen.clear();
                 }
@@ -347,7 +348,7 @@ public class GameField extends AppCompatActivity{
             int id = positions.get(i);
             View position = findViewById(id);
             position.setBackgroundColor(Color.parseColor("#D2691E"));
-            position.setOnClickListener(moveListenerForWhiteStone);
+            position.setOnClickListener(moveListenerForRedStone);
         }
     }
 
@@ -580,11 +581,11 @@ public void showValidPosForQueen(List<Integer>positions){
                     stopGame();
                 }
                 controller.changeTurnOfPlayer(false, true, visualizeTurnOfPlayerOne, visualizeTurnOfPlayerTwo);
-                TURN=REDTURN;
-            }
+                TURN = REDTURN;
 
             }
         }
+    }
 
     public void moveQueen(View position){
         float diffX = position.getX() - movingStone.getX();

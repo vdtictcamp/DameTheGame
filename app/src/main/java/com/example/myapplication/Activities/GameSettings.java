@@ -32,7 +32,7 @@ public class GameSettings extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_settings);
-        btnStartGame= findViewById(R.id.btnStartGame);
+        btnStartGame = findViewById(R.id.btnStartGame);
         currentUserAuth = FirebaseAuth.getInstance();
         View.OnClickListener startGameListener = new View.OnClickListener() {
             @Override
@@ -41,11 +41,11 @@ public class GameSettings extends AppCompatActivity {
             }
         };
         btnStartGame.setOnClickListener(startGameListener);
-        editTxtPlayerOneName=findViewById(R.id.editTxtPlayerOneName);
-        editTxtPlayerTwoName=findViewById(R.id.editTxtPlayerTwoName);
+        editTxtPlayerOneName = findViewById(R.id.editTxtPlayerOneName);
+        editTxtPlayerTwoName = findViewById(R.id.editTxtPlayerTwoName);
     }
 
-    public void startGame(){
+    public void startGame() {
         gameName = "offline";
         Intent intent = new Intent(getApplicationContext(), localGame.class);
         intent.putExtra("gameName", gameName);
@@ -56,12 +56,12 @@ public class GameSettings extends AppCompatActivity {
 
     @SuppressLint("ResourceType")
     @Override
-    public boolean onCreateOptionsMenu( Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
-        if (currentUserAuth.getCurrentUser()!=null){
+        if (currentUserAuth.getCurrentUser() != null) {
             menu.removeItem(R.id.menuLoginItem);
         }
-        if(currentUserAuth.getCurrentUser()==null){
+        if (currentUserAuth.getCurrentUser() == null) {
             menu.add(R.id.menuLoginItem);
             menu.removeItem(R.id.menuLogoutItem);
         }
@@ -71,7 +71,7 @@ public class GameSettings extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menuLoginItem:
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
