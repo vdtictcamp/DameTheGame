@@ -14,15 +14,14 @@ public class Controller {
     public void changeTurnOfPlayer(boolean playerOneTurn, boolean playerTwoTurn, View view2, View view1){
         if(playerOneTurn){
             view2.setVisibility(view1.VISIBLE);
-        }else{
-            view1.setVisibility(view1.INVISIBLE);
+            view1.setVisibility(view2.INVISIBLE);
         }
-
        if(playerTwoTurn){
-           view2.setVisibility(view2.VISIBLE);
-       }else{
-           view1.setVisibility(view2.INVISIBLE);
+           view1.setVisibility(view2.VISIBLE);
+           view2.setVisibility(view1.INVISIBLE);
        }
+
+
     }
 
 }

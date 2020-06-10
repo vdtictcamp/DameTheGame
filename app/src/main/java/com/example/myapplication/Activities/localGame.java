@@ -13,6 +13,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.TextView;
 
 import com.example.myapplication.Firebase.FirebaseGameController;
 import com.example.myapplication.GameEngine.ChangeGameConditionRedStone;
@@ -93,6 +94,8 @@ public class localGame extends AppCompatActivity {
             positions = new View[8][8];
             visualizeTurnOfPlayerOne=findViewById(R.id.playersOneTurn);
             visualizeTurnOfPlayerTwo=findViewById(R.id.playersTwoTurn);
+            TextView lblPlayerOne = findViewById(R.id.lblPlayerOneSwitcher);
+            TextView lblPlayerTwo = findViewById(R.id.lblPlayerTwoSwitcher);
             controller=new Controller();
             Intent intent= getIntent();
             context=this;
@@ -100,6 +103,10 @@ public class localGame extends AppCompatActivity {
             //With the game name we identify the player, dependent of the player, the corrct Thread to controll the turns of the player will start
             //The Threads controll the online game
             gameName = intent.getExtras().getString("gameName");
+            String playerOneName = intent.getExtras().getString("playerOneName");
+            String playerTwoName = intent.getExtras().getString("playerTwoName");
+            lblPlayerOne.setText(playerOneName);
+            lblPlayerTwo.setText(playerTwoName);
             player = intent.getExtras().getString("Player");
 
             //Load the Animation, the Animation helps to identify the stone which has been touched
@@ -152,6 +159,7 @@ public class localGame extends AppCompatActivity {
             //QueenChecker
             queenChecker=new QueenChecker(this, positionsIds);
 
+            controller.changeTurnOfPlayer(false, true, visualizeTurnOfPlayerOne, visualizeTurnOfPlayerTwo);
             //Clears the Board
             clearBoard();
 
@@ -195,7 +203,6 @@ public class localGame extends AppCompatActivity {
                             }
                         }
                     }
-
                     posForRedQueen.clear();
                 }
             };
@@ -240,7 +247,6 @@ public class localGame extends AppCompatActivity {
                                 allPositionsToJump = gameController.fillPositionsToJumpInList(posAfterEat, false);
                                 ShowThePositionAfterEatingRedStone(allPositionsToJump);
                             }
-
                         }
                     }
                     posForWhiteQueen.clear();
@@ -269,7 +275,6 @@ public class localGame extends AppCompatActivity {
                     whiteStones[i][j].setOnClickListener(whiteStoneClickListener);
                 }
             }
-            visualizeTurnOfPlayerTwo.setBackgroundColor(Color.WHITE);
         }
 
 //----------------------------------------------------------------------------------------
@@ -541,7 +546,7 @@ public class localGame extends AppCompatActivity {
                     stones = gameController.switchPosOfStoneInArray(stones,positionsIds, movingStone.getId(), view.getId());
 
                     //Thie line of code let's appear the view which visualize the turn of the player
-                    controller.changeTurnOfPlayer(false, true, visualizeTurnOfPlayerOne, visualizeTurnOfPlayerTwo);
+                    controller.changeTurnOfPlayer(false, true, visualizeTurnOfPlayerTwo, visualizeTurnOfPlayerOne);
                     TURN=REDTURN;
                 }
                 allPositionsToJump.clear();

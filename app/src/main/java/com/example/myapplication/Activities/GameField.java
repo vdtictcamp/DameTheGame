@@ -330,7 +330,6 @@ public class GameField extends AppCompatActivity{
                             .start();
                     stones = gameController.switchPosOfStoneInArray(stones, positionsIds, stone.getId(), position.getId());
                     if (TURN == WHITETURN) {
-                        //firebase.finishPlayerOneTurn();
                         TURN = REDTURN;
 
                     } else {

@@ -22,7 +22,9 @@
         android:layout_height="30dp"
         android:layout_marginBottom="50dp"
         android:layout_marginLeft="20dp"
-        android:text="@string/playerOneTurn">
+        android:text="@string/playerOneTurn"
+        android:textSize="20sp"
+        android:textColor="@color/sandbraun">
     </TextView>
 
         <View
@@ -41,7 +43,9 @@
         android:layout_width="80dp"
         android:layout_height="30dp"
         android:layout_marginLeft="50dp"
-        android:text="@string/playerTwoTurn">
+        android:text="@string/playerTwoTurn"
+            android:textSize="20sp"
+            android:textColor="@color/sandbraun">
 
     </TextView>
 
