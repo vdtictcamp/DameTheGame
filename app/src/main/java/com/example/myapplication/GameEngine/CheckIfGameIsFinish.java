@@ -23,7 +23,7 @@ public class CheckIfGameIsFinish {
             }
         }
         System.out.println("Anzahl rote gefressene Steine:"+counter_2);
-        if(counter_1>=10 || counter_2>=10){
+        if(counter_1>=9 || counter_2>=9){
             isFinish=true;
         }
         return isFinish;

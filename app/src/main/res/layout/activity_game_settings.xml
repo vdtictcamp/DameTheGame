@@ -19,32 +19,32 @@
         android:layout_marginBottom="20dp"
         android:text="@string/playerOneSettings"
         android:textColor="@color/sandbraun"
-        android:textSize="17dp"
+        android:textSize="20dp"
         android:textStyle="bold|italic"></TextView>
 
     <EditText
         android:id="@+id/editTxtPlayerOneName"
         android:layout_width="291dp"
-        android:layout_height="64dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="50dp"
         android:fontFamily="@font/reem_kufi"
         android:text="@string/lblplayername"
         android:textColor="@color/sandbraun"
-        android:textSize="15dp"
-        android:layout_marginLeft="50dp">
-    </EditText>
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp"></EditText>
 
     <TextView
         android:id="@+id/lblPlayerTwo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="20dp"
-        android:layout_marginLeft="50dp"
         android:text="@string/playerTwoSettings"
         android:textColor="@color/sandbraun"
-        android:textSize="17dp"
-        android:textStyle="bold|italic">
-    </TextView>
+        android:textSize="20dp"
+        android:textStyle="bold|italic"></TextView>
 
     <EditText
 
@@ -55,7 +55,7 @@
         android:fontFamily="@font/reem_kufi"
         android:text="@string/lblplayername"
         android:textColor="@color/sandbraun"
-        android:textSize="15dp"
+        android:textSize="20dp"
         android:layout_marginBottom="50dp"
         android:layout_marginLeft="50dp" />
 

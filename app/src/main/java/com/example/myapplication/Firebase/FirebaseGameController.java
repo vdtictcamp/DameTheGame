@@ -181,7 +181,12 @@ public class FirebaseGameController {
     }
 
     //This Method will write the stones which will be removed to the base
-    public void writeStonesToRemove() {
-
-    }
+    public void writeStonesToRemove(int row, int col) {
+            HashMap<String, Integer> values = new HashMap<>();
+            reference = database.getReference("rooms").child(this.gameName).child("StoneToRemove");
+            values.put("rowStone", row);
+            values.put("colStone", col);
+            //values.put()
+            reference.setValue(values);
+        }
 }

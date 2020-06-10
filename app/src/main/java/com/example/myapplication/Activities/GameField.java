@@ -201,7 +201,7 @@ public class GameField extends AppCompatActivity {
                         redStonesToEat = chGameCondRed.returnStonesToEat();
                         if(posAfterEat!=null &&posAfterEat.size()>0) {
                             allPositionsToJump = gameController.fillPositionsToJumpInList(posAfterEat, false);
-                            ShowThePositionAfterEatingRedStone(allPositionsToJump);
+                            ShowThePositionAfterEatingWhiteStone(allPositionsToJump);
                         }
 
                     }
@@ -248,7 +248,7 @@ public class GameField extends AppCompatActivity {
                         whiteStonesToEat = chGameCondWhite.returnStonesToEat();
                         if (posAfterEat != null && posAfterEat.size() > 0) {
                             allPositionsToJump = gameController.fillPositionsToJumpInList(posAfterEat, false);
-                            ShowThePositionAfterEatingWhiteStone(allPositionsToJump);
+                            ShowThePositionAfterEatingRedStone(allPositionsToJump);
                         }
                     }
                     posForWhiteQueen.clear();
@@ -351,7 +351,7 @@ public class GameField extends AppCompatActivity {
             int id = positions.get(i);
             View position = findViewById(id);
             position.setBackgroundColor(Color.parseColor("#D2691E"));
-            position.setOnClickListener(moveListenerForRedStone);
+            position.setOnClickListener(moveListenerForWhiteStone);
         }
     }
 

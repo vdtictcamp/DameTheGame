@@ -20,15 +20,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class MainActivity extends AppCompatActivity {
 
     private Button btnInitNewGame;
-    private Button btnToLogin;
     private Button btnRegister;
     private Button btnOnlineSpielen;
-    private Button btnToSearchGame;
-    private Button btnCreateGame;
-
-    private Button btnTestransaction;
-    private FirebaseDatabase database;
-    private DatabaseReference reference;
     private FirebaseAuth currentUserAuth;
 
     @Override
@@ -39,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
         btnOnlineSpielen = findViewById(R.id.btnOnlineSpiel);
         currentUserAuth = FirebaseAuth.getInstance();
-
 
         btnInitNewGame.setOnClickListener((new View.OnClickListener() {
             @Override

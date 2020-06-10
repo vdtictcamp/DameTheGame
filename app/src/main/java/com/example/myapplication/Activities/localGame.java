@@ -556,11 +556,8 @@ public class localGame extends AppCompatActivity {
                 TURN = REDTURN;
                 allPositionsToJump.clear();
             }
-
         }
-
     }
-
     //This method moves the Queen
     public void moveQueen(View position) {
         float diffX = position.getX() - movingStone.getX();
