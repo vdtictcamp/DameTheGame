@@ -41,17 +41,17 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        btnRegister=findViewById(R.id.btnRegister);
+        btnRegister = findViewById(R.id.btnRegister);
         txtUserName = findViewById(R.id.txtUsername);
-        txtPassword=findViewById(R.id.txtPassword);
-        txtPasswordRepeat=findViewById(R.id.txtPasswordRepeat);
-        loadBar=findViewById(R.id.loadBarRegister);
+        txtPassword = findViewById(R.id.txtPassword);
+        txtPasswordRepeat = findViewById(R.id.txtPasswordRepeat);
+        loadBar = findViewById(R.id.loadBarRegister);
         loadBar.setVisibility(loadBar.INVISIBLE);
 
         firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
 
-        if (firebaseAuth.getCurrentUser()!=null){
+        if (firebaseAuth.getCurrentUser() != null) {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         }
@@ -59,25 +59,25 @@ public class RegisterActivity extends AppCompatActivity {
         View.OnClickListener createAccountListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                name =txtUserName.getText().toString().trim();
+                name = txtUserName.getText().toString().trim();
                 password = txtPassword.getText().toString().trim();
                 password_repeat = txtPasswordRepeat.getText().toString().trim();
 
-                if(TextUtils.isEmpty(name)){
+                if (TextUtils.isEmpty(name)) {
                     Toast.makeText(RegisterActivity.this, "Email muss vorhanden sein", Toast.LENGTH_LONG).show();
                     return;
                 }
-                if(TextUtils.isEmpty(password)){
+                if (TextUtils.isEmpty(password)) {
                     Toast.makeText(RegisterActivity.this, "Bitte legen Sie ein Passwort fest", Toast.LENGTH_LONG).show();
                 }
-                if(password.length()<5){
+                if (password.length() < 5) {
                     Toast.makeText(RegisterActivity.this, "Passwörter müssen übereinstimmen", Toast.LENGTH_LONG).show();
                 }
-                if(!password_repeat.equals(password)){
+                if (!password_repeat.equals(password)) {
                     Toast.makeText(RegisterActivity.this, "Passwörter müssen übereinstimmen", Toast.LENGTH_LONG).show();
                 }
 
-                if(!TextUtils.isEmpty(name) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(password_repeat)) {
+                if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(password_repeat)) {
                     loadBar.setVisibility(loadBar.VISIBLE);
                     firebaseAuth.createUserWithEmailAndPassword(name, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -102,12 +102,12 @@ public class RegisterActivity extends AppCompatActivity {
 
     @SuppressLint("ResourceType")
     @Override
-    public boolean onCreateOptionsMenu( Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
-        if (firebaseAuth.getCurrentUser()!=null){
+        if (firebaseAuth.getCurrentUser() != null) {
             menu.removeItem(R.id.menuLoginItem);
         }
-        if(firebaseAuth.getCurrentUser()==null){
+        if (firebaseAuth.getCurrentUser() == null) {
             menu.add(R.id.menuLoginItem);
             menu.removeItem(R.id.menuLogoutItem);
         }
@@ -116,7 +116,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menuLoginItem:
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);

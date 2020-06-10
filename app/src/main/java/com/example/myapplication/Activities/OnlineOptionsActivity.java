@@ -25,7 +25,7 @@ public class OnlineOptionsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_online_options);
-        btnCreateOnlineGame=findViewById(R.id.btnCreateOnlineGame);
+        btnCreateOnlineGame = findViewById(R.id.btnCreateOnlineGame);
         btnSearchOnlineGame = findViewById(R.id.btnSearchOnlineGame);
         currentUserAuth = FirebaseAuth.getInstance();
 
@@ -51,12 +51,12 @@ public class OnlineOptionsActivity extends AppCompatActivity {
 
     @SuppressLint("ResourceType")
     @Override
-    public boolean onCreateOptionsMenu( Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
-        if (currentUserAuth.getCurrentUser()!=null){
+        if (currentUserAuth.getCurrentUser() != null) {
             menu.removeItem(R.id.menuLoginItem);
         }
-        if(currentUserAuth.getCurrentUser()==null){
+        if (currentUserAuth.getCurrentUser() == null) {
             menu.add(R.id.menuLoginItem);
             menu.removeItem(R.id.menuLogoutItem);
         }
@@ -65,7 +65,7 @@ public class OnlineOptionsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menuLoginItem:
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);

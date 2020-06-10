@@ -21,24 +21,24 @@ import com.google.firebase.auth.FirebaseAuth;
 public class LoginActivity extends AppCompatActivity {
 
 
-private Button btnRegister, btnLogin;
-private String email;
-private String password;
-private FirebaseAuth firebaseAuth;
-private EditText txtName;
-private EditText txtPassword;
-private ProgressBar loadBar;
+    private Button btnRegister, btnLogin;
+    private String email;
+    private String password;
+    private FirebaseAuth firebaseAuth;
+    private EditText txtName;
+    private EditText txtPassword;
+    private ProgressBar loadBar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        btnRegister=findViewById(R.id.btnToRegister);
+        btnRegister = findViewById(R.id.btnToRegister);
         txtName = findViewById(R.id.txtLoginUsername);
-        txtPassword=findViewById(R.id.txtLoginPassword);
-        btnLogin=findViewById(R.id.btnLogin);
-        loadBar=findViewById(R.id.loadBarLogin);
+        txtPassword = findViewById(R.id.txtLoginPassword);
+        btnLogin = findViewById(R.id.btnLogin);
+        loadBar = findViewById(R.id.loadBarLogin);
         loadBar.setVisibility(loadBar.INVISIBLE);
 
         View.OnClickListener toRegister = new View.OnClickListener() {
@@ -52,18 +52,18 @@ private ProgressBar loadBar;
         View.OnClickListener loginListner = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                email=txtName.getText().toString().trim();
-                password=txtPassword.getText().toString().trim();
-                if(TextUtils.isEmpty(email)){
+                email = txtName.getText().toString().trim();
+                password = txtPassword.getText().toString().trim();
+                if (TextUtils.isEmpty(email)) {
                     txtName.setText("Name darf nicht leer sein");
                     return;
                 }
-                if(TextUtils.isEmpty(password)){
+                if (TextUtils.isEmpty(password)) {
                     Toast.makeText(LoginActivity.this, "Bitte geben Sie Ihr Passwort ein", Toast.LENGTH_SHORT).show();
                 }
                 firebaseAuth = FirebaseAuth.getInstance();
                 //Authenticate the user
-                if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
+                if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
                     loadBar.setVisibility(loadBar.VISIBLE);
                     firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -75,19 +75,17 @@ private ProgressBar loadBar;
                             } else {
                                 Toast.makeText(LoginActivity.this, "Error" + task.getException(), Toast.LENGTH_SHORT).show();
                                 loadBar.setVisibility(loadBar.INVISIBLE);
-
                             }
-
                         }
                     });
                 }
             }
         };
-            btnLogin.setOnClickListener(loginListner);
+        btnLogin.setOnClickListener(loginListner);
     }
 
-    public void changeToRegister(){
-        Intent intent= new Intent(this, RegisterActivity.class);
+    public void changeToRegister() {
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 
