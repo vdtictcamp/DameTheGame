@@ -26,11 +26,11 @@
     </TextView>
 
         <View
-            android:layout_marginTop="20dp"
             android:id="@+id/playersTwoTurn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="26dp"
+            android:layout_height="25dp"
             android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/rounded_corner">
 
         </View>
@@ -46,11 +46,11 @@
     </TextView>
 
         <View
-            android:layout_marginTop="20dp"
             android:id="@+id/playersOneTurn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
             android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/roundet_corner_red">
 
         </View>

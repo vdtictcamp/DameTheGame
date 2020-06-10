@@ -84,11 +84,11 @@ public class QueenChecker {
         List<Integer>positionsToJump = new ArrayList<>();
         List<Integer>checkPositionsRight = new ArrayList<>();
         List<Integer>checkPositionsLeft = new ArrayList<>();
-        for(int i=row; i<positions.length; i++){
+        for(int i=row+1; i<positions.length; i++){
             if(i>7 || i<0|| i==row){
                 continue;
             }
-            for(int j=col; j<positions[i].length; j++){
+            for(int j=col+1; j<positions[i].length; j++){
                 if((i==row+rowDiff && j==col+colDiff &&colDiff%2!=0)) {
                     if(whiteQueen) {
                         if (stones[i][j] != 0 && gameController.checkIfIsWhiteStone(stones[i][j], whiteStones)) {
@@ -237,7 +237,7 @@ public class QueenChecker {
             if(i>7 || i==row || i<=0){
                 continue;
             }
-            for(int j=col-2; j<positions[i].length; j++){
+            for(int j=col+1; j<positions[i].length; j++){
                 if(j<0 || j>7){
                     continue;
                 }
