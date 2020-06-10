@@ -172,8 +172,7 @@ public class GameField extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 allPositionsToJump.clear();
-                chGameCondRed = new ChangeGameConditionRedStone(context, stones, positionsIds, redStonesIds);
-                if((TURN & REDTURN)!=0) {
+                if((TURN & REDTURN)!=0 &&player.equals("PlayerTwo")) {
                     movingStone=v;
                     v.startAnimation(onClickAnim);
                     //We check if the choosen stone is a queen
@@ -197,17 +196,15 @@ public class GameField extends AppCompatActivity{
                         }
                     }
                     else {
+                        showValidPositionsForRedStones(v);
                         posAfterEat = chGameCondRed.canEateWhiteStone(v);
                         whiteStonesToEat = chGameCondRed.returnStonesToEat();
                         if(posAfterEat!=null &&posAfterEat.size()>0) {
                             allPositionsToJump = gameController.fillPositionsToJumpInList(posAfterEat, false);
                             ShowThePositionAfterEatingWhiteStone(allPositionsToJump);
                         }
-                        else{
-                            showValidPositionsForRedStones(v);
-                        }
+
                     }
-                    TURN=WHITETURN;
                 }
                 posForRedQueen.clear();
             }
@@ -217,10 +214,9 @@ public class GameField extends AppCompatActivity{
         View.OnClickListener whiteStoneClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                allPositionsToJump.clear();
                 chGameCondWhite = new ChangeGameConditionWhiteStone( context, stones, positionsIds, whiteStonesIds);
                 //Checks whoms Turn it is
-                if ((TURN & WHITETURN) != 0) {
+                if ((TURN & WHITETURN) != 0 &&player.equals("PlayerOne")) {
                     movingStone=v;
                     v.startAnimation(onClickAnim);
                     //We check if the choosen Stone is a queen
@@ -244,19 +240,17 @@ public class GameField extends AppCompatActivity{
                         }
                     }
                     else {
+                        showValidPositionsForWhiteStones(v);
                         posAfterEat = chGameCondWhite.canEateRedStone(v);
                         redStonesToEat = chGameCondWhite.returnStonesToEat();
                         if(posAfterEat!=null &&posAfterEat.size()>0) {
                             allPositionsToJump = gameController.fillPositionsToJumpInList(posAfterEat, false);
                             ShowThePositionAfterEatingRedStone(allPositionsToJump);
                         }
-                        else{
-                            showValidPositionsForWhiteStones(v);
-                        }
                     }
-                    TURN=REDTURN;
+                    posForWhiteQueen.clear();
                 }
-                posForWhiteQueen.clear();
+
             }
         };
 
@@ -286,7 +280,6 @@ public class GameField extends AppCompatActivity{
         visualizeTurnOfPlayerTwo.setBackgroundColor(Color.WHITE);
         firebase = new FirebaseGameController(stones, gameName);
         firebase.initStartSituationBeta(0,0,0,0,  player);
-
         pOneThread=new PlayerOneThread(stones, gameName, this);
         pTwoThread = new PlayerTwoThread(stones, gameName, this);
 
@@ -354,7 +347,7 @@ public class GameField extends AppCompatActivity{
             int id = positions.get(i);
             View position = findViewById(id);
             position.setBackgroundColor(Color.parseColor("#D2691E"));
-            position.setOnClickListener(moveListenerForRedStone);
+            position.setOnClickListener(moveListenerForWhiteStone);
         }
     }
 
@@ -566,10 +559,6 @@ public void showValidPosForQueen(List<Integer>positions){
         int stoneId = movingStone.getId();
         float diffX=0;
         float diffY=0;
-        int rowPos = 0;
-        int colPos = 0;
-        int rowStone = 0;
-        int colStone = 0;
         if((TURN & WHITETURN)!=0) {
             if (movingStone.getY() > view.getY() && validPosToMove.contains(view)|| allPositionsToJump.contains(view.getId())) {
                 clearBoard();
@@ -592,7 +581,6 @@ public void showValidPosForQueen(List<Integer>positions){
                 }
                 controller.changeTurnOfPlayer(false, true, visualizeTurnOfPlayerOne, visualizeTurnOfPlayerTwo);
                 TURN=REDTURN;
-
             }
 
             }
