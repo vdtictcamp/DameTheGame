@@ -25,6 +25,8 @@ public class GameSettings extends AppCompatActivity {
     EditText txtFieldGameName;
     private Button btnStartGame;
     FirebaseAuth currentUserAuth;
+    private EditText editTxtPlayerOneName;
+    private EditText editTxtPlayerTwoName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,14 +40,17 @@ public class GameSettings extends AppCompatActivity {
                 startGame();
             }
         };
-
         btnStartGame.setOnClickListener(startGameListener);
+        editTxtPlayerOneName=findViewById(R.id.editTxtPlayerOneName);
+        editTxtPlayerTwoName=findViewById(R.id.editTxtPlayerTwoName);
     }
 
     public void startGame(){
         gameName = "offline";
         Intent intent = new Intent(getApplicationContext(), localGame.class);
         intent.putExtra("gameName", gameName);
+        intent.putExtra("playerOneName", editTxtPlayerOneName.getText().toString());
+        intent.putExtra("playerTwoName", editTxtPlayerTwoName.getText().toString());
         startActivity(intent);
     }
 
