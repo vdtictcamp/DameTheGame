@@ -506,7 +506,7 @@ public class localGame extends AppCompatActivity {
                     }
                     //After each move we need to change the position of the stone in the stone array
                     stones= gameController.switchPosOfStoneInArray(stones, positionsIds, movingStone.getId(), view.getId());
-                    controller.changeTurnOfPlayer(visualizeTurnOfPlayerTwo, visualizeTurnOfPlayerOne);
+                    controller.changeTurnOfPlayer(true, false, visualizeTurnOfPlayerTwo, visualizeTurnOfPlayerOne);
                     TURN=WHITETURN;
                 }
                 allPositionsToJump.clear();
@@ -521,7 +521,7 @@ public class localGame extends AppCompatActivity {
                 int id = stones[index[0]][index[1]];
                 redQueens.add(id);
                 View stoneToQueen = findViewById(id);
-                setRedQueen(stoneToQueen);
+                queenChecker.setRedQueen(stoneToQueen);
             }
         }
 
@@ -550,7 +550,7 @@ public class localGame extends AppCompatActivity {
                     //After each move we need to change the position of the stone in the stone array
                     stones = gameController.switchPosOfStoneInArray(stones,positionsIds, movingStone.getId(), view.getId());
 
-                    controller.changeTurnOfPlayer(visualizeTurnOfPlayerOne, visualizeTurnOfPlayerTwo);
+                    controller.changeTurnOfPlayer(false, true, visualizeTurnOfPlayerOne, visualizeTurnOfPlayerTwo);
                     TURN=REDTURN;
                 }
                 allPositionsToJump.clear();
@@ -562,7 +562,7 @@ public class localGame extends AppCompatActivity {
                 int id = stones[index[0]][index[1]];
                 whiteQueens.add(id);
                 View stoneToQueen = findViewById(id);
-                setWhiteQueen(stoneToQueen);
+                queenChecker.setWhiteQueen(stoneToQueen);
             }
         }
 
@@ -604,6 +604,7 @@ public class localGame extends AppCompatActivity {
             for(int i=0; i<whiteStonesIds.length; i++){
                 for(int j=0; j<whiteStonesIds.length; j++){
                     if(whiteStonesIds[i][j]==stones[row][col]){
+                        System.out.println("Stein gefunden ");
                         eatenStones.add(whiteStonesIds[i][j]);
                         System.out.println(whiteStonesIds.length+" "+whiteStonesIds[i].length);
                         System.out.println("Anzahl gefressener weisser Steine"+eatenStones.size());
@@ -619,10 +620,4 @@ public class localGame extends AppCompatActivity {
             gameLayout.removeView(v);
         }
 
-        public void setWhiteQueen(View stoneToQueen ){
-            queenChecker.setWhiteQueen(stoneToQueen);
-        }
-        public void setRedQueen(View stoneToQueen){
-            queenChecker.setRedQueen(stoneToQueen);
-        }
     }
