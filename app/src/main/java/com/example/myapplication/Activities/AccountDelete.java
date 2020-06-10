@@ -30,17 +30,17 @@ public class AccountDelete extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
-        btnDeleteAccount=findViewById(R.id.btnDeleteAccount);
-        currentUserAuth=FirebaseAuth.getInstance();
-        firebasUser=currentUserAuth.getCurrentUser();
+        btnDeleteAccount = findViewById(R.id.btnDeleteAccount);
+        currentUserAuth = FirebaseAuth.getInstance();
+        firebasUser = currentUserAuth.getCurrentUser();
 
         View.OnClickListener deletListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Gecklickt");
+                System.out.println("Geklickt");
                 AlertDialog.Builder dialog = new AlertDialog.Builder(AccountDelete.this);
                 dialog.setTitle("Bist du sicher?");
-                dialog.setMessage("Alle deine Daten werden gelöscht und du kanns nicht mehr online spielen");
+                dialog.setMessage("Alle deine Daten werden gelöscht und du kannst nicht mehr online spielen");
                 dialog.setPositiveButton("Ja ich will mein Konto löschen", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -48,12 +48,11 @@ public class AccountDelete extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(AccountDelete.this, "Dein Konto wurde erflogreich gelöscht", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(AccountDelete.this, "Dein Konto wurde erfolgreich gelöscht", Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(intent);
                                 } else {
-                                    Toast.makeText(AccountDelete.this, "Etwas ist leider schief gegengen", Toast.LENGTH_LONG).show();
-
+                                    Toast.makeText(AccountDelete.this, "Etwas ist leider schief gegangen", Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
@@ -66,12 +65,9 @@ public class AccountDelete extends AppCompatActivity {
                     }
                 });
                 dialog.show();
-
             }
         };
-
         btnDeleteAccount.setOnClickListener(deletListener);
-
     }
 
 
@@ -121,7 +117,7 @@ public class AccountDelete extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.lblAccountMenu:
-                intent=new Intent(getApplicationContext(), AccountDelete.class);
+                intent = new Intent(getApplicationContext(), AccountDelete.class);
                 startActivity(intent);
             default:
                 return super.onOptionsItemSelected(item);
