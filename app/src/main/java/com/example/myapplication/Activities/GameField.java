@@ -561,7 +561,7 @@ public void showValidPosForQueen(List<Integer>positions){
             if(isFinish){
                 stopGame();
             }
-                controller.changeTurnOfPlayer(visualizeTurnOfPlayerTwo, visualizeTurnOfPlayerOne);
+                controller.changeTurnOfPlayer(true, false, visualizeTurnOfPlayerTwo, visualizeTurnOfPlayerOne);
                 TURN=WHITETURN;
             }
         }
@@ -597,7 +597,7 @@ public void showValidPosForQueen(List<Integer>positions){
                 if (isFinish) {
                     stopGame();
                 }
-                controller.changeTurnOfPlayer(visualizeTurnOfPlayerOne, visualizeTurnOfPlayerTwo);
+                controller.changeTurnOfPlayer(false, true, visualizeTurnOfPlayerOne, visualizeTurnOfPlayerTwo);
                 TURN=REDTURN;
 
             }

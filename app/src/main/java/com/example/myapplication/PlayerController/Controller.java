@@ -11,15 +11,15 @@ import com.example.myapplication.R;
 //Diese Klasse schiebt das grüne Quadrat, um zu visualisieren, welcher Spieler am Zug ist
 public class Controller {
 
-    public void changeTurnOfPlayer(boolean playerOneTurn, boolean playerTwoTurn, View view1, View view2){
+    public void changeTurnOfPlayer(boolean playerOneTurn, boolean playerTwoTurn, View view2, View view1){
         if(playerOneTurn){
             view1.setVisibility(view1.VISIBLE);
         }else{
-            view1.setVisibility(view1.INVISIBLE);
+            view2.setVisibility(view1.INVISIBLE);
         }
 
        if(playerTwoTurn){
-           view2.setVisibility(view2.VISIBLE);
+           view1.setVisibility(view2.VISIBLE);
        }else{
            view2.setVisibility(view2.INVISIBLE);
        }
