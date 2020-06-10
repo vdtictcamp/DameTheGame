@@ -4,14 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/damebraun"
     tools:context=".Activities.AccountDelete">
 
     <Button
         android:id="@+id/btnDeleteAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="176dp"
+        android:layout_height="53dp"
+        android:background="@color/sandbraun"
+        android:textColor="@color/damebraun"
+        android:fontFamily="@font/alfa_slab_one"
         android:text="@string/btnDeleteAccount"
-        tools:layout_editor_absoluteX="167dp"
-        tools:layout_editor_absoluteY="110dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

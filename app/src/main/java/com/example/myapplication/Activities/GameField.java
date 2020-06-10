@@ -85,7 +85,7 @@ public class GameField extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_field);
         gameLayout = findViewById(R.id.gamelayout);
-        countdown = findViewById(R.id.countdown);
+        //countdown = findViewById(R.id.countdown);
         redStones = new View[8][8];
         whiteStones = new View[8][8];
         positions = new View[8][8];
@@ -135,7 +135,6 @@ public class GameField extends AppCompatActivity {
         //Game Controller
         gameController=new GameController(this, positionsIds);
         queenChecker=new QueenChecker(this, positionsIds);
-
 
 
         View.OnClickListener checkPositions = new View.OnClickListener() {
