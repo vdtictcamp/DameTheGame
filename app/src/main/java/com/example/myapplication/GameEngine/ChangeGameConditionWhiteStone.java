@@ -24,7 +24,6 @@ public class ChangeGameConditionWhiteStone{
 
     }
 
-
     //First we need to check if a enemy stone is in front of another stone
     //Then we need to check if the Position beyond thie stone is free
     public List<List<Integer>> canEateRedStone(View stone) {
@@ -74,7 +73,7 @@ public class ChangeGameConditionWhiteStone{
         return positionsToJump;
     }
 
-    //Gets all Positions to jump inDiagonal
+    //Gets all Positions to jump Diagonal
     public List<Integer> collectPosRightDiagonal(int i, int j) {
         System.out.println("clicked von diagonal");
         int colDiff = 1;
@@ -120,6 +119,7 @@ public class ChangeGameConditionWhiteStone{
         return positionsToJump;
     }
 
+    //This Method collects the positions to jump in left Diagonal
     public List<Integer>collectPosLeftDiagonal(int i, int j) {
         System.out.println("clicked von diagonal");
         int colDiff = 1;
@@ -157,13 +157,13 @@ public class ChangeGameConditionWhiteStone{
                                 }
                             }
                         }
-                        }
+                    }
                 }
-
             }
         }
         return positionsToJump;
     }
+    //This Method checks if there is more then one position to jump for eat a enemy stone
     public boolean checkNextJump(int row, int col){
         if( col==0 ){
             if(stones[row+1][col+1]!=0){
@@ -190,7 +190,7 @@ public class ChangeGameConditionWhiteStone{
         }
     }
 
-
+    //This Method return the stones which could be eaten, at least the player decides which stone he want's to eat
     public List<Integer> returnStonesToEat(){
         return stonesToEat;
     }

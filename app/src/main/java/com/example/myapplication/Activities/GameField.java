@@ -174,7 +174,6 @@ public class GameField extends AppCompatActivity {
             public void onClick(View v) {
                 clearBoard();
                 chGameCondRed = new ChangeGameConditionRedStone(context, stones, positionsIds, whiteStonesIds);
-                allPositionsToJump.clear();
                 if((TURN & REDTURN)!=0 &&player.equals("PlayerTwo")) {
                     movingStone=v;
                     v.startAnimation(onClickAnim);
@@ -190,7 +189,7 @@ public class GameField extends AppCompatActivity {
                         queenChecker.getPositionsToJumpBackwardRight(stones,row, col, whiteStonesIds, redStonesIds, false);
                         queenChecker.getPositionsToJumpBackwardLeft(stones,row, col, whiteStonesIds, redStonesIds, false);
                         posForRedQueen=queenChecker.returnPostions();
-                        whiteStonesToEat = queenChecker.returnStonesToEat();
+                        redStonesToEat = queenChecker.returnStonesToEat();
                         if(posForRedQueen.size()>0){
                             allPositionsToJump= gameController.fillPositionsToJumpInList(posForRedQueen, true);
                                 showValidPosForQueen(allPositionsToJump);
@@ -199,10 +198,10 @@ public class GameField extends AppCompatActivity {
                     else {
                         showValidPositionsForRedStones(v);
                         posAfterEat = chGameCondRed.canEateWhiteStone(v);
-                        whiteStonesToEat = chGameCondRed.returnStonesToEat();
+                        redStonesToEat = chGameCondRed.returnStonesToEat();
                         if(posAfterEat!=null &&posAfterEat.size()>0) {
                             allPositionsToJump = gameController.fillPositionsToJumpInList(posAfterEat, false);
-                            ShowThePositionAfterEatingWhiteStone(allPositionsToJump);
+                            ShowThePositionAfterEatingRedStone(allPositionsToJump);
                         }
 
                     }
@@ -244,9 +243,9 @@ public class GameField extends AppCompatActivity {
                         }
                     }
                     else {
-                        showValidPositionsForRedStones(v);
+                        showValidPositionsForWhiteStones(v);
                         posAfterEat = chGameCondWhite.canEateRedStone(v);
-                        whiteStonesToEat = chGameCondRed.returnStonesToEat();
+                        whiteStonesToEat = chGameCondWhite.returnStonesToEat();
                         if (posAfterEat != null && posAfterEat.size() > 0) {
                             allPositionsToJump = gameController.fillPositionsToJumpInList(posAfterEat, false);
                             ShowThePositionAfterEatingWhiteStone(allPositionsToJump);
@@ -535,6 +534,7 @@ public void showValidPosForQueen(List<Integer>positions){
         int stoneId = movingStone.getId();
         if((TURN & REDTURN)!=0 ){
         if(movingStone.getY()<view.getY() && validPosToMove.contains(view)|| allPositionsToJump.contains(view.getId())) {
+            allPositionsToJump.clear();
             clearBoard();
             float diffX = view.getX() - movingStone.getX();
             float diffY = view.getY() - movingStone.getY();
@@ -578,6 +578,7 @@ public void showValidPosForQueen(List<Integer>positions){
         float diffY=0;
         if((TURN & WHITETURN)!=0) {
             if (movingStone.getY() > view.getY() && validPosToMove.contains(view)|| allPositionsToJump.contains(view.getId())) {
+                allPositionsToJump.clear();
                 clearBoard();
                 diffX = view.getX() - movingStone.getX();
                 diffY = view.getY() - movingStone.getY();

@@ -278,20 +278,6 @@ public class QueenChecker {
         return positionsToJump;
     }
 
-
-    public int[] getRowAndCol(int[][]stones, View queen) {
-        int index[]=new int[2];
-        for (int i = 0; i < stones.length; i++) {
-            for (int j = 0; j < stones[i].length; j++) {
-                if(stones[i][j]==queen.getId()){
-                    index[0]=i;
-                    index[1]=j;
-                }
-            }
-        }
-        return index;
-    }
-
     public boolean checkNextJump(int[][]stones, int row, int col){
         if( col==0 ){
             if(stones[row+1][col+1]!=0 || stones[row-1][col+1]!=0 ){
@@ -317,6 +303,19 @@ public class QueenChecker {
         else{
             return false;
         }
+    }
+
+    public int[] getRowAndCol(int[][]stones, View queen) {
+        int index[]=new int[2];
+        for (int i = 0; i < stones.length; i++) {
+            for (int j = 0; j < stones[i].length; j++) {
+                if(stones[i][j]==queen.getId()){
+                    index[0]=i;
+                    index[1]=j;
+                }
+            }
+        }
+        return index;
     }
 
     public List<List<Integer>> returnPostions(){

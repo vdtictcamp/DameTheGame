@@ -56,7 +56,7 @@ public class ChangeGameConditionRedStone {
                         }
                     }else
                         if(i==0 && j==0){
-                        if (stones[i + 1][j + 1] == 0 ) {
+                            if (stones[i + 1][j + 1] == 0 ) {
                             break;
                         }
                     }

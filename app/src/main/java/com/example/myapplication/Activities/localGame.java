@@ -311,7 +311,6 @@ public class localGame extends AppCompatActivity {
         }
     }
 
-
     @SuppressLint("ResourceAsColor")
     private void clearBoard() {
         for (int i = 0; i < positions.length; i++) {
@@ -463,6 +462,7 @@ public class localGame extends AppCompatActivity {
         }
     }
 
+    //Sets the click listener to the positions which are not blocked and therefore available for a movemente
     private void setMoveListenerWhiteStone(int[] positionsToMove) {
         if (positionsToMove != null) {
             for (int i = 0; i < positionsToMove.length; i++) {
@@ -511,8 +511,9 @@ public class localGame extends AppCompatActivity {
                     queenChecker.setRedQueen(stoneToQueen);
                 }
                 TURN = WHITETURN;
+                allPositionsToJump.clear();
             }
-            allPositionsToJump.clear();
+
         }
     }
 
@@ -553,12 +554,14 @@ public class localGame extends AppCompatActivity {
                     queenChecker.setWhiteQueen(stoneToQueen);
                 }
                 TURN = REDTURN;
+                allPositionsToJump.clear();
             }
-            allPositionsToJump.clear();
+
         }
 
     }
 
+    //This method moves the Queen
     public void moveQueen(View position) {
         float diffX = position.getX() - movingStone.getX();
         float diffY = position.getY() - movingStone.getY();
@@ -592,15 +595,13 @@ public class localGame extends AppCompatActivity {
         }
     }
 
+    //This method removes the stone from the Board
     public void removeStone(int row, int col) {
         for (int i = 0; i < whiteStonesIds.length; i++) {
             for (int j = 0; j < whiteStonesIds.length; j++) {
                 if (whiteStonesIds[i][j] == stones[row][col]) {
-                    counter++;
-                    System.out.println("Counter:"+counter);
                     whiteStonesIds[i][j]=0;
                     System.out.println(whiteStonesIds.length + " " + whiteStonesIds[i].length);
-                    break;
                 }
                 else if (redStonesIds[i][j] == stones[row][col]) {
                     redStonesIds[i][j] = 0;

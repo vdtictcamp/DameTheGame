@@ -70,30 +70,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }));
 
-       /* btnTestransaction.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //firebase = new FirebaseGameController(stones, gameName);
-                //firebase.initStartSituation(player);
-                database = FirebaseDatabase.getInstance();
-                reference = database.getReference("test").child("Testevent");
-                //reference.setValue("lol");
-                Map<String, Transaction> transactions = new HashMap<>();
-                transactions.put("yeahFirebase", new Transaction("1", "2", "3", "4"));
-                reference.setValue(transactions);
-            }
-        }));
-        */
-        /**
-         reference = database.getReference("test").child("Testevent");
-         DatabaseReference usersRef = reference.child("Testevent");
-
-         Map<String, Transaction> transactions = new HashMap<>();
-         transactions.put("alanisawesome", new Transaction("1", "2", "3", "4"));
-
-         usersRef.setValueAsync(transaction);
-         **/
-
     }
 
     @SuppressLint("ResourceType")
