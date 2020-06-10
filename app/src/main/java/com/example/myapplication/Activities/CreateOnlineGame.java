@@ -22,7 +22,7 @@ public class CreateOnlineGame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_online_game);
         btnStartGame=findViewById(R.id.btnCreateOnlineGame);
-    txtFieldGameName=findViewById(R.id.nameOnlineGame);
+        txtFieldGameName=findViewById(R.id.nameOnlineGame);
 
         View.OnClickListener startGameListener = new View.OnClickListener() {
             @Override

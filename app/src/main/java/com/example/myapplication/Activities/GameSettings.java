@@ -44,7 +44,7 @@ public class GameSettings extends AppCompatActivity {
 
     public void startGame(){
         gameName = "offline";
-        Intent intent = new Intent(getApplicationContext(), GameField.class);
+        Intent intent = new Intent(getApplicationContext(), localGame.class);
         intent.putExtra("gameName", gameName);
         startActivity(intent);
     }

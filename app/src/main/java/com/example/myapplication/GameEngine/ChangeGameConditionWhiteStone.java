@@ -12,23 +12,18 @@ public class ChangeGameConditionWhiteStone{
     private int[][] positions = new int[8][8];
     private int[][] whiteStonesIds;
     private List<Integer>stonesToEat = new ArrayList<>();
+    private Context context;
+    private GameController gameController;
 
-    public ChangeGameConditionWhiteStone( int[][] stones, int[][] positions, int[][] whiteStonesIds ) {
+    public ChangeGameConditionWhiteStone( Context context, int[][] stones, int[][] positions, int[][] whiteStonesIds ) {
         this.stones = stones;
         this.positions = positions;
         this.whiteStonesIds = whiteStonesIds;
+        this.context=context;
+        this.gameController=new GameController(context, positions);
+
     }
 
-    public boolean checkIfIsWhiteStone(int id){
-        for(int i=0; i<whiteStonesIds.length; i++){
-            for(int j=0; j<whiteStonesIds[i].length; j++){
-                if(whiteStonesIds[i][j]==id){
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 
     //First we need to check if a enemy stone is in front of another stone
     //Then we need to check if the Position beyond thie stone is free
@@ -66,14 +61,11 @@ public class ChangeGameConditionWhiteStone{
                             positionsToJump = null;
                         }
                     }
-
                     if(positionsToJump!=null) {
                         List<Integer> pos = collectPosRightDiagonal(i, j);
                         positionsToJump.add(pos);
                         pos = collectPosLeftDiagonal(i, j);
                         positionsToJump.add(pos);
-
-
                     }
                 }
 
@@ -81,8 +73,6 @@ public class ChangeGameConditionWhiteStone{
         }
         return positionsToJump;
     }
-
-
 
     //Gets all Positions to jump inDiagonal
     public List<Integer> collectPosRightDiagonal(int i, int j) {
@@ -96,12 +86,12 @@ public class ChangeGameConditionWhiteStone{
             for (int z = 0; z < positions[i].length; z++) {
                 if (z < 8) {
                     if (k == i + rowDiff && z == j + colDiff && (colDiff % 2 != 0)) {
-                        if (stones[k][z] != 0 && checkIfIsWhiteStone(stones[k][z])) {
+                        if (stones[k][z] != 0 && gameController.checkIfIsWhiteStone(stones[k][z], whiteStonesIds)) {
                             rowDiff++;
                             colDiff++;
                         }
                     }
-                    if(j+colDiff<8){
+                    if(j+colDiff<=7){
                         if (k == i + rowDiff && z == j + colDiff && (colDiff % 2 == 0)) {
                             if (stones[k][z] == 0 ) {
                                 positionsToJump.add(positions[k][z]);
@@ -131,7 +121,6 @@ public class ChangeGameConditionWhiteStone{
     }
 
     public List<Integer>collectPosLeftDiagonal(int i, int j) {
-
         System.out.println("clicked von diagonal");
         int colDiff = 1;
         int rowDiff = 1;
@@ -139,10 +128,10 @@ public class ChangeGameConditionWhiteStone{
         List<Integer>checkPositionsLeft = new ArrayList<>();
         List<Integer> positionsToJump = new ArrayList<>();
         for (int k = i; k < positions.length; k++) {
-            for (int z = 0; z < positions[i].length; z++) {
+            for (int z = j-2; z < j+3; z++) {
                 if (z >=0) {
                     if ((k == i + rowDiff && z == j - colDiff) && (colDiff % 2 != 0)) {
-                        if ((stones[k][z] != 0) && (checkIfIsWhiteStone(stones[k][z]))) {
+                        if ((stones[k][z] != 0) && (gameController.checkIfIsWhiteStone(stones[k][z], whiteStonesIds))) {
                             rowDiff++;
                             colDiff++;
                         }
@@ -154,7 +143,7 @@ public class ChangeGameConditionWhiteStone{
                                 stonesToEat.add(stones[k - 1][z + 1]);
                                 colDiff++;
                                 rowDiff++;
-                                if(k!=0 &&z!=0){
+                                if(k!=0){
                                     if(checkNextJump(k, z)) {
                                         checkPositionsLeft = collectPosLeftDiagonal(k, z);
                                         checkPositionsRight = collectPosRightDiagonal(k, z);
@@ -176,10 +165,24 @@ public class ChangeGameConditionWhiteStone{
         return positionsToJump;
     }
     public boolean checkNextJump(int row, int col){
-        if(row ==0 || col==0 || col==7 || row==7){
+        if( col==0 ){
+            if(stones[row+1][col+1]!=0){
+                return true;
+            }else {
+                return false;
+            }
+        }
+        else if(col==7){
+            if(stones[row+1][col-1]!=0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        else if(row ==0 || row==7){
             return false;
         }
-        else if(stones[row-1][col-1]!=0 || stones[row-1][col+1]!=0){
+        else if(stones[row+1][col-1]!=0 || stones[row+1][col+1]!=0){
             return true;
         }
         else{

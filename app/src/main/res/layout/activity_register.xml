@@ -13,7 +13,6 @@
         android:layout_width="268dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="82dp"
@@ -23,7 +22,7 @@
         android:textColor="@color/sandbraun"
         android:textSize="26dp"
 
-        android:textStyle="bold|italic"></TextView>
+        android:textStyle="bold|italic" />
 
     <EditText
         android:id="@+id/txtUsername"
@@ -86,8 +85,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="125dp"
-        android:layout_marginBottom="83dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginBottom="97dp"
         android:background="@color/sandbraun"
         android:fontFamily="@font/alfa_slab_one"
         android:text="@string/register"
@@ -159,11 +158,13 @@
         app:layout_constraintTop_toTopOf="@+id/txtPassword" />
 
     <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/loadBarRegister"
+        android:layout_width="103dp"
+        android:layout_height="24dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="314dp" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="667dp"
+        android:layout_marginEnd="256dp" />
 
 
 </RelativeLayout>

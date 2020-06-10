@@ -4,7 +4,11 @@ import android.content.Context;
 import android.os.Looper;
 
 import com.example.myapplication.Activities.GameField;
+import com.example.myapplication.Activities.Transaction;
 import com.example.myapplication.Firebase.FirebaseGameController;
+
+import java.util.HashMap;
+import java.util.List;
 
 public class PlayerOneThread extends Thread implements Runnable {
 
@@ -18,6 +22,7 @@ public class PlayerOneThread extends Thread implements Runnable {
     boolean playerTwohasJoined = false;
     FirebaseGameController dataBaseController;
     private boolean gameOver=false;
+    private boolean inTurn = true;
 
     public PlayerOneThread(int[][]stones, String gameName, Context context) {
         this.stones = stones;
@@ -32,19 +37,16 @@ public class PlayerOneThread extends Thread implements Runnable {
         return isInTurn;
     }
 
-    public boolean finishTurn() {
+    public void finishTurn() {
         isInTurn = false;
-        return isInTurn;
     }
 
 
     @Override
     public void run() {
-
-
         Looper.prepare();
-        while (!playerTwohasJoined){
-            playerTwohasJoined=dataBaseController.checkIfPlayerTwoHasJoined();
+        while (!playerTwohasJoined) {
+            playerTwohasJoined = dataBaseController.checkIfPlayerTwoHasJoined();
             System.out.println("Warte bis Spieler zwei beitritt");
             try {
                 Thread.sleep(3000);
@@ -52,42 +54,44 @@ public class PlayerOneThread extends Thread implements Runnable {
                 e.printStackTrace();
             }
         }
+        System.out.println("Spieler zwei ist beigetreten");
         game.connectionSuccessfull();
         while (!gameOver) {
+            isInTurn = gameController.readTurnOfPlayerOne();
             if (!isInTurn) {
-                long[] ids = gameController.readStoneIdPositionId();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                HashMap<String, Integer> ids = gameController.addValueEventListenerAllValues();
+                System.out.println(ids);
                 if (ids != null) {
                     System.out.println("TRUEEEEEE");
-                    int s_row = Integer.parseInt(String.valueOf(ids[0]));
-                    int s_col = Integer.parseInt(String.valueOf(ids[1]));
-                    System.out.println(".....................");
-                    System.out.println("StoneID" + ids[0]);
-                    System.out.println("....................");
-                    System.out.println("PositionID" + ids[1]);
-                    System.out.println(ids[2]);
-                    System.out.println(ids[3]);
-                    System.out.println("Stones aus Thread:"+ stones[s_row][s_col]);
-                    int p_row = Integer.parseInt(String.valueOf(ids[2]));
-                    int p_col = Integer.parseInt(String.valueOf(ids[3]));
-                    isInTurn = isInTurn();
-                    game.moveHelperFunc(s_col, s_row, p_row,p_col);
-                    //game.helpViewMover(stones[s_col][s_row], positionIds[p_row][p_col]);
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    System.out.println(ids);
+                    long rowPos = Long.parseLong(String.valueOf(ids.get("rowPos")));
+                    long colPos = Long.parseLong(String.valueOf(ids.get("colPos")));
+                    long colStone = Long.parseLong(String.valueOf(ids.get("colStone")));
+                    long rowStone = Long.parseLong(String.valueOf(ids.get("rowStone")));
+                    if (rowPos != 0 && colPos != 0 && colPos != 0 && colStone != 0) {
+                        ids=null;
+                        boolean ready = gameController.setDefaultUpdateValues();
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        if(ready) {
+                            isInTurn = true;
+                            gameController.finishPlayerTwoTurn();
+                            game.moveHelperFunc((int) colStone, (int) rowStone, (int) rowPos, (int) colPos);
+                        }
                     }
-                    isInTurn=true;
-                    //Nachdem die Steine bewegt wurden, muss der aktuelle Spielstatus ausgelesen werden
 
-                    //Now we need to move the Stone
-                    //Then we finish the Turn of player one
-                    //And set the Turn for player two
                 }
-                finishTurn();
-                pTwoThread.isInTurn();
             }
 
         }
     }
-}
+    }
+

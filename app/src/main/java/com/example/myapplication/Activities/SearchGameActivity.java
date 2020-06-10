@@ -3,20 +3,25 @@ package com.example.myapplication.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.Firebase.Firebase2;
 import com.example.myapplication.Firebase.Firebase3;
 import com.example.myapplication.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,34 +34,36 @@ import java.util.List;
 public class SearchGameActivity extends AppCompatActivity {
 
     private Button btnJoinGame;
-    ListView listView;
-    String gameName;
-    EditText txtFieldGameName;
-    DatabaseReference reference;
-    FirebaseDatabase database;
+    private ListView listView;
+    private TextView lblWaitForGames;
+    private ProgressBar loadBar;
+    private String gameName;
+    private DatabaseReference reference;
+    private FirebaseDatabase database;
+    private DatabaseReference roomsRef;
+    private FirebaseAuth currentUserAuth;
 
-    DatabaseReference roomsRef;
-    DatabaseReference roomRef;
-
-    List<String> roomsList;
-    String roomName = "";
-    String playerName = "";
-    boolean isHosted;
+    private List<String> roomsList;
+    private String playerName = "";
+    private boolean isHosted = false;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_game);
-        btnJoinGame=findViewById(R.id.btnJoingame);
         database = FirebaseDatabase.getInstance();
         listView = findViewById(R.id.listView);
+        lblWaitForGames=findViewById(R.id.lblWaitingForGames);
         isHosted=false;
         roomsList = new ArrayList<>();
-
+        loadBar=findViewById(R.id.loadBarJoinGame);
         playerName = "test";
+        addRoomsEventListener();
+        currentUserAuth= FirebaseAuth.getInstance();
 
 
+    /**
         btnJoinGame.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,20 +78,17 @@ public class SearchGameActivity extends AppCompatActivity {
                 }
             }
         }));
+     **/
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //bestehendem room beitreten und sich selbst als player2 hinzufügen
-                roomName = roomsList.get(position);
-                //roomRef = database.getReference("rooms/" + roomName + "/player2");
-                //addRoomEventListener();
-                //roomRef.setValue(playerName);
-                joinGame(roomName);
+                gameName = roomsList.get(position);
+                checkIfGameIsHosted();
             }
         });
 
-        addRoomsEventListener();
     }
 
     public void joinGame(String gameName){
@@ -95,16 +99,19 @@ public class SearchGameActivity extends AppCompatActivity {
     }
 
     private void checkIfGameIsHosted(){
+        loadBar.setVisibility(loadBar.VISIBLE);
         reference = database.getReference("rooms").child(gameName).child("PlayerOneHasJoined");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 isHosted = (boolean) dataSnapshot.getValue();
                 if (isHosted){
+                    loadBar.setVisibility(loadBar.INVISIBLE);
+                    lblWaitForGames.setVisibility(lblWaitForGames.INVISIBLE);
                     joinGame(gameName);
                 }
                 else{
-                    txtFieldGameName.setText("Dises Spiel ist nicht gehostet");
+                    Toast.makeText(SearchGameActivity.this, "Dieses Spiel ist nicht gehostet",Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -127,6 +134,8 @@ public class SearchGameActivity extends AppCompatActivity {
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(SearchGameActivity.this, android.R.layout.simple_list_item_1, roomsList);
                     listView.setAdapter(adapter);
                 }
+                loadBar.setVisibility(loadBar.INVISIBLE);
+                lblWaitForGames.setVisibility(lblWaitForGames.INVISIBLE);
             }
 
             @Override
@@ -137,21 +146,50 @@ public class SearchGameActivity extends AppCompatActivity {
         });
     }
 
-    private void addRoomEventListener(){
-        roomRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //join room
-                Intent intent = new Intent(getApplicationContext(), Firebase3.class);
-                intent.putExtra("roomName", roomName);
-                startActivity(intent);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                //error
-                Toast.makeText(SearchGameActivity.this, "Error", Toast.LENGTH_SHORT).show();
-            }
-        });
+
+    @SuppressLint("ResourceType")
+    @Override
+    public boolean onCreateOptionsMenu( Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        if (currentUserAuth.getCurrentUser()!=null){
+            menu.removeItem(R.id.menuLoginItem);
+        }
+        if(currentUserAuth.getCurrentUser()==null){
+            menu.add(R.id.menuLoginItem);
+            menu.removeItem(R.id.menuLogoutItem);
+        }
+        return super.onCreateOptionsMenu(menu);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menuLoginItem:
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.rulesMenuItem:
+                intent = new Intent(getApplicationContext(), GameRulesActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.registerMenuItem:
+                intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.menuOnlineItem:
+                intent = new Intent(getApplicationContext(), OnlineOptionsActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.menuLogoutItem:
+                currentUserAuth.getInstance().signOut();
+                intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
 }
