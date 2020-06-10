@@ -451,7 +451,6 @@ public class localGame extends AppCompatActivity {
         }
     };
 
-
     //Sets the click listener to the valid positions for the movements of the Red Stone
     private void setMoveListenerRedStone(int[] positionsToMove) {
         if (positionsToMove != null) {

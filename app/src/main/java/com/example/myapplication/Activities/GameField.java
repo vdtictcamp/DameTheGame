@@ -171,6 +171,8 @@ public class GameField extends AppCompatActivity {
         View.OnClickListener redStoneClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                chGameCondRed = new ChangeGameConditionRedStone(context, stones, positionsIds, whiteStonesIds);
+
                 allPositionsToJump.clear();
                 if((TURN & REDTURN)!=0 &&player.equals("PlayerTwo")) {
                     movingStone=v;
@@ -214,6 +216,7 @@ public class GameField extends AppCompatActivity {
         View.OnClickListener whiteStoneClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                chGameCondWhite = new ChangeGameConditionWhiteStone(context, stones, positionsIds, whiteStonesIds);
                 allPositionsToJump.clear();
                 //Checks whoms Turn it is
                 if ((TURN & WHITETURN) != 0 &&player.equals("PlayerOne")) {
@@ -232,7 +235,7 @@ public class GameField extends AppCompatActivity {
                         queenChecker.getPositionsToJumpForwardRight(stones,row, col, whiteStonesIds, redStonesIds, true);
                         posForWhiteQueen=queenChecker.returnPostions();
                         redStonesToEat = queenChecker.returnStonesToEat();
-                        if(posForWhiteQueen.size()>0){
+                        if(posAfterEat != null && posAfterEat.size() > 0){
                             allPositionsToJump= gameController.fillPositionsToJumpInList(posForWhiteQueen, true);
                             for(int i=0; i<posForWhiteQueen.size(); i++) {
                                 showValidPosForQueen(posForWhiteQueen.get(i));
