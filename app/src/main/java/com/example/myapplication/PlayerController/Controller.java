@@ -12,8 +12,17 @@ import com.example.myapplication.R;
 public class Controller {
 
     public void changeTurnOfPlayer(View view1, View view2){
-            view1.setBackgroundColor(Color.WHITE);
-            view2.setBackgroundColor(Color.GREEN);
+        if(view1.getVisibility()==view1.VISIBLE){
+            view1.setVisibility(view1.INVISIBLE);
+        }
+        else{
+            view1.setVisibility(view1.VISIBLE);
+        }
+        if(view2.getVisibility()==view2.VISIBLE) {
+            view2.setVisibility(view1.INVISIBLE);
+        }else{
+            view2.setVisibility(view2.VISIBLE);
+        }
     }
 
 }

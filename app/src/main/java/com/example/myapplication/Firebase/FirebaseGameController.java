@@ -302,23 +302,6 @@ public class FirebaseGameController {
         return isHosted;
     }
 
-    //1
-    //This Method will send the Turn code and the stone which has moved to his last position
-    public void sendUpdateInformaions(int stoneRow, int stoneCol, int posRow, int posCol, String player){
-
-        reference = database.getReference("rooms").child(gameName).child("updateInformations").child("position").child("row");
-        reference.setValue(posRow);
-        reference = database.getReference("rooms").child(gameName).child("updateInformations").child("position").child("col");
-        reference.setValue(posCol);
-        reference = database.getReference("rooms").child(gameName).child("updateInformations").child("stone").child("row");
-        reference.setValue(stoneRow);
-        reference = database.getReference("rooms").child(gameName).child("updateInformations").child("stone").child("col");
-        reference.setValue(stoneCol);
-
-
-    }
-
-
     public boolean readTurnOfPlayerOne(){
         reference = database.getReference("rooms").child(gameName).child("PlayerOneTurn");
         reference.addValueEventListener(new ValueEventListener() {
@@ -377,24 +360,6 @@ public class FirebaseGameController {
     public void setPlayerTwoTurn(){
         reference = database.getReference("rooms").child(gameName).child("PlayerTwoTurn");
         reference.setValue(true);
-    }
-
-    //2
-    public long[] readStoneIdPositionId(){
-        addValueEventListenerStoneRow();
-        addValueEventListenerStoneCol();
-        addValueEventListenerPositionRow();
-        addValueEventListenerPositionCol();
-
-        System.out.println(ids[0]+" "+ids[1]+" "+ids[2]+" "+ids[3]);
-        if(ids[0]!=0 && ids[1]!=0 && ids[2]!=0 && ids[3]!=0){
-        setDefaultUpdateValues();
-            return ids;
-        }else {
-            System.out.println("readStoneIdPosizionID error");
-            return null;
-        }
-
     }
 
 

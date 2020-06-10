@@ -1,889 +1,922 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.GameField"
-    android:id="@+id/gamelayout"
+    android:id="@+id/mainLayout"
     android:orientation="vertical"
-    android:layout_marginTop="@dimen/marginTopAndBottom"
     android:columnCount="8"
     android:rowCount="14"
-    android:layout_marginLeft="5dp">
+    android:background="@color/damebraun">
 
-    <View
-        android:id="@+id/playersTwoTurn"
-        android:layout_width="30dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+    <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/lblPlayerOneSwitcher"
+        android:layout_width="80dp"
         android:layout_height="30dp"
-        android:layout_row="13"
-        android:layout_column="4"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@color/green">
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="20dp"
+        android:text="@string/playerOneTurn">
+    </TextView>
 
-    </View>
+        <View
+            android:layout_marginTop="20dp"
+            android:id="@+id/playersTwoTurn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/rounded_corner">
 
-    <View
-        android:id="@+id/playersOneTurn"
-        android:layout_width="30dp"
+        </View>
+
+        <TextView
+        android:layout_marginTop="20dp"
+        android:id="@+id/lblPlayerTwoSwitcher"
+        android:layout_width="80dp"
         android:layout_height="30dp"
-        android:layout_row="13"
-        android:layout_column="2"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/green">
-
-    </View>
-
-    <View
-        android:id="@+id/view6"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_row="7"
-        android:layout_column="2"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_corner"></View>
-
-    <View
-        android:id="@+id/pos7g"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="1"
-        android:layout_column="6"
-        android:background="@color/black">
-
-    </View>
-
-    <View
-        android:id="@+id/pos8h"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="0"
-        android:layout_column="7"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos7d"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="1"
-        android:layout_column="3"
-        android:background="@color/gray"></View>
-
-    <View
-        android:id="@+id/pos6"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="1"
-        android:layout_column="2"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos5c"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="3"
-        android:layout_column="2"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos5e"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="3"
-        android:layout_column="4"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos5g"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="3"
-        android:layout_column="6"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos4b"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="4"
-        android:layout_column="1"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos4d"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="4"
-        android:layout_column="3"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos2d"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="6"
-        android:layout_column="3"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos4f"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="4"
-        android:layout_column="5"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos3e"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="5"
-        android:layout_column="4"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos4h"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="4"
-        android:layout_column="7"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos3g"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="5"
-        android:layout_column="6"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos3a"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="5"
-        android:layout_column="0"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos3c"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="5"
-        android:layout_column="2"
-        android:background="@color/black"></View>
-
-
-
-    <View
-        android:id="@+id/pos2h"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="6"
-        android:layout_column="7"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos2f"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="6"
-        android:layout_column="5"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos2b"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="6"
-        android:layout_column="1"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos1a"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="7"
-        android:layout_column="0"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos1c"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="7"
-        android:layout_column="2"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos1e"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="7"
-        android:layout_column="4"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos1g"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="7"
-        android:layout_column="6"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos5a"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="3"
-        android:layout_column="0"
-        android:background="@color/black">
-
-    </View>
-
-    <View
-        android:id="@+id/pos7a"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="1"
-        android:layout_column="0"
-        android:background="@color/black">
-
-    </View>
-
-    <View
-        android:id="@+id/pos8a"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="0"
-        android:layout_column="0"
-        android:background="@color/gray"></View>
-
-    <View
-        android:id="@+id/pos7c"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="1"
-        android:layout_column="2"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos8d"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="0"
-        android:layout_column="3"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos8b"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="0"
-        android:layout_column="1"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos7e"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="1"
-        android:layout_column="4"
-        android:background="@color/black"></View>
-
-    <View
-        android:layout_column="2"
-        android:layout_row="0"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/pos8c"
-        android:background="@color/gray">
-
-
-
-
-    </View>
-
-    <View
-        android:id="@+id/pos6d"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="2"
-        android:layout_column="3"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos6b"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="2"
-        android:layout_column="1"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos6f"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="2"
-        android:layout_column="5"
-        android:background="@color/black"></View>
-
-    <View
-        android:id="@+id/pos8f"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="0"
-        android:layout_column="5"
-        android:background="@color/black"></View>
-
-
-    <View
-        android:id="@+id/pos6a"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="2"
-        android:layout_column="0"
-        android:background="@color/gray"></View>
-
-    <View
-        android:id="@+id/b9"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_row="2"
-        android:layout_column="1"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/roundet_corner_red">
-
-    </View>
-
-    <View
-        android:id="@+id/b6"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_row="1"
-        android:layout_column="2"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/roundet_corner_red">
-
-    </View>
-
-    <View
-        android:id="@+id/b1"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_row="0"
-        android:layout_column="1"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/roundet_corner_red">
-
-    </View>
-
-    <View
-        android:id="@+id/b10"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_row="2"
-        android:layout_column="3"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/roundet_corner_red">
-
-    </View>
-
-    <View
-        android:id="@+id/b7"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_row="1"
-        android:layout_column="4"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/roundet_corner_red">
-
-    </View>
-
-    <View
-        android:id="@+id/b3"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_row="0"
-        android:layout_column="5"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/roundet_corner_red">
-
-    </View>
-
-    <View
-        android:id="@+id/b4"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_row="0"
-        android:layout_column="7"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/roundet_corner_red">
-
-    </View>
-
-    <View
-        android:id="@+id/b11"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_row="2"
-        android:layout_column="5"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/roundet_corner_red">
-
-    </View>
-
-    <View
-        android:id="@+id/b8"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_row="1"
-        android:layout_column="6"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/roundet_corner_red">
-
-    </View>
-
-    <View
-        android:id="@+id/pos5b"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="3"
-        android:layout_column="1"
-        android:background="@color/gray"></View>
-
-    <View
-        android:id="@+id/pos5d"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="3"
-        android:layout_column="3"
-        android:background="@color/gray"></View>
-
-    <View
-        android:id="@+id/pos5f"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="3"
-        android:layout_column="5"
-        android:background="@color/gray"></View>
-
-    <View
-        android:id="@+id/pos5h"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="3"
-        android:layout_column="7"
-        android:background="@color/gray"></View>
-
-    <View
-        android:id="@+id/pos4a"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="4"
-        android:layout_column="0"
-        android:background="@color/gray"></View>
-
-    <View
-        android:id="@+id/pos4c"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="4"
-        android:layout_column="2"
-        android:background="@color/gray"></View>
-
-    <View
-        android:id="@+id/pos4e"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="4"
-        android:layout_column="4"
-        android:background="@color/gray"></View>
-
-    <View
-        android:id="@+id/pos4g"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="4"
-        android:layout_column="6"
-        android:background="@color/gray"></View>
-
-    <View
-        android:id="@+id/pos3b"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="5"
-        android:layout_column="1"
-        android:background="@color/gray"></View>
-
-    <View
-        android:id="@+id/pos3d"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="5"
-        android:layout_column="3"
-        android:background="@color/gray"></View>
-
-    <View
-        android:id="@+id/pos3f"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="5"
-        android:layout_column="5"
-        android:background="@color/gray"></View>
-
-    <View
-        android:id="@+id/pos3h"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="5"
-        android:layout_column="7"
-        android:background="@color/gray"></View>
-
-    <View
-        android:id="@+id/pos2a"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="6"
-        android:layout_column="0"
-        android:background="@color/gray"></View>
-
-    <View
-        android:id="@+id/pos2c"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="6"
-        android:layout_column="2"
-        android:background="@color/gray"></View>
-
-    <View
-        android:id="@+id/pos2e"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="6"
-        android:layout_column="4"
-        android:background="@color/gray"></View>
-
-    <View
-        android:id="@+id/pos2g"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="6"
-        android:layout_column="6"
-        android:background="@color/gray"></View>
-
-    <View
-        android:id="@+id/pos1h"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="7"
-        android:layout_column="7"
-        android:background="@color/gray"></View>
-
-    <View
-        android:id="@+id/pos1f"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="7"
-        android:layout_column="5"
-        android:background="@color/gray">
-
-    </View>
-
-    <View
-        android:id="@+id/pos1d"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="7"
-        android:layout_column="3"
-        android:background="@color/gray">
-
-    </View>
-    <View
-        android:id="@+id/pos1b"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="7"
-        android:layout_column="1"
-        android:background="@color/gray">
-
-    </View>
-
-    <View
-        android:id="@+id/pos7b"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="1"
-        android:layout_column="1"
-        android:background="@color/gray">
-
-    </View>
-
-    <View
-        android:id="@+id/pos6c"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="2"
-        android:layout_column="2"
-        android:background="@color/gray">
-
-    </View>
-
-    <View
-        android:id="@+id/pos6e"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="2"
-        android:layout_column="4"
-        android:background="@color/gray">
-
-    </View>
-
-    <View
-        android:id="@+id/pos8e"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="0"
-        android:layout_column="4"
-        android:background="@color/gray">
-
-    </View>
-
-    <View
-        android:id="@+id/pos7f"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="1"
-        android:layout_column="5"
-        android:background="@color/gray">
-
-    </View>
-
-    <View
-        android:id="@+id/pos6g"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="2"
-        android:layout_column="6"
-        android:background="@color/gray">
-
-    </View>
-
-    <View
-        android:id="@+id/pos8g"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="0"
-        android:layout_column="6"
-        android:background="@color/gray">
-
-    </View>
-
-    <View
-        android:id="@+id/pos7h"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="1"
-        android:layout_column="7"
-        android:background="@color/gray">
-
-    </View>
-
-    <View
-        android:id="@+id/pos6h"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_row="2"
-        android:layout_column="7"
-        android:background="@color/black">
-
-    </View>
-
-    <View
-        android:id="@+id/w7"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_row="6"
-        android:layout_column="5"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/rounded_corner"></View>
-
-    <View
-        android:id="@+id/w11"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_row="5"
-        android:layout_column="4"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/rounded_corner"></View>
-
-    <View
-        android:id="@+id/w5"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_row="6"
-        android:layout_column="1"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_corner"></View>
-
-    <View
-        android:id="@+id/w2_2"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_row="7"
-        android:layout_column="2"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/rounded_corner"></View>
-
-    <View
-        android:id="@+id/w9"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_row="5"
-        android:layout_column="0"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/rounded_corner"></View>
-
-    <View
-        android:id="@+id/b2"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_row="0"
-        android:layout_column="3"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/roundet_corner_red">
-
-    </View>
-
-    <View
-        android:id="@+id/b12"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_row="2"
-        android:layout_column="7"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/roundet_corner_red">
-
-    </View>
-
-    <View
-        android:id="@+id/b5"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_row="1"
-        android:layout_column="0"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/roundet_corner_red">
-
-    </View>
-
-    <View
-        android:id="@+id/w4"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_row="7"
-        android:layout_column="6"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/rounded_corner"></View>
-
-    <View
-        android:id="@+id/w12"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_row="5"
-        android:layout_column="6"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/rounded_corner"></View>
-
-    <View
-        android:id="@+id/w8"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_row="6"
-        android:layout_column="7"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/rounded_corner"></View>
-
-    <View
-        android:id="@+id/w1"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_row="7"
-        android:layout_column="0"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/rounded_corner">
-
-    </View>
-
-    <View
-        android:id="@+id/w10"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_row="5"
-        android:layout_column="2"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/rounded_corner">
-
-    </View>
-
-    <View
-        android:id="@+id/w3"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_row="7"
-        android:layout_column="4"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/rounded_corner">
-
-    </View>
-
-    <View
-        android:id="@+id/w6"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_row="6"
-        android:layout_column="3"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
-        android:background="@drawable/rounded_corner">
-
-    </View>
-
-
-    <EditText
-        android:id="@+id/countdown"
-        android:layout_width="42dp"
-        android:layout_height="30dp"
-        android:layout_row="13"
-        android:layout_column="0"
-        android:ems="10"
-        android:inputType="time" />
-
-</GridLayout>
+        android:layout_marginLeft="50dp"
+        android:text="@string/playerTwoTurn">
+
+    </TextView>
+
+        <View
+            android:layout_marginTop="20dp"
+            android:id="@+id/playersOneTurn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/roundet_corner_red">
+
+        </View>
+
+    </LinearLayout>
+
+
+    <GridLayout
+        android:id="@+id/gamelayout"
+        android:layout_marginTop="20dp"
+        android:columnCount="8"
+        android:rowCount="14"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp">
+
+
+        <View
+                android:id="@+id/view6"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_row="7"
+                android:layout_column="2"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_corner"></View>
+
+            <View
+                android:id="@+id/pos7g"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="1"
+                android:layout_column="6"
+                android:background="@color/black">
+
+            </View>
+
+            <View
+                android:id="@+id/pos8h"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="0"
+                android:layout_column="7"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos7d"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="1"
+                android:layout_column="3"
+                android:background="@color/gray"></View>
+
+            <View
+                android:id="@+id/pos6"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="1"
+                android:layout_column="2"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos5c"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="3"
+                android:layout_column="2"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos5e"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="3"
+                android:layout_column="4"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos5g"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="3"
+                android:layout_column="6"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos4b"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="4"
+                android:layout_column="1"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos4d"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="4"
+                android:layout_column="3"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos2d"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="6"
+                android:layout_column="3"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos4f"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="4"
+                android:layout_column="5"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos3e"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="5"
+                android:layout_column="4"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos4h"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="4"
+                android:layout_column="7"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos3g"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="5"
+                android:layout_column="6"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos3a"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="5"
+                android:layout_column="0"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos3c"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="5"
+                android:layout_column="2"
+                android:background="@color/black"></View>
+
+
+
+            <View
+                android:id="@+id/pos2h"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="6"
+                android:layout_column="7"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos2f"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="6"
+                android:layout_column="5"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos2b"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="6"
+                android:layout_column="1"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos1a"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="7"
+                android:layout_column="0"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos1c"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="7"
+                android:layout_column="2"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos1e"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="7"
+                android:layout_column="4"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos1g"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="7"
+                android:layout_column="6"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos5a"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="3"
+                android:layout_column="0"
+                android:background="@color/black">
+
+            </View>
+
+            <View
+                android:id="@+id/pos7a"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:background="@color/black">
+
+            </View>
+
+            <View
+                android:id="@+id/pos8a"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:background="@color/gray"></View>
+
+            <View
+                android:id="@+id/pos7c"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="1"
+                android:layout_column="2"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos8d"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="0"
+                android:layout_column="3"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos8b"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos7e"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="1"
+                android:layout_column="4"
+                android:background="@color/black"></View>
+
+            <View
+                android:layout_column="2"
+                android:layout_row="0"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/pos8c"
+                android:background="@color/gray">
+
+
+
+
+            </View>
+
+            <View
+                android:id="@+id/pos6d"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="2"
+                android:layout_column="3"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos6b"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="2"
+                android:layout_column="1"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos6f"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="2"
+                android:layout_column="5"
+                android:background="@color/black"></View>
+
+            <View
+                android:id="@+id/pos8f"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="0"
+                android:layout_column="5"
+                android:background="@color/black"></View>
+
+
+            <View
+                android:id="@+id/pos6a"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="2"
+                android:layout_column="0"
+                android:background="@color/gray"></View>
+
+            <View
+                android:id="@+id/b9"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_row="2"
+                android:layout_column="1"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/roundet_corner_red">
+
+            </View>
+
+            <View
+                android:id="@+id/b6"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_row="1"
+                android:layout_column="2"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/roundet_corner_red">
+
+            </View>
+
+            <View
+                android:id="@+id/b1"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/roundet_corner_red">
+
+            </View>
+
+            <View
+                android:id="@+id/b10"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_row="2"
+                android:layout_column="3"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/roundet_corner_red">
+
+            </View>
+
+            <View
+                android:id="@+id/b7"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_row="1"
+                android:layout_column="4"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/roundet_corner_red">
+
+            </View>
+
+            <View
+                android:id="@+id/b3"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_row="0"
+                android:layout_column="5"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/roundet_corner_red">
+
+            </View>
+
+            <View
+                android:id="@+id/b4"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_row="0"
+                android:layout_column="7"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/roundet_corner_red">
+
+            </View>
+
+            <View
+                android:id="@+id/b11"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_row="2"
+                android:layout_column="5"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/roundet_corner_red">
+
+            </View>
+
+            <View
+                android:id="@+id/b8"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_row="1"
+                android:layout_column="6"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/roundet_corner_red">
+
+            </View>
+
+            <View
+                android:id="@+id/pos5b"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="3"
+                android:layout_column="1"
+                android:background="@color/gray"></View>
+
+            <View
+                android:id="@+id/pos5d"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="3"
+                android:layout_column="3"
+                android:background="@color/gray"></View>
+
+            <View
+                android:id="@+id/pos5f"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="3"
+                android:layout_column="5"
+                android:background="@color/gray"></View>
+
+            <View
+                android:id="@+id/pos5h"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="3"
+                android:layout_column="7"
+                android:background="@color/gray"></View>
+
+            <View
+                android:id="@+id/pos4a"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="4"
+                android:layout_column="0"
+                android:background="@color/gray"></View>
+
+            <View
+                android:id="@+id/pos4c"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="4"
+                android:layout_column="2"
+                android:background="@color/gray"></View>
+
+            <View
+                android:id="@+id/pos4e"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="4"
+                android:layout_column="4"
+                android:background="@color/gray"></View>
+
+            <View
+                android:id="@+id/pos4g"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="4"
+                android:layout_column="6"
+                android:background="@color/gray"></View>
+
+            <View
+                android:id="@+id/pos3b"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="5"
+                android:layout_column="1"
+                android:background="@color/gray"></View>
+
+            <View
+                android:id="@+id/pos3d"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="5"
+                android:layout_column="3"
+                android:background="@color/gray"></View>
+
+            <View
+                android:id="@+id/pos3f"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="5"
+                android:layout_column="5"
+                android:background="@color/gray"></View>
+
+            <View
+                android:id="@+id/pos3h"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="5"
+                android:layout_column="7"
+                android:background="@color/gray"></View>
+
+            <View
+                android:id="@+id/pos2a"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="6"
+                android:layout_column="0"
+                android:background="@color/gray"></View>
+
+            <View
+                android:id="@+id/pos2c"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="6"
+                android:layout_column="2"
+                android:background="@color/gray"></View>
+
+            <View
+                android:id="@+id/pos2e"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="6"
+                android:layout_column="4"
+                android:background="@color/gray"></View>
+
+            <View
+                android:id="@+id/pos2g"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="6"
+                android:layout_column="6"
+                android:background="@color/gray"></View>
+
+            <View
+                android:id="@+id/pos1h"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="7"
+                android:layout_column="7"
+                android:background="@color/gray"></View>
+
+            <View
+                android:id="@+id/pos1f"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="7"
+                android:layout_column="5"
+                android:background="@color/gray">
+
+            </View>
+
+            <View
+                android:id="@+id/pos1d"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="7"
+                android:layout_column="3"
+                android:background="@color/gray">
+
+            </View>
+            <View
+                android:id="@+id/pos1b"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="7"
+                android:layout_column="1"
+                android:background="@color/gray">
+
+            </View>
+
+            <View
+                android:id="@+id/pos7b"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="1"
+                android:layout_column="1"
+                android:background="@color/gray">
+
+            </View>
+
+            <View
+                android:id="@+id/pos6c"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="2"
+                android:layout_column="2"
+                android:background="@color/gray">
+
+            </View>
+
+            <View
+                android:id="@+id/pos6e"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="2"
+                android:layout_column="4"
+                android:background="@color/gray">
+
+            </View>
+
+            <View
+                android:id="@+id/pos8e"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="0"
+                android:layout_column="4"
+                android:background="@color/gray">
+
+            </View>
+
+            <View
+                android:id="@+id/pos7f"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="1"
+                android:layout_column="5"
+                android:background="@color/gray">
+
+            </View>
+
+            <View
+                android:id="@+id/pos6g"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="2"
+                android:layout_column="6"
+                android:background="@color/gray">
+
+            </View>
+
+            <View
+                android:id="@+id/pos8g"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="0"
+                android:layout_column="6"
+                android:background="@color/gray">
+
+            </View>
+
+            <View
+                android:id="@+id/pos7h"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="1"
+                android:layout_column="7"
+                android:background="@color/gray">
+
+            </View>
+
+            <View
+                android:id="@+id/pos6h"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_row="2"
+                android:layout_column="7"
+                android:background="@color/black">
+
+            </View>
+
+            <View
+                android:id="@+id/w7"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_row="6"
+                android:layout_column="5"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/rounded_corner"></View>
+
+            <View
+                android:id="@+id/w11"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_row="5"
+                android:layout_column="4"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/rounded_corner"></View>
+
+            <View
+                android:id="@+id/w5"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_row="6"
+                android:layout_column="1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_corner"></View>
+
+            <View
+                android:id="@+id/w2_2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_row="7"
+                android:layout_column="2"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/rounded_corner"></View>
+
+            <View
+                android:id="@+id/w9"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_row="5"
+                android:layout_column="0"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/rounded_corner"></View>
+
+            <View
+                android:id="@+id/b2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_row="0"
+                android:layout_column="3"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/roundet_corner_red">
+
+            </View>
+
+            <View
+                android:id="@+id/b12"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_row="2"
+                android:layout_column="7"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/roundet_corner_red">
+
+            </View>
+
+            <View
+                android:id="@+id/b5"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/roundet_corner_red">
+
+            </View>
+
+            <View
+                android:id="@+id/w4"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_row="7"
+                android:layout_column="6"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/rounded_corner"></View>
+
+            <View
+                android:id="@+id/w12"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_row="5"
+                android:layout_column="6"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/rounded_corner"></View>
+
+            <View
+                android:id="@+id/w8"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_row="6"
+                android:layout_column="7"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/rounded_corner"></View>
+
+            <View
+                android:id="@+id/w1"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_row="7"
+                android:layout_column="0"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/rounded_corner">
+
+            </View>
+
+            <View
+                android:id="@+id/w10"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_row="5"
+                android:layout_column="2"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/rounded_corner">
+
+            </View>
+
+            <View
+                android:id="@+id/w3"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_row="7"
+                android:layout_column="4"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/rounded_corner">
+
+            </View>
+
+            <View
+                android:id="@+id/w6"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_row="6"
+                android:layout_column="3"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/rounded_corner">
+
+            </View>
+
+
+            <EditText
+                android:id="@+id/countdown"
+                android:layout_width="42dp"
+                android:layout_height="30dp"
+                android:layout_row="13"
+                android:layout_column="0"
+                android:ems="10"
+                android:inputType="time" />
+
+        </GridLayout>
+</LinearLayout>
 

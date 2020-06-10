@@ -35,9 +35,7 @@ public class localGame extends AppCompatActivity {
         private static int[][]positionsIds;
         private int[][]whiteStonesIds;
         private int[][]redStonesIds;
-
         static int[][] stones;
-
         private View[][] redStones;
         private View[][]whiteStones;
         private static View[][]positions;
@@ -54,7 +52,7 @@ public class localGame extends AppCompatActivity {
         private List<Integer>redQueens = new ArrayList<>();
         private List<List<Integer>>posForRedQueen=new ArrayList<>();
         private List<List<Integer>>posForWhiteQueen=new ArrayList<>();
-        List<Integer>allPositionsToJump = new ArrayList<>();
+        private List<Integer>allPositionsToJump = new ArrayList<>();
         private boolean timeLimit;
         private TimeThread timer;
         private PlayerOneThread pOneThread;
@@ -68,8 +66,9 @@ public class localGame extends AppCompatActivity {
         private boolean sentData=false;
         private Context context;
         private List<Integer>positionsToMove_Q=new ArrayList<>();
+        private List<Integer>eatenStones =new ArrayList<>();
 
-        //We need thie variables to controll the turns of the player
+    //We need thie variables to controll the turns of the player
         private String gameName =" ";
         private String player=" ";
 
@@ -86,7 +85,7 @@ public class localGame extends AppCompatActivity {
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_game_field);
+            setContentView(R.layout.activity_local_game);
             gameLayout = findViewById(R.id.gamelayout);
             countdown = findViewById(R.id.countdown);
             redStones = new View[8][8];
@@ -116,7 +115,7 @@ public class localGame extends AppCompatActivity {
                     {R.id.pos7a, R.id.pos7b, R.id.pos7c, R.id.pos7d, R.id.pos7e, R.id.pos7f, R.id.pos7g, R.id.pos7h},
                     {R.id.pos8a, R.id.pos8b, R.id.pos8c, R.id.pos8d, R.id.pos8e, R.id.pos8f, R.id.pos8g, R.id.pos8h}};
 
-            //The distrubution of the Stones on the Board, startsituation of the game
+            //The distrubution of the Stones on the Board, this array represents the startsituation of the game after executing the onCreate Method
             stones = new int[][]{{R.id.w1, 0, R.id.w2_2, 0, R.id.w3, 0, R.id.w4, 0},
                     {0, R.id.w5, 0, R.id.w6, 0, R.id.w7, 0, R.id.w8},
                     { R.id.w9, 0, R.id.w10, 0, R.id.w11, 0, R.id.w12, 0},
@@ -498,36 +497,30 @@ public class localGame extends AppCompatActivity {
                             .x(movingStone.getX() + diffX + (movingStone.getWidth() / 2))
                             .y(movingStone.getY() + diffY + (movingStone.getHeight() / 2))
                             .start();
-
                     if (whiteStonesToEat.size() > 0) {
                         gameController.removeStones(stones,allPositionsToJump, stoneId,posId);
                     }
-
-                    //After each move we need to change the position of the stone in the stone array
-                    stones= gameController.switchPosOfStoneInArray(stones, positionsIds, movingStone.getId(), view.getId());
                     boolean isFinish =finishChecker.checkIfGameIsFinish(whiteStonesIds, redStonesIds);
                     if(isFinish){
                         stopGame();
                     }
+                    //After each move we need to change the position of the stone in the stone array
+                    stones= gameController.switchPosOfStoneInArray(stones, positionsIds, movingStone.getId(), view.getId());
                     controller.changeTurnOfPlayer(visualizeTurnOfPlayerTwo, visualizeTurnOfPlayerOne);
                     TURN=WHITETURN;
                 }
                 allPositionsToJump.clear();
             }
 
+            //Gets the Column and Row of the destination Position
             int[]index = gameController.getChoosenPositionToJump(stones,view.getId());
-            if(index[0]==7){
-                int id = stones[index[0]][index[1]];
-                whiteQueens.add(id);
-                View stoneToQueen = findViewById(id);
-                setWhiteQueen(stoneToQueen);
-            }
+
+            //If a red stone has reached the lowest row he's transforming himself into a queen
 
             if(index[0]==0){
                 int id = stones[index[0]][index[1]];
                 redQueens.add(id);
                 View stoneToQueen = findViewById(id);
-                setWhiteQueen(stoneToQueen);
                 setRedQueen(stoneToQueen);
             }
         }
@@ -550,31 +543,26 @@ public class localGame extends AppCompatActivity {
                     if (redStonesToEat.size() >0) {
                        gameController.removeStones(stones,allPositionsToJump, stoneId,posId);
                     }
-
-                    //After each move we need to change the position of the stone in the stone array
-                    stones = gameController.switchPosOfStoneInArray(stones,positionsIds, movingStone.getId(), view.getId());
                     boolean isFinish = finishChecker.checkIfGameIsFinish(whiteStonesIds, redStonesIds);
                     if (isFinish) {
                         stopGame();
                     }
+                    //After each move we need to change the position of the stone in the stone array
+                    stones = gameController.switchPosOfStoneInArray(stones,positionsIds, movingStone.getId(), view.getId());
+
                     controller.changeTurnOfPlayer(visualizeTurnOfPlayerOne, visualizeTurnOfPlayerTwo);
                     TURN=REDTURN;
                 }
                 allPositionsToJump.clear();
             }
-
             int[]index = gameController.getChoosenPositionToJump(stones,view.getId());
+
+            //If a white stone has reached the seventh row, its transforming itself to a queen
             if(index[0]==7){
                 int id = stones[index[0]][index[1]];
                 whiteQueens.add(id);
                 View stoneToQueen = findViewById(id);
                 setWhiteQueen(stoneToQueen);
-            }
-            if(index[0]==0){
-                int id = stones[index[0]][index[1]];
-                redQueens.add(id);
-                View stoneToQueen = findViewById(id);
-                setRedQueen(stoneToQueen);
             }
         }
 
@@ -597,6 +585,10 @@ public class localGame extends AppCompatActivity {
                         gameController.removeStones(stones, allPositionsToJump, movingStone.getId(), position.getId());
                     }
                 }
+                boolean isFinish = finishChecker.checkIfGameIsFinish(whiteStonesIds, redStonesIds);
+                if (isFinish) {
+                    stopGame();
+                }
                 stones= gameController.switchPosOfStoneInArray(stones,positionsIds, movingStone.getId(), position.getId());
                 if(TURN==WHITETURN){
                     TURN = REDTURN;
@@ -609,10 +601,12 @@ public class localGame extends AppCompatActivity {
             }
         }
         public void removeStone(int row, int col){
-            View v = findViewById(stones[row][col]);
             for(int i=0; i<whiteStonesIds.length; i++){
                 for(int j=0; j<whiteStonesIds.length; j++){
                     if(whiteStonesIds[i][j]==stones[row][col]){
+                        eatenStones.add(whiteStonesIds[i][j]);
+                        System.out.println(whiteStonesIds.length+" "+whiteStonesIds[i].length);
+                        System.out.println("Anzahl gefressener weisser Steine"+eatenStones.size());
                         whiteStonesIds[i][j]=0;
                     }
                     if(redStonesIds[i][j]==stones[row][col]){
@@ -620,6 +614,7 @@ public class localGame extends AppCompatActivity {
                     }
                 }
             }
+            View v = findViewById(stones[row][col]);
             stones[row][col]=0;
             gameLayout.removeView(v);
         }

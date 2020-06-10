@@ -47,10 +47,9 @@ public class GameController {
         return true;
     }
 
-
-
     //We will conduct this method fpr every stone which can be eaten
     public void removeStones(int[][]stones, List<Integer> positions, int stoneId, int positionId) {
+
         int colChoosenPos = 0,rowChoosenPos=0, rowStone = 0, colStone = 0, rowJumpPos=0, colJumpPos=0;
         int diffRow = 0, colDiff = 0;
         int []index = getChoosenPositionToJump(stones, positionId);
@@ -69,7 +68,6 @@ public class GameController {
 
                 }
             }
-
             if(colChoosenPos>colStone){
                 if(colJumpPos>=colStone) {
                     diffRow = (rowJumpPos + rowStone) / 2;
