@@ -26,8 +26,7 @@
         android:id="@+id/menuLogoutItem">
     </item>
     <item
-        android:title="Konto"
-        android:id="@+id/lblAccountMenu">
-    </item>
+        android:id="@+id/lblAccountMenu"
+        android:title="Konto löschen"></item>
 
 </menu>
