@@ -18,7 +18,7 @@
         android:id="@+id/registerMenuItem">
     </item>
 <item
-    android:title="@string/login"
+    android:title="@string/anmelden"
     android:id="@+id/menuLoginItem">
 </item>
     <item

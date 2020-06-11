@@ -23,7 +23,7 @@
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.099"></TextView>
+        app:layout_constraintVertical_bias="0.099" />
 
     <EditText
         android:id="@+id/editTxtPlayerOneName"
@@ -31,13 +31,14 @@
         android:layout_height="56dp"
         android:fontFamily="@font/reem_kufi"
         android:textColor="@color/sandbraun"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.263"></EditText>
+        app:layout_constraintVertical_bias="0.263"
+        android:autofillHints="Spielername 1" />
 
     <TextView
         android:id="@+id/lblPlayerTwo"
@@ -45,21 +46,21 @@
         android:layout_height="32dp"
         android:text="@string/playerTwoSettings"
         android:textColor="@color/sandbraun"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.464"></TextView>
+        app:layout_constraintVertical_bias="0.464" />
 
     <TextView
         android:id="@+id/lblPlayerTwo3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Entscheide dich für einen Spielername"
+        android:text="@string/WähleSpielername"
         android:textColor="@color/sandbraun"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,22 +68,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.2"
-        tools:text="Entscheide dich für einen Spielernamen"></TextView>
+        tools:text="Entscheide dich für einen Spielernamen" />
 
     <TextView
         android:id="@+id/lblPlayerTwo2"
         android:layout_width="363dp"
         android:layout_height="44dp"
-        android:text="Entscheide dich für einen Spielername"
+        android:text="@string/WähleSpielername"
         android:textColor="@color/sandbraun"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.558"
-        tools:text="Entscheide dich für einen Spielername"></TextView>
+        tools:text="Entscheide dich für einen Spielername" />
 
     <EditText
 
@@ -97,7 +98,8 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.65" />
+        app:layout_constraintVertical_bias="0.65"
+        android:autofillHints="Spielername 2" />
 
     <Button
         android:id="@+id/btnStartGame"
@@ -105,7 +107,7 @@
         android:layout_height="56dp"
         android:background="@color/sandbraun"
         android:fontFamily="@font/alfa_slab_one"
-        android:text="Spielen!"
+        android:text="@string/Spielen"
         android:textColor="@color/damebraun"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

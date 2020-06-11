@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/reem_kufi"
-        android:text="Spiel erstellen"
+        android:text="@string/spiel_erstellen"
         android:textColor="@color/sandbraun"
         android:textSize="26sp"
         android:textStyle="bold|italic"
@@ -34,7 +34,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:fontFamily="@font/reem_kufi"
-        android:text="Name des Raumes eingeben"
+        android:text="@string/wählen_raum_name"
         android:textColor="@color/sandbraun"
         android:textSize="17sp"
         android:textStyle="bold|italic"
@@ -62,7 +62,9 @@
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.46" />
+        app:layout_constraintVertical_bias="0.46"
+        android:autofillHints="Raumname"
+        tools:ignore="LabelFor" />
 
     <Button
         android:id="@+id/btnCreateOnlineGame"
@@ -71,7 +73,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:background="@color/sandbraun"
-        android:text="Spiel erstellen"
+        android:text="@string/spiel_erstellen"
         android:fontFamily="@font/alfa_slab_one"
         android:textColor="@color/damebraun"
         app:layout_constraintBottom_toBottomOf="parent"

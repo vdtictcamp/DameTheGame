@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.myapplication.Firebase.Firebase;
 import com.example.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 

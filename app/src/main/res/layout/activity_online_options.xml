@@ -15,7 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/reem_kufi"
-        android:text="Was willst du tun?"
+        android:text="@string/was_willst_tun"
         android:textColor="@color/sandbraun"
         android:textSize="26sp"
         android:textStyle="bold|italic"
@@ -32,14 +32,14 @@
         android:layout_height="50dp"
         android:background="@color/sandbraun"
         android:fontFamily="@font/alfa_slab_one"
-        android:text="Online Spiel suchen"
+        android:text="@string/onlinespiel_suchen"
         android:textColor="@color/damebraun"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.402"></Button>
+        app:layout_constraintVertical_bias="0.402" />
 
     <Button
         android:id="@+id/btnCreateOnlineGame"
@@ -47,7 +47,7 @@
         android:layout_height="47dp"
         android:background="@color/sandbraun"
         android:fontFamily="@font/alfa_slab_one"
-        android:text="Online Spiel erstellen"
+        android:text="@string/onlinespiel_erstellen"
         android:textColor="@color/damebraun"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

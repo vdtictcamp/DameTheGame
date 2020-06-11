@@ -18,9 +18,9 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/reem_kufi"
-        android:text="Neuen Account Erstellen"
+        android:text="@string/lblCreateNewAccount"
         android:textColor="@color/sandbraun"
-        android:textSize="26dp"
+        android:textSize="26sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +44,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.244"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        android:autofillHints="Email"
+        tools:ignore="LabelFor" />
 
     <EditText
         android:id="@+id/txtPassword"
@@ -62,7 +64,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.36"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        android:autofillHints="Passwort"
+        tools:ignore="LabelFor" />
 
     <EditText
         android:id="@+id/txtPasswordRepeat"
@@ -79,7 +83,9 @@
         app:layout_constraintHorizontal_bias="0.258"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.477" />
+        app:layout_constraintVertical_bias="0.477"
+        android:autofillHints=""
+        tools:ignore="LabelFor" />
 
     <Button
         android:id="@+id/btnRegister"
@@ -107,10 +113,10 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:fontFamily="@font/reem_kufi"
         android:inputType="textPersonName"
-        android:text="E-Mail"
+        android:text="@string/email"
         android:textColor="@color/sandbraun"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -118,7 +124,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.198"
-        android:layout_marginBottom="5dp"/>
+        android:layout_marginBottom="5dp"
+        tools:ignore="TextViewEdits" />
 
     <TextView
         android:id="@+id/editTextTextPersonName2"
@@ -129,16 +136,17 @@
         android:layout_alignParentBottom="true"
         android:fontFamily="@font/reem_kufi"
         android:inputType="textPersonName"
-        android:text="Passwort"
+        android:text="@string/passwort"
         android:textColor="@color/sandbraun"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.246"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.313"
-        android:layout_marginBottom="5dp"/>
+        android:layout_marginBottom="5dp"
+        tools:ignore="TextViewEdits" />
 
     <TextView
         android:id="@+id/editTextTextPersonName3"
@@ -148,15 +156,16 @@
         android:layout_alignParentStart="true"
         android:fontFamily="@font/reem_kufi"
         android:inputType="textPersonName"
-        android:text=" Passwort wiederholen"
+        android:text="@string/passwort_wiederholen"
         android:textColor="@color/sandbraun"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.257"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.42" />
+        app:layout_constraintVertical_bias="0.42"
+        tools:ignore="TextViewEdits" />
 
     <ProgressBar
         android:id="@+id/loadBarRegister"
