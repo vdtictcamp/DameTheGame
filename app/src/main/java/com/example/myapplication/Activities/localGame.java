@@ -1,5 +1,6 @@
 package com.example.myapplication.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -8,12 +9,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myapplication.Firebase.FirebaseGameController;
 import com.example.myapplication.GameEngine.ChangeGameConditionRedStone;
@@ -26,26 +29,39 @@ import com.example.myapplication.R;
 import com.example.myapplication.Threads.PlayerOneThread;
 import com.example.myapplication.Threads.PlayerTwoThread;
 import com.example.myapplication.Threads.TimeThread;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class localGame extends AppCompatActivity {
 
+    FirebaseAuth currentUserAuth;
+
     public GridLayout gameLayout;
+    private Context context;
+
     private static int[][] positionsIds;
     private int[][] whiteStonesIds;
     private int[][] redStonesIds;
     static int[][] stones;
+    private int[] validPositionsToMove = new int[2];
+
     private View[][] redStones;
     private View[][] whiteStones;
     private static View[][] positions;
-    private int[] validPositionsToMove = new int[2];
     private List<View> validPosToMove = new ArrayList<>();
+    private View visualizeTurnOfPlayerOne;
+    private View visualizeTurnOfPlayerTwo;
     public View movingStone;
+
     private ChangeGameConditionWhiteStone chGameCondWhite;
     private ChangeGameConditionRedStone chGameCondRed;
     private CheckIfGameIsFinish finishChecker = new CheckIfGameIsFinish();
+    private Controller controller;
+    private GameController gameController;
+    private QueenChecker queenChecker;
+
     private List<List<Integer>> posAfterEat = new ArrayList<>();
     private List<Integer> whiteStonesToEat = new ArrayList<>();
     private List<Integer> redStonesToEat = new ArrayList<>();
@@ -54,21 +70,7 @@ public class localGame extends AppCompatActivity {
     private List<List<Integer>> posForRedQueen = new ArrayList<>();
     private List<List<Integer>> posForWhiteQueen = new ArrayList<>();
     private List<Integer> allPositionsToJump = new ArrayList<>();
-    private boolean timeLimit;
-    private TimeThread timer;
-    private PlayerOneThread pOneThread;
-    private PlayerTwoThread pTwoThread;
-    private View visualizeTurnOfPlayerOne;
-    private View visualizeTurnOfPlayerTwo;
-    private Controller controller;
-    private FirebaseGameController firebase;
-    private GameController gameController;
-    private QueenChecker queenChecker;
-    private boolean sentData = false;
-    private Context context;
     private List<Integer> positionsToMove_Q = new ArrayList<>();
-    private List<Integer> eatenStones = new ArrayList<>();
-    int counter=0;
 
     //We need thie variables to controll the turns of the player
     private String gameName = " ";
@@ -95,19 +97,21 @@ public class localGame extends AppCompatActivity {
         positions = new View[8][8];
         visualizeTurnOfPlayerOne = findViewById(R.id.playersOneTurn);
         visualizeTurnOfPlayerTwo = findViewById(R.id.playersTwoTurn);
-        TextView lblPlayerOne = findViewById(R.id.lblPlayerOneSwitcher);
-        TextView lblPlayerTwo = findViewById(R.id.lblPlayerTwoSwitcher);
-        controller = new Controller();
-        Intent intent = getIntent();
         context = this;
 
-        //With the game name we identify the player, dependent of the player, the corrct Thread to controll the turns of the player will start
-        //The Threads controll the online game
-        gameName = intent.getExtras().getString("gameName");
+        //Identify the User
+        currentUserAuth = FirebaseAuth.getInstance();
+
+        TextView lblPlayerOne = findViewById(R.id.lblPlayerOneSwitcher);
+        TextView lblPlayerTwo = findViewById(R.id.lblPlayerTwoSwitcher);
+        Intent intent = getIntent();
+
+        String gameName = intent.getExtras().getString("gameName");
         String playerOneName = intent.getExtras().getString("playerOneName");
         String playerTwoName = intent.getExtras().getString("playerTwoName");
         lblPlayerOne.setText(playerOneName);
         lblPlayerTwo.setText(playerTwoName);
+
         player = intent.getExtras().getString("Player");
 
         //Load the Animation, the Animation helps to identify the stone which has been touched
@@ -160,7 +164,12 @@ public class localGame extends AppCompatActivity {
         //QueenChecker
         queenChecker = new QueenChecker(this, positionsIds);
 
+        //PlayerController
+        controller = new Controller();
+
+        //We set that the player one starts
         controller.changeTurnOfPlayer(false, true, visualizeTurnOfPlayerOne, visualizeTurnOfPlayerTwo);
+
         //Clears the Board
         clearBoard();
 
@@ -199,7 +208,7 @@ public class localGame extends AppCompatActivity {
                         allPositionsToJump = gameController.fillPositionsToJumpInList(posAfterEat, true);
                         whiteStonesToEat = chGameCondRed.returnStonesToEat();
                         if (allPositionsToJump.size()>0) {
-                            ShowThePositionAfterEatingWhiteStone(allPositionsToJump);
+                            showThePositionAfterEatingWhiteStone(allPositionsToJump);
                         }else{
                             showValidPositionsForRedStones(v);
                         }
@@ -245,7 +254,7 @@ public class localGame extends AppCompatActivity {
                         allPositionsToJump = gameController.fillPositionsToJumpInList(posAfterEat, true);
                         redStonesToEat = chGameCondWhite.returnStonesToEat();
                         if (allPositionsToJump.size()>0) {
-                            ShowThePositionAfterEatingRedStone(allPositionsToJump);
+                            showThePositionAfterEatingRedStone(allPositionsToJump);
                         }else{
                             showValidPositionsForWhiteStones(v);
                         }
@@ -281,22 +290,66 @@ public class localGame extends AppCompatActivity {
 
 //----------------------------------------------------------------------------------------
 
+    @SuppressLint("ResourceType")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
+        if (currentUserAuth.getCurrentUser() != null) {
+            menu.removeItem(R.id.menuLoginItem);
+        }
+        if (currentUserAuth.getCurrentUser() == null) {
+            menu.removeItem(R.id.menuLogoutItem);
+            menu.removeItem(R.id.lblAccountMenu);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menuLoginItem:
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.rulesMenuItem:
+                intent = new Intent(getApplicationContext(), GameRulesActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.registerMenuItem:
+                intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.menuOnlineItem:
+                if (currentUserAuth.getCurrentUser() == null) {
+                    Toast.makeText(localGame.this, "Um online zu spielen melde dich bitte mit deinem Account an", Toast.LENGTH_LONG).show();
 
+                } else {
+                    intent = new Intent(getApplicationContext(), OnlineOptionsActivity.class);
+                    startActivity(intent);
+                }
+                return true;
+            case R.id.menuLogoutItem:
+                currentUserAuth.getInstance().signOut();
+                intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.lblAccountMenu:
+                intent=new Intent(getApplicationContext(), Account.class);
+                startActivity(intent);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    //Display the 'The End Game' Activity
     public void stopGame() {
-        //Display the 'The End Game' Activity
         Intent intent = new Intent(this, EndOfGameActivity.class);
         startActivity(intent);
     }
 
 
     //Dieser Position muss anschliessend ein View.OnClickListener gegeben werden
-    private void ShowThePositionAfterEatingRedStone(List<Integer> positions) {
+    private void showThePositionAfterEatingRedStone(List<Integer> positions) {
         for (int i = 0; i < positions.size(); i++) {
             int id = positions.get(i);
             View position = findViewById(id);
@@ -306,7 +359,8 @@ public class localGame extends AppCompatActivity {
         }
     }
 
-    private void ShowThePositionAfterEatingWhiteStone(List<Integer> positions) {
+    //This Method shows all
+    private void showThePositionAfterEatingWhiteStone(List<Integer> positions) {
         for (int i = 0; i < positions.size(); i++) {
             int id = positions.get(i);
             View position = findViewById(id);

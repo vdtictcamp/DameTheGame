@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.AccountDelete"></activity>
+        <activity android:name=".Activities.Account"></activity>
         <activity android:name=".Activities.localGame" />
         <activity android:name=".Activities.OnlineOptionsActivity" />
         <activity android:name=".Activities.GameRulesActivity" />

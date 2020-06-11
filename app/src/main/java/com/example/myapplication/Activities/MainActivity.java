@@ -14,8 +14,6 @@ import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btnInitNewGame = findViewById(R.id.btnInitnewGame);
-        btnRegister = findViewById(R.id.btnRegister);
+        btnRegister = findViewById(R.id.btnToRegister);
         btnOnlineSpielen = findViewById(R.id.btnOnlineSpiel);
         currentUserAuth = FirebaseAuth.getInstance();
 
@@ -53,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                if(currentUserAuth.getCurrentUser()!=null){
+                    Toast.makeText(MainActivity.this, "Du bist bereits eingeloggt", Toast.LENGTH_LONG).show();
+                }
                 startActivity(intent);
             }
         }));
@@ -68,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }));
-
     }
 
     @SuppressLint("ResourceType")
@@ -77,10 +77,8 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu, menu);
         if (currentUserAuth.getCurrentUser() != null) {
             menu.removeItem(R.id.menuLoginItem);
-            menu.add(R.id.lblAccountMenu);
         }
         if (currentUserAuth.getCurrentUser() == null) {
-            menu.add(R.id.menuLoginItem);
             menu.removeItem(R.id.menuLogoutItem);
             menu.removeItem(R.id.lblAccountMenu);
         }
@@ -117,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.lblAccountMenu:
-                intent=new Intent(getApplicationContext(), AccountDelete.class);
+                intent=new Intent(getApplicationContext(), Account.class);
                 startActivity(intent);
             default:
                 return super.onOptionsItemSelected(item);

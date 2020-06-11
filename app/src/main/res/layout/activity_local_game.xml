@@ -908,19 +908,7 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/rounded_corner">
-
             </View>
-
-
-            <EditText
-                android:id="@+id/countdown"
-                android:layout_width="42dp"
-                android:layout_height="30dp"
-                android:layout_row="13"
-                android:layout_column="0"
-                android:ems="10"
-                android:inputType="time" />
-
         </GridLayout>
 </LinearLayout>
 

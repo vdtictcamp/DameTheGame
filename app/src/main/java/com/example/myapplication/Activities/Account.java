@@ -22,7 +22,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class AccountDelete extends AppCompatActivity {
+public class Account extends AppCompatActivity {
 
     private Button btnDeleteAccount;
     private FirebaseAuth currentUserAuth;
@@ -56,9 +56,9 @@ public class AccountDelete extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(AccountDelete.this, "Ein neues Passwort wurde dir auf deinen Email Account gesendet", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Account.this, "Ein neues Passwort wurde dir auf deinen Email Account gesendet", Toast.LENGTH_LONG).show();
                         }else{
-                            Toast.makeText(AccountDelete.this, "Dein Passwort konnte leider nicht zurückgesetzt werden", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Account.this, "Dein Passwort konnte leider nicht zurückgesetzt werden", Toast.LENGTH_LONG).show();
 
                         }
                     }
@@ -71,7 +71,7 @@ public class AccountDelete extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 System.out.println("Geklickt");
-                AlertDialog.Builder dialog = new AlertDialog.Builder(AccountDelete.this);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(Account.this);
                 dialog.setTitle("Bist du sicher?");
                 dialog.setMessage("Alle deine Daten werden gelöscht und du kannst nicht mehr online spielen");
                 dialog.setPositiveButton("Ja ich will mein Konto löschen", new DialogInterface.OnClickListener() {
@@ -82,11 +82,11 @@ public class AccountDelete extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(AccountDelete.this, "Dein Konto wurde erfolgreich gelöscht", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(Account.this, "Dein Konto wurde erfolgreich gelöscht", Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                     startActivity(intent);
                                 } else {
-                                    Toast.makeText(AccountDelete.this, "Etwas ist leider schief gegangen", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(Account.this, "Etwas ist leider schief gegangen", Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
@@ -138,7 +138,7 @@ public class AccountDelete extends AppCompatActivity {
                 return true;
             case R.id.menuOnlineItem:
                 if (currentUserAuth.getCurrentUser() == null) {
-                    Toast.makeText(AccountDelete.this, "Um online zu spielen melde dich bitte mit deinem Account an", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Account.this, "Um online zu spielen melde dich bitte mit deinem Account an", Toast.LENGTH_LONG).show();
 
                 } else {
                     intent = new Intent(getApplicationContext(), OnlineOptionsActivity.class);
@@ -151,7 +151,7 @@ public class AccountDelete extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.lblAccountMenu:
-                intent = new Intent(getApplicationContext(), AccountDelete.class);
+                intent = new Intent(getApplicationContext(), Account.class);
                 startActivity(intent);
             default:
                 return super.onOptionsItemSelected(item);

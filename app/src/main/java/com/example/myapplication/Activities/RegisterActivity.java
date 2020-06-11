@@ -30,12 +30,10 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText txtPassword;
     private EditText txtPasswordRepeat;
     private ProgressBar loadBar;
-    String name;
-    String password;
-    String password_repeat;
-    String password_hash;
-    FirebaseDatabase database;
-    FirebaseAuth firebaseAuth;
+    private String name;
+    private String password;
+    private String password_repeat;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +47,15 @@ public class RegisterActivity extends AppCompatActivity {
         loadBar.setVisibility(loadBar.INVISIBLE);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
 
         if (firebaseAuth.getCurrentUser() != null) {
+            Toast.makeText(RegisterActivity.this, "Du bist bereits eingeloggt", Toast.LENGTH_LONG).show();
+
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         }
 
+        //On Click the register process starts
         View.OnClickListener createAccountListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,17 +99,14 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
-
     @SuppressLint("ResourceType")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         if (firebaseAuth.getCurrentUser() != null) {
             menu.removeItem(R.id.menuLoginItem);
-            menu.add(R.id.lblAccountMenu);
         }
         if (firebaseAuth.getCurrentUser() == null) {
-            menu.add(R.id.menuLoginItem);
             menu.removeItem(R.id.menuLogoutItem);
             menu.removeItem(R.id.lblAccountMenu);
         }
@@ -132,14 +129,22 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.menuOnlineItem:
-                intent = new Intent(getApplicationContext(), OnlineOptionsActivity.class);
-                startActivity(intent);
+                if (firebaseAuth.getCurrentUser() == null) {
+                    Toast.makeText(RegisterActivity.this, "Um online zu spielen melde dich bitte mit deinem Account an", Toast.LENGTH_LONG).show();
+
+                } else {
+                    intent = new Intent(getApplicationContext(), OnlineOptionsActivity.class);
+                    startActivity(intent);
+                }
                 return true;
             case R.id.menuLogoutItem:
                 firebaseAuth.getInstance().signOut();
                 intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.lblAccountMenu:
+                intent=new Intent(getApplicationContext(), Account.class);
+                startActivity(intent);
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -56,14 +56,14 @@ public class PlayerOneThread extends Thread implements Runnable {
         System.out.println("Spieler zwei ist beigetreten");
         game.connectionSuccessfull();
         while (!gameOver) {
-            isInTurn = gameController.readTurnOfPlayerOne();
+            isInTurn = dataBaseController.readTurnOfPlayerOne();
             if (!isInTurn) {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                HashMap<String, Integer> ids = gameController.addValueEventListenerAllValues();
+                HashMap<String, Integer> ids = dataBaseController.addValueEventListenerAllValues();
                 System.out.println(ids);
                 if (ids != null) {
                     System.out.println("TRUEEEEEE");
@@ -74,7 +74,7 @@ public class PlayerOneThread extends Thread implements Runnable {
                     long rowStone = Long.parseLong(String.valueOf(ids.get("rowStone")));
                     if (rowPos != 0 && colPos != 0 && colPos != 0 && colStone != 0) {
                         ids=null;
-                        boolean ready = gameController.setDefaultUpdateValues();
+                        boolean ready = dataBaseController.setDefaultUpdateValues();
                         try {
                             Thread.sleep(2000);
                         } catch (InterruptedException e) {
@@ -82,7 +82,7 @@ public class PlayerOneThread extends Thread implements Runnable {
                         }
                         if(ready) {
                             isInTurn = true;
-                            gameController.finishPlayerTwoTurn();
+                            dataBaseController.finishPlayerTwoTurn();
                             game.moveHelperFunc((int) colStone, (int) rowStone, (int) rowPos, (int) colPos);
                         }
                     }

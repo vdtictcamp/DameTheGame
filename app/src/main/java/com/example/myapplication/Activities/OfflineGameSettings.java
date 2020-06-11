@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -57,10 +58,8 @@ public class OfflineGameSettings extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu, menu);
         if (currentUserAuth.getCurrentUser() != null) {
             menu.removeItem(R.id.menuLoginItem);
-            menu.add(R.id.lblAccountMenu);
         }
         if (currentUserAuth.getCurrentUser() == null) {
-            menu.add(R.id.menuLoginItem);
             menu.removeItem(R.id.menuLogoutItem);
             menu.removeItem(R.id.lblAccountMenu);
         }
@@ -83,19 +82,24 @@ public class OfflineGameSettings extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.menuOnlineItem:
-                intent = new Intent(getApplicationContext(), CreateOnlineGame.class);
-                startActivity(intent);
+                if (currentUserAuth.getCurrentUser() == null) {
+                    Toast.makeText(OfflineGameSettings.this, "Um online zu spielen melde dich bitte mit deinem Account an", Toast.LENGTH_LONG).show();
+
+                } else {
+                    intent = new Intent(getApplicationContext(), OnlineOptionsActivity.class);
+                    startActivity(intent);
+                }
                 return true;
             case R.id.menuLogoutItem:
                 currentUserAuth.getInstance().signOut();
                 intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.lblAccountMenu:
+                intent=new Intent(getApplicationContext(), Account.class);
+                startActivity(intent);
             default:
                 return super.onOptionsItemSelected(item);
-
-
         }
     }
-
 }

@@ -94,7 +94,7 @@ public class OnlineOptionsActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.lblAccountMenu:
-                intent=new Intent(getApplicationContext(), AccountDelete.class);
+                intent=new Intent(getApplicationContext(), Account.class);
                 startActivity(intent);
             default:
                 return super.onOptionsItemSelected(item);

@@ -26,6 +26,7 @@ public class ChangeGameConditionRedStone {
 
 
 
+    //This Method checks if a white stone can eat a red Stone, therefore it mus have a stone one row and one col in advance
     public List<List<Integer>> canEateWhiteStone( View stone) {
         List<List<Integer>> positionsToJump = new ArrayList<>();
         int id = stone.getId();
@@ -60,7 +61,6 @@ public class ChangeGameConditionRedStone {
                             break;
                         }
                     }
-
                     if(positionsToJump!=null) {
                         List<Integer> pos = collectPosRightDiagonal(i, j);
                         positionsToJump.add(pos);
@@ -118,6 +118,8 @@ public class ChangeGameConditionRedStone {
         return positionsToJump;
 }
 
+
+//This Method collects all positions to jump in left Diagonal
 public List<Integer> collectPosLeftDiagonal(int i, int j){
     int colDiff = 1;
     int rowDiff = 1;
@@ -160,6 +162,8 @@ public List<Integer> collectPosLeftDiagonal(int i, int j){
     }
     return positionsToJump;
 }
+
+//This Method checks if there are more stones which can be eaten
     public boolean checkNextJump(int row, int col){
         if(col==0){
             if(stones[col+1][row-1]!=0){
@@ -186,6 +190,7 @@ public List<Integer> collectPosLeftDiagonal(int i, int j){
         }
     }
 
+    //This Method returns all stones which can be eaten
     public List<Integer> returnStonesToEat () {
                 return stonesToEat;
             }

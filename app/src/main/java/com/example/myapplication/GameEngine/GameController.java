@@ -29,6 +29,7 @@ public class GameController {
         firebaseGameController=new FirebaseGameController("Default");
     }
 
+    //This Method checks if its a red stone
     public boolean checkIfIsRedStone(int id, int[][]redStonesIds) {
         for (int i = 0; i < redStonesIds.length; i++) {
             for (int j = 0; j < redStonesIds[i].length; j++) {
@@ -40,6 +41,7 @@ public class GameController {
         return true;
     }
 
+    //This Method
     public boolean checkIfIsWhiteStone(int id, int[][]whiteStonesIds){
         for(int i=0; i<whiteStonesIds.length; i++){
             for(int j=0; j<whiteStonesIds[i].length; j++){

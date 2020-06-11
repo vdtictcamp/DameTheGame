@@ -333,11 +333,15 @@ public class GameField extends AppCompatActivity {
                     } else {
                         TURN = WHITETURN;
                     }
+
                     HashMap<String, Integer> values = firebase.readStoneToRemove();
-                    int row = values.get("rosStone");
-                    int col = values.get("colStone");
-                    if(row !=0 && col!=0){
-                        removeStone(row, col);
+                    if(values!=null) {
+                        int row = values.get("rosStone");
+                        int col = values.get("colStone");
+                        if (row != 0 && col != 0) {
+                            removeStone(row, col);
+                            firebase.writeStonesToRemoveToNull();
+                        }
                     }
                 }
             }
@@ -595,7 +599,7 @@ public void showValidPosForQueen(List<Integer>positions){
                         .y(movingStone.getY() + diffY + (movingStone.getHeight() / 2))
                         .start();
 
-                if (redStonesToEat.size() != 0) {
+                if (redStonesToEat.size() > 0) {
                     gameController.removeStones(stones, allPositionsToJump,stoneId,posId);
                 }
                 //stones = gameController.switchPosOfStoneInArray(stones, positionsIds,movingStone.getId(), view.getId());
@@ -688,8 +692,6 @@ public void showValidPosForQueen(List<Integer>positions){
         }
         stones[row][col]=0;
     }
-
-
 
     public void setWhiteQueen(View stoneToQueen ){
         queenChecker.setWhiteQueen(stoneToQueen);

@@ -73,7 +73,7 @@
     <string name="username">Username</string>
     <string name="passwort">Passwort</string>
     <string name="online_spielen">Online Spielen</string>
-    <string name="neues_offline_spiel">Neues Offline Spiel</string>
+    <string name="neues_offline_spiel">Neues lokales Spiel</string>
     <string name="was_willst_tun">Was willst du tun?</string>
     <string name="onlinespiel_suchen">Online Spiel suchen</string>
     <string name="onlinespiel_erstellen">Online Spiel erstellen</string>

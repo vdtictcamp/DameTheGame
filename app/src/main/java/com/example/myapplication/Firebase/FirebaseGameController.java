@@ -176,7 +176,7 @@ public class FirebaseGameController {
     public boolean checkIfPlayerTwoHasJoined() {
         boolean hasJoined = false;
         hasJoined = readIfPlayerTwoHasJoined();
-        return isHosted;
+        return hasJoined;
     }
 
     //This Method will write the stones which will be removed to the base
@@ -187,6 +187,16 @@ public class FirebaseGameController {
             values.put("colStone", col);
             reference.setValue(values);
         }
+
+
+        public void writeStonesToRemoveToNull(){
+            HashMap<String, Integer> values = new HashMap<>();
+            reference = database.getReference("rooms").child(this.gameName).child("StoneToRemove");
+            values.put("rowStone", 0);
+            values.put("colStone", 0);
+            reference.setValue(values);
+        }
+
         public HashMap<String, Integer> readStoneToRemove(){
             reference = database.getReference("rooms").child(this.gameName).child("StoneToRemove");
             reference.addValueEventListener(new ValueEventListener() {

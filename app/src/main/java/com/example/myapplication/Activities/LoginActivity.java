@@ -97,10 +97,8 @@ public class LoginActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu, menu);
         if (firebaseAuth.getCurrentUser() != null) {
             menu.removeItem(R.id.menuLoginItem);
-            menu.add(R.id.lblAccountMenu);
         }
         if (firebaseAuth.getCurrentUser() == null) {
-            menu.add(R.id.menuLoginItem);
             menu.removeItem(R.id.menuLogoutItem);
             menu.removeItem(R.id.lblAccountMenu);
         }
@@ -137,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.lblAccountMenu:
-                intent=new Intent(getApplicationContext(), AccountDelete.class);
+                intent=new Intent(getApplicationContext(), Account.class);
                 startActivity(intent);
             default:
                 return super.onOptionsItemSelected(item);
