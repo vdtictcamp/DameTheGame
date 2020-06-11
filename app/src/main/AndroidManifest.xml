@@ -36,8 +36,6 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".Firebase.Firebase2" />
-        <activity android:name=".Firebase.Firebase3" />
     </application>
 
 </manifest>

@@ -186,7 +186,23 @@ public class FirebaseGameController {
             reference = database.getReference("rooms").child(this.gameName).child("StoneToRemove");
             values.put("rowStone", row);
             values.put("colStone", col);
-            //values.put()
             reference.setValue(values);
+        }
+        public HashMap<String, Integer> readStoneToRemove(){
+            reference = database.getReference("rooms").child(this.gameName).child("StoneToRemove");
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    values = (HashMap<String, Integer>) dataSnapshot.getValue();
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+            return values;
         }
 }

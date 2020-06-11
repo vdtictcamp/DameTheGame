@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -79,14 +80,22 @@ public class OnlineOptionsActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.menuOnlineItem:
-                intent = new Intent(getApplicationContext(), OnlineOptionsActivity.class);
-                startActivity(intent);
+                if (currentUserAuth.getCurrentUser() == null) {
+                    Toast.makeText(OnlineOptionsActivity.this, "Um online zu spielen melde dich bitte mit deinem Account an", Toast.LENGTH_LONG).show();
+
+                } else {
+                    intent = new Intent(getApplicationContext(), OnlineOptionsActivity.class);
+                    startActivity(intent);
+                }
                 return true;
             case R.id.menuLogoutItem:
                 currentUserAuth.getInstance().signOut();
                 intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.lblAccountMenu:
+                intent=new Intent(getApplicationContext(), AccountDelete.class);
+                startActivity(intent);
             default:
                 return super.onOptionsItemSelected(item);
         }

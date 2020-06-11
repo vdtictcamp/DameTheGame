@@ -107,14 +107,16 @@ public class QueenChecker {
                     if(stones[i][j]==0 && rowDiff%2==0){
                         positionsToJump.add(positions[i][j]);
                         stonesToEat.add(stones[i-1][j-1]);
-                        if(checkNextJump(stones, i,j)){
-                            checkPositionsLeft=getPositionsToJumpBackwardLeft(stones, i,j, whiteStones, redStones, whiteQueen);
-                            checkPositionsRight=getPositionsToJumpBackwardRight(stones, i,j, whiteStones, redStones, whiteQueen);
-                            for (int p = 0; p < checkPositionsRight.size(); p++) {
-                                positionsToJump.add(checkPositionsRight.get(p));
-                            }
-                            for (int p = 0; p < checkPositionsLeft.size(); p++) {
-                                positionsToJump.add(checkPositionsLeft.get(p));
+                        if(i!=0 || i!=7) {
+                            if (checkNextJump(stones, i, j)) {
+                                checkPositionsLeft = getPositionsToJumpBackwardLeft(stones, i, j, whiteStones, redStones, whiteQueen);
+                                checkPositionsRight = getPositionsToJumpBackwardRight(stones, i, j, whiteStones, redStones, whiteQueen);
+                                for (int p = 0; p < checkPositionsRight.size(); p++) {
+                                    positionsToJump.add(checkPositionsRight.get(p));
+                                }
+                                for (int p = 0; p < checkPositionsLeft.size(); p++) {
+                                    positionsToJump.add(checkPositionsLeft.get(p));
+                                }
                             }
                         }
                     }
@@ -158,16 +160,18 @@ public class QueenChecker {
                     if(stones[i][j]==0 && rowDiff%2==0){
                         positionsToJump.add(positions[i][j]);
                         stonesToEat.add(stones[i-1][j+1]);
-                        if(checkNextJump(stones, i,j)){
-                            checkPositionsLeft=getPositionsToJumpBackwardLeft(stones, i,j, whiteStones, redStones, whiteQueen);
-                            checkPositionsRight=getPositionsToJumpBackwardRight(stones, i,j, whiteStones, redStones, whiteQueen);
-                            for (int p = 0; p < checkPositionsRight.size(); p++) {
-                                positionsToJump.add(checkPositionsRight.get(p));
-                            }
-                            for (int p = 0; p < checkPositionsLeft.size(); p++) {
-                                positionsToJump.add(checkPositionsLeft.get(p));
-                            }
-                        }
+                       if(i!=0 || i!=7) {
+                           if (checkNextJump(stones, i, j)) {
+                               checkPositionsLeft = getPositionsToJumpBackwardLeft(stones, i, j, whiteStones, redStones, whiteQueen);
+                               checkPositionsRight = getPositionsToJumpBackwardRight(stones, i, j, whiteStones, redStones, whiteQueen);
+                               for (int p = 0; p < checkPositionsRight.size(); p++) {
+                                   positionsToJump.add(checkPositionsRight.get(p));
+                               }
+                               for (int p = 0; p < checkPositionsLeft.size(); p++) {
+                                   positionsToJump.add(checkPositionsLeft.get(p));
+                               }
+                           }
+                       }
                     }
                 }
             }
@@ -209,14 +213,16 @@ public class QueenChecker {
                     if(stones[i][j]==0 &&(rowDiff % 2 == 0)){
                         positionsToJump.add(positions[i][j]);
                         stonesToEat.add(stones[i+1][j+1]);
-                        if(checkNextJump(stones, i,j)){
-                            checkPositionsLeft=getPositionsToJumpForwardLeft(stones, i,j, whiteStones, redStones, whiteQueen);
-                            checkPositionsRight=getPositionsToJumpForwardRight(stones, i,j, whiteStones, redStones, whiteQueen);
-                            for (int p = 0; p < checkPositionsRight.size(); p++) {
-                                positionsToJump.add(checkPositionsRight.get(p));
-                            }
-                            for (int p = 0; p < checkPositionsLeft.size(); p++) {
-                                positionsToJump.add(checkPositionsLeft.get(p));
+                        if(i!=0 || i!=7) {
+                            if (checkNextJump(stones, i, j)) {
+                                checkPositionsLeft = getPositionsToJumpForwardLeft(stones, i, j, whiteStones, redStones, whiteQueen);
+                                checkPositionsRight = getPositionsToJumpForwardRight(stones, i, j, whiteStones, redStones, whiteQueen);
+                                for (int p = 0; p < checkPositionsRight.size(); p++) {
+                                    positionsToJump.add(checkPositionsRight.get(p));
+                                }
+                                for (int p = 0; p < checkPositionsLeft.size(); p++) {
+                                    positionsToJump.add(checkPositionsLeft.get(p));
+                                }
                             }
                         }
                     }
@@ -259,15 +265,17 @@ public class QueenChecker {
                     if(stones[i][j]==0 &&rowDiff%2==0){
                         positionsToJump.add(positions[i][j]);
                         stonesToEat.add(stones[i + 1][j - 1]);
-                        if(checkNextJump(stones, i,j)){
-                            checkPositionsLeft=getPositionsToJumpForwardRight(stones, i,j, whiteStones, redStones, whiteQueen);
-                            checkPositionsRight=getPositionsToJumpForwardLeft(stones, i,j, whiteStones, redStones, whiteQueen);
+                        if(i!=0 || i!=7){
+                        if(checkNextJump(stones, i,j)) {
+                            checkPositionsLeft = getPositionsToJumpForwardRight(stones, i, j, whiteStones, redStones, whiteQueen);
+                            checkPositionsRight = getPositionsToJumpForwardLeft(stones, i, j, whiteStones, redStones, whiteQueen);
                             for (int p = 0; p < checkPositionsRight.size(); p++) {
                                 positionsToJump.add(checkPositionsRight.get(p));
                             }
                             for (int p = 0; p < checkPositionsLeft.size(); p++) {
                                 positionsToJump.add(checkPositionsLeft.get(p));
                             }
+                        }
                         }
                     }
                 }

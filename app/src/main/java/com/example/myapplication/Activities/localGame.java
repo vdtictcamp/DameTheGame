@@ -179,27 +179,29 @@ public class localGame extends AppCompatActivity {
                         int[] index = queenChecker.getRowAndCol(stones, v);
                         int row = index[0];
                         int col = index[1];
-                        positionsToMove_Q = queenChecker.getPositionsToMove(stones, row, col);
-                        showValidPosForQueen(positionsToMove_Q);
                         queenChecker.getPositionsToJumpForwardRight(stones, row, col, whiteStonesIds, redStonesIds, false);
                         queenChecker.getPositionsToJumpForwardLeft(stones, row, col, whiteStonesIds, redStonesIds, false);
                         queenChecker.getPositionsToJumpBackwardRight(stones, row, col, whiteStonesIds, redStonesIds, false);
                         queenChecker.getPositionsToJumpBackwardLeft(stones, row, col, whiteStonesIds, redStonesIds, false);
                         posForRedQueen = queenChecker.returnPostions();
                         whiteStonesToEat = queenChecker.returnStonesToEat();
-                        if (posForRedQueen.size() > 0) {
-                            allPositionsToJump = gameController.fillPositionsToJumpInList(posForRedQueen, true);
-                            for (int i = 0; i < allPositionsToJump.size(); i++) {
-                                showValidPosForQueen(allPositionsToJump);
-                            }
+                        allPositionsToJump = gameController.fillPositionsToJumpInList(posForRedQueen, true);
+                        if (allPositionsToJump.size() > 0){
+                            showValidPosForQueen(allPositionsToJump);
+                    }
+                        else{
+                            positionsToMove_Q = queenChecker.getPositionsToMove(stones, row, col);
+                            showValidPosForQueen(positionsToMove_Q);
                         }
+
                     } else {
-                        showValidPositionsForRedStones(v);
                         posAfterEat = chGameCondRed.canEateWhiteStone(v);
+                        allPositionsToJump = gameController.fillPositionsToJumpInList(posAfterEat, true);
                         whiteStonesToEat = chGameCondRed.returnStonesToEat();
-                        if (posAfterEat != null && posAfterEat.size() > 0) {
-                            allPositionsToJump = gameController.fillPositionsToJumpInList(posAfterEat, false);
+                        if (allPositionsToJump.size()>0) {
                             ShowThePositionAfterEatingWhiteStone(allPositionsToJump);
+                        }else{
+                            showValidPositionsForRedStones(v);
                         }
                     }
                 }
@@ -237,12 +239,13 @@ public class localGame extends AppCompatActivity {
                                 showValidPosForQueen(allPositionsToJump);
                         }
                     } else {
-                        showValidPositionsForWhiteStones(v);
                         posAfterEat = chGameCondWhite.canEateRedStone(v);
+                        allPositionsToJump = gameController.fillPositionsToJumpInList(posAfterEat, true);
                         redStonesToEat = chGameCondWhite.returnStonesToEat();
-                        if (posAfterEat != null && posAfterEat.size() > 0) {
-                            allPositionsToJump = gameController.fillPositionsToJumpInList(posAfterEat, false);
+                        if (allPositionsToJump.size()>0) {
                             ShowThePositionAfterEatingRedStone(allPositionsToJump);
+                        }else{
+                            showValidPositionsForWhiteStones(v);
                         }
                     }
                 }
@@ -510,6 +513,8 @@ public class localGame extends AppCompatActivity {
                     View stoneToQueen = findViewById(id);
                     queenChecker.setRedQueen(stoneToQueen);
                 }
+                controller.changeTurnOfPlayer(true, false, visualizeTurnOfPlayerTwo, visualizeTurnOfPlayerOne);
+
                 TURN = WHITETURN;
                 allPositionsToJump.clear();
             }
@@ -553,6 +558,7 @@ public class localGame extends AppCompatActivity {
                     View stoneToQueen = findViewById(id);
                     queenChecker.setWhiteQueen(stoneToQueen);
                 }
+                controller.changeTurnOfPlayer(false, true, visualizeTurnOfPlayerTwo, visualizeTurnOfPlayerOne);
                 TURN = REDTURN;
                 allPositionsToJump.clear();
             }
@@ -570,11 +576,11 @@ public class localGame extends AppCompatActivity {
                     .start();
             if (whiteQueens.contains(movingStone.getId())) {
                 if (redStonesToEat.size() > 0) {
-                    gameController.removeStones(stones, allPositionsToJump, movingStone.getId(), position.getId());
+                    gameController.removeStonesQueen(stones, allPositionsToJump, movingStone.getId(), position.getId());
                 }
             } else {
                 if (whiteStonesToEat.size() > 0) {
-                    gameController.removeStones(stones, allPositionsToJump, movingStone.getId(), position.getId());
+                    gameController.removeStonesQueen(stones, allPositionsToJump, movingStone.getId(), position.getId());
                 }
             }
             boolean isFinish = finishChecker.checkIfGameIsFinish(whiteStonesIds, redStonesIds);
@@ -583,8 +589,10 @@ public class localGame extends AppCompatActivity {
             }
             stones = gameController.switchPosOfStoneInArray(stones, positionsIds, movingStone.getId(), position.getId());
             if (TURN == WHITETURN) {
+                controller.changeTurnOfPlayer(false, true, visualizeTurnOfPlayerTwo, visualizeTurnOfPlayerOne);
                 TURN = REDTURN;
             } else {
+                controller.changeTurnOfPlayer(true, false, visualizeTurnOfPlayerTwo, visualizeTurnOfPlayerOne);
                 TURN = WHITETURN;
             }
             allPositionsToJump.clear();
@@ -609,4 +617,8 @@ public class localGame extends AppCompatActivity {
         stones[row][col] = 0;
         gameLayout.removeView(v);
     }
+
+
+
+
 }

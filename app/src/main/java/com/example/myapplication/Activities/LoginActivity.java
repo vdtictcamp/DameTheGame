@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         loadBar = findViewById(R.id.loadBarLogin);
         loadBar.setVisibility(loadBar.INVISIBLE);
+        firebaseAuth = FirebaseAuth.getInstance();
 
         View.OnClickListener toRegister = new View.OnClickListener() {
             @Override
@@ -64,8 +65,6 @@ public class LoginActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(password)) {
                     Toast.makeText(LoginActivity.this, "Bitte geben Sie Ihr Passwort ein", Toast.LENGTH_SHORT).show();
                 }
-                firebaseAuth = FirebaseAuth.getInstance();
-                //Authenticate the user
                 if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
                     loadBar.setVisibility(loadBar.VISIBLE);
                     firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

@@ -31,7 +31,7 @@
         android:text="@string/lblplayername"
         android:textColor="@color/sandbraun"
         android:textSize="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="50dp"></EditText>
 
     <TextView
@@ -51,7 +51,7 @@
         android:id="@+id/editTxtPlayerTwoName"
         android:layout_width="286dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/reem_kufi"
         android:text="@string/lblplayername"
         android:textColor="@color/sandbraun"
@@ -67,7 +67,8 @@
         android:fontFamily="@font/alfa_slab_one"
         android:text="Spielen!"
         android:textColor="@color/damebraun"
-        android:layout_marginLeft="50dp" />
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="100dp"/>
 
 
 </LinearLayout>
