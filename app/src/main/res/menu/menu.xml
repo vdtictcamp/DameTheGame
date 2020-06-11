@@ -27,6 +27,6 @@
     </item>
     <item
         android:id="@+id/lblAccountMenu"
-        android:title="Konto löschen"></item>
+        android:title="Konto"></item>
 
 </menu>

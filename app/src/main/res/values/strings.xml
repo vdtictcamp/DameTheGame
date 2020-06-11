@@ -79,6 +79,8 @@
     <string name="onlinespiel_erstellen">Online Spiel erstellen</string>
     <string name="email">E-Mail</string>
     <string name="passwort_wiederholen">Passwort wiederholen</string>
+    <string name="passwort_zurucksetzen">Passwort zurücksetzen</string>
+    <string name="placeholder_for_mail">placeholder_for_mail</string>
 
 
 </resources>
