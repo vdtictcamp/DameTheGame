@@ -29,7 +29,7 @@
         <activity android:name=".Activities.GameField" />
         <activity android:name=".Activities.LoginActivity" />
         <activity android:name=".Activities.RegisterActivity" />
-        <activity android:name=".Activities.GameSettings" />
+        <activity android:name=".Activities.OfflineGameSettings" />
         <activity android:name=".Activities.SearchGameActivity" />
 
         <meta-data

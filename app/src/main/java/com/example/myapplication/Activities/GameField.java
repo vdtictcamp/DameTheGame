@@ -57,8 +57,6 @@ public class GameField extends AppCompatActivity {
     private List<List<Integer>> posForRedQueen = new ArrayList<>();
     private List<List<Integer>> posForWhiteQueen = new ArrayList<>();
     List<Integer> allPositionsToJump = new ArrayList<>();
-    private boolean timeLimit;
-    private TimeThread timer;
     private PlayerOneThread pOneThread;
     private PlayerTwoThread pTwoThread;
     private View visualizeTurnOfPlayerOne;

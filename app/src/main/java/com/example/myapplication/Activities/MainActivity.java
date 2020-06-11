@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         btnInitNewGame.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), GameSettings.class);
+                Intent intent = new Intent(getApplicationContext(), OfflineGameSettings.class);
                 intent.putExtra("gameName", "Default");
                 startActivity(intent);
             }

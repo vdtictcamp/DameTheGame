@@ -11,14 +11,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.io.BufferedReader;
-
-public class GameSettings extends AppCompatActivity {
+public class OfflineGameSettings extends AppCompatActivity {
 
 
     String gameName;
@@ -31,7 +28,7 @@ public class GameSettings extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_settings);
+        setContentView(R.layout.activity_offline_game_settings);
         btnStartGame = findViewById(R.id.btnStartGame);
         currentUserAuth = FirebaseAuth.getInstance();
         View.OnClickListener startGameListener = new View.OnClickListener() {
