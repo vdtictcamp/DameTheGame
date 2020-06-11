@@ -153,10 +153,18 @@ public class FirebaseGameController {
     }
 
     public void finishPlayerOneTurn() {
-        reference = database.getReference("rooms").child(gameName).child("PlayerOneTurn");
-        reference.setValue(false);
-        reference = database.getReference("rooms").child(gameName).child("PlayerTwoTurn");
-        reference.setValue(true);
+
+        HashMap<String, Object> values = new HashMap<>();
+        values.put("PlayerOneTurn", false);
+        values.put("PlayerTwoTurn", true);
+        reference = database.getReference("rooms").child(this.gameName);
+        reference.updateChildren(values);
+
+
+        //reference = database.getReference("rooms").child(gameName).child("PlayerOneTurn");
+        //reference.setValue(false);
+        //reference = database.getReference("rooms").child(gameName).child("PlayerTwoTurn");
+        //reference.setValue(true);
     }
 
     public void finishPlayerTwoTurn() {
@@ -166,7 +174,7 @@ public class FirebaseGameController {
         reference.setValue(true);
     }
 
-    public boolean checkIfPlayerTwoHasJoined() {
+    public boolean checkIfPlayerTwoHasJoined(){
         boolean hasJoined = false;
         hasJoined = readIfPlayerTwoHasJoined();
         return hasJoined;
