@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
@@ -25,6 +26,7 @@ public class AccountDelete extends AppCompatActivity {
     private Button btnDeleteAccount;
     private FirebaseAuth currentUserAuth;
     private FirebaseUser firebasUser;
+    private ProgressBar loadBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,8 @@ public class AccountDelete extends AppCompatActivity {
         btnDeleteAccount = findViewById(R.id.btnDeleteAccount);
         currentUserAuth = FirebaseAuth.getInstance();
         firebasUser = currentUserAuth.getCurrentUser();
+        loadBar = findViewById(R.id.loadBarDeleteAccount);
+        loadBar.setVisibility(loadBar.INVISIBLE);
 
         View.OnClickListener deletListener = new View.OnClickListener() {
             @Override
@@ -44,6 +48,7 @@ public class AccountDelete extends AppCompatActivity {
                 dialog.setPositiveButton("Ja ich will mein Konto löschen", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        loadBar.setVisibility(loadBar.VISIBLE);
                         firebasUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {

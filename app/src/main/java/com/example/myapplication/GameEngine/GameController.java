@@ -48,23 +48,22 @@ public class GameController {
     }
 
     //We will conduct this method fpr every stone which can be eaten
-    public void removeStones(int[][]stones, List<Integer> positions, int stoneId, int positionId) {
+    public void removeStonesQueen(int[][]stones, List<Integer> positions, int stoneId, int positionId) {
         int colChoosenPos = 0,rowChoosenPos=0, rowStone = 0, colStone = 0, rowJumpPos=0, colJumpPos=0;
         int diffRow = 0, colDiff = 0;
         int []index = getChoosenPositionToJump(stones, positionId);
         colChoosenPos=index[1];
-        for (int p_id = 0; p_id < positions.size(); p_id++) {
+        for (int p_id = 1; p_id<positions.size(); p_id++) {
             for (int i = 0; i < stones.length; i++) {
                 for (int j = 0; j < stones[i].length; j++) {
-                    if(positionIds[i][j]==positions.get(p_id)){
-                        rowJumpPos=i;
-                        colJumpPos=j;
-                    }
-                    if (stones[i][j] == stoneId || stoneId==positionIds[i][j]) {
-                        rowStone = i;
-                        colStone = j;
-                    }
-
+                        if (positionIds[i][j] == positions.get(p_id)) {
+                            rowJumpPos = i;
+                            colJumpPos = j;
+                        }
+                        if (stones[i][j] == stoneId || stoneId == positionIds[i][j]) {
+                            rowStone = i;
+                            colStone = j;
+                        }
                 }
             }
             if(colChoosenPos>colStone){
@@ -76,7 +75,7 @@ public class GameController {
                     } else {
                         ((GameField) activity).removeStone(diffRow, colDiff);
                     }
-                    stoneId = positionIds[rowJumpPos][colJumpPos];
+
                 }
             }if(colChoosenPos<colStone){
                 if(colJumpPos<=colStone){
@@ -87,7 +86,6 @@ public class GameController {
                     }else{
                         ((GameField) activity).removeStone(diffRow, colDiff);
                     }
-                    stoneId = positionIds[rowJumpPos][colJumpPos];
 
                 }
             }
@@ -100,8 +98,6 @@ public class GameController {
                     }else{
                         ((GameField) activity).removeStone(diffRow, colDiff);
                     }
-                    stoneId = positionIds[rowJumpPos][colJumpPos];
-
                 }
             }
             if(colChoosenPos>=colStone){
@@ -113,14 +109,95 @@ public class GameController {
                     } else {
                         ((GameField) activity).removeStone(diffRow, colDiff);
                     }
-                    stoneId = positionIds[rowJumpPos][colJumpPos];
                 }
             }
+
+            if(positions.get(p_id)==positionId){
+                break;
+            }
+            stoneId=positionIds[rowJumpPos][colJumpPos];
+        }
+    }
+
+    //We will conduct this method fpr every stone which can be eaten
+    public void removeStones(int[][]stones, List<Integer> positions, int stoneId, int positionId) {
+        int colChoosenPos = 0,rowChoosenPos=0, rowStone = 0, colStone = 0, rowJumpPos=0, colJumpPos=0;
+        int diffRow = 0, colDiff = 0;
+        int []index = getChoosenPositionToJump(stones, positionId);
+        colChoosenPos=index[1];
+
+        for (int p_id = 0; p_id < positions.size(); p_id++) {
+            for (int i = 0; i < stones.length; i++) {
+                for (int j = 0; j < stones[i].length; j++) {
+                        if (positionIds[i][j] == positions.get(p_id)) {
+                            rowJumpPos = i;
+                            colJumpPos = j;
+                        }
+                        if (stones[i][j] == stoneId || stoneId == positionIds[i][j]) {
+                            rowStone = i;
+                            colStone = j;
+                        }
+                }
+            }
+            if(colChoosenPos>colStone){
+                if(colJumpPos>=colStone) {
+                    diffRow = (rowJumpPos + rowStone) / 2;
+                    colDiff = (colJumpPos + colStone) / 2;
+                    if (activity instanceof localGame) {
+                        ((localGame) activity).removeStone(diffRow, colDiff);
+                    } else {
+                        ((GameField) activity).removeStone(diffRow, colDiff);
+                    }
+
+                }
+            }if(colChoosenPos<colStone){
+                if(colJumpPos<=colStone){
+                    diffRow = (rowJumpPos + rowStone) / 2;
+                    colDiff = (colJumpPos + colStone) / 2;
+                    if(activity instanceof localGame) {
+                        ((localGame) activity).removeStone(diffRow, colDiff);
+                    }else{
+                        ((GameField) activity).removeStone(diffRow, colDiff);
+                    }
+
+                }
+            }
+            if(colChoosenPos<=colStone){
+                if(colJumpPos<=colStone){
+                    diffRow = (rowJumpPos + rowStone) / 2;
+                    colDiff = (colJumpPos + colStone) / 2;
+                    if(activity instanceof localGame) {
+                        ((localGame) activity).removeStone(diffRow, colDiff);
+                    }else{
+                        ((GameField) activity).removeStone(diffRow, colDiff);
+                    }
+                }
+            }
+            if(colChoosenPos>=colStone){
+                if(colJumpPos>=colStone) {
+                    diffRow = (rowJumpPos + rowStone) / 2;
+                    colDiff = (colJumpPos + colStone) / 2;
+                    if (activity instanceof localGame) {
+                        ((localGame) activity).removeStone(diffRow, colDiff);
+                    } else {
+                        ((GameField) activity).removeStone(diffRow, colDiff);
+                    }
+                }
+            }
+                stoneId = positionIds[rowJumpPos][colJumpPos];
+
             if(positions.get(p_id)==positionId){
                 break;
             }
         }
 
+    }
+
+    //When we remove the stone we just set the id to null in the array
+    //We use this method to test this mechanism
+    public int[][] removeStoneTest(int[][] stones, int row, int col){
+        stones[row][col]=0;
+        return stones;
     }
 
     public int[] getChoosenPositionToJump(int[][]stones, int positionId){

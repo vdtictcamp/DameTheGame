@@ -68,7 +68,6 @@ public class ChangeGameConditionRedStone {
                         positionsToJump.add(pos);
                     }
                 }
-
             }
         }
         return positionsToJump;
@@ -118,8 +117,6 @@ public class ChangeGameConditionRedStone {
         }
         return positionsToJump;
 }
-
-
 
 public List<Integer> collectPosLeftDiagonal(int i, int j){
     int colDiff = 1;

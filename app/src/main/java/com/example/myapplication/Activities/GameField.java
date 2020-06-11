@@ -28,6 +28,7 @@ import com.example.myapplication.Threads.PlayerTwoThread;
 import com.example.myapplication.Threads.TimeThread;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class GameField extends AppCompatActivity {
@@ -197,7 +198,7 @@ public class GameField extends AppCompatActivity {
                     else {
                         showValidPositionsForRedStones(v);
                         posAfterEat = chGameCondRed.canEateWhiteStone(v);
-                        redStonesToEat = chGameCondRed.returnStonesToEat();
+                        whiteStonesToEat = chGameCondRed.returnStonesToEat();
                         if(posAfterEat!=null &&posAfterEat.size()>0) {
                             allPositionsToJump = gameController.fillPositionsToJumpInList(posAfterEat, false);
                             ShowThePositionAfterEatingWhiteStone(allPositionsToJump);
@@ -205,6 +206,7 @@ public class GameField extends AppCompatActivity {
 
                     }
                 }
+                posAfterEat.clear();
                 posForRedQueen.clear();
                 chGameCondRed=null;
             }
@@ -244,12 +246,13 @@ public class GameField extends AppCompatActivity {
                     else {
                         showValidPositionsForWhiteStones(v);
                         posAfterEat = chGameCondWhite.canEateRedStone(v);
-                        whiteStonesToEat = chGameCondWhite.returnStonesToEat();
+                        redStonesToEat = chGameCondWhite.returnStonesToEat();
                         if (posAfterEat != null && posAfterEat.size() > 0) {
                             allPositionsToJump = gameController.fillPositionsToJumpInList(posAfterEat, false);
                             ShowThePositionAfterEatingRedStone(allPositionsToJump);
                         }
                     }
+                    posAfterEat.clear();
                     posForWhiteQueen.clear();
                     chGameCondWhite=null;
                 }
@@ -281,6 +284,7 @@ public class GameField extends AppCompatActivity {
         }
 
         visualizeTurnOfPlayerTwo.setBackgroundColor(Color.WHITE);
+        controller.changeTurnOfPlayer(true, false, visualizeTurnOfPlayerTwo, visualizeTurnOfPlayerOne);
         firebase = new FirebaseGameController(stones, gameName);
         firebase.initStartSituationBeta(0,0,0,0,  player);
         pOneThread=new PlayerOneThread(stones, gameName, this);
@@ -330,6 +334,12 @@ public class GameField extends AppCompatActivity {
 
                     } else {
                         TURN = WHITETURN;
+                    }
+                    HashMap<String, Integer> values = firebase.readStoneToRemove();
+                    int row = values.get("rosStone");
+                    int col = values.get("colStone");
+                    if(row !=0 && col!=0){
+                        removeStone(row, col);
                     }
                 }
             }
@@ -545,19 +555,18 @@ public void showValidPosForQueen(List<Integer>positions){
             if (whiteStonesToEat.size() != 0) {
                 gameController.removeStones(stones, allPositionsToJump,stoneId,posId);
             }
-            switchPosOfStoneInArray(movingStone, view);
+            gameController.switchPosOfStoneInArray(stones, positionsIds,movingStone.getId(), view.getId());
 
             boolean isFinish =finishChecker.checkIfGameIsFinish(whiteStonesIds, redStonesIds);
             if(isFinish){
                 stopGame();
             }
-                controller.changeTurnOfPlayer(true, false, visualizeTurnOfPlayerTwo, visualizeTurnOfPlayerOne);
+            controller.changeTurnOfPlayer(true, false, visualizeTurnOfPlayerTwo, visualizeTurnOfPlayerOne);
 
             //Gets the Column and Row of the destination Position
             int[] index = gameController.getChoosenPositionToJump(stones, view.getId());
 
             //If a red stone has reached the lowest row he's transforming himself into a queen
-
             if (index[0] == 0) {
                 int id = stones[index[0]][index[1]];
                 redQueens.add(id);
@@ -589,8 +598,7 @@ public void showValidPosForQueen(List<Integer>positions){
                 if (redStonesToEat.size() != 0) {
                     gameController.removeStones(stones, allPositionsToJump,stoneId,posId);
                 }
-                switchPosOfStoneInArray(movingStone, view);
-
+                gameController.switchPosOfStoneInArray(stones, positionsIds,movingStone.getId(), view.getId());
 
                 boolean isFinish = finishChecker.checkIfGameIsFinish(whiteStonesIds, redStonesIds);
                 if (isFinish) {
@@ -611,7 +619,6 @@ public void showValidPosForQueen(List<Integer>positions){
             }
         }
     }
-
     public void moveQueen(View position){
         float diffX = position.getX() - movingStone.getX();
         float diffY = position.getY() - movingStone.getY();
@@ -619,7 +626,7 @@ public void showValidPosForQueen(List<Integer>positions){
                 .x(movingStone.getX() + diffX + (movingStone.getWidth() / 2))
                 .y(movingStone.getY() + diffY + (movingStone.getHeight() / 2))
                 .start();
-        switchPosOfStoneInArray(movingStone, position);
+        gameController.switchPosOfStoneInArray(stones, positionsIds,movingStone.getId(), position.getId());
 
         if(TURN==WHITETURN){
             TURN = REDTURN;
@@ -629,58 +636,16 @@ public void showValidPosForQueen(List<Integer>positions){
 
     }
 
-
     public void removeStone(int row, int col){
+        firebase.writeStonesToRemove(row, col);
         View v = findViewById(stones[row][col]);
-        gameLayout.removeView(v);
+        if(v!=null) {
+            gameLayout.removeView(v);
+        }
         stones[row][col]=0;
-
     }
 
 
-    public void switchPosOfStoneInArray(View stone, View pos){
-        int col=0, row =0;
-        int idStone = stone.getId();
-        int idPos = pos.getId();
-        int oldCol=0;
-        int oldRow=0;
-        for(int i=0; i<positionsIds.length; i++){
-            for(int j=0; j<positionsIds[i].length; j++){
-                if(stones[i][j]==idStone){
-                    oldCol=j;
-                    oldRow=i;
-                    System.out.println("Alte Spalte:"+oldCol+" "+"Alte Reihe"+oldRow);
-                }
-                //Now we got the stone and we need to change the index
-                if(positionsIds[i][j]==idPos){
-                    stones[i][j]=idStone;
-                    col = j;
-                    row = i;
-                    System.out.println("Row:"+i+"Col:"+j);
-                }
-            }
-        }
-        //firebase.sendUpdateInformaions(oldRow, oldCol, row, col, player);
-        firebase.updateValuesBeta(oldRow, oldCol, row, col);
-        stones[oldRow][oldCol]=0;
-        stones[row][col]=idStone;
-        //Every Time when we switch a Position we need to check if we got a new Queen
-        if(row==7){
-            int id = stones[row][col];
-            whiteQueens.add(id);
-            View stoneToQueen = findViewById(id);
-            setWhiteQueen(stoneToQueen);
-        }
-        if(row==0){
-            int id = stones[row][col];
-            redQueens.add(id);
-            View stoneToQueen = findViewById(id);
-            setWhiteQueen(stoneToQueen);
-            setRedQueen(stoneToQueen);
-
-        }
-
-    }
 
     public void setWhiteQueen(View stoneToQueen ){
         queenChecker.setWhiteQueen(stoneToQueen);
