@@ -27,7 +27,7 @@ public class PlayerOneThread extends Thread implements Runnable {
     public PlayerOneThread(int[][]stones, String gameName, Context context) {
         this.stones = stones;
         this.gameName=gameName;
-        dataBaseController=new FirebaseGameController(gameName);
+        gameController = new FirebaseGameController(gameName);
         this.game= (GameField) context;
     }
 
@@ -45,7 +45,7 @@ public class PlayerOneThread extends Thread implements Runnable {
     public void run() {
         Looper.prepare();
         while (!playerTwohasJoined) {
-            playerTwohasJoined = dataBaseController.checkIfPlayerTwoHasJoined();
+            playerTwohasJoined = gameController.checkIfPlayerTwoHasJoined();
             System.out.println("Warte bis Spieler zwei beitritt");
             try {
                 Thread.sleep(3000);

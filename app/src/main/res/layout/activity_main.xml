@@ -11,8 +11,8 @@
 
     <Button
         android:id="@+id/btnToRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="218dp"
+        android:layout_height="61dp"
         android:layout_centerInParent="true"
         android:background="@color/sandbraun"
         android:fontFamily="@font/alfa_slab_one"
@@ -26,8 +26,8 @@
 
     <Button
         android:id="@+id/btnOnlineSpiel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="217dp"
+        android:layout_height="54dp"
         android:layout_centerInParent="true"
         android:background="@color/sandbraun"
         android:fontFamily="@font/alfa_slab_one"
@@ -41,8 +41,8 @@
 
     <Button
         android:id="@+id/btnInitnewGame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="219dp"
+        android:layout_height="60dp"
         android:background="@color/sandbraun"
         android:fontFamily="@font/alfa_slab_one"
         android:text="@string/neues_offline_spiel"
