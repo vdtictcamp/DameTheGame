@@ -30,6 +30,7 @@
     </TextView>
 
     <Button
+        android:id="@+id/btnResetPassword"
         android:layout_width="162dp"
         android:layout_height="48dp"
         android:background="@color/sandbraun"

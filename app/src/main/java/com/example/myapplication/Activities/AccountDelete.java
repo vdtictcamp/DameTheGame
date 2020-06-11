@@ -30,6 +30,7 @@ public class AccountDelete extends AppCompatActivity {
     private ProgressBar loadBar;
     private TextView lblEmailAccount;
     private String email;
+    private Button btnResetPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,25 @@ public class AccountDelete extends AppCompatActivity {
         email=firebasUser.getEmail();
         System.out.println(email);
         lblEmailAccount.setText(email);
+        btnResetPassword=findViewById(R.id.btnResetPassword);
+
+        btnResetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentUserAuth.sendPasswordResetEmail(firebasUser.getEmail().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(AccountDelete.this, "Ein neues Passwort wurde dir auf deinen Email Account gesendet", Toast.LENGTH_LONG).show();
+                        }else{
+                            Toast.makeText(AccountDelete.this, "Dein Passwort konnte leider nicht zurückgesetzt werden", Toast.LENGTH_LONG).show();
+
+                        }
+                    }
+                });
+            }
+        });
+
 
         View.OnClickListener deletListener = new View.OnClickListener() {
             @Override
