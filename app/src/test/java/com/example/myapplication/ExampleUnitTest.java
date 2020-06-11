@@ -3,6 +3,7 @@ package com.example.myapplication;
 import com.example.myapplication.Activities.GameField;
 import com.example.myapplication.Activities.localGame;
 import com.example.myapplication.GameEngine.GameController;
+import com.example.myapplication.Queen.QueenChecker;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,11 +28,13 @@ public class ExampleUnitTest {
     int[][]whiteStonesIds;
     localGame game;
     GameField gameBeta;
+    QueenChecker queenChecker;
 
 
     public ExampleUnitTest(){
     game = new localGame();
     gameBeta=new GameField();
+    queenChecker = new QueenChecker(game, positionsIds);
 
     //For the testst we need the following resources
     positionsIds = new int[][]{{R.id.pos1a, R.id.pos1b, R.id.pos1c, R.id.pos1d, R.id.pos1e, R.id.pos1f, R.id.pos1g, R.id.pos1h},
@@ -92,7 +95,43 @@ public class ExampleUnitTest {
     }
 
     @Test public void checkIfPosIsBlockedTest(){
+        //With the following Code we test if
+        int rowPos = getRow();
+        int colPos = getCol();
+        int colStone = getCol();
+        int rowStone = getCol();
+        boolean blocked = controller.checkIfStoneIsBlockingPos(stones, colPos, rowPos);
+        if(!blocked){
+            assertTrue(stones[rowPos][colPos]==0);
+        }else{
+            assertTrue(stones[rowPos][colPos]!=0);
+        }
 
+        //We test now three times if the position is blocked when we change the position of a stone in the array
+        //This Test shows the following fact: We change the postion of stone. The destination position should now be blocked
+        //So the value of the stone array at the row position and colposition should not be null
+       for(int i=0; i<3; i++){
+            do {
+                rowPos=getRow();
+                colPos = getCol();
+                rowStone= getCol();
+                colStone = getCol();
+            }while(stones[rowStone][colStone]==0);
+            stones = controller.switchPosOfStoneInArray(stones, positionsIds, stones[rowStone][colStone],positionsIds[rowPos][colPos]);
+            boolean isBlocked = controller.checkIfStoneIsBlockingPos(stones,colPos, rowPos);
+            assertTrue(stones[rowPos][colPos]!=0);
+        }
+    }
+
+    @Test public void checkNextJumpTest(){
+        int row = getRow();
+        int col = getCol();
+        boolean canJump = queenChecker.checkNextJump(stones, row, col);
+        if(!canJump){
+            assertTrue(stones[row][col]==0);
+        }else{
+            assertTrue(stones[row][col]!=0);
+        }
     }
 
     @Test

@@ -226,18 +226,20 @@ public class localGame extends AppCompatActivity {
                         int[] index = queenChecker.getRowAndCol(stones, v);
                         int row = index[0];
                         int col = index[1];
-                        positionsToMove_Q = queenChecker.getPositionsToMove(stones, row, col);
-                        showValidPosForQueen(positionsToMove_Q);
                         queenChecker.getPositionsToJumpForwardLeft(stones, row, col, whiteStonesIds, redStonesIds, true);
                         queenChecker.getPositionsToJumpBackwardLeft(stones, row, col, whiteStonesIds, redStonesIds, true);
                         queenChecker.getPositionsToJumpBackwardRight(stones, row, col, whiteStonesIds, redStonesIds, true);
                         queenChecker.getPositionsToJumpForwardRight(stones, row, col, whiteStonesIds, redStonesIds, true);
                         posForWhiteQueen = queenChecker.returnPostions();
                         redStonesToEat = queenChecker.returnStonesToEat();
-                        if (posForWhiteQueen.size() > 0) {
-                            allPositionsToJump = gameController.fillPositionsToJumpInList(posForWhiteQueen, true);
-                                showValidPosForQueen(allPositionsToJump);
+                        allPositionsToJump = gameController.fillPositionsToJumpInList(posForWhiteQueen, true);
+                        if(allPositionsToJump.size()>0) {
+                            showValidPosForQueen(allPositionsToJump);
+                        }else{
+                            positionsToMove_Q = queenChecker.getPositionsToMove(stones, row, col);
+                            showValidPosForQueen(positionsToMove_Q);
                         }
+
                     } else {
                         posAfterEat = chGameCondWhite.canEateRedStone(v);
                         allPositionsToJump = gameController.fillPositionsToJumpInList(posAfterEat, true);

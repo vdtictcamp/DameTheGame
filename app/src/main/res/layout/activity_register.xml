@@ -57,6 +57,8 @@
         android:layout_below="@+id/newAccount"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
+        android:layout_marginTop="5dp"
+        android:autofillHints="Passwort"
         android:background="@color/sandbraun"
         android:ems="10"
         android:inputType="textPassword"
@@ -65,9 +67,7 @@
         app:layout_constraintHorizontal_bias="0.258"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.36"
-        android:layout_marginTop="5dp"
-        android:autofillHints="Passwort"
+        app:layout_constraintVertical_bias="0.387"
         tools:ignore="LabelFor" />
 
     <EditText
@@ -77,6 +77,7 @@
         android:layout_below="@+id/newAccount"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
+        android:autofillHints=""
         android:background="@color/sandbraun"
         android:ems="10"
         android:inputType="textPassword"
@@ -85,8 +86,7 @@
         app:layout_constraintHorizontal_bias="0.258"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.477"
-        android:autofillHints=""
+        app:layout_constraintVertical_bias="0.54"
         tools:ignore="LabelFor" />
 
     <Button
@@ -105,7 +105,7 @@
         app:layout_constraintHorizontal_bias="0.217"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.66" />
+        app:layout_constraintVertical_bias="0.736" />
 
     <TextView
         android:id="@+id/editTextTextPersonName"
@@ -115,18 +115,18 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:textSize="20sp"
+        android:layout_marginBottom="5dp"
         android:fontFamily="@font/reem_kufi"
         android:inputType="textPersonName"
         android:text="@string/email"
         android:textColor="@color/sandbraun"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.179"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.198"
-        android:layout_marginBottom="5dp"
+        app:layout_constraintVertical_bias="0.192"
         tools:ignore="TextViewEdits" />
 
     <TextView
@@ -136,6 +136,7 @@
         android:layout_below="@+id/newAccount"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
         android:fontFamily="@font/reem_kufi"
         android:inputType="textPersonName"
         android:text="@string/passwort"
@@ -146,8 +147,7 @@
         app:layout_constraintHorizontal_bias="0.246"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.313"
-        android:layout_marginBottom="5dp"
+        app:layout_constraintVertical_bias="0.329"
         tools:ignore="TextViewEdits" />
 
     <TextView
@@ -166,13 +166,13 @@
         app:layout_constraintHorizontal_bias="0.257"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.42"
+        app:layout_constraintVertical_bias="0.477"
         tools:ignore="TextViewEdits" />
 
     <ProgressBar
         android:id="@+id/loadBarRegister"
-        android:layout_width="103dp"
-        android:layout_height="24dp"
+        android:layout_width="109dp"
+        android:layout_height="35dp"
         android:layout_below="@+id/newAccount"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -182,7 +182,7 @@
         app:layout_constraintHorizontal_bias="0.227"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.565" />
+        app:layout_constraintVertical_bias="0.629" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

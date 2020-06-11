@@ -258,7 +258,6 @@ public class GameController {
     }
 
     public boolean checkIfStoneIsBlockingPos(int[][]stones, int col, int row){
-        int id = stones[row][col];
         if(stones[row][col]==0){
             return false;
         }else{

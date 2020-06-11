@@ -240,7 +240,7 @@ public class QueenChecker {
         List<Integer>checkPositionsRight = new ArrayList<>();
         List<Integer>checkPositionsLeft = new ArrayList<>();
         for(int i=row+1; i>row-3; i--){
-            if(i>7 || i==row || i<=0){
+            if(i>7 || i==row || i<0){
                 continue;
             }
             for(int j=col+1; j<positions[i].length; j++){
@@ -286,6 +286,7 @@ public class QueenChecker {
         return positionsToJump;
     }
 
+    //This Method checks if there are more stones which can be eaten
     public boolean checkNextJump(int[][]stones, int row, int col){
         if( col==0 ){
             if(stones[row+1][col+1]!=0 || stones[row-1][col+1]!=0 ){

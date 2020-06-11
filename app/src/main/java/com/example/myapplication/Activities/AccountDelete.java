@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
@@ -27,6 +28,8 @@ public class AccountDelete extends AppCompatActivity {
     private FirebaseAuth currentUserAuth;
     private FirebaseUser firebasUser;
     private ProgressBar loadBar;
+    private TextView lblEmailAccount;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,12 @@ public class AccountDelete extends AppCompatActivity {
         firebasUser = currentUserAuth.getCurrentUser();
         loadBar = findViewById(R.id.loadBarDeleteAccount);
         loadBar.setVisibility(loadBar.INVISIBLE);
+        lblEmailAccount = findViewById(R.id.lblAccountEmail);
+        currentUserAuth=FirebaseAuth.getInstance();
+        firebasUser =currentUserAuth.getCurrentUser();
+        email=firebasUser.getEmail();
+        System.out.println(email);
+        lblEmailAccount.setText(email);
 
         View.OnClickListener deletListener = new View.OnClickListener() {
             @Override
