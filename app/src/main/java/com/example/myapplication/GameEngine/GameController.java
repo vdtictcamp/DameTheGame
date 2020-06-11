@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.example.myapplication.Activities.GameField;
 import com.example.myapplication.Activities.localGame;
+import com.example.myapplication.Firebase.FirebaseGameController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ public class GameController {
 
     private Activity activity;
     int[][] positionIds;
+    FirebaseGameController firebaseGameController;
 
 
     public GameController(Context context, int[][] positionIds) {
@@ -23,6 +25,8 @@ public class GameController {
         }else {
             this.activity=(localGame)context;
         }
+
+        firebaseGameController=new FirebaseGameController("Default");
     }
 
     public boolean checkIfIsRedStone(int id, int[][]redStonesIds) {
@@ -241,6 +245,8 @@ public class GameController {
     public int[][] switchPosOfStoneInArray(int[][]stones,int[][]positionIds, int stoneID, int posId){
         int oldCol=0;
         int oldRow=0;
+        int row=0;
+        int col=0;
         for(int i=0; i<positionIds.length; i++){
             for(int j=0; j<positionIds[i].length; j++){
                 if(stones[i][j]==stoneID){
@@ -250,9 +256,13 @@ public class GameController {
                 //Now we got the stone and we need to change the index
                 if(positionIds[i][j]==posId){
                     stones[i][j]=stoneID;
+                    row=i;
+                    col=j;
+
                 }
             }
         }
+        firebaseGameController.updateValuesBeta(oldRow, oldCol,row, col);
         stones[oldRow][oldCol]=0;
         return stones;
     }

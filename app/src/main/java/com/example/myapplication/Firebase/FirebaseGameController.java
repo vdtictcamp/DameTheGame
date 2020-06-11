@@ -37,8 +37,7 @@ public class FirebaseGameController {
     private HashMap<String, Integer> values;
 
 
-    public FirebaseGameController(int[][] stones, String gameName) {
-        this.stones = stones;
+    public FirebaseGameController( String gameName) {
         this.gameName = gameName;
         database = FirebaseDatabase.getInstance();
     }

@@ -30,7 +30,7 @@ public class PlayerTwoThread extends Thread implements Runnable {
     public PlayerTwoThread(int[][] stones, String gameName, Context context) {
         this.stones = stones;
         this.gameName = gameName;
-        gameController = new FirebaseGameController(stones, this.gameName);
+        gameController = new FirebaseGameController( this.gameName);
         this.game = (GameField) context;
     }
 
