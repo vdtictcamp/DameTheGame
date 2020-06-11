@@ -37,6 +37,7 @@ public class ExampleInstrumentedTest {
         assertEquals("com.example.myapplication", appContext.getPackageName());
     }
 
+    //With this Rule we determine that the programms should open the Register Activity
     @Rule
     public ActivityTestRule<RegisterActivity> registerRule = new ActivityTestRule<RegisterActivity>(RegisterActivity.class);
 
@@ -49,6 +50,7 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.txtPasswordRepeat)).perform(typeText("Welcome"));
     }
 
+    //With this Rule we define that the programm should opens the Loigin Activity
     @Rule
     public ActivityTestRule<LoginActivity> loginRule = new ActivityTestRule<LoginActivity>(LoginActivity.class);
 

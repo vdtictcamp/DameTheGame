@@ -1,11 +1,9 @@
 package com.example.myapplication.Threads;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Looper;
 
 import com.example.myapplication.Activities.GameField;
-import com.example.myapplication.Activities.Transaction;
 import com.example.myapplication.Firebase.FirebaseGameController;
 import com.example.myapplication.GameEngine.GameController;
 
@@ -34,16 +32,6 @@ public class PlayerTwoThread extends Thread implements Runnable {
         this.game = (GameField) context;
     }
 
-    public boolean isInTurn() {
-        isInTurn = true;
-        return isInTurn;
-    }
-
-    public boolean finishTurn() {
-        isInTurn = false;
-        return isInTurn;
-    }
-
     @Override
     public void run() {
 
@@ -58,10 +46,6 @@ public class PlayerTwoThread extends Thread implements Runnable {
                 }
                 HashMap<String, Integer> ids = gameController.addValueEventListenerAllValues();
                 if (ids != null) {
-                    System.out.println(ids.keySet());
-                    System.out.println(ids);
-                        System.out.println("TRUEEEEEE");
-                        System.out.println(ids);
                         long rowPos = Long.parseLong(String.valueOf(ids.get("rowPos")));
                         long colPos = Long.parseLong(String.valueOf(ids.get("colPos")));
                         long colStone = Long.parseLong(String.valueOf(ids.get("colStone")));
@@ -82,6 +66,7 @@ public class PlayerTwoThread extends Thread implements Runnable {
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
+                                isInTurn=true;
                                 game.moveHelperFunc((int) colStone, (int) rowStone, (int) rowPos, (int) colPos);
                             }
                         }

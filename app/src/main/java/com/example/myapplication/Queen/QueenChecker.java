@@ -233,6 +233,7 @@ public class QueenChecker {
         return positionsToJump;
     }
 
+    //This Method collects all Positions to jump in the right forward positions
     public List<Integer> getPositionsToJumpForwardRight(int[][]stones, int row, int col, int[][] whiteStones, int[][] redStones, boolean whiteQueen){
         int rowDiff=1;
         int colDiff=1;
@@ -314,6 +315,7 @@ public class QueenChecker {
         }
     }
 
+    //This Method returns the Row and column of the Queen
     public int[] getRowAndCol(int[][]stones, View queen) {
         int index[]=new int[2];
         for (int i = 0; i < stones.length; i++) {
@@ -332,6 +334,7 @@ public class QueenChecker {
         return allPositionsToJump;
     }
 
+    //This Method return all stones to eat
     public List<Integer> returnStonesToEat(){
         return stonesToEat;
     }

@@ -4,23 +4,18 @@ import android.content.Context;
 import android.os.Looper;
 
 import com.example.myapplication.Activities.GameField;
-import com.example.myapplication.Activities.Transaction;
 import com.example.myapplication.Firebase.FirebaseGameController;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class PlayerOneThread extends Thread implements Runnable {
 
-    GameField game;
-    PlayerTwoThread pTwoThread;
+    private GameField game;
     private boolean isInTurn=true;
-    int[][] stones;
-    int counter =15;
-    FirebaseGameController gameController;
-    String gameName;
-    boolean playerTwohasJoined = false;
-    FirebaseGameController dataBaseController;
+    private int[][] stones;
+    private String gameName;
+    private boolean playerTwohasJoined = false;
+    private FirebaseGameController dataBaseController;
     private boolean gameOver=false;
     private boolean inTurn = true;
 
@@ -31,29 +26,18 @@ public class PlayerOneThread extends Thread implements Runnable {
         this.game= (GameField) context;
     }
 
-    public boolean isInTurn() {
-        isInTurn = true;
-        return isInTurn;
-    }
-
-    public void finishTurn() {
-        isInTurn = false;
-    }
-
 
     @Override
     public void run() {
         Looper.prepare();
         while (!playerTwohasJoined) {
             playerTwohasJoined = dataBaseController.checkIfPlayerTwoHasJoined();
-            System.out.println("Warte bis Spieler zwei beitritt");
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        System.out.println("Spieler zwei ist beigetreten");
         game.connectionSuccessfull();
         while (!gameOver) {
             isInTurn = dataBaseController.readTurnOfPlayerOne();
@@ -66,8 +50,6 @@ public class PlayerOneThread extends Thread implements Runnable {
                 HashMap<String, Integer> ids = dataBaseController.addValueEventListenerAllValues();
                 System.out.println(ids);
                 if (ids != null) {
-                    System.out.println("TRUEEEEEE");
-                    System.out.println(ids);
                     long rowPos = Long.parseLong(String.valueOf(ids.get("rowPos")));
                     long colPos = Long.parseLong(String.valueOf(ids.get("colPos")));
                     long colStone = Long.parseLong(String.valueOf(ids.get("colStone")));

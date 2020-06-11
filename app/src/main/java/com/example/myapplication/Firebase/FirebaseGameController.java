@@ -1,23 +1,16 @@
 package com.example.myapplication.Firebase;
 
-import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
-
 import androidx.annotation.NonNull;
 
-import com.example.myapplication.Activities.Transaction;
 import com.example.myapplication.GameEngine.GameController;
-import com.example.myapplication.Player.Player;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class FirebaseGameController {
 
