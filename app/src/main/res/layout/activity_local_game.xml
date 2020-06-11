@@ -59,6 +59,18 @@
 
         </View>
 
+        <TextView
+            android:id="@+id/gameCountdown"
+            android:layout_width="69dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:text="00:00"
+            android:textColor="@color/sandbraun"
+            android:textSize="20sp"
+            android:layout_marginTop="20dp">
+
+        </TextView>
+
     </LinearLayout>
 
 

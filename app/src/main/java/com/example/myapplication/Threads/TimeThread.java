@@ -1,43 +1,54 @@
 package com.example.myapplication.Threads;
 
+import android.os.CountDownTimer;
 import android.os.Looper;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.myapplication.Activities.GameField;
 import com.example.myapplication.Activities.localGame;
 
+import java.util.Locale;
+
 public class TimeThread extends Thread implements Runnable {
 
     private localGame gameField;
-    private int timer = 600;
-    boolean finish = false;
-    EditText countdown;
+    private TextView countdown;
+    private long STARTTIME = 6000000;
+    private long leftTime = STARTTIME;
+    private CountDownTimer timerCount;
 
-    public TimeThread(localGame game, EditText countdown){
+
+    //Time Thread
+    public TimeThread(localGame game, TextView countdown) {
         this.gameField = game;
         this.countdown = countdown;
     }
 
     @Override
     public void run() {
-        Looper.prepare();
-        while (timer>0){
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+        timerCount = new CountDownTimer(leftTime, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                leftTime = millisUntilFinished;
+                updateTimeText();
+                if(leftTime==1){
+                    timerCount.cancel();
+                }
             }
-            timer--;
-            //countdown.setText(String.valueOf(timer));
-            if(timer<=0){
-                stopGame();
+
+            @Override
+            public void onFinish() {
+
             }
-        }
-        finish = true;
+        }.start();
     }
 
-private void stopGame(){
-        gameField.stopGame();
+    public void updateTimeText(){
+        int minutes = (int)(leftTime/1000)/60;
+        int seconds = (int)(leftTime/1000)%60;
+        String timeLeftText = String.format(Locale.getDefault(),"%02d:%02d", minutes, seconds);
+        countdown.setText(timeLeftText);
+    }
 }
 
-}

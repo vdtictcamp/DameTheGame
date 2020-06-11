@@ -7,7 +7,7 @@
 
     android:background="@color/damebraun"
     android:orientation="vertical"
-    tools:context=".Activities.GameSettings">
+    tools:context=".Activities.OfflineGameSettings">
 
 
     <TextView
@@ -117,7 +117,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.779" />
+        app:layout_constraintVertical_bias="0.877" />
+
+    <TextView
+        android:id="@+id/lblTimeLimit"
+        android:layout_width="155dp"
+        android:layout_height="26dp"
+        android:text="@string/timlimit"
+        tools:layout_editor_absoluteX="34dp"
+        tools:layout_editor_absoluteY="519dp"
+        tools:ignore="MissingConstraints"
+        />
+
+    <CheckBox
+        android:id="@+id/checkBoxTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CheckBox"
+        tools:layout_editor_absoluteX="286dp"
+        tools:layout_editor_absoluteY="519dp"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

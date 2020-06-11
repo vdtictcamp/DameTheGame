@@ -10,7 +10,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
@@ -25,6 +27,8 @@ public class OfflineGameSettings extends AppCompatActivity {
     FirebaseAuth currentUserAuth;
     private EditText editTxtPlayerOneName;
     private EditText editTxtPlayerTwoName;
+    private Switch timeSwitch;
+    private CheckBox checkBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +45,18 @@ public class OfflineGameSettings extends AppCompatActivity {
         btnStartGame.setOnClickListener(startGameListener);
         editTxtPlayerOneName = findViewById(R.id.editTxtPlayerOneName);
         editTxtPlayerTwoName = findViewById(R.id.editTxtPlayerTwoName);
+        checkBox=findViewById(R.id.checkBoxTimer);
     }
 
     public void startGame() {
-        gameName = "offline";
         Intent intent = new Intent(getApplicationContext(), localGame.class);
+        if(checkBox.isSelected()){
+            intent.putExtra("Timer", true);
+        }
+        else{
+            intent.putExtra("Timer", false);
+        }
+        gameName = "offline";
         intent.putExtra("gameName", gameName);
         intent.putExtra("playerOneName", editTxtPlayerOneName.getText().toString());
         intent.putExtra("playerTwoName", editTxtPlayerTwoName.getText().toString());

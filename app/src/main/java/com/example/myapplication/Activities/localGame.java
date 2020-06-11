@@ -53,7 +53,9 @@ public class localGame extends AppCompatActivity {
     private List<View> validPosToMove = new ArrayList<>();
     private View visualizeTurnOfPlayerOne;
     private View visualizeTurnOfPlayerTwo;
-    public View movingStone;
+    private View movingStone;
+    private TextView countdown;
+
 
     private ChangeGameConditionWhiteStone chGameCondWhite;
     private ChangeGameConditionRedStone chGameCondRed;
@@ -72,6 +74,8 @@ public class localGame extends AppCompatActivity {
     private List<Integer> allPositionsToJump = new ArrayList<>();
     private List<Integer> positionsToMove_Q = new ArrayList<>();
 
+    private boolean timer;
+
     //We need thie variables to controll the turns of the player
     private String gameName = " ";
     private String player = " ";
@@ -82,7 +86,7 @@ public class localGame extends AppCompatActivity {
 
     // At the beginning of the game we set the turn for the player which plays the white stones
     int TURN = WHITETURN;
-    private EditText countdown;
+    //Animation which ist starting when we touch a stone
     private Animation onClickAnim;
 
     @SuppressLint("ResourceAsColor")
@@ -97,6 +101,7 @@ public class localGame extends AppCompatActivity {
         positions = new View[8][8];
         visualizeTurnOfPlayerOne = findViewById(R.id.playersOneTurn);
         visualizeTurnOfPlayerTwo = findViewById(R.id.playersTwoTurn);
+        countdown=findViewById(R.id.countdown);
         context = this;
 
         //Identify the User
@@ -113,6 +118,9 @@ public class localGame extends AppCompatActivity {
         lblPlayerTwo.setText(playerTwoName);
 
         player = intent.getExtras().getString("Player");
+
+        //We ask now the GameSettingsActivity if we need to set the timer
+        timer=intent.getExtras().getBoolean("Timer");
 
         //Load the Animation, the Animation helps to identify the stone which has been touched
         onClickAnim = AnimationUtils.loadAnimation(this, R.anim.clicked);
@@ -169,6 +177,12 @@ public class localGame extends AppCompatActivity {
 
         //We set that the player one starts
         controller.changeTurnOfPlayer(false, true, visualizeTurnOfPlayerOne, visualizeTurnOfPlayerTwo);
+
+        //Initialize the Time Thread, which starts the countdown of 10 minutes
+        TimeThread timerThread = new TimeThread(localGame.this, countdown);
+        if(timer){
+            timerThread.start();
+        }
 
         //Clears the Board
         clearBoard();
@@ -290,6 +304,7 @@ public class localGame extends AppCompatActivity {
 
 //----------------------------------------------------------------------------------------
 
+    //This method displays the Menu on the Activity
     @SuppressLint("ResourceType")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
