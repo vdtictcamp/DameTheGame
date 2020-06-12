@@ -20,15 +20,17 @@
         android:textColor="@color/damebraun"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.557" />
+        app:layout_constraintVertical_bias="0.576" />
 
     <Button
         android:id="@+id/btnOnlineSpiel"
         android:layout_width="217dp"
         android:layout_height="54dp"
         android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
         android:background="@color/sandbraun"
         android:fontFamily="@font/alfa_slab_one"
         android:text="@string/online_spielen"
@@ -37,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.42" />
+        app:layout_constraintVertical_bias="0.429" />
 
     <Button
         android:id="@+id/btnInitnewGame"
@@ -49,10 +51,9 @@
         android:textColor="@color/damebraun"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.297" />
+        app:layout_constraintVertical_bias="0.321" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

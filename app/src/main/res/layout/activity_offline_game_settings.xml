@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:background="@color/damebraun"
     android:orientation="vertical"
     tools:context=".Activities.OfflineGameSettings">
@@ -109,6 +108,7 @@
         android:id="@+id/btnStartGame"
         android:layout_width="135dp"
         android:layout_height="56dp"
+        android:layout_marginTop="100dp"
         android:background="@color/sandbraun"
         android:fontFamily="@font/alfa_slab_one"
         android:text="@string/Spielen"
@@ -117,7 +117,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.903" />
+        app:layout_constraintVertical_bias="0.923" />
 
     <TextView
         android:id="@+id/lblTimeLimit"
@@ -135,7 +135,7 @@
         app:layout_constraintHorizontal_bias="0.58"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTxtPlayerTwoName"
-        app:layout_constraintVertical_bias="0.655"
+        app:layout_constraintVertical_bias="1.0"
         tools:ignore="MissingConstraints" />
 
     <CheckBox

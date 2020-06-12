@@ -41,7 +41,7 @@ public class GameController {
         return true;
     }
 
-    //This Method
+    //This Method checks if the Stone is a white stone
     public boolean checkIfIsWhiteStone(int id, int[][]whiteStonesIds){
         for(int i=0; i<whiteStonesIds.length; i++){
             for(int j=0; j<whiteStonesIds[i].length; j++){

@@ -31,13 +31,9 @@ public class MainActivity extends AppCompatActivity {
         btnOnlineSpielen = findViewById(R.id.btnOnlineSpiel);
         currentUserAuth = FirebaseAuth.getInstance();
 
-        if(currentUserAuth==null){
-            btnRegister.setVisibility(btnRegister.INVISIBLE);
-        }else{
-            btnRegister.setVisibility(btnRegister.VISIBLE);
 
-        }
 
+        //On click we change to Game Setting Activity
         btnInitNewGame.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }));
 
+        //On click we change to Register Activity
         btnRegister.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }));
 
+        //If the User is loged in on click the app displays the online game options activity
         btnOnlineSpielen.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         }));
     }
 
+    //Creates the Menu
     @SuppressLint("ResourceType")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -85,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    //All Items of the menu
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
