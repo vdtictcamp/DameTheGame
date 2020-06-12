@@ -10,11 +10,11 @@ import com.example.myapplication.Activities.localGame;
 
 import java.util.Locale;
 
-public class TimeThread extends Thread implements Runnable {
+public class TimeThread {
 
     private localGame gameField;
     private TextView countdown;
-    private long STARTTIME = 6000000;
+    private long STARTTIME = 600000;
     private long leftTime = STARTTIME;
     private CountDownTimer timerCount;
 
@@ -24,10 +24,11 @@ public class TimeThread extends Thread implements Runnable {
         this.gameField = game;
         this.countdown = countdown;
         this.countdown.setText(String.valueOf(STARTTIME));
+        startCountdown();
     }
 
-    @Override
-    public void run() {
+    public void startCountdown(){
+
         timerCount = new CountDownTimer(leftTime, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
