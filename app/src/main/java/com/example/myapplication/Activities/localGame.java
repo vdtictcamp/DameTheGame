@@ -681,7 +681,6 @@ public class localGame extends AppCompatActivity {
             for (int j = 0; j < whiteStonesIds.length; j++) {
                 if (whiteStonesIds[i][j] == stones[row][col]) {
                     whiteStonesIds[i][j]=0;
-                    System.out.println(whiteStonesIds.length + " " + whiteStonesIds[i].length);
                 }
                 else if (redStonesIds[i][j] == stones[row][col]) {
                     redStonesIds[i][j] = 0;
@@ -692,8 +691,4 @@ public class localGame extends AppCompatActivity {
         stones[row][col] = 0;
         gameLayout.removeView(v);
     }
-
-
-
-
 }

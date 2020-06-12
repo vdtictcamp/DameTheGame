@@ -27,23 +27,26 @@ public class QueenChecker {
 
     //This Method sets the Queen
     public void setRedQueen(View queen){
-        queen.setBackgroundColor(Color.MAGENTA);
+        queen.setBackgroundColor(Color.parseColor("#A65E2F"));
+
     }
+    //This Method sets the white Queen
     public void setWhiteQueen(View queen) {
         queen.setBackgroundColor(Color.LTGRAY);
     }
 
+    //This Method checks if the clicked Stone is a white stone
     public boolean checkIfIsWhiteQueen(List<Integer>whiteQueens, View v){
         boolean isQueen = false;
         for(int i=0; i<whiteQueens.size(); i++){
             if(v.getId()==whiteQueens.get(i)){
                 isQueen=true;
             }
-
         }
         return isQueen;
     }
 
+    //This Method checks if the clicked Stone is a redqueen
     public boolean checkIfIsRedQueen(List<Integer>redQueens, View v){
         boolean isQueen = false;
         for(int i=0; i<redQueens.size(); i++){
@@ -55,8 +58,8 @@ public class QueenChecker {
         return isQueen;
     }
 
-
-
+    //This Method collects the Position to move forward for the Queen
+    //The Queen can move forward as aswell backward
     public List<Integer> getPositionsToMove(int[][] stones,  int row, int col){
         List<Integer>posToMove = new ArrayList<>();
         int colDiff =1;

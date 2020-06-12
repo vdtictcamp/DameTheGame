@@ -30,7 +30,6 @@ import java.util.List;
 
 public class SearchGameActivity extends AppCompatActivity {
 
-    private Button btnJoinGame;
     private ListView listView;
     private TextView lblWaitForGames;
     private ProgressBar loadBar;
