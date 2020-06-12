@@ -11,7 +11,7 @@ import com.example.myapplication.R;
 
 public class EndOfGameActivity extends AppCompatActivity {
 
-    Button btnBack;
+    private Button btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

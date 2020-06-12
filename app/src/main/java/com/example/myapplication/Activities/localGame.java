@@ -247,7 +247,6 @@ public class localGame extends AppCompatActivity {
                     v.startAnimation(onClickAnim);
                     //We check if the choosen Stone is a queen
                     if (queenChecker.checkIfIsWhiteQueen(whiteQueens, v)) {
-                        System.out.println("Es ist eine Königin" + posForWhiteQueen.size());
                         int[] index = queenChecker.getRowAndCol(stones, v);
                         int row = index[0];
                         int col = index[1];

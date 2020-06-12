@@ -12,8 +12,8 @@ import com.example.myapplication.R;
 
 public class CreateOnlineGame extends AppCompatActivity {
 
-    String gameName;
-    EditText txtFieldGameName;
+    private String gameName;
+    private EditText txtFieldGameName;
     private Button btnStartGame;
 
     @Override

@@ -104,7 +104,6 @@ public class Account extends AppCompatActivity {
         btnDeleteAccount.setOnClickListener(deletListener);
     }
 
-
     @SuppressLint("ResourceType")
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -157,5 +156,4 @@ public class Account extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 }

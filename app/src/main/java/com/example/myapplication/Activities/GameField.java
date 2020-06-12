@@ -1,5 +1,4 @@
 package com.example.myapplication.Activities;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -9,12 +8,9 @@ import android.view.Menu;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.myapplication.Firebase.FirebaseGameController;
 import com.example.myapplication.GameEngine.ChangeGameConditionRedStone;
 import com.example.myapplication.GameEngine.ChangeGameConditionWhiteStone;
@@ -25,30 +21,34 @@ import com.example.myapplication.Queen.QueenChecker;
 import com.example.myapplication.R;
 import com.example.myapplication.Threads.PlayerOneThread;
 import com.example.myapplication.Threads.PlayerTwoThread;
-import com.example.myapplication.Threads.TimeThread;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+//We did not comment this programm logic because you can read all comments in the localGame activity
+
 public class GameField extends AppCompatActivity {
 
-    public GridLayout gameLayout;
     private static int[][] positionsIds;
     private int[][] whiteStonesIds;
     private int[][] redStonesIds;
-
     static int[][] stones;
+    private int[] validPositionsToMove = new int[2];
 
+    public GridLayout gameLayout;
+
+    private View visualizeTurnOfPlayerOne;
+    private View visualizeTurnOfPlayerTwo;
     private View[][] redStones;
     private View[][] whiteStones;
     private static View[][] positions;
-    private int[] validPositionsToMove = new int[2];
-    private List<View> validPosToMove = new ArrayList<>();
     public View movingStone;
+    private List<View> validPosToMove = new ArrayList<>();
+
     private ChangeGameConditionWhiteStone chGameCondWhite;
     private ChangeGameConditionRedStone chGameCondRed;
     private CheckIfGameIsFinish finishChecker = new CheckIfGameIsFinish();
+
     private List<List<Integer>> posAfterEat = new ArrayList<>();
     private List<Integer> whiteStonesToEat = new ArrayList<>();
     private List<Integer> redStonesToEat = new ArrayList<>();
@@ -56,27 +56,27 @@ public class GameField extends AppCompatActivity {
     private List<Integer> redQueens = new ArrayList<>();
     private List<List<Integer>> posForRedQueen = new ArrayList<>();
     private List<List<Integer>> posForWhiteQueen = new ArrayList<>();
-    List<Integer> allPositionsToJump = new ArrayList<>();
+    private List<Integer> allPositionsToJump = new ArrayList<>();
+    private List<Integer> positionsToMove_Q = new ArrayList<>();
+
+
     private PlayerOneThread pOneThread;
     private PlayerTwoThread pTwoThread;
-    private View visualizeTurnOfPlayerOne;
-    private View visualizeTurnOfPlayerTwo;
+
+
     private Controller controller;
     private FirebaseGameController firebase;
     private GameController gameController;
     private QueenChecker queenChecker;
-    boolean sentData = false;
     private Context context;
-    List<Integer> positionsToMove_Q = new ArrayList<>();
 
     //We need thie variables to controll the turns of the player
     private String gameName = " ";
     private String player = " ";
     final int WHITETURN = 1;
     final int REDTURN = 2;
-    int TURN = WHITETURN;
-    EditText countdown;
-    Animation onClickAnim;
+    private int TURN = WHITETURN;
+    private Animation onClickAnim;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -84,7 +84,6 @@ public class GameField extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_field);
         gameLayout = findViewById(R.id.gamelayout);
-        //countdown = findViewById(R.id.countdown);
         redStones = new View[8][8];
         whiteStones = new View[8][8];
         positions = new View[8][8];
@@ -619,7 +618,6 @@ public void showValidPosForQueen(List<Integer>positions){
                     queenChecker.setWhiteQueen(stoneToQueen);
                 }
                 TURN = REDTURN;
-
             }
         }
     }
