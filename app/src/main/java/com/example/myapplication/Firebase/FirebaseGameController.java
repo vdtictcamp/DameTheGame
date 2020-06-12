@@ -35,6 +35,7 @@ public class FirebaseGameController {
         database = FirebaseDatabase.getInstance();
     }
 
+
     public void initStartSituationBeta(int rowStone, int colStone, int rowPos, int colPos, String player) {
 
         if (player.equals("PlayerOne")) {
@@ -62,6 +63,7 @@ public class FirebaseGameController {
         reference.setValue(values);
     }
 
+    //sets int position-values from the moved stone
     public void updateValuesBeta(int rowStone, int colStone, int rowPos, int colPos) {
         HashMap<String, Integer> values = new HashMap<>();
         reference = database.getReference("rooms").child(this.gameName).child("updateInformations");
@@ -129,12 +131,11 @@ public class FirebaseGameController {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
         return turn;
     }
-
+    //Checks if Player two has made a move
     public boolean readTurnOfPlayerTwo() {
         reference = database.getReference("rooms").child(gameName).child("PlayerTwoTurn");
         reference.addValueEventListener(new ValueEventListener() {
@@ -153,7 +154,6 @@ public class FirebaseGameController {
     }
 
     public void finishPlayerOneTurn() {
-
         HashMap<String, Object> values = new HashMap<>();
         values.put("PlayerOneTurn", false);
         values.put("PlayerTwoTurn", true);
@@ -168,10 +168,17 @@ public class FirebaseGameController {
     }
 
     public void finishPlayerTwoTurn() {
-        reference = database.getReference("rooms").child(gameName).child("PlayerTwoTurn");
-        reference.setValue(false);
-        reference = database.getReference("rooms").child(gameName).child("PlayerOneTurn");
-        reference.setValue(true);
+
+        HashMap<String, Object> values = new HashMap<>();
+        values.put("PlayerOneTurn", true);
+        values.put("PlayerTwoTurn", false);
+        reference = database.getReference("rooms").child(this.gameName);
+        reference.updateChildren(values);
+
+        //reference = database.getReference("rooms").child(gameName).child("PlayerTwoTurn");
+        //reference.setValue(false);
+        //reference = database.getReference("rooms").child(gameName).child("PlayerOneTurn");
+        //reference.setValue(true);
     }
 
     public boolean checkIfPlayerTwoHasJoined(){
