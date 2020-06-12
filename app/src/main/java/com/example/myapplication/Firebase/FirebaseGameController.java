@@ -29,7 +29,6 @@ public class FirebaseGameController {
     private HashMap<String, Integer> updateValues;
     private HashMap<String, Integer> values;
 
-
     public FirebaseGameController( String gameName) {
         this.gameName = gameName;
         database = FirebaseDatabase.getInstance();
@@ -74,7 +73,7 @@ public class FirebaseGameController {
         reference.setValue(values);
     }
 
-
+    //returns the updateInformations from Firebase in form of a Hashmap
     public HashMap<String, Integer> addValueEventListenerAllValues() {
         reference = database.getReference("rooms").child(this.gameName).child("updateInformations");
         reference.addValueEventListener(new ValueEventListener() {
@@ -92,7 +91,7 @@ public class FirebaseGameController {
         return values;
     }
 
-
+    //resets the updateInformations on Firebase to 0 after a move and returns true
     public boolean setDefaultUpdateValues() {
         HashMap<String, Integer> values = new HashMap<>();
         values.put("rowPos", 0);
@@ -103,7 +102,7 @@ public class FirebaseGameController {
         reference.setValue(values);
         return true;
     }
-
+    //checksthe value of PlayerTwoHasJoined on Firebase and returns it
     private boolean readIfPlayerTwoHasJoined() {
         reference = database.getReference("rooms").child(gameName).child("PlayerTwoHasJoined");
         reference.addValueEventListener(new ValueEventListener() {
@@ -121,6 +120,7 @@ public class FirebaseGameController {
         return isHosted;
     }
 
+    //checks the value of PlayerOneTurn on Firebase and returns it
     public boolean readTurnOfPlayerOne() {
         reference = database.getReference("rooms").child(gameName).child("PlayerOneTurn");
         reference.addValueEventListener(new ValueEventListener() {
@@ -128,13 +128,13 @@ public class FirebaseGameController {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 turn = (boolean) dataSnapshot.getValue();
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
         return turn;
     }
+
     //Checks if Player two has made a move
     public boolean readTurnOfPlayerTwo() {
         reference = database.getReference("rooms").child(gameName).child("PlayerTwoTurn");
@@ -152,7 +152,7 @@ public class FirebaseGameController {
 
         return turn;
     }
-
+    //after a successful move of Player one, the values of the turn values get swiched true<->false
     public void finishPlayerOneTurn() {
         HashMap<String, Object> values = new HashMap<>();
         values.put("PlayerOneTurn", false);
@@ -167,8 +167,8 @@ public class FirebaseGameController {
         //reference.setValue(true);
     }
 
+    //after a successful move of Player two, the values of the turn values get swiched true<->false
     public void finishPlayerTwoTurn() {
-
         HashMap<String, Object> values = new HashMap<>();
         values.put("PlayerOneTurn", true);
         values.put("PlayerTwoTurn", false);
