@@ -181,7 +181,9 @@ public class localGame extends AppCompatActivity {
         //Initialize the Time Thread, which starts the countdown of 10 minutes
         if(timer){
             TimeThread timerThread = new TimeThread(localGame.this, countdown);
-            timerThread.start();
+        }
+        else {
+            countdown.setText(" ");
         }
 
         //Clears the Board

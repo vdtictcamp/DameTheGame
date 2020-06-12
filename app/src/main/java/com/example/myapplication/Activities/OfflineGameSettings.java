@@ -48,10 +48,9 @@ public class OfflineGameSettings extends AppCompatActivity {
         btnStartGame.setOnClickListener(startGameListener);
     }
 
-
     public void startGame() {
         Intent intent = new Intent(getApplicationContext(), localGame.class);
-        if(checkBox.isSelected()){
+        if(checkBox.isChecked()){
             intent.putExtra("Timer", true);
         }
         else{
