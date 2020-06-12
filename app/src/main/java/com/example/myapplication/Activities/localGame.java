@@ -101,7 +101,7 @@ public class localGame extends AppCompatActivity {
         positions = new View[8][8];
         visualizeTurnOfPlayerOne = findViewById(R.id.playersOneTurn);
         visualizeTurnOfPlayerTwo = findViewById(R.id.playersTwoTurn);
-        countdown=findViewById(R.id.countdown);
+        countdown=findViewById(R.id.gameCountdown);
         context = this;
 
         //Identify the User
@@ -179,8 +179,8 @@ public class localGame extends AppCompatActivity {
         controller.changeTurnOfPlayer(false, true, visualizeTurnOfPlayerOne, visualizeTurnOfPlayerTwo);
 
         //Initialize the Time Thread, which starts the countdown of 10 minutes
-        TimeThread timerThread = new TimeThread(localGame.this, countdown);
         if(timer){
+            TimeThread timerThread = new TimeThread(localGame.this, countdown);
             timerThread.start();
         }
 
@@ -319,6 +319,8 @@ public class localGame extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    //This is the selection of the Activities, each elemente has a listener
+    //If the User clicks on a menu element he navigates directly to the specified Acitvity
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -385,6 +387,7 @@ public class localGame extends AppCompatActivity {
         }
     }
 
+    //This method clears the board
     @SuppressLint("ResourceAsColor")
     private void clearBoard() {
         for (int i = 0; i < positions.length; i++) {

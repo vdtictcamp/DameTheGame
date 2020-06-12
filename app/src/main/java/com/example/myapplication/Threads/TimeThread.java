@@ -23,6 +23,7 @@ public class TimeThread extends Thread implements Runnable {
     public TimeThread(localGame game, TextView countdown) {
         this.gameField = game;
         this.countdown = countdown;
+        this.countdown.setText(String.valueOf(STARTTIME));
     }
 
     @Override

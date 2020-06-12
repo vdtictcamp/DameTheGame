@@ -21,13 +21,11 @@ import com.google.firebase.auth.FirebaseAuth;
 public class OfflineGameSettings extends AppCompatActivity {
 
 
-    String gameName;
-    EditText txtFieldGameName;
+    private String gameName;
     private Button btnStartGame;
-    FirebaseAuth currentUserAuth;
+    private FirebaseAuth currentUserAuth;
     private EditText editTxtPlayerOneName;
     private EditText editTxtPlayerTwoName;
-    private Switch timeSwitch;
     private CheckBox checkBox;
 
     @Override
@@ -36,17 +34,20 @@ public class OfflineGameSettings extends AppCompatActivity {
         setContentView(R.layout.activity_offline_game_settings);
         btnStartGame = findViewById(R.id.btnStartGame);
         currentUserAuth = FirebaseAuth.getInstance();
+        editTxtPlayerOneName = findViewById(R.id.editTxtPlayerOneName);
+        editTxtPlayerTwoName = findViewById(R.id.editTxtPlayerTwoName);
+        checkBox=findViewById(R.id.checkBoxTimer);
+
         View.OnClickListener startGameListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startGame();
             }
         };
+
         btnStartGame.setOnClickListener(startGameListener);
-        editTxtPlayerOneName = findViewById(R.id.editTxtPlayerOneName);
-        editTxtPlayerTwoName = findViewById(R.id.editTxtPlayerTwoName);
-        checkBox=findViewById(R.id.checkBoxTimer);
     }
+
 
     public void startGame() {
         Intent intent = new Intent(getApplicationContext(), localGame.class);

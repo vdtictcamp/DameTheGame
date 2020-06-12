@@ -12,19 +12,19 @@ import java.util.List;
 public class PlayerOneThread extends Thread implements Runnable {
 
     private GameField game;
-    private boolean isInTurn=true;
+    private boolean isInTurn = true;
     private int[][] stones;
     private String gameName;
     private boolean playerTwohasJoined = false;
     private FirebaseGameController dataBaseController;
-    private boolean gameOver=false;
+    private boolean gameOver = false;
     private boolean inTurn = true;
 
-    public PlayerOneThread(int[][]stones, String gameName, Context context) {
+    public PlayerOneThread(int[][] stones, String gameName, Context context) {
         this.stones = stones;
-        this.gameName=gameName;
-        dataBaseController=new FirebaseGameController(gameName);
-        this.game= (GameField) context;
+        this.gameName = gameName;
+        dataBaseController = new FirebaseGameController(gameName);
+        this.game = (GameField) context;
     }
 
 
@@ -56,14 +56,14 @@ public class PlayerOneThread extends Thread implements Runnable {
                     long colStone = Long.parseLong(String.valueOf(ids.get("colStone")));
                     long rowStone = Long.parseLong(String.valueOf(ids.get("rowStone")));
                     if (rowPos != 0 && colPos != 0 && colPos != 0 && colStone != 0) {
-                        ids=null;
+                        ids = null;
                         boolean ready = dataBaseController.setDefaultUpdateValues();
                         try {
                             Thread.sleep(2000);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        if(ready) {
+                        if (ready) {
                             isInTurn = true;
                             dataBaseController.finishPlayerTwoTurn();
                             game.moveHelperFunc((int) colStone, (int) rowStone, (int) rowPos, (int) colPos);
@@ -72,8 +72,7 @@ public class PlayerOneThread extends Thread implements Runnable {
 
                 }
             }
-
         }
     }
-    }
+}
 
