@@ -14,19 +14,12 @@ import java.util.List;
 
 public class FirebaseGameController {
 
-    int[][] stones;
-    FirebaseDatabase database;
-    List<List<Integer>> currentField;
-    private List<Integer> field;
-    long updateIds = 0;
-    private List<String> roomsList;
-    DatabaseReference reference, reference1, reference2;
-    GameController gameController;
-    String gameName;
-    long[] ids = new long[4];
+    private FirebaseDatabase database;
+    private DatabaseReference reference;
+    private String gameName;
+    private long[] ids = new long[4];
     private boolean isHosted = false;
     private boolean turn = false;
-    private HashMap<String, Integer> updateValues;
     private HashMap<String, Integer> values;
 
     public FirebaseGameController( String gameName) {
@@ -36,14 +29,12 @@ public class FirebaseGameController {
 
 
     public void initStartSituationBeta(int rowStone, int colStone, int rowPos, int colPos, String player) {
-
         if (player.equals("PlayerOne")) {
             reference = database.getReference("rooms").child(gameName).child("PlayerOneHasJoined");
             reference.setValue(true);
             reference = database.getReference("rooms").child(gameName).child("PlayerTwoHasJoined");
             reference.setValue(false);
         }
-
         if (player.equals("PlayerTwo")) {
             reference = database.getReference("rooms").child(gameName).child("PlayerTwoHasJoined");
             reference.setValue(true);
@@ -80,7 +71,6 @@ public class FirebaseGameController {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 values = (HashMap<String, Integer>) dataSnapshot.getValue();
-                System.out.println("UpdateSTone" + values);
             }
 
             @Override
@@ -113,7 +103,6 @@ public class FirebaseGameController {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
 
@@ -146,7 +135,6 @@ public class FirebaseGameController {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
 
@@ -159,12 +147,6 @@ public class FirebaseGameController {
         values.put("PlayerTwoTurn", true);
         reference = database.getReference("rooms").child(this.gameName);
         reference.updateChildren(values);
-
-
-        //reference = database.getReference("rooms").child(gameName).child("PlayerOneTurn");
-        //reference.setValue(false);
-        //reference = database.getReference("rooms").child(gameName).child("PlayerTwoTurn");
-        //reference.setValue(true);
     }
 
     //after a successful move of Player two, the values of the turn values get swiched true<->false
@@ -174,11 +156,6 @@ public class FirebaseGameController {
         values.put("PlayerTwoTurn", false);
         reference = database.getReference("rooms").child(this.gameName);
         reference.updateChildren(values);
-
-        //reference = database.getReference("rooms").child(gameName).child("PlayerTwoTurn");
-        //reference.setValue(false);
-        //reference = database.getReference("rooms").child(gameName).child("PlayerOneTurn");
-        //reference.setValue(true);
     }
 
     public boolean checkIfPlayerTwoHasJoined(){
@@ -211,12 +188,10 @@ public class FirebaseGameController {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     values = (HashMap<String, Integer>) dataSnapshot.getValue();
-
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-
                 }
             });
 

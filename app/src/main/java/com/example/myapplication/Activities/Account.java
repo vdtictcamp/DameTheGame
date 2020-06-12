@@ -37,25 +37,26 @@ public class Account extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
         btnDeleteAccount = findViewById(R.id.btnDeleteAccount);
-        currentUserAuth = FirebaseAuth.getInstance();
-        firebasUser = currentUserAuth.getCurrentUser();
         loadBar = findViewById(R.id.loadBarDeleteAccount);
         loadBar.setVisibility(loadBar.INVISIBLE);
         lblEmailAccount = findViewById(R.id.lblAccountEmail);
-        currentUserAuth=FirebaseAuth.getInstance();
-        firebasUser =currentUserAuth.getCurrentUser();
-        email=firebasUser.getEmail();
-        System.out.println(email);
-        lblEmailAccount.setText(email);
         btnResetPassword=findViewById(R.id.btnResetPassword);
 
+        email=firebasUser.getEmail();
+        lblEmailAccount.setText(email);
+        currentUserAuth=FirebaseAuth.getInstance();
+        firebasUser =currentUserAuth.getCurrentUser();
+
+        //On Click the Process to reset the password starts
         btnResetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loadBar.setVisibility(loadBar.VISIBLE);
                 currentUserAuth.sendPasswordResetEmail(firebasUser.getEmail().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
+                            loadBar.setVisibility(loadBar.INVISIBLE);
                             Toast.makeText(Account.this, "Ein neues Passwort wurde dir auf deinen Email Account gesendet", Toast.LENGTH_LONG).show();
                         }else{
                             Toast.makeText(Account.this, "Dein Passwort konnte leider nicht zurückgesetzt werden", Toast.LENGTH_LONG).show();
@@ -66,11 +67,10 @@ public class Account extends AppCompatActivity {
             }
         });
 
-
+        //on Click the delete process of the User Account starts
         View.OnClickListener deletListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Geklickt");
                 AlertDialog.Builder dialog = new AlertDialog.Builder(Account.this);
                 dialog.setTitle("Bist du sicher?");
                 dialog.setMessage("Alle deine Daten werden gelöscht und du kannst nicht mehr online spielen");

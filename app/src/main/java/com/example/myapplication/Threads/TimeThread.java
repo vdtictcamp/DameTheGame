@@ -12,23 +12,20 @@ import java.util.Locale;
 
 public class TimeThread {
 
-    private localGame gameField;
     private TextView countdown;
     private long STARTTIME = 600000;
     private long leftTime = STARTTIME;
     private CountDownTimer timerCount;
 
-
     //Time Thread
     public TimeThread(localGame game, TextView countdown) {
-        this.gameField = game;
         this.countdown = countdown;
         this.countdown.setText(String.valueOf(STARTTIME));
         startCountdown();
     }
 
+    //Starts the Timer
     public void startCountdown(){
-
         timerCount = new CountDownTimer(leftTime, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -46,6 +43,7 @@ public class TimeThread {
         }.start();
     }
 
+    //Updates the countdown text
     public void updateTimeText(){
         int minutes = (int)(leftTime/1000)/60;
         int seconds = (int)(leftTime/1000)%60;

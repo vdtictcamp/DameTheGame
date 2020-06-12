@@ -2,7 +2,8 @@ package com.example.myapplication.GameEngine;
 
 public class CheckIfGameIsFinish {
 
-
+    //This Method checks if the Game is finish that means the method checks
+    // if all stones from one color has been removed from the board
     public boolean checkIfGameIsFinish(int[][]whiteStones, int[][]redStones){
         int counter_1=0;
         int counter_2=0;

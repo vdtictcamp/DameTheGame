@@ -14,10 +14,11 @@ import java.util.List;
 public class GameController {
 
     private Activity activity;
-    int[][] positionIds;
-    FirebaseGameController firebaseGameController;
+    private int[][] positionIds;
+    private FirebaseGameController firebaseGameController;
 
 
+    //Creating Object of an Game Controller
     public GameController(Context context, int[][] positionIds) {
         this.positionIds = positionIds;
         if(context.getClass().equals(GameField.class)){
@@ -25,7 +26,6 @@ public class GameController {
         }else {
             this.activity=(localGame)context;
         }
-
         firebaseGameController=new FirebaseGameController("Default");
     }
 
@@ -55,7 +55,7 @@ public class GameController {
 
     //We will conduct this method fpr every stone which can be eaten
     public void removeStonesQueen(int[][]stones, List<Integer> positions, int stoneId, int positionId) {
-        int colChoosenPos = 0,rowChoosenPos=0, rowStone = 0, colStone = 0, rowJumpPos=0, colJumpPos=0;
+        int colChoosenPos = 0, rowStone = 0, colStone = 0, rowJumpPos=0, colJumpPos=0;
         int diffRow = 0, colDiff = 0;
         int []index = getChoosenPositionToJump(stones, positionId);
         colChoosenPos=index[1];
@@ -127,7 +127,7 @@ public class GameController {
 
     //We will conduct this method fpr every stone which can be eaten
     public void removeStones(int[][]stones, List<Integer> positions, int stoneId, int positionId) {
-        int colChoosenPos = 0,rowChoosenPos=0, rowStone = 0, colStone = 0, rowJumpPos=0, colJumpPos=0;
+        int colChoosenPos = 0, rowStone = 0, colStone = 0, rowJumpPos=0, colJumpPos=0;
         int diffRow = 0, colDiff = 0;
         int []index = getChoosenPositionToJump(stones, positionId);
         colChoosenPos=index[1];
@@ -206,6 +206,7 @@ public class GameController {
         return stones;
     }
 
+    //This Method returns the Column and Row of the destination Position
     public int[] getChoosenPositionToJump(int[][]stones, int positionId){
         int rowChoosenPos=0;
         int colChoosenPos=0;
@@ -239,7 +240,6 @@ public class GameController {
                     allPositionsToJump.add(posAfterEat.get(i).get(j));
                 }
             }
-
         return allPositionsToJump;
     }
 
@@ -269,6 +269,7 @@ public class GameController {
         return stones;
     }
 
+    //This Method checks if the choosen destination position is blocked wit another stone
     public boolean checkIfStoneIsBlockingPos(int[][]stones, int col, int row){
         if(stones[row][col]==0){
             return false;
