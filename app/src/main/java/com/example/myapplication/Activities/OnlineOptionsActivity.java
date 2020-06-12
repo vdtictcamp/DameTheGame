@@ -20,7 +20,7 @@ public class OnlineOptionsActivity extends AppCompatActivity {
 
     private Button btnSearchOnlineGame;
     private Button btnCreateOnlineGame;
-    FirebaseAuth currentUserAuth;
+    private FirebaseAuth currentUserAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

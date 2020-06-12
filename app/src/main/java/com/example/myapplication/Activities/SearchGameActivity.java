@@ -43,7 +43,6 @@ public class SearchGameActivity extends AppCompatActivity {
     private String playerName = "";
     private boolean isHosted = false;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -165,5 +164,4 @@ public class SearchGameActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 }
