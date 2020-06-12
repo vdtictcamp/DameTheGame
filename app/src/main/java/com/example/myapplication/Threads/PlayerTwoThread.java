@@ -34,7 +34,6 @@ public class PlayerTwoThread extends Thread implements Runnable {
 
     @Override
     public void run() {
-
         Looper.prepare();
         while (!gameOver) {
             isInTurn = gameController.readTurnOfPlayerTwo();
